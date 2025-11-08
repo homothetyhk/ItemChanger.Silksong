@@ -230,7 +230,8 @@ public static class LocationNames
     public const string Lore_Tablet__Moss_Grotto_Chapel_Inner = "Lore_Tablet-Moss_Grotto_Chapel_Inner";
     public const string Lore_Tablet__Whiteward_Oath = "Lore_Tablet-Whiteward_Oath";
     public const string Lore_Tablet__Weavenest_Atla_East = "Lore_Tablet-Weavenest_Atla_East";
-
+    public const string Lore_Tablet__Mr_Mushroom = "Lore_Tablet-Mr_Mushroom";
+    
     public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
     public const string Materium__Flintstone = "Materium-Flintstone";
     public const string Materium__Roach Guts = "Materium-Roach Guts";
