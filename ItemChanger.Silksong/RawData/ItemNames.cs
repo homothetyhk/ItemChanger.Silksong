@@ -341,8 +341,8 @@ public static class ItemNames
     public const string Lore_Tablet__Trobbio_Sign = "Lore_Tablet-Trobbio_Sign";
     public const string Lore_Tablet__Trobbio_Notes = "Lore_Tablet-Trobbio_Notes";
     public const string Lore_Tablet__Tormented_Trobbio_Notes = "Lore_Tablet-Tormented_Trobbio_Notes";
-    public const string Lore_Tablet__Mosshome_Below_Silkspear = "Lore_Tablet-Mosshome_Below_Silkspear";  // No needolin needed
-    public const string Lore_Tablet__Mosshome_Below_Silkspear_Harp = "Lore_Tablet-Mosshome_Below_Silkspear_Harp";  // Needs needolin
+    public const string Lore_Tablet__Mosshome_Below_Silkspear = "Lore_Tablet-Mosshome_Below_Silkspear";
+    public const string Lore_Tablet__Mosshome_Below_Silkspear_Harp = "Lore_Tablet-Mosshome_Below_Silkspear_Harp";
     public const string Lore_Tablet__Mount_Fay_Bottom = "Lore_Tablet-Mount_Fay_Bottom";
     public const string Lore_Tablet__Deep_Docks_Forge = "Lore_Tablet-Deep_Docks_Forge";
     public const string Lore_Tablet__Bilewater_Shortcut = "Lore_Tablet-Bilewater_Shortcut";
