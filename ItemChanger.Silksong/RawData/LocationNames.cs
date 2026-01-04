@@ -137,7 +137,7 @@ public static class LocationNames
     // mask shards - 14 objects, 4 quest rewards, 2 in shops
     public const string Mask_Shard__Bilewater = "Mask_Shard-Bilewater";
     public const string Mask_Shard__Blasted_Steps = "Mask_Shard-Blasted_Steps";
-    public const string Mask_Shard__Brightvein = "Mask_Shard-Savage_Brightvein";
+    public const string Mask_Shard__Brightvein = "Mask_Shard-Brightvein";
     public const string Mask_Shard__Cogwork_Core = "Mask_Shard-Cogwork_Core";
     public const string Mask_Shard__Dark_Hearts = "Mask_Shard-Dark_Hearts"; // Quest reward
     public const string Mask_Shard__Deep_Docks = "Mask_Shard-Deep_Docks";
