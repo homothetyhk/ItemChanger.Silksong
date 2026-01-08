@@ -258,7 +258,45 @@ public static class LocationNames
 
     // TODO: finite quest items
 
-    // TODO: rosary chests, rosary and shell deposits,
+    // rosary deposits
+    public const string Rosary_Set__Tutorial = "Rosary_Set-Tutorial";
+    public const string Rosary_Set__Mosstown = "Rosary_Set-Mosstown";
+    public const string Rosary_Set__Crawl = "Rosary_Set-Crawl";
+    public const string Rosary_Set__Bone_Bottom = "Rosary_Set-Bone_Bottom";
+    public const string Rosary_Set__Bone_East_1 = "Rosary_Set-Bone_East_1";
+    public const string Rosary_Set__Bone_East_2 = "Rosary_Set-Bone_East_2";
+    public const string Rosary_Set__Greymoor_Upper = "Rosary_Set-Greymoor_Upper";
+    public const string Rosary_Set__Greymoor_Lower = "Rosary_Set-Greymoor_Lower";
+    public const string Rosary_Set__Far_Fields = "Rosary_Set-Far_Fields";
+    public const string Rosary_Set__Hunters_March = "Rosary_Set-Hunters_March";
+    public const string Rosary_Set__Aqueduct = "Rosary_Set-Aqueduct";
+    public const string Rosary_Set__Wisp_Thicket = "Rosary_Set-Wisp_Thicket";
+    public const string Rosary_Set__Shellwood_West = "Rosary_Set-Shellwood_West";
+    public const string Rosary_Set__Shellwood_Central = "Rosary_Set-Shellwood_Central";
+    public const string Rosary_Set__Shellwood_East = "Rosary_Set-Shellwood_East";
+    public const string Rosary_Set__Coral_Tower = "Rosary_Set-Coral_Tower";
+    public const string Rosary_Set__Underworks_1 = "Rosary_Set-Underworks_1";
+    public const string Rosary_Set__Underworks_2 = "Rosary_Set-Underworks_2";
+    public const string Rosary_Set__Choral_Chambers_1 = "Rosary_Set-Choral_Chambers_1";
+    public const string Rosary_Set__Choral_Chambers_2 = "Rosary_Set-Choral_Chambers_2";
+    public const string Rosary_Set__Choral_Chambers_3 = "Rosary_Set-Choral_Chambers_3";
+    public const string Rosary_Set__Library = "Rosary_Set-Library";
+    public const string Rosary_Set__High_Halls = "Rosary_Set-High_Halls";
+    public const string Rosary_Set__Slab_1 = "Rosary_Set-Slab_1";
+    public const string Rosary_Set__Slab_2 = "Rosary_Set-Slab_2";
+
+    // shard deposits
+    public const string Shard_Pouch__Deep_Docks_Forge = "Shard_Pouch-Deep_Docks_Forge";
+    public const string Shard_Pouch__Deep_Docks_West = "Shard_Pouch-Deep_Docks_West";
+    public const string Shard_Pouch__Greymoor_Upper = "Shard_Pouch-Greymoor_Upper";
+    public const string Shard_Pouch__Greymoor_Lower = "Shard_Pouch-Greymoor_Lower";
+    public const string Shard_Pouch__Far_Fields = "Shard_Pouch-Far_Fields";
+    public const string Shard_Pouch__Shellwood = "Shard_Pouch-Shellwood";
+    public const string Shard_Pouch__Underworks_West = "Shard_Pouch-Underworks_West";
+    public const string Shard_Pouch__Underworks_Arena = "Shard_Pouch-Underworks_Arena";
+    public const string Shard_Pouch__Library = "Shard_Pouch-Library";
+    public const string Shard_Pouch__Arborium = "Shard_Pouch-Arborium";
+    public const string Shard_Pouch__Cogwork_Core = "Shard_Pouch-Cogwork_Core";
 
     // Fast travel
     public const string Bellway__Bone_Bottom = "Bellway-Bone_Bottom";
