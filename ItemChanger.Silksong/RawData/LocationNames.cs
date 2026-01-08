@@ -213,6 +213,23 @@ public static class LocationNames
 
     // TODO: consumable items
 
+    // mossberries
+    public const string Mossberry__Moss_Grotto_Northwest = "Mossberry-Moss_Grotto_Northwest";
+    public const string Mossberry__Moss_Grotto_East = "Mossberry-Moss_Grotto_East";
+    public const string Mossberry__Bone_Bottom_Moss_Druid = "Mossberry-Bone_Bottom_Moss_Druid";
+    public const string Mossberry__Bone_Bottom_Above_Town = "Mossberry-Bone_Bottom_Above_Town";
+    public const string Mossberry__Bone_Bottom_Above_Bonegrave = "Mossberry-Bone_Bottom_Above_Bonegrave";
+    public const string Mossberry__Weavenest_Atla = "Mossberry-Weavenest_Atla";
+    public const string Mossberry__Memorium = "Mossberry-Memorium";
+
+    // pollip bulbs
+    public const string Pollip_Bulb__Shellwood_West = "Pollip_Bulb-Shellwood_West";
+    public const string Pollip_Bulb__Shellwood_Central = "Pollip_Bulb-Shellwood_Central";
+    public const string Pollip_Bulb__Shellwood_Cling_Grip = "Pollip_Bulb-Shellwood_Cling_Grip";
+    public const string Pollip_Bulb__Shellwood_South = "Pollip_Bulb-Shellwood_South";
+    public const string Pollip_Bulb__Shellwood_East = "Pollip_Bulb-Shellwood_East";
+    public const string Pollip_Bulb__Shellwood_Far_East = "Pollip_Bulb-Shellwood_Far_East";
+
     // mementos (note: hearts listed with plot items)
     public const string Craw_Memento = "Craw_Memento";
     public const string Grey_Memento = "Grey_Memento";
