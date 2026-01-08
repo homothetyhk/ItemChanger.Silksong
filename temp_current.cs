@@ -230,18 +230,6 @@ public static class LocationNames
     public const string Pollip_Bulb__Shellwood_East = "Pollip_Bulb-Shellwood_East";
     public const string Pollip_Bulb__Shellwood_Far_East = "Pollip_Bulb-Shellwood_Far_East";
 
-    // tool pouches
-    public const string Tool_Pouch__Mort = "Tool_Pouch-Mort";
-    public const string Tool_Pouch__Loddie = "Tool_Pouch-Loddie";
-    public const string Tool_Pouch__Nuu = "Tool_Pouch-Nuu";
-    public const string Tool_Pouch__Mooshka = "Tool_Pouch-Mooshka";
-
-    // crafting kits
-    public const string Crafting_Kit__Forge_Daughter = "Crafting_Kit-Forge_Daughter";
-    public const string Crafting_Kit__Creige = "Crafting_Kit-Creige";
-    public const string Crafting_Kit__Twelfth_Architect = "Crafting_Kit-Twelfth_Architect";
-    public const string Crafting_Kit__Grindle = "Crafting_Kit-Grindle";
-
     // mementos (note: hearts listed with plot items)
     public const string Craw_Memento = "Craw_Memento";
     public const string Grey_Memento = "Grey_Memento";
