@@ -374,6 +374,101 @@ public static class LocationNames
 
     // TODO: Styx/Skynx
 
+    // shop item locations - Pebb
+    public const string Pebb__Magnetite_Brooch = "Pebb-Magnetite_Brooch";
+    public const string Pebb__Mask_Shard = "Pebb-Mask_Shard";
+    public const string Pebb__Craftmetal = "Pebb-Craftmetal";
+    public const string Pebb__Simple_Key = "Pebb-Simple_Key";
+
+    // shop item locations - Forge Daughter
+    public const string Forge_Daughter__Sting_Shard = "Forge_Daughter-Sting_Shard";
+    public const string Forge_Daughter__Magma_Bell = "Forge_Daughter-Magma_Bell";
+    public const string Forge_Daughter__Crafting_Kit = "Forge_Daughter-Crafting_Kit";
+    public const string Forge_Daughter__Silkshot = "Forge_Daughter-Silkshot";
+
+    // shop item locations - Mottled Skarr
+    public const string Mottled_Skarr__Curveclaw = "Mottled_Skarr-Curveclaw";
+    public const string Mottled_Skarr__Fractured_Mask = "Mottled_Skarr-Fractured_Mask";
+
+    // shop item locations - Mort
+    public const string Mort__Weighted_Belt = "Mort-Weighted_Belt";
+    public const string Mort__Tool_Pouch = "Mort-Tool_Pouch";
+    public const string Mort__Memory_Locket = "Mort-Memory_Locket";
+
+    // shop item locations - Frey
+    public const string Frey__Memory_Locket = "Frey-Memory_Locket";
+    public const string Frey__Spool_Fragment = "Frey-Spool_Fragment";
+    public const string Frey__Multibinder = "Frey-Multibinder";
+
+    // shop item locations - Twelfth Architect
+    public const string Twelfth_Architect__Cogwork_Wheel = "Twelfth_Architect-Cogwork_Wheel";
+    public const string Twelfth_Architect__Scuttlebrace = "Twelfth_Architect-Scuttlebrace";
+    public const string Twelfth_Architect__Silkshot = "Twelfth_Architect-Silkshot";
+    public const string Twelfth_Architect__Crafting_Kit = "Twelfth_Architect-Crafting_Kit";
+    public const string Twelfth_Architect__Architects_Key = "Twelfth_Architect-Architects_Key";
+
+    // shop item locations - Grindle
+    public const string Grindle__Thiefs_Mark = "Grindle-Thiefs_Mark";
+    public const string Grindle__Spool_Fragment = "Grindle-Spool_Fragment";
+    public const string Grindle__Crafting_Kit = "Grindle-Crafting_Kit";
+    public const string Grindle__Snitch_Pick = "Grindle-Snitch_Pick";
+    public const string Grindle__Magnetite_Dice = "Grindle-Magnetite_Dice";
+
+    // shop item locations - Jubilana
+    public const string Jubilana__Ascendants_Grip = "Jubilana-Ascendants_Grip";
+    public const string Jubilana__Simple_Key = "Jubilana-Simple_Key";
+    public const string Jubilana__Spool_Extender = "Jubilana-Spool_Extender";
+    public const string Jubilana__Spider_Strings = "Jubilana-Spider_Strings";
+    public const string Jubilana__Spool_Fragment = "Jubilana-Spool_Fragment";
+    public const string Jubilana__Mask_Shard = "Jubilana-Mask_Shard";
+
+    // memory lockets (20 total)
+    public const string Memory_Locket__Mort = "Memory_Locket-Mort";
+    public const string Memory_Locket__Frey = "Memory_Locket-Frey";
+    public const string Memory_Locket__Quest_Flintbeetles = "Memory_Locket-Quest_Flintbeetles";
+    public const string Memory_Locket__The_Marrow = "Memory_Locket-The_Marrow";
+    public const string Memory_Locket__Hunters_March = "Memory_Locket-Hunters_March";
+    public const string Memory_Locket__Deep_Docks = "Memory_Locket-Deep_Docks";
+    public const string Memory_Locket__Far_Fields_Secret = "Memory_Locket-Far_Fields_Secret";
+    public const string Memory_Locket__Greymoor_1 = "Memory_Locket-Greymoor_1";
+    public const string Memory_Locket__Greymoor_2 = "Memory_Locket-Greymoor_2";
+    public const string Memory_Locket__Bellhart_1 = "Memory_Locket-Bellhart_1";
+    public const string Memory_Locket__Bellhart_2 = "Memory_Locket-Bellhart_2";
+    public const string Memory_Locket__Wormways = "Memory_Locket-Wormways";
+    public const string Memory_Locket__Blasted_Steps = "Memory_Locket-Blasted_Steps";
+    public const string Memory_Locket__Sands_of_Karak = "Memory_Locket-Sands_of_Karak";
+    public const string Memory_Locket__The_Slab = "Memory_Locket-The_Slab";
+    public const string Memory_Locket__Underworks_1 = "Memory_Locket-Underworks_1";
+    public const string Memory_Locket__Underworks_2 = "Memory_Locket-Underworks_2";
+    public const string Memory_Locket__Memorium = "Memory_Locket-Memorium";
+    public const string Memory_Locket__Whispering_Vaults = "Memory_Locket-Whispering_Vaults";
+    public const string Memory_Locket__Bilewater_1 = "Memory_Locket-Bilewater_1";
+    public const string Memory_Locket__Bilewater_2 = "Memory_Locket-Bilewater_2";
+
+    // craftmetal locations (8 total)
+    public const string Craftmetal__Pebb = "Craftmetal-Pebb";
+    public const string Craftmetal__The_Marrow = "Craftmetal-The_Marrow";
+    public const string Craftmetal__Deep_Docks = "Craftmetal-Deep_Docks";
+    public const string Craftmetal__Blasted_Steps = "Craftmetal-Blasted_Steps";
+    public const string Craftmetal__Underworks = "Craftmetal-Underworks";
+    public const string Craftmetal__Wisp_Thicket = "Craftmetal-Wisp_Thicket";
+    public const string Craftmetal__Jubilana = "Craftmetal-Jubilana";
+    public const string Craftmetal__Putrified_Ducts = "Craftmetal-Putrified_Ducts";
+
+
+
+    // quest reward locations
+    public const string Quest_Reward__Drifters_Cloak = "Quest_Reward-Drifters_Cloak";  // Flexile Spines (Seamstress)
+    public const string Quest_Reward__Druids_Eye = "Quest_Reward-Druids_Eye";  // Berry Picking (Moss Druid)
+    public const string Quest_Reward__Pollip_Pouch = "Quest_Reward-Pollip_Pouch";  // Rite of the Pollip (Greyroot)
+    public const string Quest_Reward__Flea_Brew = "Quest_Reward-Flea_Brew";  // The Lost Fleas (Mooshka)
+    public const string Quest_Reward__Plasmium_Phial = "Quest_Reward-Plasmium_Phial";  // Alchemist's Assistant (Zylotol)
+    public const string Quest_Reward__Tacks = "Quest_Reward-Tacks";  // Roach Guts (Crull/Benjin)
+    public const string Quest_Reward__Throwing_Ring = "Quest_Reward-Throwing_Ring";  // Trail's End (Shakra)
+    public const string Quest_Reward__Mask_Shard_Beastfly = "Quest_Reward-Mask_Shard_Beastfly";  // Savage Beastfly
+    public const string Quest_Reward__Spool_Fragment_Sherma = "Quest_Reward-Spool_Fragment_Sherma";  // Balm for the Wounded
+    public const string Quest_Reward__Crest_of_Witch = "Quest_Reward-Crest_of_Witch";  // Infestation Operation (Yarnaby)
+
     // Novelty/cursed locations
     public const string Flea_Shop = "Flea_Shop";  // threshold shop; should consume the mooshka silk spool, fleatopia tool pouch, egg of flealia
 }
