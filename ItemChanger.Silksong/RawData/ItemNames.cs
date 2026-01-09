@@ -4,8 +4,8 @@ public static class ItemNames
 {
     // Silk skills
     public const string Cross_Stitch = "Cross_Stitch";
-    public const string Pale_Nails = "Pail_Nails";
-    public const string Rune_Rage = "Rune_Range";
+    public const string Pale_Nails = "Pale_Nails";
+    public const string Rune_Rage = "Rune_Rage";
     public const string Sharpdart = "Sharpdart";
     public const string Silkspear = "Silkspear";
     public const string Thread_Storm = "Thread_Storm";
@@ -57,7 +57,7 @@ public static class ItemNames
     public const string Curveclaw = "Curveclaw";
     public const string Curvesickle = "Curvesickle";
     public const string Delver_s_Drill = "Delver's_Drill";
-    public const string Flea_Brew = "Flew_Brew"; // TODO: refill item
+    public const string Flea_Brew = "Flea_Brew"; // TODO: refill item
     public const string Flintslate = "Flintslate";
     public const string Longpin = "Longpin";
     public const string Needle_Phial = "Needle_Phial";
@@ -79,7 +79,7 @@ public static class ItemNames
     public const string Claw_Mirror = "Claw_Mirror";
     public const string Claw_Mirrors = "Claw_Mirrors";
     public const string Druid_s_Eye = "Druid's_Eye";
-    public const string Druid_s_Eyes = "Druid's_Eues";
+    public const string Druid_s_Eyes = "Druid's_Eyes";
     public const string Egg_of_Flealia = "Egg_of_Flealia";
     public const string Fractured_Mask = "Fractured_Mask";
     public const string Injector_Band = "Injector_Band";
@@ -143,7 +143,7 @@ public static class ItemNames
     public const string Bone_Scroll__Burning_Bug = "Bone_Scroll-Burning_Bug"; // Bone Record Wisp Top
     public const string Bone_Scroll__Lost_Pilgrim = "Bone_Scroll-Lost_Pilgrim"; // Bone Record Greymoor_flooded_corridor
     public const string Bone_Scroll__Singed_Pilgrim = "Bone_Scroll-Singed_Pilgrim"; // Bone Record Bone_East_14
-    public const string Bone_Scroll__Underwprker = "Bone_Scroll-Underworker"; // Bone Record Understore_Map_Room
+    public const string Bone_Scroll__Underworker = "Bone_Scroll-Underworker"; // Bone Record Understore_Map_Room
     public const string Choral_Commandment__Eternity = "Choral_Commandment-Eternity"; // Seal Chit City Merchant
     public const string Choral_Commandment__Light = "Choral_Commandment-Light"; // Seal Chit Silk Siphon
     public const string Choral_Commandment__Surgeon = "Choral_Commandment-Surgeon"; // Seal Chit Ward Corpse
@@ -188,7 +188,7 @@ public static class ItemNames
     public const string Verdania_Map = "Verdania_Map";
     public const string Weavenest_Alta_Map = "Weavenest_Alta_Map";
     public const string Whispering_Vaults_Map = "Whispering_Vaults_Map";
-    public const string Whiteward_Map = "Whitewarp_Map";
+    public const string Whiteward_Map = "Whiteward_Map";
     public const string Wormways_Map = "Wormways_Map";
 
     // quills

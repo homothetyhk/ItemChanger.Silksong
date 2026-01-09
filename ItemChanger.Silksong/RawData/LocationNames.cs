@@ -217,6 +217,63 @@ public static class LocationNames
     public const string Growstone = "Growstone";
     public const string Hornet_Statuette = "Hornet_Statuette";
 
+    /*
+    // Shell Shard Fossils (breakable rocks that drop shards)
+    public const string Shell_Shard_Fossil__Tut_01 = "Shell_Shard_Fossil-Tut_01";
+    public const string Shell_Shard_Fossil__Tut_01b_1 = "Shell_Shard_Fossil-Tut_01b_1";
+    public const string Shell_Shard_Fossil__Tut_01b_2 = "Shell_Shard_Fossil-Tut_01b_2";
+    public const string Shell_Shard_Fossil__Tut_01b_3 = "Shell_Shard_Fossil-Tut_01b_3";
+    public const string Shell_Shard_Fossil__Tut_02_1 = "Shell_Shard_Fossil-Tut_02_1";
+    public const string Shell_Shard_Fossil__Tut_02_2 = "Shell_Shard_Fossil-Tut_02_2";
+    public const string Shell_Shard_Fossil__Tut_02_3 = "Shell_Shard_Fossil-Tut_02_3";
+    public const string Shell_Shard_Fossil__Mosstown_03_1 = "Shell_Shard_Fossil-Mosstown_03_1";
+    public const string Shell_Shard_Fossil__Mosstown_03_2 = "Shell_Shard_Fossil-Mosstown_03_2";
+    public const string Shell_Shard_Fossil__Mosstown_03_3 = "Shell_Shard_Fossil-Mosstown_03_3";
+    public const string Shell_Shard_Fossil__Shellwood_01_1 = "Shell_Shard_Fossil-Shellwood_01_1";
+    public const string Shell_Shard_Fossil__Shellwood_01_2 = "Shell_Shard_Fossil-Shellwood_01_2";
+    public const string Shell_Shard_Fossil__Shellwood_01_3 = "Shell_Shard_Fossil-Shellwood_01_3";
+    public const string Shell_Shard_Fossil__Shellwood_01_4 = "Shell_Shard_Fossil-Shellwood_01_4";
+    public const string Shell_Shard_Fossil__Shellwood_01_5 = "Shell_Shard_Fossil-Shellwood_01_5";
+    public const string Shell_Shard_Fossil__Shellwood_11_1 = "Shell_Shard_Fossil-Shellwood_11_1";
+    public const string Shell_Shard_Fossil__Shellwood_11_2 = "Shell_Shard_Fossil-Shellwood_11_2";
+    public const string Shell_Shard_Fossil__Shellwood_11_3 = "Shell_Shard_Fossil-Shellwood_11_3";
+    public const string Shell_Shard_Fossil__Shellwood_11_4 = "Shell_Shard_Fossil-Shellwood_11_4";
+    public const string Shell_Shard_Fossil__Shellwood_11_5 = "Shell_Shard_Fossil-Shellwood_11_5";
+    public const string Shell_Shard_Fossil__Shellwood_25 = "Shell_Shard_Fossil-Shellwood_25";
+    public const string Shell_Shard_Fossil__Shellwood_26 = "Shell_Shard_Fossil-Shellwood_26";
+    public const string Shell_Shard_Fossil__Greymoor_16_1 = "Shell_Shard_Fossil-Greymoor_16_1";
+    public const string Shell_Shard_Fossil__Greymoor_16_2 = "Shell_Shard_Fossil-Greymoor_16_2";
+    public const string Shell_Shard_Fossil__Greymoor_17_1 = "Shell_Shard_Fossil-Greymoor_17_1";
+    public const string Shell_Shard_Fossil__Greymoor_17_2 = "Shell_Shard_Fossil-Greymoor_17_2";
+    public const string Shell_Shard_Fossil__Greymoor_17_3 = "Shell_Shard_Fossil-Greymoor_17_3";
+    public const string Shell_Shard_Fossil__Greymoor_17_4 = "Shell_Shard_Fossil-Greymoor_17_4";
+    public const string Shell_Shard_Fossil__Greymoor_17_5 = "Shell_Shard_Fossil-Greymoor_17_5";
+    public const string Shell_Shard_Fossil__Library_11b = "Shell_Shard_Fossil-Library_11b";
+    public const string Shell_Shard_Fossil__Library_12_1 = "Shell_Shard_Fossil-Library_12_1";
+    public const string Shell_Shard_Fossil__Library_12_2 = "Shell_Shard_Fossil-Library_12_2";
+    public const string Shell_Shard_Fossil__Library_13_1 = "Shell_Shard_Fossil-Library_13_1";
+    public const string Shell_Shard_Fossil__Library_13_2 = "Shell_Shard_Fossil-Library_13_2";
+    public const string Shell_Shard_Fossil__Slab_05_1 = "Shell_Shard_Fossil-Slab_05_1";
+    public const string Shell_Shard_Fossil__Slab_05_2 = "Shell_Shard_Fossil-Slab_05_2";
+    public const string Shell_Shard_Fossil__Slab_05_3 = "Shell_Shard_Fossil-Slab_05_3";
+    public const string Shell_Shard_Fossil__Slab_12_1 = "Shell_Shard_Fossil-Slab_12_1";
+    public const string Shell_Shard_Fossil__Slab_12_2 = "Shell_Shard_Fossil-Slab_12_2";
+    public const string Shell_Shard_Fossil__Slab_18_1 = "Shell_Shard_Fossil-Slab_18_1";
+    public const string Shell_Shard_Fossil__Slab_18_2 = "Shell_Shard_Fossil-Slab_18_2";
+    public const string Shell_Shard_Fossil__Bone_East_24 = "Shell_Shard_Fossil-Bone_East_24";
+    public const string Shell_Shard_Fossil__Bone_East_LavaChallenge = "Shell_Shard_Fossil-Bone_East_LavaChallenge";
+    public const string Shell_Shard_Fossil__Bone_East_13_1 = "Shell_Shard_Fossil-Bone_East_13_1";
+    public const string Shell_Shard_Fossil__Bone_East_13_2 = "Shell_Shard_Fossil-Bone_East_13_2";
+    public const string Shell_Shard_Fossil__Bone_East_13_3 = "Shell_Shard_Fossil-Bone_East_13_3";
+    public const string Shell_Shard_Fossil__Coral_36 = "Shell_Shard_Fossil-Coral_36";
+    public const string Shell_Shard_Fossil__Peak_01 = "Shell_Shard_Fossil-Peak_01";
+    public const string Shell_Shard_Fossil__Wisp_09 = "Shell_Shard_Fossil-Wisp_09";
+    public const string Shell_Shard_Fossil__Under_17_1 = "Shell_Shard_Fossil-Under_17_1";
+    public const string Shell_Shard_Fossil__Under_17_2 = "Shell_Shard_Fossil-Under_17_2";
+    public const string Shell_Shard_Fossil__Under_17_3 = "Shell_Shard_Fossil-Under_17_3";
+    
+    */
+
     // beast shards - 9 total (6 boss drops, 2 glowing spots, 1 quest reward)
     public const string Beast_Shard__Blasted_Steps_Statue = "Beast_Shard-Blasted_Steps_Statue"; // Shard statue behind breakable wall
     public const string Beast_Shard__Craggler = "Beast_Shard-Craggler";  // Wormways
@@ -624,11 +681,6 @@ public static class LocationNames
     public const string Cogheart_Piece__Choral_Chambers = "Cogheart_Piece-Choral_Chambers"; // To the west, connected to the tall room that leads to The Slab.
     public const string Cogheart_Piece__Memorium = "Cogheart_Piece-Memorium"; // To the east, in the room above the map room.
     public const string Cogheart_Piece__Whispering_Vaults = "Cogheart_Piece-Whispering_Vaults"; // In a room below the entrance to The Stage.
-
-   
-
-
-
     // TODOs
 
     
