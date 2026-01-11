@@ -75,13 +75,17 @@ public static class LocationNames
     // crests
     public const string Crest_of_Architect = "Crest_of_Architect";
     public const string Crest_of_Beast = "Crest_of_Beast";
+    public const string Crest_of_Cloakless = "Crest_of_Cloakless";
+    public const string Crest_of_Cursed_Witch = "Crest_of_Cursed_Witch";
     public const string Crest_of_Hunter = "Crest_of_Hunter";
+    public const string Crest_of_Hunter__Upgrade_1 = "Crest_of_Hunter-Upgrade_1"; // Meeting Eva, unlock 12 slots
+    public const string Crest_of_Hunter__Upgrade_2 = "Crest_of_Hunter-Upgrade_2"; // Unlock 27 slots
     public const string Crest_of_Reaper = "Crest_of_Reaper";
     public const string Crest_of_Shaman = "Crest_of_Shaman";
     public const string Crest_of_Wanderer = "Crest_of_Wanderer";
     public const string Crest_of_Witch = "Crest_of_Witch";
-    public const string Vesticrest_Blue = "Vesticrest_Blue";
-    public const string Vesticrest_Yellow = "Vesticrest_Yellow";
+    public const string Vesticrest_Blue__Expansion = "Vesticrest_Blue-Expansion"; // Unlock 20 slots, adds Blue Tool slot
+    public const string Vesticrest_Yellow = "Vesticrest_Yellow"; // Unlock 12 slots, adds Yellow Tool slot
     // red tools (note: Ruined_Tool is listed with quest items; shop items: Curveclaw (Mottled_Skarr), Sting_Shard (Forge Daughter); Cogwork_Wheel is a craftmetal shop item (Twelfth Architect))
     public const string Cogfly = "Cogfly";
       //public const string Cogwork_Wheel = "Cogwork_Wheel";
@@ -375,6 +379,12 @@ public static class LocationNames
     public const string Farsight = "Farsight";
     public const string Materium = "Materium";
 
+ // materium types (submenu items for Materium)
+    public const string Materium__Flintstone = "Materium-Flintstone";
+    public const string Materium__Magnetite = "Materium-Magnetite";
+    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
+    public const string Materium__Voltridian = "Materium-Voltridian";
+    
     // Rosary Rocks
     public const string Rosary_Rock__Aqueduct_08 = "Rosary_Rock-Aqueduct_08";
     public const string Rosary_Rock__Aspid_01 = "Rosary_Rock-Aspid_01";
@@ -562,8 +572,10 @@ public static class LocationNames
     public const string Lore_Tablet__Bilewater_Hate = "Lore_Tablet-Bilewater_Hate";
     public const string Lore_Tablet__Bilewater_Punish = "Lore_Tablet-Bilewater_Punish";
     public const string Lore_Tablet__Blasted_Steps_Arbiter = "Lore_Tablet-Blasted_Steps_Arbiter";
-    public const string Lore_Tablet__Blasted_Steps_Pinstress = "Lore_Tablet-Blasted_Steps_Pinstress";
     public const string Lore_Tablet__Blasted_Steps_Pilgrim = "Lore_Tablet-Blasted_Steps_Pilgrim";
+    public const string Lore_Tablet__Blasted_Steps_Pinstress = "Lore_Tablet-Blasted_Steps_Pinstress";
+    public const string Lore_Tablet__Bone_Bottom_Weaver = "Lore_Tablet-Bone_Bottom_Weaver";
+    public const string Lore_Tablet__Bone_Bottom_Weaver_Harp = "Lore_Tablet-Bone_Bottom_Weaver_Harp";
     public const string Lore_Tablet__Coral_Tower = "Lore_Tablet-Coral_Tower";
     public const string Lore_Tablet__Cradle_Blackbarrens = "Lore_Tablet-Cradle_Blackbarrens";
     public const string Lore_Tablet__Cradle_Sandsea = "Lore_Tablet-Cradle_Sandsea";
@@ -575,9 +587,11 @@ public static class LocationNames
     public const string Lore_Tablet__Greymoor_Litany = "Lore_Tablet-Greymoor_Litany";
     public const string Lore_Tablet__Greymoor_Orders = "Lore_Tablet-Greymoor_Orders";
     public const string Lore_Tablet__Marrow_Pilgrim = "Lore_Tablet-Marrow_Pilgrim";
-    public const string Lore_Tablet__Marrow_Trobbio = "Lore_Tablet-Marrow_Trobbio";
+    public const string Lore_Tablet__Marrow_Twisted_Shells = "Lore_Tablet-Marrow_Twisted_Shells";
     public const string Lore_Tablet__Memorium_Containment = "Lore_Tablet-Memorium_Containment";
     public const string Lore_Tablet__Memorium_Entrance = "Lore_Tablet-Memorium_Entrance";
+    public const string Lore_Tablet__Moss_Grotto_Chapel_Anguished = "Lore_Tablet-Moss_Grotto_Chapel_Anguished";
+    public const string Lore_Tablet__Moss_Grotto_Chapel_Flickering = "Lore_Tablet-Moss_Grotto_Chapel_Flickering";
     public const string Lore_Tablet__Mount_Fay = "Lore_Tablet-Mount_Fay";
     public const string Lore_Tablet__Putrified_Ducts_Mr_Mushroom = "Lore_Tablet-Putrified_Ducts_Mr_Mushroom";
     public const string Lore_Tablet__Putrified_Ducts_Pale_Lake = "Lore_Tablet-Putrified_Ducts_Pale_Lake";
@@ -592,14 +606,10 @@ public static class LocationNames
     public const string Lore_Tablet__Verdania_Twins = "Lore_Tablet-Verdania_Twins";
     public const string Lore_Tablet__Weavenest_Atla = "Lore_Tablet-Weavenest_Atla";
     public const string Lore_Tablet__Weavenest_Murglin = "Lore_Tablet-Weavenest_Murglin";
-    public const string Lore_Tablet__Whiteward_Oath = "Lore_Tablet-Whiteward_Oath";
+    public const string Lore_Tablet__Whispering_Vaults_Tormented = "Lore_Tablet-Whispering_Vaults_Tormented";
     public const string Lore_Tablet__Whispering_Vaults_Trobbio = "Lore_Tablet-Whispering_Vaults_Trobbio";
     public const string Lore_Tablet__Whispering_Vaults_Trobbio_Act_2 = "Lore_Tablet-Whispering_Vaults_Trobbio_Act_2";
-    public const string Lore_Tablet__Whispering_Vaults_Tormented = "Lore_Tablet-Whispering_Vaults_Tormented";
-    public const string Lore_Tablet__Moss_Grotto_Chapel_Flickering = "Lore_Tablet-Moss_Grotto_Chapel_Flickering";
-    public const string Lore_Tablet__Moss_Grotto_Chapel_Anguished = "Lore_Tablet-Moss_Grotto_Chapel_Anguished";
-    public const string Lore_Tablet__Bone_Bottom_Weaver = "Lore_Tablet-Bone_Bottom_Weaver";
-    public const string Lore_Tablet__Bone_Bottom_Weaver_Harp = "Lore_Tablet-Bone_Bottom_Weaver_Harp";
+    public const string Lore_Tablet__Whiteward_Oath = "Lore_Tablet-Whiteward_Oath";
 
 
     // Memory lockets (20 total)
