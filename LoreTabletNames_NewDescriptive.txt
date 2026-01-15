@@ -1,0 +1,50 @@
+# New Descriptive Lore Tablet Names (LocationNames.cs)
+# These names were created for PR #10 to be more descriptive of the tablet content/location
+# Keeping this log in case they are useful in the future
+
+# Format: NewName -> OriginalName (from master ItemNames.cs)
+
+Lore_Tablet__Abyss_Void_Cleanse -> Lore_Tablet__Abyss_Top
+Lore_Tablet__Abyss_Void_Prayer -> Lore_Tablet__Abyss_Bottom_Left
+Lore_Tablet__Memorium_Containment -> Lore_Tablet__Memorium_Orders
+Lore_Tablet__Bellhart_Pilgrim_East -> Lore_Tablet__Bellhart_East
+Lore_Tablet__Bellhart_Pilgrim_West -> Lore_Tablet__Bellhart_West
+Lore_Tablet__Bellhart_Plinney -> (new - third Bellhart tablet)
+Lore_Tablet__Marrow_Pilgrim -> Lore_Tablet__Marrow_Start
+Lore_Tablet__Marrow_Twisted_Shells -> Lore_Tablet__Marrow_Top
+Lore_Tablet__Far_Fields_Pilgrim -> Lore_Tablet__Pilgrims_Rest
+Lore_Tablet__Verdania_Twins -> Lore_Tablet__Verdania_End
+Lore_Tablet__Verdania_Shrine -> (new - third Verdania tablet)
+Lore_Tablet__Blasted_Steps_Arbiter -> Lore_Tablet__Blasted_Steps_Start
+Lore_Tablet__Blasted_Steps_Pilgrim -> Lore_Tablet__Karak_Entrance
+Lore_Tablet__Blasted_Steps_Pinstress -> Lore_Tablet__Blasted_Steps_Nursery
+Lore_Tablet__Cradle_Blackbarrens -> Lore_Tablet__Cradle_Cage_1
+Lore_Tablet__Cradle_Sandsea -> Lore_Tablet__Cradle_Cage_2
+Lore_Tablet__Cradle_Steel_City -> Lore_Tablet__Cradle_Cage_3
+Lore_Tablet__Greymoor_Orders -> Lore_Tablet__Greymoor_Orders_Above_Home
+Lore_Tablet__Greymoor_Litany -> Lore_Tablet__Greymoor_Bottom
+Lore_Tablet__Whispering_Vaults_Trobbio -> Lore_Tablet__Trobbio_Sign
+Lore_Tablet__Whispering_Vaults_Trobbio_Act_2 -> Lore_Tablet__Trobbio_Notes
+Lore_Tablet__Whispering_Vaults_Tormented -> Lore_Tablet__Tormented_Trobbio_Notes
+Lore_Tablet__Moss_Grotto_Chapel_Anguished -> Lore_Tablet__Moss_Grotto_Chapel_Entrance
+Lore_Tablet__Moss_Grotto_Chapel_Flickering -> Lore_Tablet__Moss_Grotto_Chapel_Inner
+Lore_Tablet__Mount_Fay -> Lore_Tablet__Mount_Fay_Bottom
+Lore_Tablet__Deep_Docks -> Lore_Tablet__Deep_Docks_Forge
+Lore_Tablet__Bilewater_Hate -> Lore_Tablet__Bilewater_Shortcut
+Lore_Tablet__Bilewater_Punish -> Lore_Tablet__Bilewater_Above_Groal
+Lore_Tablet__Shellwood_Pilgrim -> Lore_Tablet__Shellwood_West
+Lore_Tablet__Shellwood_Weaver -> Lore_Tablet__Shellwood_Harp
+Lore_Tablet__Bone_Bottom_Weaver -> Lore_Tablet__Nyleth
+Lore_Tablet__Bone_Bottom_Weaver_Harp -> (combined with above?)
+Lore_Tablet__Slab_Penance_Fourth -> Lore_Tablet__Slab_Orders_1
+Lore_Tablet__Slab_Penance_Eighth -> Lore_Tablet__Slab_Orders_2
+Lore_Tablet__Slab_First_Sinner -> Lore_Tablet__First_Sinner
+Lore_Tablet__Terminus_Ventrica -> Lore_Tablet__Ventrica_Hub
+Lore_Tablet__Grand_Gate -> (new)
+Lore_Tablet__Weavenest_Atla -> Lore_Tablet__Weavenest_Atla_East
+Lore_Tablet__Putrified_Ducts_Mr_Mushroom -> Lore_Tablet__Mr_Mushroom
+Lore_Tablet__Putrified_Ducts_Pale_Lake -> (new)
+
+# Note: The original names in ItemNames.cs represent distinct game items
+# The new descriptive names above were created for LocationNames.cs 
+# to better describe where the tablets are found or what they contain
