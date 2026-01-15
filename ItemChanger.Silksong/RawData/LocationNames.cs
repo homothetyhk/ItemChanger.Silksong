@@ -575,6 +575,7 @@ public static class LocationNames
     public const string Lore_Tablet__Marrow_Pilgrim = "Lore_Tablet-Marrow_Pilgrim";
     public const string Lore_Tablet__Marrow_Twisted_Shells = "Lore_Tablet-Marrow_Twisted_Shells";
     public const string Lore_Tablet__Far_Fields_Pilgrim = "Lore_Tablet-Far_Fields_Pilgrim";
+    public const string Lore_Tablet__Weavenest_Cindril = "Lore_Tablet-Weavenest_Cindril";
     public const string Lore_Tablet__Weavenest_Murglin = "Lore_Tablet-Weavenest_Murglin";
     public const string Lore_Tablet__Verdania_Twins = "Lore_Tablet-Verdania_Twins";
     public const string Lore_Tablet__Verdania_Fountains = "Lore_Tablet-Verdania_Fountains";
@@ -583,6 +584,7 @@ public static class LocationNames
     public const string Lore_Tablet__Blasted_Steps_Pilgrim = "Lore_Tablet-Blasted_Steps_Pilgrim";
     public const string Lore_Tablet__Blasted_Steps_Pinstress = "Lore_Tablet-Blasted_Steps_Pinstress";
     public const string Lore_Tablet__Coral_Tower = "Lore_Tablet-Coral_Tower";
+    public const string Lore_Tablet__Sands_of_Karak = "Lore_Tablet-Sands_of_Karak";
     public const string Lore_Tablet__Cradle_Blackbarrens = "Lore_Tablet-Cradle_Blackbarrens";
     public const string Lore_Tablet__Cradle_Sandsea = "Lore_Tablet-Cradle_Sandsea";
     public const string Lore_Tablet__Cradle_Steel_City = "Lore_Tablet-Cradle_Steel_City";
@@ -605,6 +607,7 @@ public static class LocationNames
     public const string Lore_Tablet__Slab_Penance_Eighth = "Lore_Tablet-Slab_Penance_Eighth";
     public const string Lore_Tablet__Slab_First_Sinner = "Lore_Tablet-Slab_First_Sinner";
     public const string Lore_Tablet__Terminus_Ventrica = "Lore_Tablet-Terminus_Ventrica";
+    public const string Lore_Tablet__Underworks_Confessional = "Lore_Tablet-Underworks_Confessional";
     public const string Lore_Tablet__Grand_Gate = "Lore_Tablet-Grand_Gate";
     public const string Lore_Tablet__Whiteward_Oath = "Lore_Tablet-Whiteward_Oath";
     public const string Lore_Tablet__Weavenest_Atla = "Lore_Tablet-Weavenest_Atla";
