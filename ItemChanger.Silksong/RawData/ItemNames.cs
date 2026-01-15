@@ -39,15 +39,6 @@ public static class ItemNames
     public const string Seeker_s_Soul = "Seeker's_Soul";
     public const string Vaultkeeper_s_Melody = "Vaultkeeper's_Melody";
 
-    // mementos (note: hearts listed with plot items)
-    public const string Craw_Memento = "Craw_Memento";
-    public const string Grey_Memento = "Grey_Memento";
-    public const string Guardian_s_Memento = "Guardian's_Memento";
-    public const string Hero_s_Memento = "Hero's_Memento";
-    public const string Hunter_s_Memento = "Hunter's_Memento";
-    public const string Sprintmaster_Memento = "Sprintmaster_Memento";
-    public const string Surface_Memento = "Surface_Memento";
-
     // crests
     public const string Crest_of_Architect = "Crest_of_Architect";
     public const string Crest_of_Beast = "Crest_of_Beast";
@@ -192,84 +183,6 @@ public static class ItemNames
     public const string Weaver_Effigy__Camora = "Weaver_Effigy-Camora"; // Weaver Totem Bonetown_upper_room
     public const string Weaver_Effigy__Keelal = "Weaver_Effigy-Keelal"; // Weaver Totem Witch
 
-    // quills
-    public const string Quill__Purple = "Quill-Purple";
-    public const string Quill__Red = "Quill-Red";
-    public const string Quill__White = "Quill-White";
-
-    // mossberries
-    public const string Mossberry = "Mossberry";
-
-    // pollip bulbs
-    public const string Pollip_Heart = "Pollip_Heart";
-
-    // tool pouches
-    public const string Tool_Pouch = "Tool_Pouch";
-
-    // crafting kits
-    public const string Crafting_Kit = "Crafting_Kit";
-
-    // bellhome upgrades
-    public const string Bell_Lacquer__Black = "Bell_Lacquer-Black";
-    public const string Bell_Lacquer__Blue = "Bell_Lacquer-Blue";
-    public const string Bell_Lacquer__Bronze = "Bell_Lacquer-Bronze";
-    public const string Bell_Lacquer__Chrome = "Bell_Lacquer-Chrome";
-    public const string Bell_Lacquer__Red = "Bell_Lacquer-Red";
-    public const string Bell_Lacquer__White = "Bell_Lacquer-White";
-    public const string Crawbell = "Crawbell";
-    public const string Desk = "Desk";
-    public const string Farsight = "Farsight";
-    public const string Gleamlights = "Gleamlights";
-    public const string Gramophone = "Gramophone";
-    public const string Materium = "Materium";
-    public const string Personal_Spa = "Personal_Spa";
-
-    // materium types (submenu items for Materium)
-    public const string Materium__Flintstone = "Materium-Flintstone";
-    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
-    public const string Materium__Voltridian = "Materium-Voltridian";
-    public const string Materium__Magnetite = "Materium-Magnetite";
-
-    // rosary items
-    public const string Rosary_Bell = "Rosary_Bell";
-    public const string Rosary_Bowl = "Rosary_Bowl";
-    public const string Rosary_Cache = "Rosary_Cache";
-    public const string Rosary_Chest = "Rosary_Chest";
-    public const string Rosary_Event = "Rosary_Event";
-    public const string Rosary_Grave = "Rosary_Grave";
-    public const string Rosary_Npc = "Rosary_Npc";
-    public const string Rosary_Pouch = "Rosary_Pouch";
-    public const string Rosary_Rock = "Rosary_Rock";
-    public const string Rosary_Tray = "Rosary_Tray";
-
-    // consumable rosaries
-    public const string Frayed_Rosary_String = "Frayed_Rosary_String";
-    public const string Heavy_Rosary_Necklace = "Heavy_Rosary_Necklace";
-    public const string Pale_Rosary_Necklace = "Pale_Rosary_Necklace";
-    public const string Rosary_Necklace = "Rosary_Necklace";
-    public const string Rosary_String = "Rosary_String";
-
-    // Fast travel
-    public const string Bellway__Bone_Bottom = "Bellway-Bone_Bottom";
-    public const string Bellway__The_Marrow = "Bellway-The_Marrow";
-    public const string Bellway__Deep_Docks = "Bellway-Deep_Docks";
-    public const string Bellway__Far_Fields = "Bellway-Far_Fields";
-    public const string Bellway__Greymoor = "Bellway-Greymoor";
-    public const string Bellway__Bellhart = "Bellway-Bellhart";
-    public const string Bellway__Shellwood = "Bellway-Shellwood";
-    public const string Bellway__Blasted_Steps = "Bellway-Blasted_Steps";
-    public const string Bellway__The_Slab = "Bellway-The_Slab";
-    public const string Bellway__Grand_Bellway = "Bellway-Grand_Bellway";
-    public const string Bellway__Bilewater = "Bellway-Bilewater";
-    public const string Bellway__Putrified_Ducts = "Bellway-Putrified_Ducts";
-    public const string Ventrica__Terminus = "Ventrica-Terminus";
-    public const string Ventrica__Memorium = "Ventrica-Memorium";
-    public const string Ventrica__High_Halls = "Ventrica-High_Halls";
-    public const string Ventrica__First_Shrine = "Ventrica-First_Shrine";
-    public const string Ventrica__Choral_Chambers = "Ventrica-Choral_Chambers";
-    public const string Ventrica__Grand_Bellway = "Ventrica-Grand_Bellway";
-    public const string Ventrica__Underworks = "Ventrica-Underworks";
-
     // maps
     public const string Bellhart_Map = "Bellhart_Map";
     public const string Bilewater_Map = "Bilewater_Map";
@@ -299,6 +212,115 @@ public static class ItemNames
     public const string Whispering_Vaults_Map = "Whispering_Vaults_Map";
     public const string Whiteward_Map = "Whiteward_Map";
     public const string Wormways_Map = "Wormways_Map";
+
+    // quills
+    public const string Quill__Purple = "Quill-Purple";
+    public const string Quill__Red = "Quill-Red";
+    public const string Quill__White = "Quill-White";
+
+    // map markers
+    public const string Bronze_Marker = "Bronze_Marker";
+    public const string Dark_Marker = "Dark_Marker";
+    public const string Hunt_Marker = "Hunt_Marker";
+    public const string Ring_Marker = "Ring_Marker";
+    public const string Shell_Marker = "Shell_Marker";
+
+    // map pins
+    public const string Bench_Pins = "Bench_Pins";
+    public const string Bellway_Pins = "Bellway_Pins";
+    public const string Vendor_Pins = "Vendor_Pins";
+    public const string Ventrica_Pins = "Ventrica_Pins";
+
+    // flea findings
+   /* public const string Flea_Findings__Bilelands = "Flea_Findings-Bilelands";
+    public const string Flea_Findings__Blasted_Steps = "Flea_Findings-Blasted_Steps";
+    public const string Flea_Findings__Bonelands = "Flea_Findings-Bonelands";
+    public const string Flea_Findings__Midlands = "Flea_Findings-Midlands";
+    public const string Flea_Findings__Mount_Fay = "Flea_Findings-Mount_Fay";
+    public const string Flea_Findings__The_Citadel = "Flea_Findings-The_Citadel";
+    */
+
+    // mossberries
+    public const string Mossberry = "Mossberry";
+
+    // pollip bulbs
+    public const string Pollip_Heart = "Pollip_Heart";
+
+    // tool pouches
+    public const string Tool_Pouch = "Tool_Pouch";
+
+    // crafting kits
+    public const string Crafting_Kit = "Crafting_Kit";
+
+    // rosary items
+    public const string Rosary_Bell = "Rosary_Bell";
+    public const string Rosary_Bowl = "Rosary_Bowl";
+    public const string Rosary_Cache = "Rosary_Cache";
+    public const string Rosary_Chest = "Rosary_Chest";
+    public const string Rosary_Event = "Rosary_Event";
+    public const string Rosary_Grave = "Rosary_Grave";
+    public const string Rosary_Npc = "Rosary_Npc";
+    public const string Rosary_Pouch = "Rosary_Pouch";
+    public const string Rosary_Rock = "Rosary_Rock";
+    public const string Rosary_Tray = "Rosary_Tray";
+
+    // consumable rosaries
+    public const string Frayed_Rosary_String = "Frayed_Rosary_String";
+    public const string Heavy_Rosary_Necklace = "Heavy_Rosary_Necklace";
+    public const string Pale_Rosary_Necklace = "Pale_Rosary_Necklace";
+    public const string Rosary_Necklace = "Rosary_Necklace";
+    public const string Rosary_String = "Rosary_String";
+
+    // mementos (note: hearts listed with plot items)
+    public const string Craw_Memento = "Craw_Memento";
+    public const string Grey_Memento = "Grey_Memento";
+    public const string Guardian_s_Memento = "Guardian's_Memento";
+    public const string Hero_s_Memento = "Hero's_Memento";
+    public const string Hunter_s_Memento = "Hunter's_Memento";
+    public const string Sprintmaster_Memento = "Sprintmaster_Memento";
+    public const string Surface_Memento = "Surface_Memento";
+
+    // bellhome upgrades
+    public const string Bell_Lacquer__Black = "Bell_Lacquer-Black";
+    public const string Bell_Lacquer__Blue = "Bell_Lacquer-Blue";
+    public const string Bell_Lacquer__Bronze = "Bell_Lacquer-Bronze";
+    public const string Bell_Lacquer__Chrome = "Bell_Lacquer-Chrome";
+    public const string Bell_Lacquer__Red = "Bell_Lacquer-Red";
+    public const string Bell_Lacquer__White = "Bell_Lacquer-White";
+    public const string Crawbell = "Crawbell";
+    public const string Desk = "Desk";
+    public const string Farsight = "Farsight";
+    public const string Gleamlights = "Gleamlights";
+    public const string Gramophone = "Gramophone";
+    public const string Materium = "Materium";
+    public const string Personal_Spa = "Personal_Spa";
+
+    // materium types (submenu items for Materium)
+    public const string Materium__Flintstone = "Materium-Flintstone";
+    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
+    public const string Materium__Voltridian = "Materium-Voltridian";
+    public const string Materium__Magnetite = "Materium-Magnetite";
+
+    // Fast travel
+    public const string Bellway__Bone_Bottom = "Bellway-Bone_Bottom";
+    public const string Bellway__The_Marrow = "Bellway-The_Marrow";
+    public const string Bellway__Deep_Docks = "Bellway-Deep_Docks";
+    public const string Bellway__Far_Fields = "Bellway-Far_Fields";
+    public const string Bellway__Greymoor = "Bellway-Greymoor";
+    public const string Bellway__Bellhart = "Bellway-Bellhart";
+    public const string Bellway__Shellwood = "Bellway-Shellwood";
+    public const string Bellway__Blasted_Steps = "Bellway-Blasted_Steps";
+    public const string Bellway__The_Slab = "Bellway-The_Slab";
+    public const string Bellway__Grand_Bellway = "Bellway-Grand_Bellway";
+    public const string Bellway__Bilewater = "Bellway-Bilewater";
+    public const string Bellway__Putrified_Ducts = "Bellway-Putrified_Ducts";
+    public const string Ventrica__Terminus = "Ventrica-Terminus";
+    public const string Ventrica__Memorium = "Ventrica-Memorium";
+    public const string Ventrica__High_Halls = "Ventrica-High_Halls";
+    public const string Ventrica__First_Shrine = "Ventrica-First_Shrine";
+    public const string Ventrica__Choral_Chambers = "Ventrica-Choral_Chambers";
+    public const string Ventrica__Grand_Bellway = "Ventrica-Grand_Bellway";
+    public const string Ventrica__Underworks = "Ventrica-Underworks";
 
     // Lore tablets
     public const string Lore_Tablet__Abyss_Top = "Lore_Tablet-Abyss_Top";
@@ -394,28 +416,6 @@ public static class ItemNames
 
     // journal entries
     public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
-
-    // map markers
-    public const string Bronze_Marker = "Bronze_Marker";
-    public const string Dark_Marker = "Dark_Marker";
-    public const string Hunt_Marker = "Hunt_Marker";
-    public const string Ring_Marker = "Ring_Marker";
-    public const string Shell_Marker = "Shell_Marker";
-
-    // map pins
-    public const string Bench_Pins = "Bench_Pins";
-    public const string Bellway_Pins = "Bellway_Pins";
-    public const string Vendor_Pins = "Vendor_Pins";
-    public const string Ventrica_Pins = "Ventrica_Pins";
-
-    // flea findings
-   /* public const string Flea_Findings__Bilelands = "Flea_Findings-Bilelands";
-    public const string Flea_Findings__Blasted_Steps = "Flea_Findings-Blasted_Steps";
-    public const string Flea_Findings__Bonelands = "Flea_Findings-Bonelands";
-    public const string Flea_Findings__Midlands = "Flea_Findings-Midlands";
-    public const string Flea_Findings__Mount_Fay = "Flea_Findings-Mount_Fay";
-    public const string Flea_Findings__The_Citadel = "Flea_Findings-The_Citadel";
-    */
 
     // Novelty/cursed items
     public const string Left_Cling_Grip = "Left_Cling_Grip";
