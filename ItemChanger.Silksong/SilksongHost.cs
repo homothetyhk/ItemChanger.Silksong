@@ -3,6 +3,7 @@ using ItemChanger.Events;
 using ItemChanger.Logging;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Modules;
+using ItemChanger.Silksong.StartDefs;
 
 namespace ItemChanger.Silksong
 {
@@ -92,10 +93,22 @@ namespace ItemChanger.Silksong
         private void BeforeStartNewGameHook(On.GameManager.orig_StartNewGame orig, GameManager self, bool permadeathMode, bool bossRushMode)
         {
             lifecycleInvoker?.NotifyBeforeStartNewGame();
-            
-            // TODO: StartDef
+
+            PlayerData pd = PlayerData.CreateNewSingleton(addEditorOverrides: false);
+            pd.permadeathMode = permadeathMode ? GlobalEnums.PermadeathModes.On : GlobalEnums.PermadeathModes.Off;
+            Platform.Current.PrepareForNewGame(self.profileID);
+            ActiveProfile!.Load();
             lifecycleInvoker?.NotifyOnEnterGame();
-            orig(self, permadeathMode, bossRushMode);
+
+            if (ActiveProfile!.Modules.Get<StartDefModule>() is StartDefModule { StartDef: StartDef start })
+            {
+                start.GetRespawnInfo().SetRespawn();
+                self.StartCoroutine(self.RunContinueGame(self.IsMenuScene()));
+            }
+            else
+            {
+                self.StartCoroutine(self.RunStartNewGame());
+            }
 
             lifecycleInvoker?.NotifyAfterStartNewGame();
             lifecycleInvoker?.NotifyOnSafeToGiveItems(); // TODO: move

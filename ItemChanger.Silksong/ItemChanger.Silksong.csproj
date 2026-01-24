@@ -31,7 +31,7 @@
     <Using Remove="System.Threading.Tasks" />
     <Using Include="UnityEngine.Object" Alias="UObject" />
     <Using Include="UnityEngine.GameObject" Alias="GameObject" />
-    <Using Include="ItemChanger.Silksong.GlobalRefs" Static="true"/>
+    <Using Include="ItemChanger.Silksong.GlobalRefs" Static="true" />
   </ItemGroup>
 
   <ItemGroup>
