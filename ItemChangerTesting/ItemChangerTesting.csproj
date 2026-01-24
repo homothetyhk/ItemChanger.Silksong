@@ -1,0 +1,82 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- 
+  Imports silksong path properties only if present in order to allow CI builds. The file should be gitignored.
+  If you are checking out from git and need to create a new one, you can use `dotnet new silksongpath` to generate one.
+  -->
+  <Import Condition="Exists('../ItemChanger.Silksong/SilksongPath.props')" Project="../ItemChanger.Silksong/SilksongPath.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>preview</LangVersion>
+    <Nullable>enable</Nullable>
+    <RestoreAdditionalProjectSources>
+      https://nuget.bepinex.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <!--Allow access of private members at runtime.-->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Platforms>x64</Platforms>
+    <ImplicitUsings>true</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!--These properties will control the generated plugin info. Version is also used by various parts of the build system.-->
+    <AssemblyTitle>ItemChangerTesting</AssemblyTitle>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+    <Using Remove="System.Threading" />
+    <Using Remove="System.Threading.Tasks" />
+    <Using Include="UnityEngine.Object" Alias="UObject" />
+    <Using Include="UnityEngine.GameObject" Alias="GameObject" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\**\*.png"></EmbeddedResource>
+    <EmbeddedResource Include="Resources\**\*.json"></EmbeddedResource>
+    <EmbeddedResource Include="Resources\**\*.txt"></EmbeddedResource>
+    <EmbeddedResource Include="Resources\**\*.xml"></EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BepInEx.Analyzers" Version="1.0.8" PrivateAssets="all" />
+    <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="Hamunii.BepInEx.AutoPlugin" Version="2.0.1" PrivateAssets="all" />
+    <PackageReference Include="PolySharp" Version="1.15.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Silksong.ModMenu" Version="0.2.0" />
+    <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
+    <!--If you're unable resolve this dependency, check that you're using the nuget v3 package feed instead of v2.-->
+    <PackageReference Include="Silksong.GameLibs" Version="1.1.0-silksong1.0.28650" />
+    <PackageReference Include="ItemChanger.Core" Version="0.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ItemChanger.Silksong\ItemChanger.Silksong.csproj" />
+    <Reference Include="Benchwarp">
+      <HintPath>$(SilksongFolder)/BepInEx/plugins/homothety-Benchwarp/Benchwarp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_Assembly-CSharp">
+      <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_PlayMaker">
+      <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="MMHOOK_TeamCherry.Localization">
+      <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_TeamCherry.Localization.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="'$(SilksongFolder)' != ''">
+    <ItemGroup>
+      <Binaries Include="$(TargetPath)" />
+      <Binaries Include="$(TargetDir)/$(TargetName).pdb" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongFolder)/BepInEx/plugins/homothety-$(TargetName)" />
+  </Target>
+</Project>
