@@ -12,7 +12,7 @@ public static class SpriteUtil
     /// The SpriteManager with access to embedded ItemChanger pngs, constructed with the ItemChanger.Silksong assembly and prefix "ItemChanger.Silksong.Resources."
     /// </summary>
     public static SpriteManager Instance { get; } = new(
-        typeof(SpriteManager).Assembly,
+        typeof(SpriteUtil).Assembly,
         "ItemChanger.Silksong.Resources.",
         new SpriteManager.Info()
         {

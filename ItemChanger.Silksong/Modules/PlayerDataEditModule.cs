@@ -7,8 +7,8 @@ namespace ItemChanger.Silksong.Modules
     /// </summary>
     public class PlayerDataEditModule : Module
     {
-        public Queue<PDEdit> PDEdits { get; } = [];
-        public List<PDEdit> PDEditHistory { get; } = [];
+        public Queue<PDEdit> PDEdits { get; init; } = [];
+        public List<PDEdit> PDEditHistory { get; init; } = [];
 
         protected override void DoLoad()
         {

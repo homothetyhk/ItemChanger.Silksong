@@ -27,8 +27,11 @@ namespace ItemChanger.Silksong
 
         public override IEnumerable<Module> BuildDefaultModules()
         {
+            PlayerDataEditModule pde = new();
+            pde.AddPDEdit(nameof(PlayerData.bindCutscenePlayed), true);
+
             return [
-                new PlayerDataEditModule(),
+                pde,
                 ];
         }
 
@@ -99,6 +102,7 @@ namespace ItemChanger.Silksong
             lifecycleInvoker?.NotifyBeforeStartNewGame();
 
             PlayerData pd = PlayerData.CreateNewSingleton(addEditorOverrides: false);
+            GameManager.instance.playerData = pd;
             pd.permadeathMode = permadeathMode ? GlobalEnums.PermadeathModes.On : GlobalEnums.PermadeathModes.Off;
             Platform.Current.PrepareForNewGame(self.profileID);
             ActiveProfile!.Load();
