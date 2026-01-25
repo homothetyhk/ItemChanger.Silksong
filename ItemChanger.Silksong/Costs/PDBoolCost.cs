@@ -4,7 +4,7 @@ using System;
 
 namespace ItemChanger.Silksong.Costs
 {
-    public record PDBoolCost(string BoolName) : ThresholdBoolCost
+    public class PDBoolCost(string BoolName) : ThresholdBoolCost
     {
         public override string GetCostText()
         {

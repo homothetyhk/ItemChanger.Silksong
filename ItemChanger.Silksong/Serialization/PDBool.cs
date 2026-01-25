@@ -17,10 +17,5 @@ namespace ItemChanger.Silksong.Serialization
                 PlayerData.instance.SetBool(BoolName, value);
             }
         }
-
-        IBool IBool.Clone()
-        {
-            return this with { };
-        }
     }
 }

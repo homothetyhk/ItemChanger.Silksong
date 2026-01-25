@@ -15,7 +15,7 @@ namespace ItemChanger.Silksong.Containers
 
         public override string Name => ContainerNames.Shiny;
 
-        public override uint SupportedCapabilities => ContainerCapabilities.PAY_COSTS; // TODO
+        public override uint SupportedCapabilities => ContainerCapabilities.PayCosts; // TODO
 
         public override bool SupportsInstantiate => true;
 
