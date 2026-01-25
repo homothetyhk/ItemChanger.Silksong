@@ -63,6 +63,7 @@ namespace ItemChanger.Silksong
             On.GameManager.BeginSceneTransition -= TransitionHook;
             On.GameManager.ResetSemiPersistentItems -= OnResetSemiPersistentItems;
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+            MessageUtil.Clear();
         }
 
         private void OnActiveSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)

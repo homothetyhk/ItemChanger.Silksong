@@ -2,6 +2,15 @@
 
 namespace ItemChanger.Silksong.Util;
 
+/// <summary>
+/// Utility for sending UI messages (displayed in the bottom-left corner).
+/// </summary>
+/// <remarks>
+/// Silksong supports replacing the active message instantly or with a delay.
+/// However, a subsequent delayed replace cancels any pending delayed replace.
+/// This class solves that issue by managing its own queue of messages.
+/// While the queue has message requests, a new message is displayed every 3 seconds.
+/// </remarks>
 public static class MessageUtil
 {
     private static readonly Queue<ColorMsg> messages = [];
