@@ -13,6 +13,9 @@ namespace ItemChanger.Silksong
         internal SilksongHost() 
         {
             MessageUtil.Setup();
+            Finder = new();
+            Finder.DefineItemSheet(new(RawData.BaseItemList.GetBaseItems(), 0f));
+            Finder.DefineLocationSheet(new(RawData.BaseLocationList.GetBaseLocations(), 0f));
         }
 
         public override ILogger Logger { get; } = new PluginLogger();
@@ -23,7 +26,7 @@ namespace ItemChanger.Silksong
             DefaultMultiItemContainer = Containers.ChestContainer.Instance,
         };
 
-        public override Finder Finder { get; } = new();
+        public override Finder Finder { get; }
 
         public override IEnumerable<Module> BuildDefaultModules()
         {
