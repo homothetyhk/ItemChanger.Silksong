@@ -20,7 +20,5 @@ namespace ItemChanger.Silksong.Serialization
                 SceneData.instance.PersistentBools.SetValue(new() { SceneName = SceneName, ID = ID, IsSemiPersistent = SemiPersistent, Mutator = Mutator, Value = value });
             }
         }
-
-        IBool IBool.Clone() => this with { };
     }
 }

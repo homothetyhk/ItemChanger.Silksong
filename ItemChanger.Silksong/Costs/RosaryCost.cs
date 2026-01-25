@@ -3,7 +3,7 @@ using TeamCherry.Localization;
 
 namespace ItemChanger.Silksong.Costs
 {
-    public record RosaryCost(int Amount) : Cost
+    public class RosaryCost(int Amount) : Cost
     {
         /// <summary>
         /// Amount after accounting for any discount rate.
@@ -21,6 +21,6 @@ namespace ItemChanger.Silksong.Costs
             if (ActualAmount > 0) HeroController.instance.TakeGeo(ActualAmount);
         }
 
-        public override bool Includes(Cost c) => base.Includes(c) || (c is RosaryCost rc && rc.ActualAmount <= ActualAmount);
+        public override bool IsFree => ActualAmount <= 0;
     }
 }

@@ -16,9 +16,9 @@ public static class SpriteUtil
         "ItemChanger.Silksong.Resources.",
         new SpriteManager.Info()
         {
-            defaultFilterMode = FilterMode.Bilinear,
-            defaultPixelsPerUnit = 100f,
-            overridePPUs = new()
+            DefaultFilterMode = FilterMode.Bilinear,
+            DefaultPixelsPerUnit = 100f,
+            OverridePPUs = new Dictionary<string, float>()
             {
                 // e.g. { "ShopIcons.BenchPin", 64f },
             },

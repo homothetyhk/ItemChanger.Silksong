@@ -11,7 +11,5 @@ namespace ItemChanger.Silksong.Serialization
             get => PlayerData.instance.GetInt(IntName); 
             set => PlayerData.instance.SetInt(IntName, value);
         }
-
-        IInteger IInteger.Clone() => this with { };
     }
 }
