@@ -13,9 +13,9 @@
     <RestoreAdditionalProjectSources>
         https://nuget.bepinex.dev/v3/index.json
     </RestoreAdditionalProjectSources>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
       <!--Allow access of private members at runtime.-->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Platforms>x64</Platforms>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 
@@ -49,6 +49,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Silksong.PrepatcherPlugin" Version="1.3.0" />
     <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
     <!--If you're unable resolve this dependency, check that you're using the nuget v3 package feed instead of v2.-->
     <PackageReference Include="Silksong.GameLibs" Version="1.1.0-silksong1.0.28650" />

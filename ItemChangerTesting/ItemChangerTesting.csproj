@@ -13,9 +13,9 @@
     <RestoreAdditionalProjectSources>
       https://nuget.bepinex.dev/v3/index.json
     </RestoreAdditionalProjectSources>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     <!--Allow access of private members at runtime.-->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Platforms>x64</Platforms>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 

@@ -40,7 +40,14 @@ namespace ItemChangerTesting
             void Run()
             {
                 UIManager.instance.HideMenuInstant(screen.MenuScreen);
-                TestDispatcher.StartTest();
+                try
+                {
+                    TestDispatcher.StartTest();
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError($"Error starting test: {e}");
+                }
             }
         }
 
