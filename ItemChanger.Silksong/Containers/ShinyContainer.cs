@@ -23,9 +23,7 @@ namespace ItemChanger.Silksong.Containers
 
         public override GameObject GetNewContainer(ContainerInfo info)
         {
-            string sceneName = ((IPrimaryLocationPlacement)info.GiveInfo.Placement).Location.UnsafeSceneName; // TODO: wait for IC.Core fix
-            Scene scene = SceneManager.GetSceneByName(sceneName);
-            GameObject shiny = scene.Instantiate(Gameplay.CollectableItemPickupPrefab.gameObject);
+            GameObject shiny = info.ContainingScene.Instantiate(Gameplay.CollectableItemPickupPrefab.gameObject);
             ModifyContainerInPlace(shiny, info);
             return shiny;
         }

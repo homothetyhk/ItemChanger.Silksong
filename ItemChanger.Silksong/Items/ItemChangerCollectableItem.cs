@@ -19,6 +19,12 @@ namespace ItemChanger.Silksong.Items
             item.Get(showPopup: false);
         }
 
+        public override bool Redundant()
+        {
+            CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
+            return !item.CanGetMore();
+        }
+
         /* reference implementation - not fully tested
         
         public override void GiveImmediate(GiveInfo info)

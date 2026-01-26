@@ -19,20 +19,13 @@ namespace ItemChanger.Silksong.Containers
 
         public override void Get(bool showPopup = true)
         {
-            if (ReferenceEquals(ContainerInfo.GiveInfo.Items, ContainerInfo.GiveInfo.Placement.Items)) // TODO: wait for IC.Core fix
+            ContainerInfo.GiveInfo.Placement.GiveSome(ContainerInfo.GiveInfo.Items, new GiveInfo()
             {
-                ContainerInfo.GiveInfo.Placement.GiveAll(new GiveInfo()
-                {
-                    Container = ContainerInfo.ContainerType,
-                    FlingType = ContainerInfo.GiveInfo.FlingType,
-                    MessageType = Enums.MessageType.Any,
-                    Transform = ContainerTransform,
-                }, Callback);
-            }
-            else
-            {
-                throw new NotImplementedException("Partial give operations are not currently supported.");
-            }
+                Container = ContainerInfo.ContainerType,
+                FlingType = ContainerInfo.GiveInfo.FlingType,
+                MessageType = Enums.MessageType.Any,
+                Transform = ContainerTransform,
+            }, Callback);
         }
     }
 
