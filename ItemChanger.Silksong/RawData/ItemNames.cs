@@ -4,8 +4,8 @@ public static class ItemNames
 {
     // Silk skills
     public const string Cross_Stitch = "Cross_Stitch";
-    public const string Pale_Nails = "Pail_Nails";
-    public const string Rune_Rage = "Rune_Range";
+    public const string Pale_Nails = "Pale_Nails";
+    public const string Rune_Rage = "Rune_Rage";
     public const string Sharpdart = "Sharpdart";
     public const string Silkspear = "Silkspear";
     public const string Thread_Storm = "Thread_Storm";
@@ -39,15 +39,19 @@ public static class ItemNames
     public const string Seeker_s_Soul = "Seeker's_Soul";
     public const string Vaultkeeper_s_Melody = "Vaultkeeper's_Melody";
 
-    // crests (TODO: hunter upgrade, cursed witch, cloakless)
+    // crests
     public const string Crest_of_Architect = "Crest_of_Architect";
     public const string Crest_of_Beast = "Crest_of_Beast";
+    public const string Crest_of_Cloakless = "Crest_of_Cloakless";
+    public const string Crest_of_Cursed_Witch = "Crest_of_Cursed_Witch";
     public const string Crest_of_Hunter = "Crest_of_Hunter";
+    public const string Crest_of_Hunter__Upgrade_1 = "Crest_of_Hunter-Upgrade_1";
+    public const string Crest_of_Hunter__Upgrade_2 = "Crest_of_Hunter-Upgrade_2";
     public const string Crest_of_Reaper = "Crest_of_Reaper";
     public const string Crest_of_Shaman = "Crest_of_Shaman";
     public const string Crest_of_Wanderer = "Crest_of_Wanderer";
     public const string Crest_of_Witch = "Crest_of_Witch";
-    public const string Vesticrest_Blue = "Vesticrest_Blue";
+    public const string Vesticrest_Blue__Expansion = "Vesticrest_Blue-Expansion";
     public const string Vesticrest_Yellow = "Vesticrest_Yellow";
 
     // red tools (note: ruined tool is listed with quest items)
@@ -57,7 +61,7 @@ public static class ItemNames
     public const string Curveclaw = "Curveclaw";
     public const string Curvesickle = "Curvesickle";
     public const string Delver_s_Drill = "Delver's_Drill";
-    public const string Flea_Brew = "Flew_Brew"; // TODO: refill item
+    public const string Flea_Brew = "Flea_Brew"; // TODO: refill item
     public const string Flintslate = "Flintslate";
     public const string Longpin = "Longpin";
     public const string Needle_Phial = "Needle_Phial";
@@ -65,7 +69,7 @@ public static class ItemNames
     public const string Plasmium_Phial = "Plasmium_Phial"; // TODO: refill item
     public const string Rosary_Cannon = "Rosary_Cannon";
     public const string Silkshot__Forge_Daughter = "Silkshot-Forge_Daughter";
-    public const string Silkshot__Original = "Silkshot-Original";
+    public const string Silkshot__Mount_Fay = "Silkshot-Mount_Fay";
     public const string Silkshot__Twelfth_Architect = "Silkshot-Twelfth_Architect";
     public const string Snare_Setter = "Snare_Setter";
     public const string Sting_Shard = "Sting_Shard";
@@ -79,7 +83,7 @@ public static class ItemNames
     public const string Claw_Mirror = "Claw_Mirror";
     public const string Claw_Mirrors = "Claw_Mirrors";
     public const string Druid_s_Eye = "Druid's_Eye";
-    public const string Druid_s_Eyes = "Druid's_Eues";
+    public const string Druid_s_Eyes = "Druid's_Eyes";
     public const string Egg_of_Flealia = "Egg_of_Flealia";
     public const string Fractured_Mask = "Fractured_Mask";
     public const string Injector_Band = "Injector_Band";
@@ -115,16 +119,34 @@ public static class ItemNames
     public const string Thief_s_Mark = "Thief's_Mark";
     public const string Weighted_Belt = "Weighted_Belt";
 
-    // items
-    public const string Crafting_Kit = "Crafting_Kit";
-    public const string Craftmetal = "Craftmetal";
-    public const string Mask_Shard = "Mask_Shard";
-    public const string Memory_Locket = "Memory_Locket";
-    public const string Pale_Oil = "Pale_Oil";
-    public const string Plasmium_Gland = "Plasmium_Gland";
+    // silk hearts
     public const string Silk_Heart = "Silk_Heart";
+
+    // pale oil
+    public const string Pale_Oil = "Pale_Oil";
+
+    // mask shards
+    public const string Mask_Shard = "Mask_Shard";
+
+    // spool fragments
     public const string Spool_Fragment = "Spool_Fragment";
-    public const string Tool_Pouch = "Tool_Pouch";
+
+    // shard bundles
+    public const string Shard_Bundle = "Shard_Bundle";
+
+    // shard breakables
+    public const string Growstone = "Growstone";
+    public const string Hornet_Statuette = "Hornet_Statuette";
+    public const string Shell_Shard_Fossil = "Shell_Shard_Fossil";
+
+    // beast shards
+    public const string Beast_Shard = "Beast_Shard";
+
+    // pristine cores
+    public const string Pristine_Core = "Pristine_Core";
+
+    // silkeaters
+    public const string Silkeater = "Silkeater";
 
     // keys
     public const string Architect_s_Key = "Architect's_Key";
@@ -143,7 +165,7 @@ public static class ItemNames
     public const string Bone_Scroll__Burning_Bug = "Bone_Scroll-Burning_Bug"; // Bone Record Wisp Top
     public const string Bone_Scroll__Lost_Pilgrim = "Bone_Scroll-Lost_Pilgrim"; // Bone Record Greymoor_flooded_corridor
     public const string Bone_Scroll__Singed_Pilgrim = "Bone_Scroll-Singed_Pilgrim"; // Bone Record Bone_East_14
-    public const string Bone_Scroll__Underwprker = "Bone_Scroll-Underworker"; // Bone Record Understore_Map_Room
+    public const string Bone_Scroll__Underworker = "Bone_Scroll-Underworker"; // Bone Record Understore_Map_Room
     public const string Choral_Commandment__Eternity = "Choral_Commandment-Eternity"; // Seal Chit City Merchant
     public const string Choral_Commandment__Light = "Choral_Commandment-Light"; // Seal Chit Silk Siphon
     public const string Choral_Commandment__Surgeon = "Choral_Commandment-Surgeon"; // Seal Chit Ward Corpse
@@ -188,7 +210,7 @@ public static class ItemNames
     public const string Verdania_Map = "Verdania_Map";
     public const string Weavenest_Alta_Map = "Weavenest_Alta_Map";
     public const string Whispering_Vaults_Map = "Whispering_Vaults_Map";
-    public const string Whiteward_Map = "Whitewarp_Map";
+    public const string Whiteward_Map = "Whiteward_Map";
     public const string Wormways_Map = "Wormways_Map";
 
     // quills
@@ -210,25 +232,44 @@ public static class ItemNames
     public const string Ventrica_Pins = "Ventrica_Pins";
 
     // flea findings
-    public const string Flea_Findings__Bilelands = "Flea_Findings-Bilelands";
+   /* public const string Flea_Findings__Bilelands = "Flea_Findings-Bilelands";
     public const string Flea_Findings__Blasted_Steps = "Flea_Findings-Blasted_Steps";
     public const string Flea_Findings__Bonelands = "Flea_Findings-Bonelands";
     public const string Flea_Findings__Midlands = "Flea_Findings-Midlands";
     public const string Flea_Findings__Mount_Fay = "Flea_Findings-Mount_Fay";
     public const string Flea_Findings__The_Citadel = "Flea_Findings-The_Citadel";
+    */
 
-    // consumables
-    public const string Beast_Shard = "Beast_Shard";
+    // mossberries
+    public const string Mossberry = "Mossberry";
+
+    // pollip bulbs
+    public const string Pollip_Heart = "Pollip_Heart";
+
+    // tool pouches
+    public const string Tool_Pouch = "Tool_Pouch";
+
+    // crafting kits
+    public const string Crafting_Kit = "Crafting_Kit";
+
+    // rosary items
+    public const string Rosary_Bell = "Rosary_Bell";
+    public const string Rosary_Bowl = "Rosary_Bowl";
+    public const string Rosary_Cache = "Rosary_Cache";
+    public const string Rosary_Chest = "Rosary_Chest";
+    public const string Rosary_Event = "Rosary_Event";
+    public const string Rosary_Grave = "Rosary_Grave";
+    public const string Rosary_Npc = "Rosary_Npc";
+    public const string Rosary_Pouch = "Rosary_Pouch";
+    public const string Rosary_Rock = "Rosary_Rock";
+    public const string Rosary_Tray = "Rosary_Tray";
+
+    // consumable rosaries
     public const string Frayed_Rosary_String = "Frayed_Rosary_String";
-    public const string Growstone = "Growstone";
     public const string Heavy_Rosary_Necklace = "Heavy_Rosary_Necklace";
-    public const string Hornet_Statuette = "Hornet_Statuette";
     public const string Pale_Rosary_Necklace = "Pale_Rosary_Necklace";
-    public const string Pristine_Core = "Pristine_Core";
     public const string Rosary_Necklace = "Rosary_Necklace";
     public const string Rosary_String = "Rosary_String";
-    public const string Shard_Bundle = "Shard_Bundle";
-    public const string Silkeater = "Silkeater";
 
     // mementos (note: hearts listed with plot items)
     public const string Craw_Memento = "Craw_Memento";
@@ -254,44 +295,11 @@ public static class ItemNames
     public const string Materium = "Materium";
     public const string Personal_Spa = "Personal_Spa";
 
-    // finite quest items
-    public const string Broodmother_s_Eye = "Broodmother's_Eye";
-    public const string Cogheart_Piece = "Cogheart_Piece";
-    public const string Crown_Fragment = "Crown_Fragment";
-    public const string Crustnut = "Crustnut";
-    public const string Flintgem = "Flintgem";
-    public const string Grass_Doll = "Grass_Doll";
-    public const string Horn_Fragment = "Horn_Fragment";
-    public const string Mossberry = "Mossberry";
-    public const string Mossberry_Stew = "Mossberry_Stew";
-    public const string Pickled_Muckmaggot = "Pickled_Muckmaggot";
-    public const string Pollip_Heart = "Pollip_Heart";
-    public const string Ruined_Tool = "Ruined_Tool";
-    public const string Steel_Spines = "Steel_Spines";
-    public const string Twisted_Bud = "Twisted_Bud";
-    public const string Vintage_Nectar = "Vintage_Nectar";
-
-    // delivery items
-    public const string Courier_s_Rasher = "Courier's_Rasher";
-    public const string Courier_s_Swag = "Courier's_Swag";
-    public const string Liquid_Lacquer = "Liquid_Lacquer";
-    public const string Queen_s_Egg = "Queen's_Egg";
-
-    // respawning quest drops
-    public const string Choir_Cloak = "Choir_Cloak";
-    public const string Fine_Pin = "Fine_Pin";
-    public const string Pilgrim_Shawl = "Pilgrim_Shawl";
-    public const string Plasmified_Blood = "Plasmified_Blood";
-    public const string Plasmium = "Plasmium";
-    public const string Ragpelt = "Ragpelt";
-    public const string Roach_Guts = "Roach_Guts";
-    public const string Seared_Organ = "Seared_Organ";
-    public const string Shredded_Organ = "Shredded_Organ";
-    public const string Silver_Bell = "Silver_Bell";
-    public const string Skewered_Organ = "Skewered_Organ";
-    public const string Spine_Core = "Spine_Core";
-
-    // TODO: rosary chests, rosary and shell deposits,
+    // materium types (submenu items for Materium)
+    public const string Materium__Flintstone = "Materium-Flintstone";
+    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
+    public const string Materium__Voltridian = "Materium-Voltridian";
+    public const string Materium__Magnetite = "Materium-Magnetite";
 
     // Fast travel
     public const string Bellway__Bone_Bottom = "Bellway-Bone_Bottom";
@@ -315,57 +323,104 @@ public static class ItemNames
     public const string Ventrica__Underworks = "Ventrica-Underworks";
 
     // Lore tablets
-    public const string Lore_Tablet__Abyss_Top = "Lore_Tablet-Abyss_Top";
-    public const string Lore_Tablet__Abyss_Bottom_Left = "Lore_Tablet-Abyss_Bottom_Left";
+    public const string Lore_Tablet__Abyss_Void_Cleanse = "Lore_Tablet-Abyss_Void_Cleanse";
+    public const string Lore_Tablet__Abyss_Void_Prayer = "Lore_Tablet-Abyss_Void_Prayer";
     public const string Lore_Tablet__Fleatopia_Weaver_Harp = "Lore_Tablet-Fleatopia_Weaver_Harp";
     public const string Lore_Tablet__Memorium_Entrance = "Lore_Tablet-Memorium_Entrance";
-    public const string Lore_Tablet__Memorium_Orders = "Lore_Tablet-Memorium_Orders";
-    public const string Lore_Tablet__Bellhart_East = "Lore_Tablet-Bellhart_East";
-    public const string Lore_Tablet__Bellhart_West = "Lore_Tablet-Bellhart_West";
-    public const string Lore_Tablet__Marrow_Start = "Lore_Tablet-Marrow_Start";
-    public const string Lore_Tablet__Marrow_Top = "Lore_Tablet-Marrow_Top";
-    public const string Lore_Tablet__Pilgrims_Rest = "Lore_Tablet-Pilgrims_Rest";
+    public const string Lore_Tablet__Memorium_Containment = "Lore_Tablet-Memorium_Containment";
+    public const string Lore_Tablet__Bellhart_Pilgrim_East = "Lore_Tablet-Bellhart_Pilgrim_East";
+    public const string Lore_Tablet__Bellhart_Pilgrim_West = "Lore_Tablet-Bellhart_Pilgrim_West";
+    public const string Lore_Tablet__Bellhart_Plinney = "Lore_Tablet-Bellhart_Plinney";
+    public const string Lore_Tablet__Marrow_Pilgrim = "Lore_Tablet-Marrow_Pilgrim";
+    public const string Lore_Tablet__Marrow_Twisted_Shells = "Lore_Tablet-Marrow_Twisted_Shells";
+    public const string Lore_Tablet__Far_Fields_Pilgrim = "Lore_Tablet-Far_Fields_Pilgrim";
     public const string Lore_Tablet__Weavenest_Cindril = "Lore_Tablet-Weavenest_Cindril";
-    public const string Lore_Tablet__Verdania_End = "Lore_Tablet-Verdania_End";
-    public const string Lore_Tablet__Verdania_Fountains = "Lore_Tablet-Verdania_Fountains";
-    public const string Lore_Tablet__Blasted_Steps_Start = "Lore_Tablet-Blasted_Steps_Start";
-    public const string Lore_Tablet__Karak_Entrance = "Lore_Tablet-Karak_Entrance";
-    public const string Lore_Tablet__Blasted_Steps_Nursery = "Lore_Tablet-Blasted_Steps_Nursery";
-    public const string Lore_Tablet__Coral_Tower = "Lore_Tablet-Coral_Tower";
-    public const string Lore_Tablet__Cradle_Cage_1 = "Lore_Tablet-Cradle_Cage_1";
-    public const string Lore_Tablet__Cradle_Cage_2 = "Lore_Tablet-Cradle_Cage_2";
-    public const string Lore_Tablet__Cradle_Cage_3 = "Lore_Tablet-Cradle_Cage_3";
-    public const string Lore_Tablet__Greymoor_Orders_Above_Home = "Lore_Tablet-Greymoor_Orders_Above_Home";
-    public const string Lore_Tablet__Greymoor_Bottom = "Lore_Tablet-Greymoor_Bottom";
-    public const string Lore_Tablet__Nuu_Scroll = "Lore_Tablet-Nuu_Scroll";
-    public const string Lore_Tablet__Trobbio_Sign = "Lore_Tablet-Trobbio_Sign";
-    public const string Lore_Tablet__Trobbio_Notes = "Lore_Tablet-Trobbio_Notes";
-    public const string Lore_Tablet__Tormented_Trobbio_Notes = "Lore_Tablet-Tormented_Trobbio_Notes";
-    public const string Lore_Tablet__Mosshome_Below_Silkspear = "Lore_Tablet-Mosshome_Below_Silkspear";
-    public const string Lore_Tablet__Mosshome_Below_Silkspear_Harp = "Lore_Tablet-Mosshome_Below_Silkspear_Harp";
-    public const string Lore_Tablet__Mount_Fay_Bottom = "Lore_Tablet-Mount_Fay_Bottom";
-    public const string Lore_Tablet__Deep_Docks_Forge = "Lore_Tablet-Deep_Docks_Forge";
-    public const string Lore_Tablet__Bilewater_Shortcut = "Lore_Tablet-Bilewater_Shortcut";
-    public const string Lore_Tablet__Bilewater_Above_Groal = "Lore_Tablet-Bilewater_Above_Groal";
     public const string Lore_Tablet__Weavenest_Murglin = "Lore_Tablet-Weavenest_Murglin";
-    public const string Lore_Tablet__Shellwood_West = "Lore_Tablet-Shellwood_West";
-    public const string Lore_Tablet__Shellwood_Harp = "Lore_Tablet-Shellwood_Harp";
-    public const string Lore_Tablet__Nyleth = "Lore_Tablet-Nyleth";
-    public const string Lore_Tablet__Slab_Orders_1 = "Lore_Tablet-Slab_Orders_1";
-    public const string Lore_Tablet__Slab_Orders_2 = "Lore_Tablet-Slab_Orders_2";
-    public const string Lore_Tablet__First_Sinner = "Lore_Tablet-First_Sinner";
-    public const string Lore_Tablet__Ventrica_Hub = "Lore_Tablet-Ventrica_Hub";
-    public const string Lore_Tablet__Moss_Grotto_Chapel_Entrance = "Lore_Tablet-Moss_Grotto_Chapel_Entrance";
-    public const string Lore_Tablet__Moss_Grotto_Chapel_Inner = "Lore_Tablet-Moss_Grotto_Chapel_Inner";
+    public const string Lore_Tablet__Verdania_Twins = "Lore_Tablet-Verdania_Twins";
+    public const string Lore_Tablet__Verdania_Fountains = "Lore_Tablet-Verdania_Fountains";
+    public const string Lore_Tablet__Verdania_Shrine = "Lore_Tablet-Verdania_Shrine";
+    public const string Lore_Tablet__Blasted_Steps_Arbiter = "Lore_Tablet-Blasted_Steps_Arbiter";
+    public const string Lore_Tablet__Blasted_Steps_Pilgrim = "Lore_Tablet-Blasted_Steps_Pilgrim";
+    public const string Lore_Tablet__Blasted_Steps_Pinstress = "Lore_Tablet-Blasted_Steps_Pinstress";
+    public const string Lore_Tablet__Coral_Tower = "Lore_Tablet-Coral_Tower";
+    public const string Lore_Tablet__Sands_of_Karak = "Lore_Tablet-Sands_of_Karak";
+    public const string Lore_Tablet__Cradle_Blackbarrens = "Lore_Tablet-Cradle_Blackbarrens";
+    public const string Lore_Tablet__Cradle_Sandsea = "Lore_Tablet-Cradle_Sandsea";
+    public const string Lore_Tablet__Cradle_Steel_City = "Lore_Tablet-Cradle_Steel_City";
+    public const string Lore_Tablet__Greymoor_Orders = "Lore_Tablet-Greymoor_Orders";
+    public const string Lore_Tablet__Greymoor_Litany = "Lore_Tablet-Greymoor_Litany";
+    public const string Lore_Tablet__Nuu_Scroll = "Lore_Tablet-Nuu_Scroll";
+    public const string Lore_Tablet__Whispering_Vaults_Trobbio = "Lore_Tablet-Whispering_Vaults_Trobbio";
+    public const string Lore_Tablet__Whispering_Vaults_Trobbio_Act_2 = "Lore_Tablet-Whispering_Vaults_Trobbio_Act_2";
+    public const string Lore_Tablet__Whispering_Vaults_Tormented = "Lore_Tablet-Whispering_Vaults_Tormented";
+    public const string Lore_Tablet__Bone_Bottom_Weaver = "Lore_Tablet-Bone_Bottom_Weaver";
+    public const string Lore_Tablet__Bone_Bottom_Weaver_Harp = "Lore_Tablet-Bone_Bottom_Weaver_Harp";
+    public const string Lore_Tablet__Mount_Fay = "Lore_Tablet-Mount_Fay";
+    public const string Lore_Tablet__Deep_Docks = "Lore_Tablet-Deep_Docks";
+    public const string Lore_Tablet__Bilewater_Hate = "Lore_Tablet-Bilewater_Hate";
+    public const string Lore_Tablet__Bilewater_Punish = "Lore_Tablet-Bilewater_Punish";
+    public const string Lore_Tablet__Shellwood_Pilgrim = "Lore_Tablet-Shellwood_Pilgrim";
+    public const string Lore_Tablet__Shellwood_Weaver = "Lore_Tablet-Shellwood_Weaver";
+    public const string Lore_Tablet__Slab_Penance_Fourth = "Lore_Tablet-Slab_Penance_Fourth";
+    public const string Lore_Tablet__Slab_Penance_Eighth = "Lore_Tablet-Slab_Penance_Eighth";
+    public const string Lore_Tablet__Slab_First_Sinner = "Lore_Tablet-Slab_First_Sinner";
+    public const string Lore_Tablet__Terminus_Ventrica = "Lore_Tablet-Terminus_Ventrica";
+    public const string Lore_Tablet__Underworks_Confessional = "Lore_Tablet-Underworks_Confessional";
+    public const string Lore_Tablet__Grand_Gate = "Lore_Tablet-Grand_Gate";
+    public const string Lore_Tablet__Moss_Grotto_Chapel_Anguished = "Lore_Tablet-Moss_Grotto_Chapel_Anguished";
+    public const string Lore_Tablet__Moss_Grotto_Chapel_Flickering = "Lore_Tablet-Moss_Grotto_Chapel_Flickering";
     public const string Lore_Tablet__Whiteward_Oath = "Lore_Tablet-Whiteward_Oath";
-    public const string Lore_Tablet__Weavenest_Atla_East = "Lore_Tablet-Weavenest_Atla_East";
-    public const string Lore_Tablet__Mr_Mushroom = "Lore_Tablet-Mr_Mushroom";
+    public const string Lore_Tablet__Weavenest_Atla = "Lore_Tablet-Weavenest_Atla";
+    public const string Lore_Tablet__Putrified_Ducts_Mr_Mushroom = "Lore_Tablet-Putrified_Ducts_Mr_Mushroom";
+    public const string Lore_Tablet__Putrified_Ducts_Pale_Lake = "Lore_Tablet-Putrified_Ducts_Pale_Lake";
 
+    // memory lockets
+    public const string Memory_Locket = "Memory_Locket";
+
+    // craftmetal
+    public const string Craftmetal = "Craftmetal";
+
+    // tradables and deliverables
+    public const string Broodmother_s_Eye = "Broodmother's_Eye";
+    public const string Crustnut = "Crustnut";
+    public const string Flintgem = "Flintgem";
+    public const string Grass_Doll = "Grass_Doll";
+    public const string Horn_Fragment = "Horn_Fragment";
+    public const string Mossberry_Stew = "Mossberry_Stew";
+    public const string Pickled_Muckmaggot = "Pickled_Muckmaggot";
+    public const string Steel_Spines = "Steel_Spines";
+    public const string Twisted_Bud = "Twisted_Bud";
+
+    // respawning quest drops
+    public const string Choir_Cloak = "Choir_Cloak"; //Max of 16
+    public const string Fine_Pin = "Fine_Pin"; //Max of 12
+    public const string Pilgrim_Shawl = "Pilgrim_Shawl"; //Max of 12
+    public const string Plasmified_Blood = "Plasmified_Blood"; //Max of 10 not technically picked up though
+    public const string Plasmium = "Plasmium";
+    public const string Ragpelt = "Ragpelt"; //Max of 25 Craws drop 1 Tall and Squatcraws drop 2-5 so possible extras
+    public const string Roach_Guts = "Roach_Guts"; //Max of 10
+    public const string Seared_Organ = "Seared_Organ"; // Max of 15
+    public const string Shredded_Organ = "Shredded_Organ"; // Max of 35 Drops in terms of 3 so one extra
+    public const string Silver_Bell = "Silver_Bell"; //Max of 8
+    public const string Skewered_Organ = "Skewered_Organ"; // Max of 10
+    public const string Spine_Core = "Spine_Core"; //Max of 25
+
+    // deliveries
+    public const string Courier_s_Rasher = "Courier's_Rasher";
+    public const string Courier_s_Swag = "Courier's_Swag";
+    public const string Liquid_Lacquer = "Liquid_Lacquer";
+    public const string Queen_s_Egg = "Queen's_Egg";
+
+    // other quest items
+    public const string Cogheart_Piece = "Cogheart_Piece";
+    public const string Crown_Fragment = "Crown_Fragment";
+    public const string Plasmium_Bud = "Plasmium_Bud";
+    public const string Plasmium_Gland = "Plasmium_Gland";
+    public const string Ruined_Tool = "Ruined_Tool";
+    public const string Vintage_Nectar = "Vintage_Nectar";
+
+    // journal entries
     public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
-    public const string Materium__Flintstone = "Materium-Flintstone";
-    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
-    public const string Materium__Voltridian = "Materium-Voltridian";
-    public const string Materium__Magnetite = "Materium-Magnetite";
 
     // Novelty/cursed items
     public const string Left_Cling_Grip = "Left_Cling_Grip";
@@ -374,12 +429,12 @@ public static class ItemNames
     public const string Right_Clawline = "Right_Clawline";
     public const string Left_Swift_Step = "Left_Swift_Step";
     public const string Right_Swift_Step = "Right_Swift_Step";
-    public const string Taunt = "Taunt";
-    public const string Double_Mask_Shard = "Double_Mask_Shard";
-    public const string Full_Mask = "Full_Mask";
-    public const string Full_Spool = "Full_Spool";
     public const string Leftslash = "Leftslash";
     public const string Rightslash = "Rightslash";
     public const string Upslash = "Upslash";
     public const string Downslash = "Downslash";
+    public const string Taunt = "Taunt";
+    public const string Double_Mask_Shard = "Double_Mask_Shard";
+    public const string Full_Mask = "Full_Mask";
+    public const string Full_Spool = "Full_Spool";
 }
