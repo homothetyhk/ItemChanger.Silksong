@@ -53,7 +53,7 @@
     <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
     <!--If you're unable resolve this dependency, check that you're using the nuget v3 package feed instead of v2.-->
     <PackageReference Include="Silksong.GameLibs" Version="1.1.0-silksong1.0.28650" />
-    <PackageReference Include="ItemChanger.Core" Version="0.4.1" />
+    <PackageReference Include="ItemChanger.Core" Version="0.4.1" GeneratePathProperty="true" />
   </ItemGroup>
 
   <ItemGroup>
@@ -75,6 +75,8 @@
       <ItemGroup>
           <Binaries Include="$(TargetPath)" />
           <Binaries Include="$(TargetDir)/$(TargetName).pdb" />
+          <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.dll" />
+          <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.xml" />
       </ItemGroup>
 
       <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongFolder)/BepInEx/plugins/homothety-$(TargetName)" />
