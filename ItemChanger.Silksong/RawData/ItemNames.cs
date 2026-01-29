@@ -47,6 +47,7 @@ public static class ItemNames
     public const string Crest_of_Shaman = "Crest_of_Shaman";
     public const string Crest_of_Wanderer = "Crest_of_Wanderer";
     public const string Crest_of_Witch = "Crest_of_Witch";
+    public const string Cloakless = "Cloakless";
     public const string Vesticrest_Blue = "Vesticrest_Blue";
     public const string Vesticrest_Yellow = "Vesticrest_Yellow";
 

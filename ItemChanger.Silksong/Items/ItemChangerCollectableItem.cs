@@ -15,14 +15,61 @@ namespace ItemChanger.Silksong.Items
 
         public override void GiveImmediate(GiveInfo info)
         {
+            //running input item name through CollectableItem, ToolItem, ToolCrest, CollectableRelic
             CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
-            item.Get(showPopup: false);
+            ToolItem tool = ToolItemManager.GetToolByName(CollectableName);
+            ToolCrest crest = ToolItemManager.GetCrestByName(CollectableName);
+            CollectableRelic relic = CollectableRelicManager.GetRelic(CollectableName);
+
+            if (item != null)//if item exists
+            {
+                item.Get(showPopup: false);
+            }
+            else if (tool != null)//if tool exists
+            {
+                tool.Get(showPopup: false);
+            }
+            else if (crest != null)//if crest exists
+            {
+                crest.Get(showPopup: true);
+            } else if (relic != null)//if relic exists
+            {
+                relic.Get(showPopup: false);
+            } else//if none of the above apply
+            {
+                Logger.LogError("Unable to retrieve item");
+            }
+            
         }
 
         public override bool Redundant()
         {
+            //running input item name through CollectableItem, ToolItem, ToolCrest, CollectableRelic
             CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
-            return !item.CanGetMore();
+            ToolItem tool = ToolItemManager.GetToolByName(CollectableName);
+            ToolCrest crest = ToolItemManager.GetCrestByName(CollectableName);
+            CollectableRelic relic = CollectableRelicManager.GetRelic(CollectableName);
+
+            if (item != null)//if item exists
+            {
+                return !item.CanGetMore();
+            } else if (tool != null)//if tool exists
+            {
+                return !tool.CanGetMore();
+            } else if (crest != null)//if crest exists
+            {
+                return !crest.CanGetMore();
+            }
+            else if (relic != null)//if relic exists
+            {
+                return !relic.CanGetMore();
+            }
+            else//if none of the above apply
+            {
+                Logger.LogError("Unable to retrieve item");
+                return false;
+            }
+
         }
 
         /* reference implementation - not fully tested
