@@ -1,4 +1,7 @@
+using Benchwarp.Data;
 using BepInEx;
+using ItemChanger.Silksong.Containers;
+using Silksong.AssetHelper.Plugin;
 
 namespace ItemChanger.Silksong
 {
@@ -12,6 +15,8 @@ namespace ItemChanger.Silksong
         private void Awake()
         {
             Instance = this;
+            // Requests must be made in Awake, so we have to do this independently from setting up the host
+            AssetRequestAPI.RequestSceneAsset(SceneNames.Bone_East_05, "Flea Rescue Barrel");
             Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
         }
 
@@ -28,6 +33,8 @@ namespace ItemChanger.Silksong
             {
                 Logger.LogError($"Error creating host: {e}");
             }
+
+            ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new FleaContainer());
         }
 
         private void StartItemChangerProfile(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)
