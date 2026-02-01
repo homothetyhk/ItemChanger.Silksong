@@ -39,14 +39,18 @@ public static class ItemNames
     public const string Seeker_s_Soul = "Seeker's_Soul";
     public const string Vaultkeeper_s_Melody = "Vaultkeeper's_Melody";
 
-    // crests (TODO: hunter upgrade, cursed witch, cloakless)
+    // crests
     public const string Crest_of_Architect = "Crest_of_Architect";
     public const string Crest_of_Beast = "Crest_of_Beast";
     public const string Crest_of_Hunter = "Crest_of_Hunter";
+    public const string Crest_of_Hunter_v2 = "Crest_of_Hunter_v2";
+    public const string Crest_of_Hunter_v3 = "Crest_of_Hunter_v3";
     public const string Crest_of_Reaper = "Crest_of_Reaper";
     public const string Crest_of_Shaman = "Crest_of_Shaman";
     public const string Crest_of_Wanderer = "Crest_of_Wanderer";
     public const string Crest_of_Witch = "Crest_of_Witch";
+    public const string Cursed = "Cursed";
+    public const string Cloakless = "Cloakless";
     public const string Vesticrest_Blue = "Vesticrest_Blue";
     public const string Vesticrest_Yellow = "Vesticrest_Yellow";
 
@@ -143,7 +147,7 @@ public static class ItemNames
     public const string Bone_Scroll__Burning_Bug = "Bone_Scroll-Burning_Bug"; // Bone Record Wisp Top
     public const string Bone_Scroll__Lost_Pilgrim = "Bone_Scroll-Lost_Pilgrim"; // Bone Record Greymoor_flooded_corridor
     public const string Bone_Scroll__Singed_Pilgrim = "Bone_Scroll-Singed_Pilgrim"; // Bone Record Bone_East_14
-    public const string Bone_Scroll__Underwprker = "Bone_Scroll-Underworker"; // Bone Record Understore_Map_Room
+    public const string Bone_Scroll__Underworker = "Bone_Scroll-Underworker"; // Bone Record Understore_Map_Room
     public const string Choral_Commandment__Eternity = "Choral_Commandment-Eternity"; // Seal Chit City Merchant
     public const string Choral_Commandment__Light = "Choral_Commandment-Light"; // Seal Chit Silk Siphon
     public const string Choral_Commandment__Surgeon = "Choral_Commandment-Surgeon"; // Seal Chit Ward Corpse
@@ -220,7 +224,7 @@ public static class ItemNames
     // consumables
     public const string Beast_Shard = "Beast_Shard";
     public const string Frayed_Rosary_String = "Frayed_Rosary_String";
-    public const string Growstone = "Growstone";
+    public const string Growstone = "Growstone";//steel soul exclusive
     public const string Heavy_Rosary_Necklace = "Heavy_Rosary_Necklace";
     public const string Hornet_Statuette = "Hornet_Statuette";
     public const string Pale_Rosary_Necklace = "Pale_Rosary_Necklace";
@@ -243,7 +247,7 @@ public static class ItemNames
     public const string Bell_Lacquer__Black = "Bell_Lacquer-Black";
     public const string Bell_Lacquer__Blue = "Bell_Lacquer-Blue";
     public const string Bell_Lacquer__Bronze = "Bell_Lacquer-Bronze";
-    public const string Bell_Lacquer__Chrome = "Bell_Lacquer-Chrome";
+    public const string Bell_Lacquer__Chrome = "Bell_Lacquer-Chrome";//steel soul exclusive
     public const string Bell_Lacquer__Red = "Bell_Lacquer-Red";
     public const string Bell_Lacquer__White = "Bell_Lacquer-White";
     public const string Crawbell = "Crawbell";
