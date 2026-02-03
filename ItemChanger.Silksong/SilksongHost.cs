@@ -5,6 +5,7 @@ using ItemChanger.Modules;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.StartDefs;
 using ItemChanger.Silksong.Util;
+using TeamCherry.SharedUtils;
 
 namespace ItemChanger.Silksong
 {
@@ -30,12 +31,7 @@ namespace ItemChanger.Silksong
 
         public override IEnumerable<Module> BuildDefaultModules()
         {
-            PlayerDataEditModule pde = new();
-            pde.AddPDEdit(nameof(PlayerData.bindCutscenePlayed), true);
-
-            return [
-                pde,
-                ];
+            return [];
         }
 
         private LifecycleEvents.Invoker? lifecycleInvoker;
@@ -107,13 +103,14 @@ namespace ItemChanger.Silksong
 
             PlayerData pd = PlayerData.CreateNewSingleton(addEditorOverrides: false);
             GameManager.instance.playerData = pd;
-            pd.permadeathMode = permadeathMode ? GlobalEnums.PermadeathModes.On : GlobalEnums.PermadeathModes.Off;
+            pd.SetVariable(nameof(PlayerData.permadeathMode), permadeathMode ? GlobalEnums.PermadeathModes.On : GlobalEnums.PermadeathModes.Off);
             Platform.Current.PrepareForNewGame(self.profileID);
             ActiveProfile!.Load();
             lifecycleInvoker?.NotifyOnEnterGame();
 
             if (ActiveProfile!.Modules.Get<StartDefModule>() is StartDefModule { StartDef: StartDef start })
             {
+                pd.SetBool(nameof(PlayerData.bindCutscenePlayed), true); // so that entering Tut_01 later does not trigger the wakeup sequence
                 start.GetRespawnInfo().SetRespawn();
                 self.StartCoroutine(self.RunContinueGame(self.IsMenuScene()));
             }
