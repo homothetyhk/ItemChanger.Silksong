@@ -31,7 +31,7 @@ jobs:
     - name: Get Version
       id: version
       run: |
-        VERSION=$(dotnet build ItemChanger.Silksong/ItemChanger.Silksong.csproj -getProperty:Version)
+        VERSION=$(dotnet build Directory.Build.props -getProperty:Version)
         echo Version is $VERSION
         echo "version=$VERSION" >> $GITHUB_OUTPUT
     - name: Upload build artifact

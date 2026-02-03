@@ -31,16 +31,13 @@ jobs:
         with:
           dotnet-version: '10.x'
 
-      - name: Setup DocFX
-        run: dotnet tool update -g docfx
-
       - name: Build Project
         run: dotnet build ItemChanger.Silksong/ItemChanger.Silksong.csproj -c Release
         continue-on-error: true
 
       - name: DocFX build
         working-directory: docs
-        run: docfx docfx.json
+        run: dnx docfx.json
         continue-on-error: false
 
       - name: Upload assets
