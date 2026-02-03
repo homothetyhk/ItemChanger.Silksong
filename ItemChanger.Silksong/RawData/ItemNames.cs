@@ -295,12 +295,6 @@ public static class ItemNames
     public const string Materium = "Materium";
     public const string Personal_Spa = "Personal_Spa";
 
-    // materium types (submenu items for Materium)
-    public const string Materium__Flintstone = "Materium-Flintstone";
-    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
-    public const string Materium__Voltridian = "Materium-Voltridian";
-    public const string Materium__Magnetite = "Materium-Magnetite";
-
     // Fast travel
     public const string Bellway__Bone_Bottom = "Bellway-Bone_Bottom";
     public const string Bellway__The_Marrow = "Bellway-The_Marrow";
@@ -369,6 +363,15 @@ public static class ItemNames
     public const string Lore_Tablet__Weavenest_Atla_East = "Lore_Tablet-Weavenest_Atla_East";
     public const string Lore_Tablet__Mr_Mushroom = "Lore_Tablet-Mr_Mushroom";
 
+    // journal entries
+    public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
+
+    // materium types (submenu items for Materium)
+    public const string Materium__Flintstone = "Materium-Flintstone";
+    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
+    public const string Materium__Voltridian = "Materium-Voltridian";
+    public const string Materium__Magnetite = "Materium-Magnetite";
+
     // memory lockets
     public const string Memory_Locket = "Memory_Locket";
 
@@ -413,9 +416,6 @@ public static class ItemNames
     public const string Plasmium_Gland = "Plasmium_Gland";
     public const string Ruined_Tool = "Ruined_Tool";
     public const string Vintage_Nectar = "Vintage_Nectar";
-
-    // journal entries
-    public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
 
     // Novelty/cursed items
     public const string Left_Cling_Grip = "Left_Cling_Grip";

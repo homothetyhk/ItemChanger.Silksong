@@ -379,12 +379,6 @@ public static class LocationNames
     public const string Farsight = "Farsight";
     public const string Materium = "Materium";
 
- // materium types (submenu items for Materium)
-    public const string Materium__Flintstone = "Materium-Flintstone";
-    public const string Materium__Magnetite = "Materium-Magnetite";
-    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
-    public const string Materium__Voltridian = "Materium-Voltridian";
-    
     // Rosary Rocks
     public const string Rosary_Rock__Aqueduct_08 = "Rosary_Rock-Aqueduct_08";
     public const string Rosary_Rock__Aspid_01 = "Rosary_Rock-Aspid_01";
@@ -610,6 +604,14 @@ public static class LocationNames
     public const string Lore_Tablet__Weavenest_Atla_East = "Lore_Tablet-Weavenest_Atla_East";
     public const string Lore_Tablet__Mr_Mushroom = "Lore_Tablet-Mr_Mushroom";
 
+    // journal entries
+    public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
+
+    // materium types (submenu items for Materium)
+    public const string Materium__Flintstone = "Materium-Flintstone";
+    public const string Materium__Magnetite = "Materium-Magnetite";
+    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
+    public const string Materium__Voltridian = "Materium-Voltridian";
 
     // Memory lockets (20 total)
     // public const string Memory_Locket__Mort = "Memory_Locket-Mort";
