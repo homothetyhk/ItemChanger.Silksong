@@ -305,6 +305,36 @@ public static class LocationNames
     public const string Materium__Voltridian = "Materium-Voltridian";
     public const string Materium__Magnetite = "Materium-Magnetite";
 
+    // Fleas
+    // TODO - give these descriptive names (that's why I haven't bothered to change the capitalization)
+    public const string Flea__coral_24 = "Flea-coral_24";
+    public const string Flea__dock_03d = "Flea-dock_03d";
+    public const string Flea__slab_06 = "Flea-slab_06";
+    public const string Flea__library_01 = "Flea-library_01";
+    public const string Flea__shadow_28 = "Flea-shadow_28";
+    public const string Flea__library_09 = "Flea-library_09";
+    public const string Flea__under_23 = "Flea-under_23";
+    public const string Flea__greymoor_15b = "Flea-greymoor_15b";
+    public const string Flea__shadow_10 = "Flea-shadow_10";
+    public const string Flea__peak_05c = "Flea-peak_05c";
+    public const string Flea__shellwood_03 = "Flea-shellwood_03";
+    public const string Flea__dock_16 = "Flea-dock_16";
+    public const string Flea__coral_35 = "Flea-coral_35";
+    public const string Flea__bone_east_05 = "Flea-bone_east_05";
+    public const string Flea__slab_cell = "Flea-slab_cell";
+    public const string Flea__dust_12 = "Flea-dust_12";
+    public const string Flea__crawl_06 = "Flea-crawl_06";
+    public const string Flea__under_21 = "Flea-under_21";
+    public const string Flea__greymoor_06 = "Flea-greymoor_06";
+    public const string Flea__dust_09 = "Flea-dust_09";
+    public const string Flea__belltown_04 = "Flea-belltown_04";
+    public const string Flea__song_11 = "Flea-song_11";
+    public const string Flea__song_14 = "Flea-song_14";
+    public const string Flea__bone_east_10_church = "Flea-bone_east_10_church";
+    public const string Flea__bone_06 = "Flea-bone_06";
+    public const string Flea__bone_east_17b = "Flea-bone_east_17b";
+    public const string Flea__ant_03 = "Flea-ant_03";
+
     // TODO: Styx/Skynx
 
     // Novelty/cursed locations

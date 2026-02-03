@@ -14,6 +14,8 @@ public enum Tests
     StartInTut_02,
     [Description("Tests giving Surgeon's_Key from a coordinate shiny")]
     Surgeon_s_Key_from_spawned_shiny,
+    [Description("Tests giving Flea from a coordinate shiny")]
+    FleaFromSpawnedShiny,
     [Description("Tests modifying the Pale_Oil-Whispering_Vaults shiny in-place")]
     Surgeon_s_Key_at_Whispering_Vaults,
 }
@@ -53,6 +55,18 @@ public static class TestDispatcher
             case Tests.StartInTut_02:
                 StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
                 break;
+            case Tests.FleaFromSpawnedShiny:
+                StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Test",
+                    SceneName = SceneNames.Tut_02,
+                    X = 133.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem("Anonymous Flea")!));
+                break;
             case Tests.Surgeon_s_Key_from_spawned_shiny:
                 StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
                 prof.AddPlacement(new CoordinateLocation
@@ -60,7 +74,7 @@ public static class TestDispatcher
                     Name = "Test",
                     SceneName = SceneNames.Tut_02,
                     X = 133.6f,
-                    Y = 32.6f,
+                    Y = 31.57f,
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Surgeon_s_Key)!));

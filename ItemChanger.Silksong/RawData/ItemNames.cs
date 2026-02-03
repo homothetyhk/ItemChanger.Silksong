@@ -382,4 +382,7 @@ public static class ItemNames
     public const string Rightslash = "Rightslash";
     public const string Upslash = "Upslash";
     public const string Downslash = "Downslash";
+
+    // Flea
+    public const string Flea = "Flea";
 }

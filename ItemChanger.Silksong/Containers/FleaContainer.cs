@@ -3,68 +3,253 @@ using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Containers;
 using ItemChanger.Extensions;
+using ItemChanger.Silksong.Components;
+using ItemChanger.Silksong.Extensions;
+using ItemChanger.Silksong.FsmStateActions;
+using ItemChanger.Silksong.Tags;
 using Silksong.AssetHelper.ManagedAssets;
 using Silksong.FsmUtil;
+using Silksong.FsmUtil.Actions;
 using UnityEngine;
 
 namespace ItemChanger.Silksong.Containers;
+
+public enum FleaContainerType
+{
+    /// <summary>
+    /// Sleeping flea, woken up on contact.
+    /// </summary>
+    Sleeping,
+    /// <summary>
+    /// Trapped in a barrel.
+    /// </summary>
+    Barrel,
+    /// <summary>
+    /// Trapped in a Hunters March style cage.
+    /// </summary>
+    AntCage,
+    /// <summary>
+    /// Trapped in a slab style (hanging) cage.
+    /// </summary>
+    SlabCage,
+    /// <summary>
+    /// Trapped in shellwood style branches.
+    /// </summary>
+    Branches,
+    /// <summary>
+    /// Trapped in a citadel style cage.
+    /// </summary>
+    CitadelCage,
+    /// <summary>
+    /// Trapped in black silk. Sleeping prior to act 3.
+    /// </summary>
+    BlackSilk,
+    /// <summary>
+    /// Trapped in a wall (these have the name Flea Rescue Generic).
+    /// </summary>
+    GenericWall,
+    /// <summary>
+    /// Scared, freed when finishing the arena.
+    /// </summary>
+    Scared,
+    /// <summary>
+    /// Trapped in ice.
+    /// </summary>
+    Ice,
+    /// <summary>
+    /// Being carried by an "aspid".
+    /// </summary>
+    Aspid
+}
+
 
 /// <summary>
 /// Container representing a flea trapped in a barrel.
 /// </summary>
 public class FleaContainer : Container
 {
-    // TODO - add support for fleas other than the one in the barrel
-    private static ManagedAsset<GameObject> _fleaHolder = ManagedAsset<GameObject>.FromSceneAsset(SceneNames.Bone_East_05, "Flea Rescue Barrel");
+    private record FleaPrefabData(ManagedAsset<GameObject> Prefab, float Offset);
 
-    public override uint SupportedCapabilities => ContainerCapabilities.None;  // TODO - add supports drop
+    private static readonly Dictionary<FleaContainerType, FleaPrefabData> _prefabs = new()
+    {
+        [FleaContainerType.Sleeping] = new(
+            ManagedAsset<GameObject>.FromSceneAsset(SceneNames.Dust_12, "Flea Rescue Sleeping"),
+            -0.29f
+        ),
+        [FleaContainerType.Barrel] = new(
+            ManagedAsset<GameObject>.FromSceneAsset(SceneNames.Bone_East_05, "Flea Rescue Barrel"),
+            0f
+        ),
+    };
 
-    public override string Name => "Flea";
+    // TODO - add support for more prefabs
+    
+    /// <summary>
+    /// Managed asset for the fleas collected item.
+    /// This is loaded while in an itemchanger profile.
+    /// </summary>
+    public static ManagedAsset<QuestTargetPlayerDataBools> FleasSavedItem { get; }
+        = ManagedAsset<QuestTargetPlayerDataBools>.FromNonSceneAsset(
+                assetName: "Assets/Data Assets/Quest System/Proxies/FleasCollected Target.asset",
+                bundleName: "dataassets_assets_assets/dataassets/questsystem/proxies.bundle"
+            );
+
+    public override uint SupportedCapabilities => ContainerCapabilities.None;  // TODO - blocked by IC.Core
+
+    public override string Name => ContainerNames.Flea;
 
     public override bool SupportsInstantiate => true;
 
-    public override bool SupportsModifyInPlace => false;  // TODO - set this to true. This would involve manual work for all fleas, I believe
+    public override bool SupportsModifyInPlace => true;
 
     public override GameObject GetNewContainer(ContainerInfo info)
     {
-        // We expect that the game object will be loaded while in game; calling EnsureLoaded
-        // should be a no-op essentially all of the time, but we call it as a guard.
-        // This function is in the unreleased AssetHelper v1.2 so it's commented out for now
-        // _fleaHolder.EnsureLoaded();
+        FleaContainerType fleaType = FleaContainerType.Sleeping;
+        FleaPrefabData data = _prefabs[fleaType];
 
-        // TODO - add (and use) ManagedAsset<GameObject>.InstantiateInScene extension method
-        GameObject fleaBarrel = info.ContainingScene.Instantiate(_fleaHolder.Handle.Result);
-        ModifyContainerInPlace(fleaBarrel, info);
+        // This should be a no-op
+        data.Prefab.EnsureLoaded();
 
-        // TODO - give the barrel a better name
-        fleaBarrel.name = $"ItemChanger Flea Barrel for {info.GiveInfo.Placement.Name}";
+        GameObject spawnedFlea = data.Prefab.InstantiateInScene(info.ContainingScene);
+        ModifyFlea(spawnedFlea, info, fleaType);
 
-        return fleaBarrel;
+        spawnedFlea.name = $"ItemChanger Flea for {info.GiveInfo.Placement.Name}";
+        // We must apply the local offset after finishing the modifications
+        return spawnedFlea.WithLocalOffset(new(0, data.Offset, 0));
     }
 
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
-        PlayMakerFSM barrelFsm = obj.LocateMyFSM("Control");
-        barrelFsm.GetState("Init")!.RemoveActionsOfType<CheckQuestPdSceneBool>();
+        OriginalFleaTypeTag tag = info.GiveInfo.Placement
+            .GetPlacementAndLocationTags()
+            .OfType<OriginalFleaTypeTag>()
+            .SingleOrDefault();
 
-        GameObject fleaRescue = obj.FindChild("Flea Rescue Activation")!;
-        PlayMakerFSM fsm = fleaRescue.LocateMyFSM("Control");
-        FsmState state = fsm.GetState("End")!;
-        SavedItemGetV2 get = state.GetFirstActionOfType<SavedItemGetV2>()!;
+        if (tag == null)
+        {
+            throw new InvalidOperationException($"No original flea container tag on {obj.name}" +
+                $"for placement {info.GiveInfo.Placement.Name}");
+        }
 
+        FleaContainerType fleaType = tag.FleaContainerType;
+        ModifyFlea(obj, info, fleaType);
+    }
+
+    public void ModifyFlea(GameObject obj, ContainerInfo info, FleaContainerType fleaType)
+    {
+        switch (fleaType)
+        {
+            case FleaContainerType.Sleeping:
+                ReplaceObtainedCheck(obj.LocateMyFSM("Call Out"), "Sleeping", info);
+                AddGiveEffectToFsm(obj.LocateMyFSM("Call Out"), info);
+                return;
+            case FleaContainerType.Barrel:
+            case FleaContainerType.AntCage:
+            case FleaContainerType.Branches:
+            case FleaContainerType.BlackSilk:
+                ReplaceObtainedCheck(obj.LocateMyFSM("Control"), "Init", info);
+                AddGiveEffectToFsm(obj.FindChild("Flea Rescue Activation").LocateMyFSM("Control"), info);
+                return;
+            case FleaContainerType.SlabCage:
+                ReplaceObtainedCheck(obj.LocateMyFSM("Flea Control"), "Idle", info);
+                AddGiveEffectToFsm(obj.FindChild("Flea Rescue Activation").LocateMyFSM("Control"), info);
+                return;
+            case FleaContainerType.CitadelCage:
+                ReplaceObtainedCheck(obj.LocateMyFSM("Control"), "Idle", info);
+                AddGiveEffectToFsm(obj.FindChild("Art Pivot/Art/Flea Rescue Activation").LocateMyFSM("Control"), info);
+                return;
+            case FleaContainerType.GenericWall:
+                ReplaceObtainedCheck(obj.LocateMyFSM("Call Out"), "Check State", info);
+                AddGiveEffectToFsm(obj.FindChild("Flea Rescue Activation").LocateMyFSM("Control"), info);
+                obj.LocateMyFSM("Call Out").GetState("Save")!.RemoveActionsOfType<SavedItemGetV2>();
+                return;
+            case FleaContainerType.Ice:
+                UObject.Destroy(obj.GetComponent<DeactivateIfPlayerdataTrue>());
+                if (info.GiveInfo.Placement.AllObtained())
+                {
+                    obj.AddComponent<Deactivator>();
+                }
+                GameObject activation = obj.LocateMyFSM("Control").GetFirstActionOfType<ActivateGameObject>("Break")!.gameObject.GameObject.Value;
+                AddGiveEffectToFsm(activation.LocateMyFSM("Control"), info);
+                return;
+            case FleaContainerType.Scared:
+                ReplaceObtainedCheck(obj.LocateMyFSM("Control"), "Check State", info);
+                AddGiveEffectToFsm(obj.LocateMyFSM("Control"), info);
+                return;
+            case FleaContainerType.Aspid:
+                ReplaceObtainedCheck(obj.LocateMyFSM("Control"), "Has Flea?", info);
+                AddGiveEffectToFsm(obj.FindChild("Flea Rescue").LocateMyFSM("Control"), info);
+                return;
+            default:
+                throw new NotImplementedException();
+        }
+    }
+
+    private void ReplaceObtainedCheck(PlayMakerFSM fsm, string stateName, ContainerInfo info)
+    {
+        FsmState state = fsm.GetState(stateName)!;
+        CheckQuestPdSceneBool check = state.GetFirstActionOfType<CheckQuestPdSceneBool>()!;
+        int idx = state.Actions.IndexOf(check);
+        FsmStateAction newCheck = new PlacementAllObtainedCheck(check) { Placement = info.GiveInfo.Placement, Invert = !check.ExpectedValue.Value };
+        state.ReplaceAction(idx, newCheck);
+    }
+
+    private void AddGiveEffectToFsm(PlayMakerFSM fsm, ContainerInfo info)
+    {
+        // All fleas give their effect via an FSM with a SavedItemGetV2 action
+        // on the Rescue 1 state and the End state (so the flea is given twice).
+        // This function is independent of the flea container type.
+        fsm.RemoveActionsOfType<SavedItemGetV2>("Rescue 1");
+        
+        FsmState endState = fsm.GetState("End")!;
+        SavedItemGetV2 get = endState.GetFirstActionOfType<SavedItemGetV2>()!;
         get.ShowPopup = false;
         get.Amount = 1;
 
         SavedContainerItem item = ScriptableObject.CreateInstance<SavedContainerItem>();
         item.ContainerInfo = info;
-        item.ContainerTransform = fleaRescue.transform;
+        item.ContainerTransform = fsm.transform;
         get.Item.Value = item;
-        // TODO - spawn shinies for non-flea items?
+
+        // TODO - give some items by flinging shinies
+        // Something like
+        // get.InsertMethodAfter(/* code to spawn and fling shinies goes here */);
     }
 
-    // TODO - container elevation
-
-    protected override void Load() { _fleaHolder.Load(); }
+    protected override void Load()
+    { 
+        foreach (FleaPrefabData data in _prefabs.Values)
+        {
+            data.Prefab.Load();
+        }
+        FleasSavedItem.Load();
+    }
     
-    protected override void Unload() { _fleaHolder.Unload(); }
+    protected override void Unload()
+    {
+        foreach (FleaPrefabData data in _prefabs.Values)
+        {
+            data.Prefab.Unload();
+        }
+        FleasSavedItem.Unload();
+    }
+}
+
+// TODO - update IC.Core
+file static class Ext
+{
+    /// <summary>
+    /// Create a new game object which is a parent to <paramref name="self"/>,
+    /// such that the offset of self relative to the new object is equal to
+    /// <paramref name="localOffset"/>.
+    /// </summary>
+    public static GameObject WithLocalOffset(this GameObject self, Vector3 localOffset)
+    {
+        GameObject newParent = self.scene.NewGameObject();
+        newParent.name = $"{self.name} offset";
+        self.transform.parent = newParent.transform;
+        self.transform.localPosition = localOffset;  // Not sure if this is more useful with or without a minus sign
+
+        return newParent;
+    }
 }

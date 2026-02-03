@@ -15,6 +15,12 @@ namespace ItemChanger.Silksong.RawData
             UIDef = new CollectableUIDef { CollectableName = "Ward Boss Key" },
         };
 
+        public static Item Flea => new FleaItem
+        {
+            Name = ItemNames.Flea,
+            UIDef = new FleaUIDef(),
+        };
+
         public static Dictionary<string, Item> GetBaseItems()
         {
             return typeof(BaseItemList).GetProperties().Select(p => (Item)p.GetValue(null)).ToDictionary(i => i.Name);

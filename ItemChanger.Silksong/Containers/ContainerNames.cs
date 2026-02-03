@@ -4,6 +4,7 @@
     {
         public const string Shiny = nameof(Shiny);
         public const string Chest = nameof(Chest);
+        public const string Flea = nameof(Flea);
     }
 
 }

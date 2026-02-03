@@ -1,5 +1,4 @@
 ﻿using ItemChanger.Items;
-using ItemChanger.Silksong.Containers;
 
 namespace ItemChanger.Silksong.Items
 {
@@ -12,12 +11,6 @@ namespace ItemChanger.Silksong.Items
         /// The <see cref="UObject.name"/> of the <see cref="CollectableItem"/>.
         /// </summary>
         public required string CollectableName { get; init; }
-
-        public override string GetPreferredContainer()
-        {
-            // return base.GetPreferredContainer();
-            return "Flea";
-        }
 
         public override void GiveImmediate(GiveInfo info)
         {
