@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.14.36603.0
+# Visual Studio Version 18
+VisualStudioVersion = 18.2.11415.280 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemChanger.Silksong", "ItemChanger.Silksong\ItemChanger.Silksong.csproj", "{F9C5C3A2-FD79-419F-B70B-C992021551D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemChangerTesting", "ItemChangerTesting\ItemChangerTesting.csproj", "{32BED630-D419-40E8-8B19-B5878287CCA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,12 +17,20 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Debug|x64.ActiveCfg = Debug|x64
-		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Debug|x64.Build.0 = Debug|x64
+		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Debug|x64.Build.0 = Debug|Any CPU
 		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Release|x64.ActiveCfg = Release|x64
-		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Release|x64.Build.0 = Release|x64
+		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Release|x64.ActiveCfg = Release|Any CPU
+		{F9C5C3A2-FD79-419F-B70B-C992021551D2}.Release|x64.Build.0 = Release|Any CPU
+		{32BED630-D419-40E8-8B19-B5878287CCA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32BED630-D419-40E8-8B19-B5878287CCA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32BED630-D419-40E8-8B19-B5878287CCA2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{32BED630-D419-40E8-8B19-B5878287CCA2}.Debug|x64.Build.0 = Debug|Any CPU
+		{32BED630-D419-40E8-8B19-B5878287CCA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32BED630-D419-40E8-8B19-B5878287CCA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32BED630-D419-40E8-8B19-B5878287CCA2}.Release|x64.ActiveCfg = Release|Any CPU
+		{32BED630-D419-40E8-8B19-B5878287CCA2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

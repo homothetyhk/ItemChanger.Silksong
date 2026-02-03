@@ -4,24 +4,24 @@
   Imports silksong path properties only if present in order to allow CI builds. The file should be gitignored.
   If you are checking out from git and need to create a new one, you can use `dotnet new silksongpath` to generate one.
   -->
-  <Import Condition="Exists('SilksongPath.props')" Project="SilksongPath.props" />
+  <Import Condition="Exists('../ItemChanger.Silksong/SilksongPath.props')" Project="../ItemChanger.Silksong/SilksongPath.props" />
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
     <RestoreAdditionalProjectSources>
-        https://nuget.bepinex.dev/v3/index.json
+      https://nuget.bepinex.dev/v3/index.json
     </RestoreAdditionalProjectSources>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
-      <!--Allow access of private members at runtime.-->
+    <!--Allow access of private members at runtime.-->
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 
   <PropertyGroup>
     <!--These properties will control the generated plugin info. Version is also used by various parts of the build system.-->
-    <AssemblyTitle>ItemChanger.Silksong</AssemblyTitle>
+    <AssemblyTitle>ItemChangerTesting</AssemblyTitle>
     <Version>0.1.0</Version>
   </PropertyGroup>
 
@@ -31,7 +31,6 @@
     <Using Remove="System.Threading.Tasks" />
     <Using Include="UnityEngine.Object" Alias="UObject" />
     <Using Include="UnityEngine.GameObject" Alias="GameObject" />
-    <Using Include="ItemChanger.Silksong.GlobalRefs" Static="true" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,14 +48,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Silksong.PrepatcherPlugin" Version="1.3.0" />
+    <PackageReference Include="Silksong.ModMenu" Version="0.2.0" />
     <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
     <!--If you're unable resolve this dependency, check that you're using the nuget v3 package feed instead of v2.-->
     <PackageReference Include="Silksong.GameLibs" Version="1.1.0-silksong1.0.28650" />
-    <PackageReference Include="ItemChanger.Core" Version="0.4.1" GeneratePathProperty="true" />
+    <PackageReference Include="ItemChanger.Core" Version="0.4.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ItemChanger.Silksong\ItemChanger.Silksong.csproj" />
     <Reference Include="Benchwarp">
       <HintPath>$(SilksongFolder)/BepInEx/plugins/homothety-Benchwarp/Benchwarp.dll</HintPath>
     </Reference>
@@ -72,22 +72,11 @@
   </ItemGroup>
 
   <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="'$(SilksongFolder)' != ''">
-      <ItemGroup>
-          <Binaries Include="$(TargetPath)" />
-          <Binaries Include="$(TargetDir)/$(TargetName).pdb" />
-          <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.dll" />
-          <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.xml" />
-      </ItemGroup>
+    <ItemGroup>
+      <Binaries Include="$(TargetPath)" />
+      <Binaries Include="$(TargetDir)/$(TargetName).pdb" />
+    </ItemGroup>
 
-      <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongFolder)/BepInEx/plugins/homothety-$(TargetName)" />
-
-      <PropertyGroup>
-          <ExportFolder>bin/Publish</ExportFolder>
-      </PropertyGroup>
-      
-      <RemoveDir Directories="$(IntermediateOutputPath)/archive" />
-      <MakeDir Directories="$(ExportFolder)" />
-      <Copy SourceFiles="@(Binaries)" DestinationFolder="$(IntermediateOutputPath)/archive" />
-      <ZipDirectory SourceDirectory="$(IntermediateOutputPath)/archive" DestinationFile="$(ExportFolder)/$(TargetName).zip" Overwrite="True" />
+    <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongFolder)/BepInEx/plugins/homothety-$(TargetName)" />
   </Target>
 </Project>

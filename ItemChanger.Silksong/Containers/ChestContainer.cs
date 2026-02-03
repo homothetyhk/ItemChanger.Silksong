@@ -8,7 +8,7 @@ namespace ItemChanger.Silksong.Containers
 
         public override string Name => ContainerNames.Chest;
 
-        public override uint SupportedCapabilities => ContainerCapabilities.NONE;
+        public override uint SupportedCapabilities => ContainerCapabilities.None;
 
         public override bool SupportsInstantiate => true;
 
