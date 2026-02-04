@@ -1,0 +1,22 @@
+[package]
+namespace = "homothety"
+name = "ItemChanger_Silksong"
+description = "Item randomization framework for Hollow Knight: Silksong"
+websiteUrl = "https://github.com/DatUub/ItemChanger.Silksong"
+containsNsfwContent = false
+
+[package.dependencies]
+BepInEx-BepInExPack_Silksong = "5.4.21"
+
+[build]
+icon = "./icon.png"
+readme = "./README.md"
+outdir = "./dist"
+
+[build.copy]
+"./ItemChanger.Silksong/bin/Publish/ItemChanger.Silksong.dll" = "./plugins/"
+"./ItemChanger.Silksong/bin/Publish/ItemChanger.Core.dll" = "./plugins/"
+
+[publish]
+repository = "https://silksong.thunderstore.io"
+communities = ["silksong"]

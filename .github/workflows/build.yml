@@ -1,0 +1,126 @@
+name: Build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      is-new-version: ${{ !fromJSON(steps.needs-release.outputs.exists || 'true') }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build -c Release --no-restore
+    - name: Get Version
+      id: version
+      run: |
+        VERSION=$(dotnet build Directory.Build.props -getProperty:Version)
+        echo Version is $VERSION
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ItemChanger.Silksong
+        path: ItemChanger.Silksong/bin/Publish/*.zip
+    - name: Upload NuGet package
+      uses: actions/upload-artifact@v4
+      with:
+        name: NuGet
+        path: ItemChanger.Silksong/bin/Release/**/*.nupkg
+    - name: Check if release needed
+      id: needs-release
+      uses: mukunku/tag-exists-action@v1.6.0
+      if: github.event_name == 'push'
+      with:
+        tag: v${{ steps.version.outputs.version }}
+
+  release-github:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && needs.build.outputs.is-new-version == 'true'
+
+    steps:
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ItemChanger.Silksong
+        path: dist/
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        draft: false
+        generate_release_notes: true
+        fail_on_unmatched_files: true
+        tag_name: v${{ needs.build.outputs.version }}
+        files: |
+          dist/*.zip
+
+  release-nuget:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && needs.build.outputs.is-new-version == 'true'
+
+    steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.x
+    - name: Download NuGet package
+      uses: actions/download-artifact@v4
+      with:
+        name: NuGet
+        path: nuget/
+    - name: Publish NuGet
+      run: |
+        dotnet nuget push nuget/*.nupkg \
+          --api-key ${{ secrets.NUGET_API_KEY }} \
+          --source https://api.nuget.org/v3/index.json
+      continue-on-error: true
+
+  release-thunderstore:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && needs.build.outputs.is-new-version == 'true'
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: ItemChanger.Silksong
+        path: dist/
+    - name: Extract and prepare package
+      run: |
+        mkdir -p thunderstore
+        unzip dist/ItemChanger.Silksong.zip -d thunderstore/plugins/
+        cp README.md thunderstore/
+        cp CHANGELOG.md thunderstore/ || true
+        cp icon.png thunderstore/ || true
+    - name: Setup tcli
+      run: dotnet tool install -g tcli
+    - name: Publish Thunderstore
+      env:
+        TCLI_AUTH_TOKEN: ${{ secrets.THUNDERSTORE_TOKEN }}
+      run: |
+        tcli publish --config-path thunderstore.toml --package-version ${{ needs.build.outputs.version }}
+      continue-on-error: true
