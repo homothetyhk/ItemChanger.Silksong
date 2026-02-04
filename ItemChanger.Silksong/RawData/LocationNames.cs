@@ -21,7 +21,8 @@ public static class LocationNames
     public const string Shakra__Global = "Shakra-Global";
     public const string Twelfth_Architect = "Twelfth_Architect";
     // Sells: Cogwork_Wheel, Scuttlebrace, Silkshot, Crafting_Kit, Architect's_Key
-
+    public const string Vog = "Vog";
+    // Sells: Flea Findings
     // Shop items:
     // - No separate per-item location constants. Shop names are at the top (see Shops).
     // - Shop-sold items are noted in comments for the relevant pools below.
@@ -75,13 +76,17 @@ public static class LocationNames
     // crests
     public const string Crest_of_Architect = "Crest_of_Architect";
     public const string Crest_of_Beast = "Crest_of_Beast";
+    public const string Crest_of_Cloakless = "Crest_of_Cloakless";
+    public const string Crest_of_Cursed_Witch = "Crest_of_Cursed_Witch";
     public const string Crest_of_Hunter = "Crest_of_Hunter";
+    public const string Crest_of_Hunter__Upgrade_1 = "Crest_of_Hunter-Upgrade_1"; // Meeting Eva, unlock 12 slots
+    public const string Crest_of_Hunter__Upgrade_2 = "Crest_of_Hunter-Upgrade_2"; // Unlock 27 slots
     public const string Crest_of_Reaper = "Crest_of_Reaper";
     public const string Crest_of_Shaman = "Crest_of_Shaman";
     public const string Crest_of_Wanderer = "Crest_of_Wanderer";
     public const string Crest_of_Witch = "Crest_of_Witch";
-    public const string Vesticrest_Blue = "Vesticrest_Blue";
-    public const string Vesticrest_Yellow = "Vesticrest_Yellow";
+    public const string Vesticrest_Blue = "Vesticrest_Blue"; // Unlock 20 slots, adds Blue Tool slot
+    public const string Vesticrest_Yellow = "Vesticrest_Yellow"; // Unlock 12 slots, adds Yellow Tool slot
     // red tools (note: Ruined_Tool is listed with quest items; shop items: Curveclaw (Mottled_Skarr), Sting_Shard (Forge Daughter); Cogwork_Wheel is a craftmetal shop item (Twelfth Architect))
     public const string Cogfly = "Cogfly";
       //public const string Cogwork_Wheel = "Cogwork_Wheel";
@@ -216,6 +221,60 @@ public static class LocationNames
     // Shard Breakables
     public const string Growstone = "Growstone";
     public const string Hornet_Statuette = "Hornet_Statuette";
+
+    // Shell Shard Fossils (breakable rocks that drop shards)
+    public const string Shell_Shard_Fossil__Tut_01 = "Shell_Shard_Fossil-Tut_01";
+    public const string Shell_Shard_Fossil__Tut_01b_1 = "Shell_Shard_Fossil-Tut_01b_1";
+    public const string Shell_Shard_Fossil__Tut_01b_2 = "Shell_Shard_Fossil-Tut_01b_2";
+    public const string Shell_Shard_Fossil__Tut_01b_3 = "Shell_Shard_Fossil-Tut_01b_3";
+    public const string Shell_Shard_Fossil__Tut_02_1 = "Shell_Shard_Fossil-Tut_02_1";
+    public const string Shell_Shard_Fossil__Tut_02_2 = "Shell_Shard_Fossil-Tut_02_2";
+    public const string Shell_Shard_Fossil__Tut_02_3 = "Shell_Shard_Fossil-Tut_02_3";
+    public const string Shell_Shard_Fossil__Mosstown_03_1 = "Shell_Shard_Fossil-Mosstown_03_1";
+    public const string Shell_Shard_Fossil__Mosstown_03_2 = "Shell_Shard_Fossil-Mosstown_03_2";
+    public const string Shell_Shard_Fossil__Mosstown_03_3 = "Shell_Shard_Fossil-Mosstown_03_3";
+    public const string Shell_Shard_Fossil__Shellwood_01_1 = "Shell_Shard_Fossil-Shellwood_01_1";
+    public const string Shell_Shard_Fossil__Shellwood_01_2 = "Shell_Shard_Fossil-Shellwood_01_2";
+    public const string Shell_Shard_Fossil__Shellwood_01_3 = "Shell_Shard_Fossil-Shellwood_01_3";
+    public const string Shell_Shard_Fossil__Shellwood_01_4 = "Shell_Shard_Fossil-Shellwood_01_4";
+    public const string Shell_Shard_Fossil__Shellwood_01_5 = "Shell_Shard_Fossil-Shellwood_01_5";
+    public const string Shell_Shard_Fossil__Shellwood_11_1 = "Shell_Shard_Fossil-Shellwood_11_1";
+    public const string Shell_Shard_Fossil__Shellwood_11_2 = "Shell_Shard_Fossil-Shellwood_11_2";
+    public const string Shell_Shard_Fossil__Shellwood_11_3 = "Shell_Shard_Fossil-Shellwood_11_3";
+    public const string Shell_Shard_Fossil__Shellwood_11_4 = "Shell_Shard_Fossil-Shellwood_11_4";
+    public const string Shell_Shard_Fossil__Shellwood_11_5 = "Shell_Shard_Fossil-Shellwood_11_5";
+    public const string Shell_Shard_Fossil__Shellwood_25 = "Shell_Shard_Fossil-Shellwood_25";
+    public const string Shell_Shard_Fossil__Shellwood_26 = "Shell_Shard_Fossil-Shellwood_26";
+    public const string Shell_Shard_Fossil__Greymoor_16_1 = "Shell_Shard_Fossil-Greymoor_16_1";
+    public const string Shell_Shard_Fossil__Greymoor_16_2 = "Shell_Shard_Fossil-Greymoor_16_2";
+    public const string Shell_Shard_Fossil__Greymoor_17_1 = "Shell_Shard_Fossil-Greymoor_17_1";
+    public const string Shell_Shard_Fossil__Greymoor_17_2 = "Shell_Shard_Fossil-Greymoor_17_2";
+    public const string Shell_Shard_Fossil__Greymoor_17_3 = "Shell_Shard_Fossil-Greymoor_17_3";
+    public const string Shell_Shard_Fossil__Greymoor_17_4 = "Shell_Shard_Fossil-Greymoor_17_4";
+    public const string Shell_Shard_Fossil__Greymoor_17_5 = "Shell_Shard_Fossil-Greymoor_17_5";
+    public const string Shell_Shard_Fossil__Library_11b = "Shell_Shard_Fossil-Library_11b";
+    public const string Shell_Shard_Fossil__Library_12_1 = "Shell_Shard_Fossil-Library_12_1";
+    public const string Shell_Shard_Fossil__Library_12_2 = "Shell_Shard_Fossil-Library_12_2";
+    public const string Shell_Shard_Fossil__Library_13_1 = "Shell_Shard_Fossil-Library_13_1";
+    public const string Shell_Shard_Fossil__Library_13_2 = "Shell_Shard_Fossil-Library_13_2";
+    public const string Shell_Shard_Fossil__Slab_05_1 = "Shell_Shard_Fossil-Slab_05_1";
+    public const string Shell_Shard_Fossil__Slab_05_2 = "Shell_Shard_Fossil-Slab_05_2";
+    public const string Shell_Shard_Fossil__Slab_05_3 = "Shell_Shard_Fossil-Slab_05_3";
+    public const string Shell_Shard_Fossil__Slab_12_1 = "Shell_Shard_Fossil-Slab_12_1";
+    public const string Shell_Shard_Fossil__Slab_12_2 = "Shell_Shard_Fossil-Slab_12_2";
+    public const string Shell_Shard_Fossil__Slab_18_1 = "Shell_Shard_Fossil-Slab_18_1";
+    public const string Shell_Shard_Fossil__Slab_18_2 = "Shell_Shard_Fossil-Slab_18_2";
+    public const string Shell_Shard_Fossil__Bone_East_24 = "Shell_Shard_Fossil-Bone_East_24";
+    public const string Shell_Shard_Fossil__Bone_East_LavaChallenge = "Shell_Shard_Fossil-Bone_East_LavaChallenge";
+    public const string Shell_Shard_Fossil__Bone_East_13_1 = "Shell_Shard_Fossil-Bone_East_13_1";
+    public const string Shell_Shard_Fossil__Bone_East_13_2 = "Shell_Shard_Fossil-Bone_East_13_2";
+    public const string Shell_Shard_Fossil__Bone_East_13_3 = "Shell_Shard_Fossil-Bone_East_13_3";
+    public const string Shell_Shard_Fossil__Coral_36 = "Shell_Shard_Fossil-Coral_36";
+    public const string Shell_Shard_Fossil__Peak_01 = "Shell_Shard_Fossil-Peak_01";
+    public const string Shell_Shard_Fossil__Wisp_09 = "Shell_Shard_Fossil-Wisp_09";
+    public const string Shell_Shard_Fossil__Under_17_1 = "Shell_Shard_Fossil-Under_17_1";
+    public const string Shell_Shard_Fossil__Under_17_2 = "Shell_Shard_Fossil-Under_17_2";
+    public const string Shell_Shard_Fossil__Under_17_3 = "Shell_Shard_Fossil-Under_17_3";
 
     // beast shards - 9 total (6 boss drops, 2 glowing spots, 1 quest reward)
     public const string Beast_Shard__Blasted_Steps_Statue = "Beast_Shard-Blasted_Steps_Statue"; // Shard statue behind breakable wall
@@ -410,7 +469,6 @@ public static class LocationNames
     public const string Pale_Rosary_Necklace__Far_Fields = "Pale_Rosary_Necklace-Far_Fields"; // Northeastern Far Fields, guarded by Skarr Stalker
     public const string Pale_Rosary_Necklace__High_Halls = "Pale_Rosary_Necklace-High_Halls"; // Rosary Bank chest west of Ventrica station
 
-    /*
     // ROSARY POUCHES (Destructible Sacks)
     public const string Rosary_Pouch__Coral_12 = "Rosary_Pouch-Coral_12";
     public const string Rosary_Pouch__Dust_02 = "Rosary_Pouch-Dust_02";
@@ -438,7 +496,6 @@ public static class LocationNames
     public const string Rosary_Npc__Pilgrim_Bonegrave_Act3 = "Rosary_Npc-Pilgrim_Bonegrave_Act3";
     public const string Rosary_Npc__Pilgrim_Shadow_23 = "Rosary_Npc-Pilgrim_Shadow_23";
     public const string Rosary_Npc__Pilgrim_Shellgrave = "Rosary_Npc-Pilgrim_Shellgrave";
-    */
 
     // Fast travel
     public const string Bellway__Bellhart = "Bellway-Bellhart";
@@ -453,7 +510,14 @@ public static class LocationNames
     public const string Bellway__Shellwood = "Bellway-Shellwood";
     public const string Bellway__The_Marrow = "Bellway-The_Marrow";
     public const string Bellway__The_Slab = "Bellway-The_Slab";
+    public const string Bellway__Grand_Bellway = "Bellway-Grand_Bellway";
+    public const string Bellway__Bilewater = "Bellway-Bilewater";
+    public const string Bellway__Putrified_Ducts = "Bellway-Putrified_Ducts";
 
+    public const string Ventrica__Terminus = "Ventrica-Terminus";
+    public const string Ventrica__Memorium = "Ventrica-Memorium";
+    public const string Ventrica__High_Halls = "Ventrica-High_Halls";
+    public const string Ventrica__First_Shrine = "Ventrica-First_Shrine";
     public const string Ventrica__Choral_Chambers = "Ventrica-Choral_Chambers";
     public const string Ventrica__First_Shrine = "Ventrica-First_Shrine";
     public const string Ventrica__Grand_Bellway = "Ventrica-Grand_Bellway";
@@ -531,19 +595,38 @@ public static class LocationNames
     public const string Lore_Tablet__Slab_Penance_Fourth = "Lore_Tablet-Slab_Penance_Fourth";
     public const string Lore_Tablet__Terminus_Ventrica = "Lore_Tablet-Terminus_Ventrica";
     public const string Lore_Tablet__Verdania_Fountains = "Lore_Tablet-Verdania_Fountains";
-    public const string Lore_Tablet__Verdania_Shrine = "Lore_Tablet-Verdania_Shrine";
-    public const string Lore_Tablet__Verdania_Twins = "Lore_Tablet-Verdania_Twins";
-    public const string Lore_Tablet__Weavenest_Atla = "Lore_Tablet-Weavenest_Atla";
+    public const string Lore_Tablet__Blasted_Steps_Start = "Lore_Tablet-Blasted_Steps_Start";
+    public const string Lore_Tablet__Karak_Entrance = "Lore_Tablet-Karak_Entrance";
+    public const string Lore_Tablet__Blasted_Steps_Nursery = "Lore_Tablet-Blasted_Steps_Nursery";
+    public const string Lore_Tablet__Coral_Tower = "Lore_Tablet-Coral_Tower";
+    public const string Lore_Tablet__Cradle_Cage_1 = "Lore_Tablet-Cradle_Cage_1";
+    public const string Lore_Tablet__Cradle_Cage_2 = "Lore_Tablet-Cradle_Cage_2";
+    public const string Lore_Tablet__Cradle_Cage_3 = "Lore_Tablet-Cradle_Cage_3";
+    public const string Lore_Tablet__Greymoor_Orders_Above_Home = "Lore_Tablet-Greymoor_Orders_Above_Home";
+    public const string Lore_Tablet__Greymoor_Bottom = "Lore_Tablet-Greymoor_Bottom";
+    public const string Lore_Tablet__Nuu_Scroll = "Lore_Tablet-Nuu_Scroll";
+    public const string Lore_Tablet__Trobbio_Sign = "Lore_Tablet-Trobbio_Sign";
+    public const string Lore_Tablet__Trobbio_Notes = "Lore_Tablet-Trobbio_Notes";
+    public const string Lore_Tablet__Tormented_Trobbio_Notes = "Lore_Tablet-Tormented_Trobbio_Notes";
+    public const string Lore_Tablet__Mosshome_Below_Silkspear = "Lore_Tablet-Mosshome_Below_Silkspear";
+    public const string Lore_Tablet__Mosshome_Below_Silkspear_Harp = "Lore_Tablet-Mosshome_Below_Silkspear_Harp";
+    public const string Lore_Tablet__Mount_Fay_Bottom = "Lore_Tablet-Mount_Fay_Bottom";
+    public const string Lore_Tablet__Deep_Docks_Forge = "Lore_Tablet-Deep_Docks_Forge";
+    public const string Lore_Tablet__Bilewater_Shortcut = "Lore_Tablet-Bilewater_Shortcut";
+    public const string Lore_Tablet__Bilewater_Above_Groal = "Lore_Tablet-Bilewater_Above_Groal";
     public const string Lore_Tablet__Weavenest_Murglin = "Lore_Tablet-Weavenest_Murglin";
     public const string Lore_Tablet__Whiteward_Oath = "Lore_Tablet-Whiteward_Oath";
-    public const string Lore_Tablet__Whispering_Vaults_Trobbio = "Lore_Tablet-Whispering_Vaults_Trobbio";
-    public const string Lore_Tablet__Whispering_Vaults_Trobbio_Act_2 = "Lore_Tablet-Whispering_Vaults_Trobbio_Act_2";
-    public const string Lore_Tablet__Whispering_Vaults_Tormented = "Lore_Tablet-Whispering_Vaults_Tormented";
-    public const string Lore_Tablet__Moss_Grotto_Chapel_Flickering = "Lore_Tablet-Moss_Grotto_Chapel_Flickering";
-    public const string Lore_Tablet__Moss_Grotto_Chapel_Anguished = "Lore_Tablet-Moss_Grotto_Chapel_Anguished";
-    public const string Lore_Tablet__Bone_Bottom_Weaver = "Lore_Tablet-Bone_Bottom_Weaver";
-    public const string Lore_Tablet__Bone_Bottom_Weaver_Harp = "Lore_Tablet-Bone_Bottom_Weaver_Harp";
+    public const string Lore_Tablet__Weavenest_Atla_East = "Lore_Tablet-Weavenest_Atla_East";
+    public const string Lore_Tablet__Mr_Mushroom = "Lore_Tablet-Mr_Mushroom";
 
+    // journal entries
+    public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
+
+    // materium types (submenu items for Materium)
+    public const string Materium__Flintstone = "Materium-Flintstone";
+    public const string Materium__Magnetite = "Materium-Magnetite";
+    public const string Materium__Roach_Guts = "Materium-Roach_Guts";
+    public const string Materium__Voltridian = "Materium-Voltridian";
 
     // Memory lockets (20 total)
     // public const string Memory_Locket__Mort = "Memory_Locket-Mort";
@@ -551,7 +634,7 @@ public static class LocationNames
     public const string Memory_Locket__Bilewater_Cocoon_Corpse = "Memory_Locket-Bilewater_Cocoon_Corpse";
     public const string Memory_Locket__Bilewater_Hidden_Room_West_Bench = "Memory_Locket-Bilewater_Hidden_Room_West_Bench";
     public const string Memory_Locket__Blasted_Steps = "Memory_Locket-Blasted_Steps";
-    public const string Memory_Locket__Coral_Chambers = "Memory_Locket-Underworks_2";
+    public const string Memory_Locket__Coral_Chambers = "Memory_Locket-Coral_Chambers";
     public const string Memory_Locket__Deep_Docks = "Memory_Locket-Deep_Docks";
     public const string Memory_Locket__Far_Fields_Secret = "Memory_Locket-Far_Fields_Secret";
     public const string Memory_Locket__Greymoor_HH = "Memory_Locket-Greymoor_HH";
@@ -597,20 +680,6 @@ public static class LocationNames
     public const string Twisted_Bud = "Twisted_Bud";
     public const string Vintage_Nectar = "Vintage_Nectar";
 
-    // From Respawnable Enemies
-
-    public const string Choir_Cloak = "Choir_Cloak"; //Max of 16
-    public const string Fine_Pin = "Fine_Pin"; //Max of 12
-    public const string Pilgrim_Shawl = "Pilgrim_Shawl"; //Max of 12
-    public const string Plasmified_Blood = "Plasmified_Blood"; //Max of 10 not technically picked up though
-    public const string Ragpelt = "Ragpelt"; //Max of 25 Craws drop 1 Tall and Squatcraws drop 2-5 so possible extras
-    public const string Roach_Guts = "Roach_Guts"; //Max of 10
-    public const string Seared_Organ = "Seared_Organ"; // Max of 15
-    public const string Shredded_Organ = "Shredded_Organ"; // Max of 35 Drops in terms of 3 so one extra
-    public const string Skewered_Organ = "Skewered_Organ"; // Max of 10
-    public const string Silver_Bell = "Silver_Bell"; //Max of 8
-    public const string Spine_Core = "Spine_Core"; //Max of 25
-
     // Deliveries from the Couriers
 
     public const string Courier_s_Rasher = "Courier's_Rasher";
@@ -624,11 +693,6 @@ public static class LocationNames
     public const string Cogheart_Piece__Choral_Chambers = "Cogheart_Piece-Choral_Chambers"; // To the west, connected to the tall room that leads to The Slab.
     public const string Cogheart_Piece__Memorium = "Cogheart_Piece-Memorium"; // To the east, in the room above the map room.
     public const string Cogheart_Piece__Whispering_Vaults = "Cogheart_Piece-Whispering_Vaults"; // In a room below the entrance to The Stage.
-
-   
-
-
-
     // TODOs
 
     

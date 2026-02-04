@@ -12,10 +12,37 @@ namespace ItemChanger.Silksong
         private void Awake()
         {
             Instance = this;
-            new SilksongHost();
             Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
+        }
 
-            //StartCoroutine(WaitToDo());
+        // this fails silently if IC.Core is not installed!
+        private void Start()
+        {
+            try
+            {
+                new SilksongHost();
+                Logger.LogInfo($"Created host!");
+                // On.UIManager.StartNewGame += StartItemChangerProfile;
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"Error creating host: {e}");
+            }
+        }
+
+        private void StartItemChangerProfile(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)
+        {
+            Logger.LogInfo("Creating IC profile...");
+            try
+            {
+                Host.ActiveProfile?.Dispose();
+                new ItemChangerProfile(Host);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"Error creating IC profile: {e}");
+            }
+            orig(self, permaDeath, bossRush);
         }
 
         private System.Collections.IEnumerator WaitToDo()

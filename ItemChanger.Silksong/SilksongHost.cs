@@ -3,12 +3,21 @@ using ItemChanger.Events;
 using ItemChanger.Logging;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Modules;
+using ItemChanger.Silksong.StartDefs;
+using ItemChanger.Silksong.Util;
+using TeamCherry.SharedUtils;
 
 namespace ItemChanger.Silksong
 {
     public class SilksongHost : ItemChangerHost
     {
-        internal SilksongHost() { }
+        internal SilksongHost() 
+        {
+            MessageUtil.Setup();
+            Finder = new();
+            Finder.DefineItemSheet(new(RawData.BaseItemList.GetBaseItems(), 0f));
+            Finder.DefineLocationSheet(new(RawData.BaseLocationList.GetBaseLocations(), 0f));
+        }
 
         public override ILogger Logger { get; } = new PluginLogger();
 
@@ -18,13 +27,11 @@ namespace ItemChanger.Silksong
             DefaultMultiItemContainer = Containers.ChestContainer.Instance,
         };
 
-        public override Finder Finder { get; } = new();
+        public override Finder Finder { get; }
 
         public override IEnumerable<Module> BuildDefaultModules()
         {
-            return [
-                new PlayerDataEditModule(),
-                ];
+            return [];
         }
 
         private LifecycleEvents.Invoker? lifecycleInvoker;
@@ -52,6 +59,7 @@ namespace ItemChanger.Silksong
             On.GameManager.BeginSceneTransition -= TransitionHook;
             On.GameManager.ResetSemiPersistentItems -= OnResetSemiPersistentItems;
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+            MessageUtil.Clear();
         }
 
         private void OnActiveSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
@@ -92,10 +100,24 @@ namespace ItemChanger.Silksong
         private void BeforeStartNewGameHook(On.GameManager.orig_StartNewGame orig, GameManager self, bool permadeathMode, bool bossRushMode)
         {
             lifecycleInvoker?.NotifyBeforeStartNewGame();
-            
-            // TODO: StartDef
+
+            PlayerData pd = PlayerData.CreateNewSingleton(addEditorOverrides: false);
+            GameManager.instance.playerData = pd;
+            pd.SetVariable(nameof(PlayerData.permadeathMode), permadeathMode ? GlobalEnums.PermadeathModes.On : GlobalEnums.PermadeathModes.Off);
+            Platform.Current.PrepareForNewGame(self.profileID);
+            ActiveProfile!.Load();
             lifecycleInvoker?.NotifyOnEnterGame();
-            orig(self, permadeathMode, bossRushMode);
+
+            if (ActiveProfile!.Modules.Get<StartDefModule>() is StartDefModule { StartDef: StartDef start })
+            {
+                pd.SetBool(nameof(PlayerData.bindCutscenePlayed), true); // so that entering Tut_01 later does not trigger the wakeup sequence
+                start.GetRespawnInfo().SetRespawn();
+                self.StartCoroutine(self.RunContinueGame(self.IsMenuScene()));
+            }
+            else
+            {
+                self.StartCoroutine(self.RunStartNewGame());
+            }
 
             lifecycleInvoker?.NotifyAfterStartNewGame();
             lifecycleInvoker?.NotifyOnSafeToGiveItems(); // TODO: move
