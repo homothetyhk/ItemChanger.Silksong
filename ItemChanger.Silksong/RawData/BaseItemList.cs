@@ -36,6 +36,16 @@ namespace ItemChanger.Silksong.RawData
         public static Dictionary<string, Item> GetBaseItems()
         {
             return GetItems().ToDictionary(item => item.Name);
+        public static Item Surgeon_s_Key => new ItemChangerCollectableItem
+        {
+            Name = ItemNames.Surgeon_s_Key,
+            CollectableName = "Ward Boss Key",
+            UIDef = new CollectableUIDef { CollectableName = "Ward Boss Key" },
+        };
+
+        public static Dictionary<string, Item> GetBaseItems()
+        {
+            return typeof(BaseItemList).GetProperties().Select(p => (Item)p.GetValue(null)).ToDictionary(i => i.Name);
         }
     }
 }
