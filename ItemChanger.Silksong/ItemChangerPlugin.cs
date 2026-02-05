@@ -24,6 +24,8 @@ namespace ItemChanger.Silksong
             // so the manual requests can be removed if the container is defined in Awake.
             AssetRequestAPI.RequestSceneAsset(SceneNames.Bone_East_05, "Flea Rescue Barrel");
             AssetRequestAPI.RequestSceneAsset(SceneNames.Dust_12, "Flea Rescue Sleeping");
+            AssetRequestAPI.RequestSceneAsset(SceneNames.Ant_03, "Flea Rescue Cage");
+            AssetRequestAPI.RequestSceneAsset(SceneNames.Library_01, "Flea Rescue CitadelCage");
             AssetRequestAPI.RequestNonSceneAsset<QuestTargetPlayerDataBools>(
                 bundleName: "dataassets_assets_assets/dataassets/questsystem/proxies.bundle",
                 assetName: "Assets/Data Assets/Quest System/Proxies/FleasCollected Target.asset"

@@ -13,3 +13,12 @@ public class OriginalFleaTypeTag : Tag
 {
     public required FleaContainerType FleaContainerType;
 }
+
+/// <summary>
+/// Tag indicating that an item is requesting to be given a particular container type.
+/// </summary>
+[ItemTag]
+public class ItemFleaTypeTag : Tag
+{
+    public required FleaContainerType FleaContainerType;
+}

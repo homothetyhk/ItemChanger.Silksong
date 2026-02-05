@@ -3,6 +3,7 @@ using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Containers;
 using ItemChanger.Extensions;
+using ItemChanger.Items;
 using ItemChanger.Placements;
 using ItemChanger.Silksong.Components;
 using ItemChanger.Silksong.Extensions;
@@ -75,11 +76,20 @@ public class FleaContainer : Container
     {
         [FleaContainerType.Sleeping] = new(
             ManagedAsset<GameObject>.FromSceneAsset(SceneNames.Dust_12, "Flea Rescue Sleeping"),
+            // asset y - hornet y
             -0.29f
         ),
         [FleaContainerType.Barrel] = new(
             ManagedAsset<GameObject>.FromSceneAsset(SceneNames.Bone_East_05, "Flea Rescue Barrel"),
             0f
+        ),
+        [FleaContainerType.AntCage] = new(
+            ManagedAsset<GameObject>.FromSceneAsset(SceneNames.Ant_03, "Flea Rescue Cage"),
+            0.67f
+        ),
+        [FleaContainerType.CitadelCage] = new(
+            ManagedAsset<GameObject>.FromSceneAsset(SceneNames.Library_01, "Flea Rescue CitadelCage"),
+            3.42f
         ),
     };
 
@@ -103,14 +113,34 @@ public class FleaContainer : Container
 
     public override bool SupportsModifyInPlace => true;
 
-    public override GameObject GetNewContainer(ContainerInfo info)
+    private FleaContainerType SelectContainerType(ContainerInfo info)
     {
+        FleaContainerType fleaType;
+
+        // TODO - validate container based on capabilities
+
+        foreach (Item item in info.GiveInfo.Items)
+        {
+            if (item.GetTag<ItemFleaTypeTag>() is ItemFleaTypeTag tag
+                && _prefabs.ContainsKey(tag.FleaContainerType))
+            {
+                fleaType = tag.FleaContainerType;
+                return fleaType;
+            }
+        }
+
         // Select random container seeded by the placement name
-        // TODO - this should choose a container based on which prefabs satisfy the requested capabilities
         int choice = ItemChangerHost.Singleton.ActiveProfile!
             .Modules.GetOrAdd<ConsistentRandomnessModule>()
             .Choose($"Flea Container // {info.GiveInfo.Placement.Name}", 0, _prefabs.Count - 1);
-        FleaContainerType fleaType = _prefabs.Keys.ElementAt(choice);
+        fleaType = _prefabs.Keys.ElementAt(choice);
+
+        return fleaType;
+    }
+
+    public override GameObject GetNewContainer(ContainerInfo info)
+    {
+        FleaContainerType fleaType = SelectContainerType(info);
         FleaPrefabData data = _prefabs[fleaType];
 
         // This should be a no-op

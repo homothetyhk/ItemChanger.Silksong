@@ -12,6 +12,8 @@ internal static partial class BaseLocationList
 {
     private const float SLEEPING_ELEVATION = -0.29f;  // should this be + or - ?
     private const float BARREL_ELEVATION = 0f;
+    private const float ANT_CAGE_ELEVATION = 0.67f;
+    private const float CITADELCAGE_ELEVATION = 3.42f;
 
     private static Location CreateFleaLocation(
         string name,
@@ -154,7 +156,7 @@ internal static partial class BaseLocationList
         SceneNames.Ant_03,
         "Flea Rescue Cage",
         FleaContainerType.AntCage,
-        replaceable: false
+        elevation: ANT_CAGE_ELEVATION
         );
 
     public static Location Flea__slab_cell => CreateFleaLocation(
@@ -179,7 +181,7 @@ internal static partial class BaseLocationList
         SceneNames.Library_01,
         "Flea Rescue CitadelCage",
         FleaContainerType.CitadelCage,
-        replaceable: false
+        elevation: CITADELCAGE_ELEVATION
         );
 
     public static Location Flea__greymoor_15b => CreateFleaLocation(
@@ -235,7 +237,7 @@ internal static partial class BaseLocationList
         SceneNames.Song_14,
         "Flea Rescue CitadelCage",
         FleaContainerType.CitadelCage,
-        replaceable: false
+        elevation: CITADELCAGE_ELEVATION
         );
 
     public static Location Flea__under_23 => CreateFleaLocation(
@@ -259,7 +261,7 @@ internal static partial class BaseLocationList
         SceneNames.Bone_East_17b,
         "Flea Scene/Flea Rescue Cage",
         FleaContainerType.AntCage,
-        replaceable: false
+        elevation: ANT_CAGE_ELEVATION
         );
 
     public static Location Flea__bone_06 => CreateFleaLocation(
