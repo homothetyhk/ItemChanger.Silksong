@@ -12,7 +12,7 @@ namespace ItemChanger.Silksong.Modules;
 /// Module recording the number of fleas saved that are not associated to a particular scene.
 /// </summary>
 [SingletonModule]
-public sealed /* singleton modules should be sealed */ class AnonymousFleasModule : Module
+public sealed class AnonymousFleasModule : Module
 {
     /// <summary>
     /// The number of anonymous fleas available in the file.
