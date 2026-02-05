@@ -27,9 +27,9 @@ namespace ItemChanger.Silksong.RawData
         public static Item Vesticrest_Yellow => new PlayerDataBoolItem { Name = "Vesticrest_Yellow", FieldName = "UnlockedExtraYellowSlot" };
 
         // Keys (PlayerData)
-        public static Item Key_of_Apostate => new PlayerDataBoolItem { Name = "Key_of_Apostate", FieldName = "HasSlabKeyA" };
+        public static Item Key_of_Apostate => new PlayerDataBoolItem { Name = "Key_of_Apostate", FieldName = "HasSlabKeyC" };
         public static Item Key_of_Heretic => new PlayerDataBoolItem { Name = "Key_of_Heretic", FieldName = "HasSlabKeyB" };
-        public static Item Key_of_Indolent => new PlayerDataBoolItem { Name = "Key_of_Indolent", FieldName = "HasSlabKeyC" };
+        public static Item Key_of_Indolent => new PlayerDataBoolItem { Name = "Key_of_Indolent", FieldName = "HasSlabKeyA" };
 
         // Melodies
         public static Item Architect_s_Melody => new PlayerDataBoolItem { Name = "Architect's_Melody", FieldName = "HasMelodyArchitect" };
