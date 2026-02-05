@@ -12,6 +12,7 @@ namespace ItemChanger.Silksong.Items
         /// </summary>
         public required string CollectableName { get; init; }
 
+
         public override void GiveImmediate(GiveInfo info)
         {
             CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
