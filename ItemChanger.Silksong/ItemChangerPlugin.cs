@@ -1,10 +1,12 @@
 using BepInEx;
+using Silksong.DataManager;
 
 namespace ItemChanger.Silksong
 {
     [BepInDependency("io.github.benchwarp")]
+    [BepInDependency("org.silksong-modding.datamanager")]
     [BepInAutoPlugin(id: "io.github.silksong.itemchanger")]
-    public partial class ItemChangerPlugin : BaseUnityPlugin
+    public partial class ItemChangerPlugin : BaseUnityPlugin, ISaveDataMod<ItemChangerProfile>
     {
         public static ItemChangerPlugin Instance { get => field ?? throw new NullReferenceException("ItemChangerPlugin is not loaded!"); private set; }
         internal new BepInEx.Logging.ManualLogSource Logger => base.Logger;
@@ -27,6 +29,30 @@ namespace ItemChanger.Silksong
             catch (Exception e)
             {
                 Logger.LogError($"Error creating host: {e}");
+            }
+        }
+
+        public ItemChangerProfile? SaveData
+        {
+            get => Host.ActiveProfile;
+            set
+            {
+                // Can't just overwrite Host.ActiveProfile, because the profile needs to be manually
+                // Disposed. This applies both when returning to the main menu, and also when using
+                // Benchwarp (which reloads the file without passing through the main menu).
+                if (Host.ActiveProfile != null)
+                {
+                    Host.ActiveProfile.Dispose();
+                    Host.ActiveProfile = null;
+                }
+                if (value != null)
+                {
+                    // IC.Core ought to expose a way to do this?
+                    var flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+                    typeof(ItemChangerProfile).GetMethod("AttachHost", flags).Invoke(value, new object[] { Host });
+                    typeof(ItemChangerProfile).GetMethod("DoHook", flags).Invoke(value, new object[]{});
+                    Host.ActiveProfile!.Load();
+                }
             }
         }
 
