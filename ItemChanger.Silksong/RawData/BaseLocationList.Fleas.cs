@@ -102,7 +102,6 @@ internal static partial class BaseLocationList
     ).WithTag(new DestroyOnContainerReplaceTag() { ObjectPath = "Bell Wall Flea/Bell Wall Tall (5)" })
      .WithTag(new DeactivateIfPlacementCheckedTag() { ObjectName = "Bell Wall Flea/Bell Wall Tall (5)", SceneName = SceneNames.Belltown_04 });
 
-    // TODO - make sure this works (false location is replaced) post-IC.Core v0.5.0
     public static Location Flea__dock_16 => new DualLocation()
     {
         Name = LocationNames.Flea__Docks_Bellway,
@@ -164,11 +163,10 @@ internal static partial class BaseLocationList
         SceneNames.Slab_Cell,
         "Flea Slab Cage",
         FleaContainerType.SlabCage,
-        replaceable: false
+        elevation: 7.01f
     ).WithTag(new RemoveComponentTag<DeactivateIfPlayerdataTrue>() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" })
      .WithTag(new DeactivateIfPlacementCheckedTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" })
-    /* .WithTag(new DeactivateIfContainerReplacedTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" } ) */;
-    // TODO - add tag for audio
+     .WithTag(new DeactivateIfContainerChangedTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed", ExpectedContainerType = ContainerNames.Flea});
 
     public static Location Flea__dust_09 => CreateFleaLocation(
         LocationNames.Flea__Exhaust_Organ,
