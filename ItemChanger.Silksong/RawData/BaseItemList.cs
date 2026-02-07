@@ -20,13 +20,11 @@ namespace ItemChanger.Silksong.RawData
             Name = ItemNames.Flea,
             UIDef = new MsgUIDef()
             {
-                // TODO - improve the name/shopdesc
-                // Note - for the postview string, the number obtained should be retrieved by
-                // [FleasCollected Target].CompletedCount
-                // FleasCollected Target is the non-scene asset
-                Name = new BoxedString("Flea Yes"),
+                // TODO - improve the shopdesc
+                Name = new CountedString() { Prefix = new LanguageString("UI", "KEY_FLEA"), Amount = new FleaCount() },
                 Sprite = new FleaSprite(),
-                ShopDesc = new BoxedString("Flea flea flea flea flea")
+                ShopDesc = new BoxedString("Flea flea flea flea flea"),
+                PreviewName = new LanguageString("UI", "KEY_FLEA")
             },
         };
 
