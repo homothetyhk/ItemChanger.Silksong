@@ -230,8 +230,16 @@ public class FleaContainer : Container
         FsmState state = fsm.GetState(stateName)!;
         CheckQuestPdSceneBool check = state.GetFirstActionOfType<CheckQuestPdSceneBool>()!;
         int idx = state.Actions.IndexOf(check);
-        FsmStateAction newCheck = new PlacementAllObtainedCheck(check) { Placement = info.GiveInfo.Placement, Invert = !check.ExpectedValue.Value };
+        bool expectedValue = check.ExpectedValue.Value;
+        FsmStateAction newCheck = new CustomCheckFsmStateAction(check) { GetIsTrue = GetIsTrue };        
         state.ReplaceAction(idx, newCheck);
+
+        bool GetIsTrue()
+        {
+            Placement pmt = info.GiveInfo.Placement;
+
+            return pmt.AllObtained() == expectedValue;
+        }
     }
 
     private void AddGiveEffectToFsm(PlayMakerFSM fsm, ContainerInfo info)
