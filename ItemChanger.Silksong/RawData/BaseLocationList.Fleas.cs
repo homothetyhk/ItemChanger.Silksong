@@ -162,7 +162,7 @@ internal static partial class BaseLocationList
         elevation: 7.01f
     ).WithTag(new RemoveComponentTag<DeactivateIfPlayerdataTrue>() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" })
      .WithTag(new DeactivateIfPlacementCheckedTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" })
-     .WithTag(new DeactivateIfContainerChangedTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed", ExpectedContainerType = ContainerNames.Flea});
+     .WithTag(new DeactivateIfUnexpectedContainerTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed", ExpectedContainerType = ContainerNames.Flea});
 
     public static Location Flea__dust_09 => CreateFleaLocation(
         LocationNames.Flea__Exhaust_Organ,

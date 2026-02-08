@@ -1,5 +1,4 @@
-﻿using ItemChanger.Locations;
-using ItemChanger.Silksong.Modules;
+﻿using ItemChanger.Silksong.Modules;
 using ItemChanger.Tags;
 using ItemChanger.Tags.Constraints;
 
@@ -10,7 +9,7 @@ namespace ItemChanger.Silksong.Tags;
 /// and should be excluded from the total number of fleas available
 /// as computed by the base game code.
 /// </summary>
-[TagConstrainedTo<Location>]
+[LocationTag]
 public class VanillaFleaTag : Tag
 {
     protected override void DoLoad(TaggableObject parent)

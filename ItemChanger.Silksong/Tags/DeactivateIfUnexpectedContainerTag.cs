@@ -11,7 +11,7 @@ namespace ItemChanger.Silksong.Tags;
 /// Deactivate the listed object if the location's container does not match the expected container.
 /// </summary>
 [TagConstrainedTo<ContainerLocation>]
-public class DeactivateIfContainerChangedTag : Tag
+public class DeactivateIfUnexpectedContainerTag : Tag
 {
     public required string SceneName { get; init; }
 
