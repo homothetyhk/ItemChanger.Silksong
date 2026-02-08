@@ -31,7 +31,9 @@ namespace ItemChanger.Silksong
 
         public override IEnumerable<Module> BuildDefaultModules()
         {
-            return [];
+            return [
+                new ConsistentRandomnessModule()
+                ];
         }
 
         private LifecycleEvents.Invoker? lifecycleInvoker;

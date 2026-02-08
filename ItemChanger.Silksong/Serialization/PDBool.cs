@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ItemChanger.Silksong.Serialization
 {
-    public record PDBool(string BoolName) : IBool, IWritableBool
+    public record PDBool(string BoolName) : IWritableValueProvider<bool>
     {
         [JsonIgnore]
         public bool Value

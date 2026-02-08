@@ -1,4 +1,11 @@
+using Benchwarp.Data;
 using BepInEx;
+using HutongGames.PlayMaker.Actions;
+using ItemChanger.Extensions;
+using ItemChanger.Silksong.Containers;
+using PrepatcherPlugin;
+using Silksong.AssetHelper.ManagedAssets;
+using Silksong.AssetHelper.Plugin;
 
 namespace ItemChanger.Silksong
 {
@@ -12,6 +19,18 @@ namespace ItemChanger.Silksong
         private void Awake()
         {
             Instance = this;
+            // Requests must be made in Awake, so we have to do this independently from setting up the host
+            // Instantiating the flea container causes the ManagedAssets to be instantiated,
+            // so the manual requests can be removed if the container is defined in Awake.
+            AssetRequestAPI.RequestSceneAsset(SceneNames.Bone_East_05, "Flea Rescue Barrel");
+            AssetRequestAPI.RequestSceneAsset(SceneNames.Dust_12, "Flea Rescue Sleeping");
+            AssetRequestAPI.RequestSceneAsset(SceneNames.Ant_03, "Flea Rescue Cage");
+            AssetRequestAPI.RequestSceneAsset(SceneNames.Library_01, "Flea Rescue CitadelCage");
+            AssetRequestAPI.RequestNonSceneAsset<QuestTargetPlayerDataBools>(
+                bundleName: "dataassets_assets_assets/dataassets/questsystem/proxies.bundle",
+                assetName: "Assets/Data Assets/Quest System/Proxies/FleasCollected Target.asset"
+                );
+
             Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
         }
 
@@ -28,6 +47,8 @@ namespace ItemChanger.Silksong
             {
                 Logger.LogError($"Error creating host: {e}");
             }
+
+            ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new FleaContainer());
         }
 
         private void StartItemChangerProfile(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)

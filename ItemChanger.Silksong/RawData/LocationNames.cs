@@ -609,6 +609,37 @@ public static class LocationNames
     public const string Materium__Roach_Guts = "Materium-Roach_Guts";
     public const string Materium__Voltridian = "Materium-Voltridian";
 
+    // Fleas
+    public const string Flea__Pilgrim_s_Rest = "Flea-Pilgrim's_Rest";
+    public const string Flea__Docks_Bellway = "Flea-Docks_Bellway";
+    public const string Flea__Slab_Cell = "Flea-Slab_Cell";
+    public const string Flea__Slab_Bellway = "Flea-Slab_Bellway";
+    public const string Flea__Wormways_Aknid = "Flea-Wormways_Aknid";
+    public const string Flea__Underworks_Lava = "Flea-Underworks_Lava";
+    public const string Flea__Underworks_Wisp = "Flea-Underworks_Wisp";
+    public const string Flea__Shellwood_Central = "Flea-Shellwood_Central";
+    public const string Flea__Whispering_Vaults = "Flea-Whispering_Vaults";
+    public const string Flea__Songclave_East = "Flea-Songclave_East";
+    public const string Flea__Exhaust_Organ = "Flea-Exhaust_Organ";
+    public const string Flea__Sands_of_Karak = "Flea-Sands_of_Karak";
+    public const string Flea__Bellhart_Upper = "Flea-Bellhart_Upper";
+    public const string Flea__Hunter_s_March = "Flea-Hunter's_March";
+    public const string Flea__Sinner_s_Road = "Flea-Sinner'_'s_Road";
+    public const string Flea__Mount_Fay = "Flea-Mount_Fay";
+    public const string Flea__Bilewater_Upper = "Flea-Bilewater_Upper";
+    public const string Flea__Bilewater_Lower = "Flea-Bilewater_Lower";
+    public const string Flea__Marrow_Upper = "Flea-Marrow_Upper";
+    public const string Flea__Greymoor_West = "Flea-Greymoor_West";
+    public const string Flea__Greymoor_Craws = "Flea-Greymoor_Craws";
+    public const string Flea__Docks_East = "Flea-Docks_East";
+    public const string Flea__Docks_Upper = "Flea-Docks_Upper";
+    public const string Flea__Far_Fields_West = "Flea-Far_Fields_West";
+    public const string Flea__Blasted_Steps_Upper = "Flea-Blasted_Steps_Upper";
+    public const string Flea__Songclave_Wind_Column = "Flea-Songclave_Wind_Column";
+    public const string Flea__Songclave_West = "Flea-Songclave_West";
+
+    // TODO: Styx/Skynx
+
     // Memory lockets (20 total)
     // public const string Memory_Locket__Mort = "Memory_Locket-Mort";
     public const string Memory_Locket__Bellhart_BellhomeCiel = "Memory_Locket-Bellhart_BellhomeCiel";
@@ -639,10 +670,6 @@ public static class LocationNames
     public const string Craftmetal__The_Marrow = "Craftmetal-The_Marrow";
     public const string Craftmetal__Underworks = "Craftmetal-Underworks";
     public const string Craftmetal__Wisp_Thicket = "Craftmetal-Wisp_Thicket";
-
-
-
-
 
     // Novelty/cursed locations
     public const string Flea_Shop = "Flea_Shop";  // threshold shop; should consume the mooshka silk spool, fleatopia tool pouch, egg of flealia

@@ -11,7 +11,7 @@ namespace ItemChanger.Silksong.Costs
             throw new NotImplementedException();
         }
 
-        protected override IBool GetValueSource()
+        protected override IValueProvider<bool> GetValueSource()
         {
             throw new NotImplementedException();
         }

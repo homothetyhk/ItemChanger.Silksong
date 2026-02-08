@@ -431,4 +431,7 @@ public static class ItemNames
     public const string Double_Mask_Shard = "Double_Mask_Shard";
     public const string Full_Mask = "Full_Mask";
     public const string Full_Spool = "Full_Spool";
+
+    // Flea
+    public const string Flea = "Flea";
 }

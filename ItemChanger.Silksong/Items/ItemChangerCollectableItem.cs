@@ -11,7 +11,7 @@ namespace ItemChanger.Silksong.Items
         /// The <see cref="UObject.name"/> of the <see cref="CollectableItem"/>.
         /// </summary>
         public required string CollectableName { get; init; }
-        
+
 
         public override void GiveImmediate(GiveInfo info)
         {
