@@ -13,9 +13,10 @@
     <ImplicitUsings>true</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>recommended</AnalysisMode>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>CS1591</NoWarn>
+    <NoWarn>$(NoWarn);CS1591;CA1510;CA1711;CA1847;CA1864</NoWarn>
     <RestorePackagesWithLockFile>True</RestorePackagesWithLockFile>
     <RestoreLockedMode Condition="'$(CI)' == 'true'">True</RestoreLockedMode>
 
