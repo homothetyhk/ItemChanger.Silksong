@@ -3,27 +3,27 @@
 namespace ItemChanger.Silksong.Items
 {
     /// <summary>
-    /// Item based on <see cref="CollectableItem"/>.
+    /// Item based on <see cref="CollectableRelic"/>.
     /// </summary>
-    public class ItemChangerCollectableItem : Item
+    public class ItemChangerCollectableRelic : Item
     {
         /// <summary>
-        /// The <see cref="UObject.name"/> of the <see cref="CollectableItem"/>.
+        /// The <see cref="UObject.name"/> of the <see cref="CollectableRelic"/>.
         /// </summary>
         public required string CollectableName { get; init; }
-
+        
 
         public override void GiveImmediate(GiveInfo info)
         {
-            CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
-            item.Get(showPopup: false);
+            CollectableRelic relic = CollectableRelicManager.GetRelic(CollectableName);
+            relic.Get(showPopup: false);
             
         }
 
         public override bool Redundant()
         {
-            CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
-            return !item.CanGetMore();
+            CollectableRelic relic = CollectableRelicManager.GetRelic(CollectableName);
+            return !relic.CanGetMore();
 
         }
 

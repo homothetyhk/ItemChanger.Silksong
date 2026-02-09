@@ -3,28 +3,26 @@
 namespace ItemChanger.Silksong.Items
 {
     /// <summary>
-    /// Item based on <see cref="CollectableItem"/>.
+    /// Item based on <see cref="ToolCrest"/>.
     /// </summary>
-    public class ItemChangerCollectableItem : Item
+    public class ItemChangerToolCrest : Item
     {
         /// <summary>
-        /// The <see cref="UObject.name"/> of the <see cref="CollectableItem"/>.
+        /// The <see cref="UObject.name"/> of the <see cref="ToolCrest"/>.
         /// </summary>
         public required string CollectableName { get; init; }
-
+        
 
         public override void GiveImmediate(GiveInfo info)
         {
-            CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
-            item.Get(showPopup: false);
-            
+            ToolCrest crest = ToolItemManager.GetCrestByName(CollectableName);
+            crest.Get(showPopup: false);
         }
 
         public override bool Redundant()
         {
-            CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
-            return !item.CanGetMore();
-
+            ToolCrest crest = ToolItemManager.GetCrestByName(CollectableName);
+            return !crest.CanGetMore();
         }
 
         /* reference implementation - not fully tested

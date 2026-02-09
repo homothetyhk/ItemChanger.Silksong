@@ -51,6 +51,8 @@ public static class ItemNames
     public const string Crest_of_Shaman = "Crest_of_Shaman";
     public const string Crest_of_Wanderer = "Crest_of_Wanderer";
     public const string Crest_of_Witch = "Crest_of_Witch";
+    public const string Cursed = "Cursed";
+    public const string Cloakless = "Cloakless";
     public const string Vesticrest_Blue = "Vesticrest_Blue";
     public const string Vesticrest_Yellow = "Vesticrest_Yellow";
 
@@ -283,7 +285,7 @@ public static class ItemNames
     public const string Bell_Lacquer__Black = "Bell_Lacquer-Black";
     public const string Bell_Lacquer__Blue = "Bell_Lacquer-Blue";
     public const string Bell_Lacquer__Bronze = "Bell_Lacquer-Bronze";
-    public const string Bell_Lacquer__Chrome = "Bell_Lacquer-Chrome";
+    public const string Bell_Lacquer__Chrome = "Bell_Lacquer-Chrome";//steel soul exclusive
     public const string Bell_Lacquer__Red = "Bell_Lacquer-Red";
     public const string Bell_Lacquer__White = "Bell_Lacquer-White";
     public const string Crawbell = "Crawbell";

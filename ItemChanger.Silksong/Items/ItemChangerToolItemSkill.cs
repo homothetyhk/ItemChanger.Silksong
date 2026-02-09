@@ -3,28 +3,48 @@
 namespace ItemChanger.Silksong.Items
 {
     /// <summary>
-    /// Item based on <see cref="CollectableItem"/>.
+    /// Item based on <see cref="ToolItem"/> for Silk Skills.
     /// </summary>
-    public class ItemChangerCollectableItem : Item
+    public class ItemChangerToolItemSkill : Item
     {
         /// <summary>
-        /// The <see cref="UObject.name"/> of the <see cref="CollectableItem"/>.
+        /// The <see cref="UObject.name"/> of the <see cref="ToolItem"/> for Silk Skills.
         /// </summary>
         public required string CollectableName { get; init; }
-
+        
 
         public override void GiveImmediate(GiveInfo info)
         {
-            CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
-            item.Get(showPopup: false);
-            
+            ToolItem tool = ToolItemManager.GetToolByName(CollectableName);
+            switch (CollectableName)//setting flag based on silk skill
+            {
+                case ("Silk Spear")://silkspear
+                    PlayerData.instance.SetBool(nameof(PlayerData.hasNeedleThrow), true);
+                    break;
+                case ("Thread Sphere")://thread storm
+                    PlayerData.instance.SetBool(nameof(PlayerData.hasThreadSphere), true);
+                    break;
+                case ("Parry")://cross stitch
+                    PlayerData.instance.SetBool(nameof(PlayerData.hasParry), true);
+                    break;
+                case ("Silk Charge")://sharpdart
+                    PlayerData.instance.SetBool(nameof(PlayerData.hasSilkCharge), true);
+                    break;
+                case ("Silk Bomb")://rune rage
+                    PlayerData.instance.SetBool(nameof(PlayerData.hasSilkBomb), true);
+                    break;
+                case ("Silk Boss Needle")://pale nails
+                    PlayerData.instance.SetBool(nameof(PlayerData.hasSilkBossNeedle), true);
+                    break;
+            }
+            tool.Get(showPopup: false);
+
         }
 
         public override bool Redundant()
         {
-            CollectableItem item = CollectableItemManager.GetItemByName(CollectableName);
-            return !item.CanGetMore();
-
+            ToolItem tool = ToolItemManager.GetToolByName(CollectableName);
+            return !tool.CanGetMore();
         }
 
         /* reference implementation - not fully tested
