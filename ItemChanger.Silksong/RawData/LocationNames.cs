@@ -642,7 +642,7 @@ public static class LocationNames
     public const string Flea__Songclave_West = "Flea-Songclave_West";
 
     // TODO: Styx/Skynx
-    
+
     // Memory lockets (20 total)
     // public const string Memory_Locket__Mort = "Memory_Locket-Mort";
     public const string Memory_Locket__Bellhart_BellhomeCiel = "Memory_Locket-Bellhart_BellhomeCiel";
