@@ -8,20 +8,13 @@ namespace ItemChanger.Silksong.Items
 
         public override void GiveImmediate(GiveInfo info)
         {
-            var pd = GameManager.instance?.playerData;
-            if (pd == null) return;
-            
-            pd.SetBool(FieldName, true);
-            pd.SetBool("hasAnyPlaceableMarker", true);
-            
-            ItemChangerPlugin.Instance.Logger.LogInfo($"Obtained marker: {Name}");
+            PlayerData.instance.SetBool(FieldName, true);
+            PlayerData.instance.SetBool("hasAnyPlaceableMarker", true);
         }
 
         public override bool Redundant()
         {
-            var pd = GameManager.instance?.playerData;
-            if (pd == null) return false;
-            return pd.GetBool(FieldName);
+            return PlayerData.instance.GetBool(FieldName);
         }
     }
 }
