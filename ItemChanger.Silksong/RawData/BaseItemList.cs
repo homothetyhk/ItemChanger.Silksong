@@ -13,6 +13,7 @@ internal static partial class BaseItemList
         Name = ItemNames.Flea,
         UIDef = new MsgUIDef()
         {
+            // TODO - improve the shopdesc
             Name = new CountedString() { Prefix = new LanguageString("UI", "KEY_FLEA"), Amount = new FleaCount() },
             Sprite = new FleaSprite(),
             ShopDesc = new BoxedString("Flea flea flea flea flea"),
