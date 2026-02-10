@@ -420,20 +420,6 @@ public static class ItemNames
     public const string Materium__Voltridian = "Materium-Voltridian";
     public const string Materium__Magnetite = "Materium-Magnetite";
 
-    // deliveries
-    public const string Courier_s_Rasher = "Courier's_Rasher";
-    public const string Courier_s_Swag = "Courier's_Swag";
-    public const string Liquid_Lacquer = "Liquid_Lacquer";
-    public const string Queen_s_Egg = "Queen's_Egg";
-
-    // other quest items
-    public const string Cogheart_Piece = "Cogheart_Piece";
-    public const string Crown_Fragment = "Crown_Fragment";
-    public const string Plasmium_Bud = "Plasmium_Bud";
-    public const string Plasmium_Gland = "Plasmium_Gland";
-    public const string Ruined_Tool = "Ruined_Tool";
-    public const string Vintage_Nectar = "Vintage_Nectar";
-
     // Novelty/cursed items
     public const string Left_Cling_Grip = "Left_Cling_Grip";
     public const string Right_Cling_Grip = "Right_Cling_Grip";
