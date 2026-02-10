@@ -51,7 +51,7 @@ public static class ItemNames
     public const string Crest_of_Shaman = "Crest_of_Shaman";
     public const string Crest_of_Wanderer = "Crest_of_Wanderer";
     public const string Crest_of_Witch = "Crest_of_Witch";
-    public const string Vesticrest_Blue__Expansion = "Vesticrest_Blue-Expansion";
+    public const string Vesticrest_Blue__Expansion = "Vesticrest_Blue";
     public const string Vesticrest_Yellow = "Vesticrest_Yellow";
 
     // red tools (note: ruined tool is listed with quest items)
@@ -232,14 +232,13 @@ public static class ItemNames
     public const string Ventrica_Pins = "Ventrica_Pins";
 
     // flea findings
-   /* public const string Flea_Findings__Bilelands = "Flea_Findings-Bilelands";
+    public const string Flea_Findings__Bilelands = "Flea_Findings-Bilelands";
     public const string Flea_Findings__Blasted_Steps = "Flea_Findings-Blasted_Steps";
     public const string Flea_Findings__Bonelands = "Flea_Findings-Bonelands";
     public const string Flea_Findings__Midlands = "Flea_Findings-Midlands";
     public const string Flea_Findings__Mount_Fay = "Flea_Findings-Mount_Fay";
     public const string Flea_Findings__The_Citadel = "Flea_Findings-The_Citadel";
-    */
-
+    
     // mossberries
     public const string Mossberry = "Mossberry";
 
