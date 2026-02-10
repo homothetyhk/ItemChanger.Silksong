@@ -641,7 +641,7 @@ public static class LocationNames
     public const string Flea__Blasted_Steps_Upper = "Flea-Blasted_Steps_Upper";
     public const string Flea__Songclave_Wind_Column = "Flea-Songclave_Wind_Column";
     public const string Flea__Songclave_West = "Flea-Songclave_West";
-    
+
     // TODO: Styx/Skynx
     
     // Memory lockets (20 total)
