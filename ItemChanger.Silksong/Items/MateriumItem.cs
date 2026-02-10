@@ -11,12 +11,14 @@ namespace ItemChanger.Silksong.Items
             var materiumData = PlayerData.instance.MateriumCollected;
             if (materiumData == null) return;
 
-            foreach (var entry in materiumData.savedData)
+            for (int i = 0; i < materiumData.savedData.Count; i++)
             {
+                var entry = materiumData.savedData[i];
                 if (entry.Name != MateriumName) continue;
                 var data = entry.Data;
                 data.IsCollected = true;
                 entry.Data = data;
+                materiumData.savedData[i] = entry;
                 return;
             }
         }

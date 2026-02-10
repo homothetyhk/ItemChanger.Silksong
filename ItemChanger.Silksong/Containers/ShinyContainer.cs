@@ -1,14 +1,19 @@
-﻿using ItemChanger.Containers;
+﻿using GlobalSettings;
+using ItemChanger.Containers;
+using ItemChanger.Extensions;
 
 namespace ItemChanger.Silksong.Containers
 {
+    /// <summary>
+    /// The default Silksong container, modeling a collectable shiny item.
+    /// </summary>
     public class ShinyContainer : Container
     {
         public static ShinyContainer Instance { get; } = new();
 
         public override string Name => ContainerNames.Shiny;
 
-        public override uint SupportedCapabilities => ContainerCapabilities.PAY_COSTS;
+        public override uint SupportedCapabilities => ContainerCapabilities.PayCosts; // TODO
 
         public override bool SupportsInstantiate => true;
 
@@ -16,12 +21,18 @@ namespace ItemChanger.Silksong.Containers
 
         public override GameObject GetNewContainer(ContainerInfo info)
         {
-            throw new NotImplementedException();
+            GameObject shiny = info.ContainingScene.Instantiate(Gameplay.CollectableItemPickupPrefab.gameObject);
+            ModifyContainerInPlace(shiny, info);
+            return shiny;
         }
 
         public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
         {
-            throw new NotImplementedException();
+            CollectableItemPickup shiny = obj.GetComponent<CollectableItemPickup>();
+            SavedContainerItem item = UnityEngine.ScriptableObject.CreateInstance<SavedContainerItem>();
+            item.ContainerInfo = info;
+            item.ContainerTransform = shiny.transform;
+            shiny.SetItem(item);
         }
 
         protected override void Load()

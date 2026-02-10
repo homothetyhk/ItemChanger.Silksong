@@ -1,8 +1,14 @@
 using BepInEx;
+using ItemChanger.Silksong.Containers;
 
 namespace ItemChanger.Silksong
 {
-    [BepInDependency("io.github.benchwarp")]
+    [BepInDependency("org.silksong-modding.fsmutil")]
+    [BepInDependency("org.silksong-modding.assethelper")]
+    [BepInDependency("org.silksong-modding.prepatcher")]
+    [BepInDependency("org.silksong-modding.i18n")]
+    [BepInDependency("org.silksong-modding.datamanager")]
+    [BepInDependency("io.github.homothetyhk.benchwarp")]
     [BepInAutoPlugin(id: "io.github.silksong.itemchanger")]
     public partial class ItemChangerPlugin : BaseUnityPlugin
     {
@@ -11,27 +17,59 @@ namespace ItemChanger.Silksong
 
         private void Awake()
         {
-            Instance = this;
-            new SilksongHost();
-            Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
-
-            //StartCoroutine(WaitToDo());
-        }
-
-        private System.Collections.IEnumerator WaitToDo()
-        {
-            while (true)
+            try
             {
-                try
-                {
-                    yield break;
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e);
-                }
-                yield return null;
+                Logger.LogInfo("Loading ItemChanger...");
+                Instance = this;
+                RequestAssets();
+                CreateHost();
+                Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e);
+                throw;
             }
         }
+
+        private void Start()
+        {
+            try
+            {
+                DefineContainers();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"Error creating host: {e}");
+            }
+        }
+
+        private void CreateHost()
+        {
+            new SilksongHost();
+        }
+
+        private void DefineContainers()
+        {
+            ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new FleaContainer());
+        }
+        
+        // The following is unused reference code for how to create a profile on new game 
+        /*
+        private void StartItemChangerProfile(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)
+        {
+            Logger.LogInfo("Creating IC profile...");
+            try
+            {
+                Host.ActiveProfile?.Dispose();
+                new ItemChangerProfile(Host);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError($"Error creating IC profile: {e}");
+            }
+            orig(self, permaDeath, bossRush);
+        }
+        */
     }
 }

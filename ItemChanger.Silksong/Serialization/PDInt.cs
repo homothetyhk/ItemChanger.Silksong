@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ItemChanger.Silksong.Serialization
 {
-    public record PDInt(string IntName) : IInteger, IWritableInteger
+    public record PDInt(string IntName) : IWritableValueProvider<int>
     {
         [JsonIgnore]
         public int Value
@@ -11,7 +11,5 @@ namespace ItemChanger.Silksong.Serialization
             get => PlayerData.instance.GetInt(IntName); 
             set => PlayerData.instance.SetInt(IntName, value);
         }
-
-        IInteger IInteger.Clone() => this with { };
     }
 }

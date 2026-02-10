@@ -11,13 +11,15 @@ namespace ItemChanger.Silksong.Items
             var killData = PlayerData.instance.EnemyJournalKillData;
             if (killData == null) return;
 
-            foreach (var entry in killData.list)
+            for (int i = 0; i < killData.list.Count; i++)
             {
+                var entry = killData.list[i];
                 if (entry.Name != EnemyName) continue;
                 var record = entry.Record;
                 record.Kills = 1;
                 record.HasBeenSeen = true;
                 entry.Record = record;
+                killData.list[i] = entry;
                 return;
             }
         }
