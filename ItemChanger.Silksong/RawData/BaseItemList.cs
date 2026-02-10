@@ -13,7 +13,6 @@ internal static partial class BaseItemList
         Name = ItemNames.Flea,
         UIDef = new MsgUIDef()
         {
-            // TODO - improve the shopdesc
             Name = new CountedString() { Prefix = new LanguageString("UI", "KEY_FLEA"), Amount = new FleaCount() },
             Sprite = new FleaSprite(),
             ShopDesc = new BoxedString("Flea flea flea flea flea"),
@@ -21,9 +20,9 @@ internal static partial class BaseItemList
         },
     };
 
-        public static Item Quill_White => new QuillItem { Name = ItemNames.Quill__White, QuillState = 1 };
-        public static Item Quill_Red => new QuillItem { Name = ItemNames.Quill__Red, QuillState = 2 };
-        public static Item Quill_Purple => new QuillItem { Name = ItemNames.Quill__Purple, QuillState = 3 };
+    public static Item Quill_White => new QuillItem { Name = ItemNames.Quill__White, QuillState = 1 };
+    public static Item Quill_Red => new QuillItem { Name = ItemNames.Quill__Red, QuillState = 2 };
+    public static Item Quill_Purple => new QuillItem { Name = ItemNames.Quill__Purple, QuillState = 3 };
 
     public static Dictionary<string, Item> GetBaseItems()
     {
