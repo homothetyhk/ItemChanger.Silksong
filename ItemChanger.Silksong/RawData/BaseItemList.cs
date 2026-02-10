@@ -21,6 +21,10 @@ internal static partial class BaseItemList
         },
     };
 
+    public static Item Quill_White => new QuillItem { Name = ItemNames.Quill__White, QuillState = 1 };
+    public static Item Quill_Red => new QuillItem { Name = ItemNames.Quill__Red, QuillState = 2 };
+    public static Item Quill_Purple => new QuillItem { Name = ItemNames.Quill__Purple, QuillState = 3 };
+
     public static Dictionary<string, Item> GetBaseItems()
     {
         return typeof(BaseItemList).GetProperties().Select(p => (Item)p.GetValue(null)).ToDictionary(i => i.Name);
