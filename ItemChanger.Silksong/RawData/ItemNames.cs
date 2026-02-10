@@ -367,6 +367,14 @@ public static class ItemNames
     public const string Lore_Tablet__Putrified_Ducts_Mr_Mushroom = "Lore_Tablet-Putrified_Ducts_Mr_Mushroom";
     public const string Lore_Tablet__Putrified_Ducts_Pale_Lake = "Lore_Tablet-Putrified_Ducts_Pale_Lake";
 
+    // journal entries
+    public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
+
+    // materium types (submenu items for Materium)
+    public const string Materium__Flintstone = "Materium-Flintstone";
+    public const string Materium__Voltridian = "Materium-Voltridian";
+    public const string Materium__Magnetite = "Materium-Magnetite";
+    
     // memory lockets
     public const string Memory_Locket = "Memory_Locket";
 
@@ -411,14 +419,6 @@ public static class ItemNames
     public const string Plasmium_Gland = "Plasmium_Gland";
     public const string Ruined_Tool = "Ruined_Tool";
     public const string Vintage_Nectar = "Vintage_Nectar";
-
-    // journal entries
-    public const string Journal_Entry__Void_Tendrils = "Journal_Entry-Void_Tendrils";
-
-    // materium types (submenu items for Materium)
-    public const string Materium__Flintstone = "Materium-Flintstone";
-    public const string Materium__Voltridian = "Materium-Voltridian";
-    public const string Materium__Magnetite = "Materium-Magnetite";
 
     // Novelty/cursed items
     public const string Left_Cling_Grip = "Left_Cling_Grip";
