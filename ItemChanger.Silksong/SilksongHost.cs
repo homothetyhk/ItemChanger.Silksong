@@ -1,10 +1,13 @@
-﻿using ItemChanger.Containers;
+﻿using GlobalEnums;
+using HarmonyLib;
+using ItemChanger.Containers;
 using ItemChanger.Events;
 using ItemChanger.Logging;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.StartDefs;
 using ItemChanger.Silksong.Util;
+using TeamCherry.SharedUtils;
 
 namespace ItemChanger.Silksong
 {
@@ -30,11 +33,8 @@ namespace ItemChanger.Silksong
 
         public override IEnumerable<Module> BuildDefaultModules()
         {
-            PlayerDataEditModule pde = new();
-            pde.AddPDEdit(nameof(PlayerData.bindCutscenePlayed), true);
-
             return [
-                pde,
+                new ConsistentRandomnessModule()
                 ];
         }
 
@@ -46,10 +46,9 @@ namespace ItemChanger.Silksong
             this.lifecycleInvoker = lifecycleInvoker;
             this.gameInvoker = gameInvoker;
 
-            On.GameManager.StartNewGame += BeforeStartNewGameHook;
-            On.GameManager.ContinueGame += OnContinueGame;
-            On.GameManager.BeginSceneTransition += TransitionHook;
-            On.GameManager.ResetSemiPersistentItems += OnResetSemiPersistentItems;
+            Type gmPatches = typeof(GameManagerPatches);
+            Harmony harmony = new(gmPatches.FullName);
+            harmony.PatchAll(gmPatches);
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnActiveSceneChanged;
         }
 
@@ -58,10 +57,7 @@ namespace ItemChanger.Silksong
             this.lifecycleInvoker = null;
             this.gameInvoker = null;
 
-            On.GameManager.StartNewGame -= BeforeStartNewGameHook;
-            On.GameManager.ContinueGame -= OnContinueGame;
-            On.GameManager.BeginSceneTransition -= TransitionHook;
-            On.GameManager.ResetSemiPersistentItems -= OnResetSemiPersistentItems;
+            Harmony.UnpatchID(typeof(GameManagerPatches).FullName);
             UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= OnActiveSceneChanged;
             MessageUtil.Clear();
         }
@@ -77,53 +73,70 @@ namespace ItemChanger.Silksong
             gameInvoker?.NotifyPersistentUpdate(); // TODO: move to execute before IC.Core
         }
 
-        private void OnResetSemiPersistentItems(On.GameManager.orig_ResetSemiPersistentItems orig, GameManager self)
+        [HarmonyPatch]
+        private static class GameManagerPatches
         {
-            gameInvoker?.NotifySemiPersistentUpdate();
-            orig(self);
-        }
-
-        private void TransitionHook(On.GameManager.orig_BeginSceneTransition orig, GameManager self, GameManager.SceneLoadInfo info)
-        {
-            string targetScene = info.SceneName;
-            string targetGate = info.EntryGateName;
-
-            gameInvoker?.NotifyBeforeNextSceneLoaded(new Events.Args.BeforeSceneLoadedEventArgs(targetScene)); // TODO: add gate info
-            // TODO: transition overrides
-            orig(self, info);
-        }
-
-        private void OnContinueGame(On.GameManager.orig_ContinueGame orig, GameManager self)
-        {
-            lifecycleInvoker?.NotifyBeforeContinueGame();
-            lifecycleInvoker?.NotifyOnEnterGame();
-            orig(self);
-            lifecycleInvoker?.NotifyAfterContinueGame();
-        }
-
-        private void BeforeStartNewGameHook(On.GameManager.orig_StartNewGame orig, GameManager self, bool permadeathMode, bool bossRushMode)
-        {
-            lifecycleInvoker?.NotifyBeforeStartNewGame();
-
-            PlayerData pd = PlayerData.CreateNewSingleton(addEditorOverrides: false);
-            GameManager.instance.playerData = pd;
-            pd.permadeathMode = permadeathMode ? GlobalEnums.PermadeathModes.On : GlobalEnums.PermadeathModes.Off;
-            Platform.Current.PrepareForNewGame(self.profileID);
-            ActiveProfile!.Load();
-            lifecycleInvoker?.NotifyOnEnterGame();
-
-            if (ActiveProfile!.Modules.Get<StartDefModule>() is StartDefModule { StartDef: StartDef start })
+            [HarmonyPatch(typeof(GameManager), nameof(GameManager.StartNewGame))]
+            [HarmonyPrefix]
+            private static bool BeforeStartNewGame(GameManager __instance, bool permadeathMode, bool bossRushMode)
             {
-                start.GetRespawnInfo().SetRespawn();
-                self.StartCoroutine(self.RunContinueGame(self.IsMenuScene()));
-            }
-            else
-            {
-                self.StartCoroutine(self.RunStartNewGame());
+                Host.lifecycleInvoker?.NotifyBeforeStartNewGame();
+
+                PlayerData pd = PlayerData.CreateNewSingleton(addEditorOverrides: false);
+                GameManager.instance.playerData = pd;
+                pd.SetVariable(nameof(PlayerData.permadeathMode), permadeathMode ? PermadeathModes.On : PermadeathModes.Off);
+                Platform.Current.PrepareForNewGame(__instance.profileID);
+                Host.ActiveProfile!.Load();
+                Host.lifecycleInvoker?.NotifyOnEnterGame();
+
+                if (Host.ActiveProfile!.Modules.Get<StartDefModule>() is StartDefModule { StartDef: StartDef start })
+                {
+                    pd.SetBool(nameof(PlayerData.bindCutscenePlayed), true); // so that entering Tut_01 later does not trigger the wakeup sequence
+                    start.GetRespawnInfo().SetRespawn();
+                    __instance.StartCoroutine(__instance.RunContinueGame(__instance.IsMenuScene()));
+                }
+                else
+                {
+                    __instance.StartCoroutine(__instance.RunStartNewGame());
+                }
+
+                Host.lifecycleInvoker?.NotifyAfterStartNewGame();
+                Host.lifecycleInvoker?.NotifyOnSafeToGiveItems(); // TODO: move
+                return false;
             }
 
-            lifecycleInvoker?.NotifyAfterStartNewGame();
-            lifecycleInvoker?.NotifyOnSafeToGiveItems(); // TODO: move
+            [HarmonyPatch(typeof(GameManager), nameof(GameManager.ContinueGame))]
+            [HarmonyPrefix]
+            private static void BeforeContinueGame()
+            {
+                Host.lifecycleInvoker?.NotifyBeforeContinueGame();
+                Host.lifecycleInvoker?.NotifyOnEnterGame();
+            }
+
+            [HarmonyPatch(typeof(GameManager), nameof(GameManager.ContinueGame))]
+            [HarmonyPostfix]
+            private static void AfterContinueGame()
+            {
+                Host.lifecycleInvoker?.NotifyAfterContinueGame();
+            }
+
+            [HarmonyPrefix]
+            [HarmonyPatch(typeof(GameManager), nameof(GameManager.ResetSemiPersistentItems))]
+            private static void BeforeResetSemiPersistentItems()
+            {
+                Host.gameInvoker?.NotifySemiPersistentUpdate();
+            }
+
+            [HarmonyPrefix]
+            [HarmonyPatch(typeof(GameManager), nameof(GameManager.BeginSceneTransition))]
+            private static void BeforeBeginSceneTransition(GameManager __instance, GameManager.SceneLoadInfo info)
+            {
+                string targetScene = info.SceneName;
+                string targetGate = info.EntryGateName;
+
+                Host.gameInvoker?.NotifyBeforeNextSceneLoaded(new Events.Args.BeforeSceneLoadedEventArgs(targetScene)); // TODO: add gate info
+                // TODO: transition overrides
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 ﻿using ItemChanger.Costs;
-using TeamCherry.Localization;
+using ItemChanger.Silksong.Util;
 
 namespace ItemChanger.Silksong.Costs
 {
@@ -12,7 +12,7 @@ namespace ItemChanger.Silksong.Costs
 
         public override bool CanPay() => PlayerData.instance.GetInt(nameof(PlayerData.geo)) >= ActualAmount;
 
-        public override string GetCostText() => string.Format(Language.Get("PAY_ROSARIES", "Fmt"), ActualAmount);
+        public override string GetCostText() => string.Format("FMT_PAY_ROSARIES".GetLanguageString(), ActualAmount);
         
         public override bool HasPayEffects() => true;
 

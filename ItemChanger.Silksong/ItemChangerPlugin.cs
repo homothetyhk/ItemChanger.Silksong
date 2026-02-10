@@ -1,8 +1,14 @@
 using BepInEx;
+using ItemChanger.Silksong.Containers;
 
 namespace ItemChanger.Silksong
 {
-    [BepInDependency("io.github.benchwarp")]
+    [BepInDependency("org.silksong-modding.fsmutil")]
+    [BepInDependency("org.silksong-modding.assethelper")]
+    [BepInDependency("org.silksong-modding.prepatcher")]
+    [BepInDependency("org.silksong-modding.i18n")]
+    [BepInDependency("org.silksong-modding.datamanager")]
+    [BepInDependency("io.github.homothetyhk.benchwarp")]
     [BepInAutoPlugin(id: "io.github.silksong.itemchanger")]
     public partial class ItemChangerPlugin : BaseUnityPlugin
     {
@@ -11,18 +17,26 @@ namespace ItemChanger.Silksong
 
         private void Awake()
         {
-            Instance = this;
-            Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
+            try
+            {
+                Logger.LogInfo("Loading ItemChanger...");
+                Instance = this;
+                RequestAssets();
+                CreateHost();
+                Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e);
+                throw;
+            }
         }
 
-        // this fails silently if IC.Core is not installed!
         private void Start()
         {
             try
             {
-                new SilksongHost();
-                Logger.LogInfo($"Created host!");
-                // On.UIManager.StartNewGame += StartItemChangerProfile;
+                DefineContainers();
             }
             catch (Exception e)
             {
@@ -30,6 +44,18 @@ namespace ItemChanger.Silksong
             }
         }
 
+        private void CreateHost()
+        {
+            new SilksongHost();
+        }
+
+        private void DefineContainers()
+        {
+            ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new FleaContainer());
+        }
+        
+        // The following is unused reference code for how to create a profile on new game 
+        /*
         private void StartItemChangerProfile(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)
         {
             Logger.LogInfo("Creating IC profile...");
@@ -44,21 +70,6 @@ namespace ItemChanger.Silksong
             }
             orig(self, permaDeath, bossRush);
         }
-
-        private System.Collections.IEnumerator WaitToDo()
-        {
-            while (true)
-            {
-                try
-                {
-                    yield break;
-                }
-                catch (Exception e)
-                {
-                    Logger.LogError(e);
-                }
-                yield return null;
-            }
-        }
+        */
     }
 }

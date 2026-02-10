@@ -10,14 +10,30 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <LangVersion>preview</LangVersion>
     <Nullable>enable</Nullable>
-    <RestoreAdditionalProjectSources>
-        https://nuget.bepinex.dev/v3/index.json
-    </RestoreAdditionalProjectSources>
-    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
-      <!--Allow access of private members at runtime.-->
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ImplicitUsings>true</ImplicitUsings>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisMode>recommended</AnalysisMode>
+    <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+    <RestorePackagesWithLockFile>True</RestorePackagesWithLockFile>
+    <RestoreLockedMode Condition="'$(CI)' == 'true'">True</RestoreLockedMode>
+
+    <!-- Shortens and anonymizes paths in debug symbols relative to the project directory. Breakpoints will not work, however. -->
+    <PathMap Condition="'$(Configuration)' == 'Release'">$(MSBuildProjectDirectory)=/</PathMap>
+
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageId>ItemChanger.Silksong</PackageId>
+    <RepositoryUrl>https://github.com/homothetyhk/ItemChanger.Silksong</RepositoryUrl>
+    <ThunderstoreAuthor>homothety</ThunderstoreAuthor>
+    <NeutralLanguage>EN</NeutralLanguage>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="True" PackagePath="README.md" />
+    <None Include="..\thunderstore\icon.png" Pack="True" PackagePath="icon.png" />
+  </ItemGroup>
 
   <PropertyGroup>
     <!--These properties will control the generated plugin info. Version is also used by various parts of the build system.-->
@@ -44,22 +60,26 @@
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.8" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="HarmonyX" Version="2.9.0" />
+    <PackageReference Include="Harmonize" Version="1.0.6" PrivateAssets="all" />
     <PackageReference Include="Hamunii.BepInEx.AutoPlugin" Version="2.1.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.26.0" PrivateAssets="all" />
     <PackageReference Include="PolySharp" Version="1.15.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Silksong.PrepatcherPlugin" Version="1.3.0" />
     <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
-    <!--If you're unable resolve this dependency, check that you're using the nuget v3 package feed instead of v2.-->
-    <PackageReference Include="Silksong.GameLibs" Version="1.1.0-silksong1.0.28650" />
-    <PackageReference Include="ItemChanger.Core" Version="0.4.1" GeneratePathProperty="true" />
+    <PackageReference Include="Silksong.GameLibs" Version="*-*" PrivateAssets="all" />
+    <PackageReference Include="ItemChanger.Core" Version="0.5.3" GeneratePathProperty="true" />
+    <!--Plugin dependencies-->
+    <PackageReference Include="Silksong.PrepatcherPlugin" Version="1.3.0" />
+    <PackageReference Include="Silksong.AssetHelper" Version="1.2.1" />
+    <PackageReference Include="Silksong.FsmUtil" Version="0.3.12" />
+    <PackageReference Include="Silksong.DataManager" Version="1.1.0" />
+    <PackageReference Include="Silksong.Benchwarp" Version="1.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Benchwarp">
-      <HintPath>$(SilksongFolder)/BepInEx/plugins/homothety-Benchwarp/Benchwarp.dll</HintPath>
-    </Reference>
+  <ItemGroup Condition="'$(Configuration)' == 'Debug'">
     <Reference Include="MMHOOK_Assembly-CSharp">
       <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_Assembly-CSharp.dll</HintPath>
     </Reference>
@@ -71,23 +91,39 @@
     </Reference>
   </ItemGroup>
 
-  <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="'$(SilksongFolder)' != ''">
-      <ItemGroup>
-          <Binaries Include="$(TargetPath)" />
-          <Binaries Include="$(TargetDir)/$(TargetName).pdb" />
-          <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.dll" />
-          <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.xml" />
-      </ItemGroup>
+  <Target Name="CopyAndPackageMod" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <Binaries Include="$(TargetPath)" LocalDir="/" PackDir="plugins" />
+      <Binaries Include="$(TargetDir)/$(TargetName).pdb" LocalDir="/" PackDir="plugins" />
+      <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.dll" />
+      <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.xml" />
+      <Binaries Include="Resources/Languages/*.json" LocalDir="languages" PackDir="plugins/languages" />
+    </ItemGroup>
+    <PropertyGroup>
+      <ThunderstoreDir>$(ProjectDir)/../thunderstore</ThunderstoreDir>
+    </PropertyGroup>
 
-      <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongFolder)/BepInEx/plugins/homothety-$(TargetName)" />
+    <!-- Local install -->
+    <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongFolder)/BepInEx/plugins/$(ThunderstoreAuthor)-$(AssemblyTitle)/%(Binaries.LocalDir)" Condition="'$(SilksongFolder)' != '' And Exists('$(SilksongFolder)')" />
 
-      <PropertyGroup>
-          <ExportFolder>bin/Publish</ExportFolder>
-      </PropertyGroup>
-      
-      <RemoveDir Directories="$(IntermediateOutputPath)/archive" />
-      <MakeDir Directories="$(ExportFolder)" />
-      <Copy SourceFiles="@(Binaries)" DestinationFolder="$(IntermediateOutputPath)/archive" />
-      <ZipDirectory SourceDirectory="$(IntermediateOutputPath)/archive" DestinationFile="$(ExportFolder)/$(TargetName).zip" Overwrite="True" />
+    <!-- Thunderstore packaging -->
+    <RemoveDir Directories="$(ThunderstoreDir)/temp;$(ThunderstoreDir)/dist" />
+    <MakeDir Directories="$(ThunderstoreDir)/temp" />
+    <Copy SourceFiles="@(Binaries)" DestinationFolder="$(ThunderstoreDir)/temp/%(Binaries.PackDir)" />
+    <Exec Command="dotnet tool restore" />
+    <Exec Command="dotnet tcli build --config-path &quot;$(ThunderstoreDir)/thunderstore.toml&quot; --package-name &quot;$(AssemblyTitle)&quot; --package-version $(Version)" StandardOutputImportance="High" StandardErrorImportance="High" />
+  </Target>
+
+
+  <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="'$(SilksongFolder)' != '' And '$(Configuration)' == 'Debug'">
+    <ItemGroup>
+      <Binaries Include="$(TargetPath)" />
+      <Binaries Include="$(TargetDir)/$(TargetName).pdb" />
+      <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.dll" />
+      <Binaries Include="$(PkgItemChanger_Core)/lib/netstandard2.1/ItemChanger.Core.xml" />
+      <Binaries Include="Resources/Languages/*.json" LocalDir="languages" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongFolder)/BepInEx/plugins/$(ThunderstoreAuthor)-$(TargetName)/%(Binaries.LocalDir)" />
   </Target>
 </Project>

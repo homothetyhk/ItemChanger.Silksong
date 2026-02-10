@@ -1,8 +1,6 @@
 ﻿using GlobalSettings;
 using ItemChanger.Containers;
 using ItemChanger.Extensions;
-using ItemChanger.Placements;
-using UnityEngine.SceneManagement;
 
 namespace ItemChanger.Silksong.Containers
 {
@@ -31,7 +29,10 @@ namespace ItemChanger.Silksong.Containers
         public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
         {
             CollectableItemPickup shiny = obj.GetComponent<CollectableItemPickup>();
-            shiny.SetItem(new SavedContainerItem() { ContainerInfo = info, ContainerTransform = shiny.transform });
+            SavedContainerItem item = UnityEngine.ScriptableObject.CreateInstance<SavedContainerItem>();
+            item.ContainerInfo = info;
+            item.ContainerTransform = shiny.transform;
+            shiny.SetItem(item);
         }
 
         protected override void Load()

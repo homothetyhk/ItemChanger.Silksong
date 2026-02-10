@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ItemChanger.Silksong.Serialization
 {
-    public record SDBool(string SceneName, string ID, bool SemiPersistent, SceneData.PersistentMutatorTypes Mutator) : IBool, IWritableBool
+    public record SDBool(string SceneName, string ID, bool SemiPersistent, SceneData.PersistentMutatorTypes Mutator) : IWritableValueProvider<bool>
     {
         public SDBool(string SceneName, string ID) : this(SceneName, ID, false, SceneData.PersistentMutatorTypes.None) { }
 

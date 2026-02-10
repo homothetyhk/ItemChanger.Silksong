@@ -2,11 +2,12 @@
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Locations;
+using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
 
 namespace ItemChanger.Silksong.RawData
 {
-    internal static class BaseLocationList
+    internal static partial class BaseLocationList
     {
         public static Location Pale_Oil__Whispering_Vaults => new ObjectLocation
         {
