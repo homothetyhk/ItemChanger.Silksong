@@ -292,12 +292,3 @@ internal static partial class BaseLocationList
         replaceable: false
         );
 }
-
-file static class Ext
-{
-    public static Location WithTag(this Location self, Tag t)
-    {
-        self.AddTag(t);
-        return self;
-    }
-}
