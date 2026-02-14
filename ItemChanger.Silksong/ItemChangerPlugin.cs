@@ -64,7 +64,8 @@ namespace ItemChanger.Silksong
 
         public void WriteSaveData(Stream saveFile)
         {
-            SerializationHelper.Serialize(saveFile, Host.ActiveProfile);
+            // WriteSaveData is never called if Host.ActiveProfile is null.
+            SerializationHelper.Serialize(saveFile, Host.ActiveProfile!);
         }
 
         public void ReadSaveData(Stream? saveFile)
@@ -83,21 +84,5 @@ namespace ItemChanger.Silksong
                 profile.Load();
             }
         }
-
-        private void StartItemChangerProfile(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)
-        {
-            Logger.LogInfo("Creating IC profile...");
-            try
-            {
-                Host.ActiveProfile?.Dispose();
-                new ItemChangerProfile(Host);
-            }
-            catch (Exception e)
-            {
-                Logger.LogError($"Error creating IC profile: {e}");
-            }
-            orig(self, permaDeath, bossRush);
-        }
-        */
     }
 }
