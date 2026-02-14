@@ -1,40 +1,30 @@
-using HarmonyLib;
 using ItemChanger.Modules;
+using PrepatcherPlugin; 
 
 namespace ItemChanger.Silksong.Modules
 {
     public class BindSkill : Module
     {
-        public static BindSkill? Instance { get; private set; }
+        public bool CanBind { get; private set; }
 
-        public bool CanBind { get; set; }
-
-        private Harmony? _harmony;
-
-        protected override void DoLoad()
+        public override void Initialize()
         {
-            Instance = this;
-            _harmony = new Harmony($"ItemChanger.Silksong.{nameof(BindSkill)}");
-            _harmony.PatchAll(typeof(Patches));
+            CanBind = PlayerData.instance.GetBool(BindItem.BindSkillKey);
+            PlayerDataVariableEvents.OnSetBool += OnSetPlayerData;
         }
 
-        protected override void DoUnload()
+        public override void Unload()
         {
-            Instance = null;
-            _harmony?.UnpatchSelf();
-            _harmony = null;
+            PlayerDataVariableEvents.OnSetBool -= OnSetPlayerData;
         }
 
-        [HarmonyPatch]
-        private static class Patches
+        private bool OnSetPlayerData(PlayerData pd, string fieldName, bool value)
         {
-            [HarmonyPostfix]
-            [HarmonyPatch(typeof(HeroController), nameof(HeroController.CanBind))]
-            private static void OverrideCanBind(ref bool __result)
+            if (fieldName == BindItem.BindSkillKey)
             {
-                if (Instance != null && !Instance.CanBind)
-                    __result = false;
+                this.CanBind = value;
             }
+            return value;
         }
     }
 }
