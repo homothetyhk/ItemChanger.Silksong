@@ -1,10 +1,15 @@
 using Benchwarp.Data;
+using BepInEx.Logging;
+using GlobalEnums;
 using ItemChanger;
 using ItemChanger.Items;
 using ItemChanger.Locations;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong;
+using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Modules;
+using ItemChanger.Silksong.Modules.FastTravel;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
 using ItemChanger.Silksong.UIDefs;
@@ -77,6 +82,9 @@ public enum Tests
     FleaAtFlea,
     [Description("Tests modifying the Pale_Oil-Whispering_Vaults shiny in-place")]
     Surgeon_s_Key_at_Whispering_Vaults,
+
+    [Description("Tests the fast travel stuff")]
+    FastTravelTest,
 }
 
 public static class TestDispatcher
@@ -112,6 +120,90 @@ public static class TestDispatcher
         Finder finder = ItemChangerHost.Singleton.Finder;
         switch (ItemChangerTestingPlugin.Instance.cfgTest.Value)
         {
+            case Tests.FastTravelTest:
+                StartNear(SceneNames.Bellway_Shadow, PrimitiveGateNames.left1);
+
+                // Add modules
+                prof.Modules.CreateBellwayModules();
+                prof.Modules.CreateVentricaModules();
+                
+                {
+                    // Add location to test unlocking a bellway in the correct scene
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Bellway Shadow location",
+                        Managed = false,
+                        SceneName = SceneNames.Bellway_Shadow,
+                        X = 44.11f,
+                        Y = 22.57f,
+                    }.Wrap()
+                     // TODO - use finder.GetItem (when there is a UIDef available)
+                     .Add(new PDBoolItem()
+                     {
+                         Name = ItemNames.Bellway__Bilewater,
+                         BoolName = nameof(PlayerData.UnlockedShadowStation),
+                         UIDef = new MsgUIDef()
+                         {
+                             Name = new BoxedString("Bilewater"),
+                             ShopDesc = new BoxedString("Stag Stag Stag Stag Stag"),
+                             Sprite = new EmptySprite(),  // TODO - use AtlasSprite
+                         }
+                     });
+                    prof.AddPlacement(pmt);
+                }
+
+                {
+                    // Add locations for bone bottom and marrow bellways
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Bellway Bonebottom location",
+                        Managed = false,
+                        SceneName = SceneNames.Bellway_01,
+                        X = 52.37f,
+                        Y = 21.59f,
+                    }.Wrap()
+                     // TODO - use finder.GetItem (when there is a UIDef available)
+                     .Add(new PDBoolItem()
+                     {
+                         Name = ItemNames.Bellway__Bone_Bottom,
+                         BoolName = CustomFastTravelLocationsModule<FastTravelLocations>.GetBoolStringForLocation(FastTravelLocations.Bonetown),
+                         UIDef = new MsgUIDef()
+                         {
+                             Name = new BoxedString("Bone bottom"),
+                             ShopDesc = new BoxedString("Stag Stag Stag Stag Stag"),
+                             Sprite = new EmptySprite(),  // TODO - use AtlasSprite
+                         }
+                     });
+                    prof.AddPlacement(pmt);
+                }
+
+                {
+                    // Add locations for bone bottom and marrow bellways
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Bellway Marrow location",
+                        Managed = false,
+                        SceneName = SceneNames.Bone_05,
+                        X = 137.18f,
+                        Y = 4.57f,
+                    }.Wrap()
+                     // TODO - use finder.GetItem (when there is a UIDef available)
+                     .Add(new PDBoolItem()
+                     {
+                         Name = ItemNames.Bellway__The_Marrow,
+                         BoolName = CustomFastTravelLocationsModule<FastTravelLocations>.GetBoolStringForLocation(FastTravelLocations.Bone),
+                         UIDef = new MsgUIDef()
+                         {
+                             Name = new BoxedString("The Marrow"),
+                             ShopDesc = new BoxedString("Stag Stag Stag Stag Stag"),
+                             Sprite = new EmptySprite(),  // TODO - use AtlasSprite
+                         }
+                     });
+                    prof.AddPlacement(pmt);
+                }
+
+                break;
+
             case Tests.StartInTut_02:
                 StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
                 break;
@@ -169,6 +261,8 @@ public static class TestDispatcher
                 }.Wrap().Add(finder.GetItem(ItemNames.Surgeon_s_Key)!));
                 break;
 
+
+            #region Please consolidate these into a single test
             case Tests.Everbloom_from_spawned_shiny:
                 StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
                 prof.AddPlacement(new CoordinateLocation
@@ -542,6 +636,8 @@ public static class TestDispatcher
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Plasmium)!));
                 break;
+            #endregion
+
 
             case Tests.Surgeon_s_Key_at_Whispering_Vaults:
                 StartNear(SceneNames.Library_03, PrimitiveGateNames.left1);
