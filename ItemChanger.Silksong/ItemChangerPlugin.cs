@@ -49,7 +49,6 @@ namespace ItemChanger.Silksong
             }
         }
 
-
         private void CreateHost()
         {
             new SilksongHost();
