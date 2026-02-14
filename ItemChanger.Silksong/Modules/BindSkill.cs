@@ -1,4 +1,5 @@
 using ItemChanger.Modules;
+using ItemChanger.Silksong.Items;
 using PrepatcherPlugin; 
 
 namespace ItemChanger.Silksong.Modules
