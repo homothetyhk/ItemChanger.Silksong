@@ -12,17 +12,55 @@ namespace ItemChanger.Silksong.RawData;
 
 internal static partial class BaseItemList
 {
-    private static IValueProvider<Sprite> BellwaySprite => new AtlasSprite()
+    private static IValueProvider<Sprite> BellwaySprite() => new AtlasSprite()
     {
         BundleName = "atlases_assets_assets/sprites/_atlases/hornet_map.spriteatlas",
         SpriteName = "pin_stag_station"
     };
 
-    private static IValueProvider<Sprite> VentricaSprite = new AtlasSprite()
+    private static IValueProvider<Sprite> VentricaSprite() => new AtlasSprite()
     {
         BundleName = "atlases_assets_assets/sprites/_atlases/hornet_map.spriteatlas",
         SpriteName = "pin_tube_station"
     };
+
+    private static IValueProvider<string> GetBellwayName(string baseLanguageKey)
+    {
+        return new CompositeString()
+        {
+            Pattern = new LanguageString($"Mods.{ItemChangerPlugin.Id}", "FMT_FAST_TRAVEL_PATTERN"),
+            Params = [
+                new LanguageString("UI", "KEY_BELLWAY"),
+                new LanguageString("Fast Travel", baseLanguageKey)
+                ]
+        };
+    }
+
+    private static IValueProvider<string> GetVentricaName(string baseLanguageKey)
+    {
+        return new CompositeString()
+        {
+            Pattern = new LanguageString($"Mods.{ItemChangerPlugin.Id}", "FMT_FAST_TRAVEL_PATTERN"),
+            Params = [
+                new LanguageString("UI", "KEY_TUBE"),
+                new LanguageString("Fast Travel", baseLanguageKey)
+                ]
+        };
+    }
+
+    // TODO - add shop descs
+
+    private static UIDef GetBellwayUIDef(string baseLanguageKey)
+    {
+        return new MsgUIDef() { Name = GetBellwayName(baseLanguageKey), Sprite = BellwaySprite() };
+    }
+
+    private static UIDef GetVentricaUIDef(string baseLanguageKey)
+    {
+        return new MsgUIDef() { Name = GetVentricaName(baseLanguageKey), Sprite = VentricaSprite() };
+    }
+
+
 
     // Bellway
 
@@ -30,15 +68,7 @@ internal static partial class BaseItemList
     {
         Name = ItemNames.Bellway__Bone_Bottom,
         BoolName = CustomFastTravelLocations.GetBoolStringForLocation(FastTravelLocations.Bonetown),
-        UIDef = new MsgUIDef()
-        {
-            // TODO - this might have to be something composite so that it says bonetown bellway or bonetown station
-            // Could either be a CompositeString (sum of sub-IStrings) or LanguageString from i18n
-            // Note that (UI, KEY_BELLWAY) gives "Bellway"
-            Name = new LanguageString("Fast Travel", "STATION_NAME_BONETOWN"),
-            // TODO - shopdesc
-            Sprite = BellwaySprite
-        },
+        UIDef = GetBellwayUIDef("STATION_NAME_BONETOWN"),
         Tags = [
             new RequireModuleTag<CustomFastTravelLocationsModule<FastTravelLocations>>()
             ]
@@ -48,13 +78,7 @@ internal static partial class BaseItemList
     {
         Name = ItemNames.Bellway__The_Marrow,
         BoolName = CustomFastTravelLocations.GetBoolStringForLocation(FastTravelLocations.Bone),
-        UIDef = new MsgUIDef()
-        {
-            // TODO - this might have to be something composite
-            Name = new LanguageString("Fast Travel", "STATION_NAME_BONE"),
-            // TODO - shopdesc
-            Sprite = BellwaySprite
-        },
+        UIDef = GetBellwayUIDef("STATION_NAME_BONE"),
         Tags = [
             new RequireModuleTag<CustomFastTravelLocationsModule<FastTravelLocations>>()
             ]
@@ -64,13 +88,7 @@ internal static partial class BaseItemList
     {
         Name = ItemNames.Bellway__Bilewater,
         BoolName = nameof(PlayerData.UnlockedShadowStation),
-        UIDef = new MsgUIDef()
-        {
-            // TODO - this might have to be something composite
-            Name = new LanguageString("Fast Travel", "STATION_NAME_SHADOW"),
-            // TODO - shopdesc
-            Sprite = BellwaySprite
-        }
+        UIDef = GetBellwayUIDef("STATION_NAME_SHADOW")
     };
 
     // Ventrica
@@ -79,13 +97,7 @@ internal static partial class BaseItemList
     {
         Name = ItemNames.Ventrica__Terminus,
         BoolName = CustomFastTravelLocations.GetBoolStringForLocation(TubeTravelLocations.Hub),
-        UIDef = new MsgUIDef()
-        {
-            // TODO - this might have to be something composite
-            Name = new LanguageString("Fast Travel", "TUBE_NAME_HUB"),
-            // TODO - shopdesc
-            Sprite = VentricaSprite
-        },
+        UIDef = GetVentricaUIDef("TUBE_NAME_HUB"),
         Tags = [
             new RequireModuleTag<CustomFastTravelLocationsModule<TubeTravelLocations>>()
             ]
@@ -95,14 +107,8 @@ internal static partial class BaseItemList
     {
         Name = ItemNames.Ventrica__High_Halls,
         BoolName = nameof(PlayerData.UnlockedHangTube),
-        UIDef = new MsgUIDef()
-        {
-            // TODO - this might have to be something composite
-            Name = new LanguageString("Fast Travel", "TUBE_NAME_HANG"),
-            // TODO - shopdesc
-            Sprite = VentricaSprite
-        }
+        UIDef = GetVentricaUIDef("TUBE_NAME_HANG"),
     };
 
-    // TODO - others (bellway/ventrica can be done as part of a refactored #37
+    // TODO - others (can be done as part of a refactored PR #37)
 }
