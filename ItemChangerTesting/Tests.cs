@@ -142,18 +142,7 @@ public static class TestDispatcher
                         X = 44.11f,
                         Y = 22.57f,
                     }.Wrap()
-                     // TODO - use finder.GetItem (when there is a UIDef available)
-                     .Add(new PDBoolItem()
-                     {
-                         Name = ItemNames.Bellway__Bilewater,
-                         BoolName = nameof(PlayerData.UnlockedShadowStation),
-                         UIDef = new MsgUIDef()
-                         {
-                             Name = new BoxedString("Bilewater"),
-                             ShopDesc = new BoxedString("Stag Stag Stag Stag Stag"),
-                             Sprite = new EmptySprite(),  // TODO - use AtlasSprite
-                         }
-                     });
+                     .Add(finder.GetItem(ItemNames.Bellway__Bilewater)!);
                     prof.AddPlacement(pmt);
                 }
 
@@ -167,18 +156,7 @@ public static class TestDispatcher
                         X = 52.37f,
                         Y = 21.59f,
                     }.Wrap()
-                     // TODO - use finder.GetItem (when there is a UIDef available)
-                     .Add(new PDBoolItem()
-                     {
-                         Name = ItemNames.Bellway__Bone_Bottom,
-                         BoolName = CustomFastTravelLocationsModule<FastTravelLocations>.GetBoolStringForLocation(FastTravelLocations.Bonetown),
-                         UIDef = new MsgUIDef()
-                         {
-                             Name = new BoxedString("Bone bottom"),
-                             ShopDesc = new BoxedString("Stag Stag Stag Stag Stag"),
-                             Sprite = new EmptySprite(),  // TODO - use AtlasSprite
-                         }
-                     });
+                     .Add(finder.GetItem(ItemNames.Bellway__Bone_Bottom)!);
                     prof.AddPlacement(pmt);
                 }
 
@@ -192,18 +170,33 @@ public static class TestDispatcher
                         X = 137.18f,
                         Y = 4.57f,
                     }.Wrap()
-                     // TODO - use finder.GetItem (when there is a UIDef available)
-                     .Add(new PDBoolItem()
-                     {
-                         Name = ItemNames.Bellway__The_Marrow,
-                         BoolName = CustomFastTravelLocationsModule<FastTravelLocations>.GetBoolStringForLocation(FastTravelLocations.Bone),
-                         UIDef = new MsgUIDef()
-                         {
-                             Name = new BoxedString("The Marrow"),
-                             ShopDesc = new BoxedString("Stag Stag Stag Stag Stag"),
-                             Sprite = new EmptySprite(),  // TODO - use AtlasSprite
-                         }
-                     });
+                     .Add(finder.GetItem(ItemNames.Bellway__The_Marrow)!);
+                    prof.AddPlacement(pmt);
+                }
+
+                {
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Ventrica Terminus location",
+                        Managed = false,
+                        SceneName = SceneNames.Tube_Hub,
+                        X = 68.77f,
+                        Y = 39.57f,
+                    }.Wrap()
+                     .Add(finder.GetItem(ItemNames.Ventrica__Terminus)!);
+                    prof.AddPlacement(pmt);
+                }
+
+                {
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Ventrica Hang location",
+                        Managed = false,
+                        SceneName = SceneNames.Hang_06b,
+                        X = 23.14f,
+                        Y = 4.57f,
+                    }.Wrap()
+                     .Add(finder.GetItem(ItemNames.Ventrica__High_Halls)!);
                     prof.AddPlacement(pmt);
                 }
 

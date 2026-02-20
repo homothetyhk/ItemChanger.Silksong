@@ -13,19 +13,24 @@ namespace ItemChanger.Silksong.Modules.FastTravel;
 [SingletonModule]
 public sealed class BellwayAutoUnlockModule : Module
 {
-    // TODO - verify this works. If this is true, then there should also be a module that automatically unlocks
+    // TODO - verify BypassCentipede works. If this is true, then there should also be a module that automatically unlocks
     // the bell eater fight, either somewhere or anywhere
+
     /// <summary>
     /// If this is true, then the bellway can be used in act 3 prior to defeating bell eater.
     /// </summary>
     public bool BypassCentipede { get; set; } = false;
 
+    private FsmEditGroup? _fsmEdits;
+
     protected override void DoLoad()
     {
-        // TODO - rewrite with something like SilksongHost.Instance.SilksongEvents.AddFsmEdit
-        On.PlayMakerFSM.Start += ModifyBellbeast;
-        On.PlayMakerFSM.Start += ModifyUnlockBehaviour;
         PlayerDataVariableEvents.OnGetBool += SetBellwayUnlocked;
+        _fsmEdits = new()
+        {
+            { new(SilksongHost.Wildcard, SilksongHost.Wildcard, "Unlock Behaviour"), ModifyUnlockBehaviour },
+            { new(SilksongHost.Wildcard, "Bone Beast NPC", "Interaction"), ModifyBellbeast }
+        };
     }
 
     private bool SetBellwayUnlocked(PlayerData pd, string fieldName, bool current)
@@ -33,29 +38,20 @@ public sealed class BellwayAutoUnlockModule : Module
         return current || fieldName == nameof(PlayerData.UnlockedFastTravel);
     }
 
-    private void ModifyUnlockBehaviour(On.PlayMakerFSM.orig_Start orig, PlayMakerFSM self)
+    private void ModifyUnlockBehaviour(PlayMakerFSM self)
     {
-        if (!self.gameObject.name.StartsWith("Bellway Toll Machine") || self.FsmName != "Unlock Behaviour")
+        if (!self.gameObject.name.StartsWith("Bellway Toll Machine"))
         {
-            orig(self);
             return;
         }
 
         FsmState inertState = self.GetState("Inert")!;
         inertState.RemoveActionsOfType<FsmStateAction>();
         inertState.AddMethod(static a => { a.fsm.Event("ACTIVATED"); });
-
-        orig(self);
     }
 
-    private void ModifyBellbeast(On.PlayMakerFSM.orig_Start orig, PlayMakerFSM self)
+    private void ModifyBellbeast(PlayMakerFSM self)
     {
-        if (self.gameObject.name != "Bone Beast NPC" || self.FsmName != "Interaction")
-        {
-            orig(self);
-            return;
-        }
-
         self.GetState("Is Unlocked?")!.ReplaceActionsOfType<PlayerDataBoolTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => true });
         self.GetState("Can Appear")!.ReplaceActionsOfType<PlayerDataBoolTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => true });
 
@@ -64,14 +60,12 @@ public sealed class BellwayAutoUnlockModule : Module
             self.GetState("Centipede")!.ReplaceActionsOfType<PlayerDataVariableTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => false });
             self.GetState("Appear Delay")!.ReplaceActionsOfType<PlayerDataVariableTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => false });
         }
-
-        orig(self);
     }
 
     protected override void DoUnload()
     {
-        On.PlayMakerFSM.Start -= ModifyBellbeast;
-        On.PlayMakerFSM.Start -= ModifyUnlockBehaviour;
         PlayerDataVariableEvents.OnGetBool -= SetBellwayUnlocked;
+        _fsmEdits?.Dispose();
+        _fsmEdits = null;
     }
 }

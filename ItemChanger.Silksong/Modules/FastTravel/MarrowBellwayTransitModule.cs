@@ -1,5 +1,4 @@
 ﻿using Benchwarp.Data;
-using GlobalEnums;
 using HarmonyLib;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Modules;
@@ -19,6 +18,7 @@ namespace ItemChanger.Silksong.Modules.FastTravel;
 public class MarrowBellwayTransitModule : Module
 {
     private ILHook? _salcHook;
+    private FsmEditGroup? _fsmEdits;
 
     protected override void DoLoad()
     {
@@ -27,15 +27,17 @@ public class MarrowBellwayTransitModule : Module
             ModifySalcPDBoolTest
             );
 
-        On.PlayMakerFSM.Start += EnterWake;
-        On.PlayMakerFSM.Start += HideVineBeast;
+        _fsmEdits = new()
+        {
+            { new(SilksongHost.Wildcard, "Beast","Beast Anim"), HideVineBeast },
+            { new(SilksongHost.Wildcard, "Bone Beast NPC", "Interaction"), EnterWake }
+        };
     }
 
-    private void HideVineBeast(On.PlayMakerFSM.orig_Start orig, PlayMakerFSM self)
+    private void HideVineBeast(PlayMakerFSM self)
     {
-        if (!self.gameObject.scene.name.StartsWith(SceneNames.Bone_05) || self.gameObject.name != "Beast" || self.FsmName != "Beast Anim")
+        if (!self.gameObject.scene.name.StartsWith(SceneNames.Bone_05))
         {
-            orig(self);
             return;
         }
 
@@ -46,15 +48,12 @@ public class MarrowBellwayTransitModule : Module
                 UObject.Destroy(a.Fsm.FsmComponent.gameObject);
             }
         });
-
-        orig(self);
     }
 
-    private void EnterWake(On.PlayMakerFSM.orig_Start orig, PlayMakerFSM self)
+    private void EnterWake(PlayMakerFSM self)
     {
-        if (!self.gameObject.scene.name.StartsWith(SceneNames.Bone_05) || self.gameObject.name != "Bone Beast NPC" || self.FsmName != "Interaction")
+        if (!self.gameObject.scene.name.StartsWith(SceneNames.Bone_05))
         {
-            orig(self);
             return;
         }
 
@@ -71,8 +70,6 @@ public class MarrowBellwayTransitModule : Module
 
             return pdvt;
         });
-
-        orig(self);
     }
 
     private void ModifySalcPDBoolTest(ILContext il)
@@ -101,6 +98,7 @@ public class MarrowBellwayTransitModule : Module
     {
         _salcHook?.Dispose();
         _salcHook = null;
-        On.PlayMakerFSM.Start -= EnterWake;
+        _fsmEdits?.Dispose();
+        _fsmEdits = null;
     }
 }

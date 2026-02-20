@@ -77,3 +77,13 @@ public sealed class CustomFastTravelLocationsModule<TLocation> : Module where TL
         _hook = null;
     }
 }
+
+public static class CustomFastTravelLocations
+{
+    /// <summary>
+    /// Convenience method to invoke <see cref="CustomFastTravelLocationsModule{TLocation}.GetBoolStringForLocation(TLocation)"/>
+    /// with type inference.
+    /// </summary>
+    public static string GetBoolStringForLocation<TLocation>(TLocation location) where TLocation : struct, IComparable
+        => CustomFastTravelLocationsModule<TLocation>.GetBoolStringForLocation(location);
+}

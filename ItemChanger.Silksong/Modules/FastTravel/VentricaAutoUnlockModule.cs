@@ -12,46 +12,34 @@ namespace ItemChanger.Silksong.Modules.FastTravel;
 [SingletonModule]
 public sealed class VentricaAutoUnlockModule : Module
 {
+    private FsmEditGroup? _fsmEdits;
+
     protected override void DoLoad()
     {
-        // TODO - rewrite with something like SilksongHost.Instance.SilksongEvents.AddFsmEdit
-        On.PlayMakerFSM.Start += ModifyVentrica;
-        On.PlayMakerFSM.Start += ModifyUnlockBehaviour;
+        _fsmEdits = new()
+        {
+            { new(SilksongHost.Wildcard, "tube_toll_machine", "Unlock Behaviour"), ModifyUnlockBehaviour },
+            { new(SilksongHost.Wildcard, "City Travel Tube", "Tube Travel"), ModifyVentrica }
+        };
     }
 
-    private void ModifyUnlockBehaviour(On.PlayMakerFSM.orig_Start orig, PlayMakerFSM self)
+    private void ModifyUnlockBehaviour(PlayMakerFSM self)
     {
-        if (!self.gameObject.name.StartsWith("tube_toll_machine") || self.FsmName != "Unlock Behaviour")
-        {
-            orig(self);
-            return;
-        }
-
         FsmState inertState = self.GetState("Inert")!;
         inertState.RemoveActionsOfType<FsmStateAction>();
         inertState.AddMethod(static a => { a.fsm.Event("ACTIVATED"); });
-
-        orig(self);
-
     }
 
-    private void ModifyVentrica(On.PlayMakerFSM.orig_Start orig, PlayMakerFSM self)
+    private void ModifyVentrica(PlayMakerFSM self)
     {
-        if (self.gameObject.name != "City Travel Tube" || self.FsmName != "Tube Travel")
-        {
-            orig(self);
-            return;
-        }
 
         FsmState lockedState = self.GetState("Locked?")!;
         lockedState.ReplaceActionsOfType<PlayerDataBoolTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => true });
-
-        orig(self);
     }
 
     protected override void DoUnload()
     {
-        On.PlayMakerFSM.Start -= ModifyVentrica;
-        On.PlayMakerFSM.Start -= ModifyUnlockBehaviour;
+        _fsmEdits?.Dispose();
+        _fsmEdits = null;
     }
 }
