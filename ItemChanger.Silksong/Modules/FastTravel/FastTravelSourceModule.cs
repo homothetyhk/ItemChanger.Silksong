@@ -58,12 +58,9 @@ public class LocationLocker<TLocation> : MonoBehaviour where TLocation : struct,
     }
 }
 
-// [SingletonModule]
 // Singleton per TLocation, regardless of any other type parameters
-// I don't believe that ItemChanger.Core currently respects the declared type of the SingletonModule attribute
-// but it's good to be explicit
-// SingletonModule is commented out because of a bug in ItemChanger.Core where it thinks it already has an
-// instance of this class
+// TODO - uncomment SingletonModule when IC.Core updates
+// [SingletonModule]
 public abstract class FastTravelSourceModule<TLocation> : Module where TLocation : struct, IComparable { }
 
 /// <summary>
