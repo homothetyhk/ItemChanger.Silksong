@@ -1,0 +1,4 @@
+_site/
+api/.manifest
+api/*.yml
+obj/
