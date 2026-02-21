@@ -59,8 +59,7 @@ public class LocationLocker<TLocation> : MonoBehaviour where TLocation : struct,
 }
 
 // Singleton per TLocation, regardless of any other type parameters
-// TODO - uncomment SingletonModule when IC.Core updates
-// [SingletonModule]
+[SingletonModule]
 public abstract class FastTravelSourceModule<TLocation> : Module where TLocation : struct, IComparable { }
 
 /// <summary>

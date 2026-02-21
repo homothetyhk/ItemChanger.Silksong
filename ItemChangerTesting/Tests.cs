@@ -4,6 +4,7 @@ using GlobalEnums;
 using ItemChanger;
 using ItemChanger.Items;
 using ItemChanger.Locations;
+using ItemChanger.Modules;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong;
@@ -105,8 +106,13 @@ public static class TestDispatcher
 
     private static void StartNear(string scene, string gate)
     {
-        ItemChangerHost.Singleton.ActiveProfile!.Modules.Remove<StartDefModule>();
-        ItemChangerHost.Singleton.ActiveProfile!.Modules.Add(new StartDefModule
+        ModuleCollection mods = ItemChangerHost.Singleton.ActiveProfile!.Modules;
+
+        if (mods.Get<StartDefModule>() is StartDefModule mod)
+        {
+            mods.Remove(mod);
+        }
+        mods.Add(new StartDefModule
         {
             StartDef = new TransitionOffsetStartDef { SceneName = scene, GateName = gate, }
         });
