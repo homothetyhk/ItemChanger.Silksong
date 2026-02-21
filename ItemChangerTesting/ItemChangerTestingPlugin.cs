@@ -6,7 +6,7 @@ using Silksong.ModMenu.Screens;
 
 namespace ItemChangerTesting
 {
-    [BepInDependency("io.github.silksong.itemchanger")]
+    [BepInDependency(ItemChanger.Silksong.ItemChangerPlugin.Id)]
     [BepInAutoPlugin(id: "io.github.testing.silksong.itemchanger")]
     public partial class ItemChangerTestingPlugin : BaseUnityPlugin, IModMenuCustomMenu
     {
