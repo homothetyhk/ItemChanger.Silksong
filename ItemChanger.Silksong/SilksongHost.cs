@@ -151,6 +151,7 @@ namespace ItemChanger.Silksong
             private static void BeforeContinueGame()
             {
                 Host.lifecycleInvoker?.NotifyBeforeContinueGame();
+                Host.ActiveProfile!.Load();
                 Host.lifecycleInvoker?.NotifyOnEnterGame();
             }
 
@@ -159,6 +160,7 @@ namespace ItemChanger.Silksong
             private static void AfterContinueGame()
             {
                 Host.lifecycleInvoker?.NotifyAfterContinueGame();
+                Host.lifecycleInvoker?.NotifyOnSafeToGiveItems(); // TODO: move
             }
 
             [HarmonyPrefix]

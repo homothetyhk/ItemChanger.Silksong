@@ -114,7 +114,7 @@ public static class TestDispatcher
         }
         mods.Add(new StartDefModule
         {
-            StartDef = new TransitionOffsetStartDef { SceneName = scene, GateName = gate, }
+            StartDef = new TransitionOffsetStartDef { SceneName = scene, GateName = gate, },
         });
     }
 
