@@ -1,3 +1,5 @@
 {
-  "FMT_PAY_ROSARIES": "{0} Rosaries"
+    "FMT_PAY_ROSARIES": "{0} Rosaries",
+    // 0: Travel Type (e.g. Bellway/Ventrica), 1: Location (e.g. Bone Bottom, High Halls)
+    "FMT_FAST_TRAVEL_PATTERN": "{1} {0}"
 }
