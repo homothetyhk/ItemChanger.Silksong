@@ -42,23 +42,24 @@ internal static partial class BaseItemList
         type: BaseGameSavedItem.ItemType.ToolItem,
         playerDataBoolName: nameof(PlayerData.hasThreadSphere));
     // rem: the following set hasSilkSpecial: silk spear, thread storm, sharpdart, cling grip, swift step, clawline, silk soar
+    // rem: the following give 100 silk: pale nails
     // rem: the following give 999 silk: silk spear, thread storm, sharpdart, cling grip, swift step, clawline, silk soar, needolin
     // rem: the following call hc.RefillAll: cross stitch
-    // rem: cross stitch, rune rage do not set hasSilkSpecial. rune rage does not refill any silk.
+    // rem: cross stitch, rune rage, pail nails do not set hasSilkSpecial. rune rage does not refill any silk.
 
     // abilities
-    public static Item Swift_Step_Item => new PDBoolItem { Name = ItemNames.Swift_Step, BoolName = nameof(PlayerData.hasDash) };
-    public static Item Cling_Grip_Item => new PDBoolItem { Name = ItemNames.Cling_Grip, BoolName = nameof(PlayerData.hasWalljump) };
-    public static Item Clawline_Item => new PDBoolItem { Name = ItemNames.Clawline, BoolName = nameof(PlayerData.hasHarpoonDash) };
-    public static Item Silk_Soar_Item => new PDBoolItem { Name = ItemNames.Silk_Soar, BoolName = nameof(PlayerData.hasSuperJump) };
-    public static Item Needolin_Item => new PDBoolItem { Name = ItemNames.Needolin, BoolName = nameof(PlayerData.hasNeedolin) };
-    public static Item Sylphsong_Item => new PDBoolItem { Name = ItemNames.Sylphsong, BoolName = nameof(PlayerData.HasBoundCrestUpgrader) };
-    public static Item Beastling_Call_Item => new PDBoolItem { Name = ItemNames.Beastling_Call, BoolName = nameof(PlayerData.UnlockedFastTravelTeleport) };
-    public static Item Elegy_of_the_Deep_Item => new PDBoolItem { Name = ItemNames.Elegy_of_the_Deep, BoolName = nameof(PlayerData.hasNeedolinMemoryPowerup) };
-    public static Item Drifter_s_Cloak_Item => new PDBoolItem { Name = ItemNames.Drifter_s_Cloak, BoolName = nameof(PlayerData.hasBrolly) };
-    public static Item Faydown_Cloak_Item => new PDBoolItem { Name = ItemNames.Faydown_Cloak, BoolName = nameof(PlayerData.hasDoubleJump) };
+    public static Item Swift_Step_Item => new PDBoolItem { Name = ItemNames.Swift_Step, BoolName = nameof(PlayerData.hasDash), UIDef = null! };
+    public static Item Cling_Grip_Item => new PDBoolItem { Name = ItemNames.Cling_Grip, BoolName = nameof(PlayerData.hasWalljump), UIDef = null! };
+    public static Item Clawline_Item => new PDBoolItem { Name = ItemNames.Clawline, BoolName = nameof(PlayerData.hasHarpoonDash), UIDef = null! };
+    public static Item Silk_Soar_Item => new PDBoolItem { Name = ItemNames.Silk_Soar, BoolName = nameof(PlayerData.hasSuperJump) , UIDef = null! };
+    public static Item Needolin_Item => new PDBoolItem { Name = ItemNames.Needolin, BoolName = nameof(PlayerData.hasNeedolin) , UIDef = null! };
+    public static Item Sylphsong_Item => new PDBoolItem { Name = ItemNames.Sylphsong, BoolName = nameof(PlayerData.HasBoundCrestUpgrader) , UIDef = null! };
+    public static Item Beastling_Call_Item => new PDBoolItem { Name = ItemNames.Beastling_Call, BoolName = nameof(PlayerData.UnlockedFastTravelTeleport) , UIDef = null! };
+    public static Item Elegy_of_the_Deep_Item => new PDBoolItem { Name = ItemNames.Elegy_of_the_Deep, BoolName = nameof(PlayerData.hasNeedolinMemoryPowerup) , UIDef = null! };
+    public static Item Drifter_s_Cloak_Item => new PDBoolItem { Name = ItemNames.Drifter_s_Cloak, BoolName = nameof(PlayerData.hasBrolly) , UIDef = null! };
+    public static Item Faydown_Cloak_Item => new PDBoolItem { Name = ItemNames.Faydown_Cloak, BoolName = nameof(PlayerData.hasDoubleJump) , UIDef = null! };
     // rem: faydown also sets visitedUpperSlab
-    public static Item Needle_Strike_Item => new PDBoolItem { Name = ItemNames.Needle_Strike, BoolName = nameof(PlayerData.hasChargeSlash) };
+    public static Item Needle_Strike_Item => new PDBoolItem { Name = ItemNames.Needle_Strike, BoolName = nameof(PlayerData.hasChargeSlash) , UIDef = null! };
     // rem: needle strike also sets InvNailHasNew, InvPaneHasNew
 
     // crests

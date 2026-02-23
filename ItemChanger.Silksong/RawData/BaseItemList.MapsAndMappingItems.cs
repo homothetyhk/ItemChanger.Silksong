@@ -18,9 +18,9 @@ internal static partial class BaseItemList
      */
     //TODO: implement ItemChanger item class that can change QuillState int value in PlayerData
 
-    public static Item Quill__White => new QuillItem { Name = ItemNames.Quill__White, QuillState = 1 };
-    public static Item Quill__Red => new QuillItem { Name = ItemNames.Quill__Red, QuillState = 2};
-    public static Item Quill__Purple => new QuillItem { Name = ItemNames.Quill__Purple, QuillState = 3 };
+    public static Item Quill__White => new QuillItem { Name = ItemNames.Quill__White, QuillState = 1, UIDef = null! };
+    public static Item Quill__Red => new QuillItem { Name = ItemNames.Quill__Red, QuillState = 2, UIDef = null! };
+    public static Item Quill__Purple => new QuillItem { Name = ItemNames.Quill__Purple, QuillState = 3, UIDef = null! };
 
 
 
