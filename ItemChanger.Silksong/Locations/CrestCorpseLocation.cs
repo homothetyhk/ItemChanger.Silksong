@@ -30,7 +30,7 @@ public class CrestCorpseLocation : AutoLocation
 
     private void HookCorpse(PlayMakerFSM fsm)
     {
-        var checkState = fsm.MustGetState("Check Unlocked");
+        FsmState checkState = fsm.MustGetState("Check Unlocked");
         checkState.RemoveActionsOfType<GetIsCrestUnlocked>();
         checkState.InsertMethod(0, () =>
         {
@@ -40,16 +40,16 @@ public class CrestCorpseLocation : AutoLocation
             }
         });
 
-        var crestChangeState = fsm.MustGetState("Crest Change");
+        FsmState crestChangeState = fsm.MustGetState("Crest Change");
         crestChangeState.RemoveActionsOfType<UnlockCrest>();
         crestChangeState.RemoveActionsOfType<AutoEquipCrestV2>();
         crestChangeState.RemoveActionsOfType<ToolsActiveStateControlV2>();
         crestChangeState.InsertMethod(0, GiveAll);
 
-        var crestMsgState = fsm.MustGetState("Crest Msg");
+        FsmState crestMsgState = fsm.MustGetState("Crest Msg");
         crestMsgState.RemoveActionsOfType<ShowToolCrestUIMsg>();
 
-        var crestGetAnticState = fsm.MustGetState("Crest Get Antic");
+        FsmState crestGetAnticState = fsm.MustGetState("Crest Get Antic");
         crestGetAnticState.RemoveLastActionOfType<Wait>();
         crestGetAnticState.RemoveLastActionMatching(act => 
             act is SendEventByName send
@@ -59,7 +59,7 @@ public class CrestCorpseLocation : AutoLocation
     private void HookMusic(PlayMakerFSM fsm)
     {
         // Most chapels use Fade Up except for the Ruined Chapel, which uses State 1.
-        var controlState = fsm.GetState("Fade Up") ?? fsm.GetState("State 1");
+        FsmState? controlState = fsm.GetState("Fade Up") ?? fsm.GetState("State 1");
         // This is purely cosmetic so we can be graceful if it fails.
         if (controlState != null)
         {

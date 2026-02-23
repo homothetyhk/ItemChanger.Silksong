@@ -7,7 +7,7 @@ internal static class FsmExtensions
 {
     public static FsmState MustGetState(this PlayMakerFSM fsm, string name)
     {
-        var state = fsm.GetState(name);
+        FsmState? state = fsm.GetState(name);
         if (state == null)
         {
             throw new InvalidOperationException($"FSM {fsm.FsmName} does not have a state {name}");
@@ -17,8 +17,8 @@ internal static class FsmExtensions
 
     private static int IndexFirstActionMatching(this FsmState state, Func<FsmStateAction, bool> predicate)
     {
-        var n = state.actions.Length;
-        for (var i = 0; i < n; i++)
+        int n = state.actions.Length;
+        for (int i = 0; i < n; i++)
         {
             if (predicate(state.actions[i]))
             {
@@ -34,8 +34,8 @@ internal static class FsmExtensions
 
     public static void RemoveLastActionMatching(this FsmState state, Func<FsmStateAction, bool> predicate)
     {
-        var n = state.actions.Length;
-        for (var i = n - 1; i >= 0; i--)
+        int n = state.actions.Length;
+        for (int i = n - 1; i >= 0; i--)
         {
             if (predicate(state.actions[i]))
             {

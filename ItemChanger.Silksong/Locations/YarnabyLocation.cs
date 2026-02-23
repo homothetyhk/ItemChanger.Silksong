@@ -38,8 +38,8 @@ public class YarnabyLocation : AutoLocation
 
         void ModifyCursedCheckState(string stateName)
         {
-            var state = fsm.MustGetState(stateName);
-            var i = state.IndexFirstActionOfType<PlayerDataVariableTest>();
+            FsmState state = fsm.MustGetState(stateName);
+            int i = state.IndexFirstActionOfType<PlayerDataVariableTest>();
             if (i == -1)
             {
                 i = state.actions.Length;
@@ -50,20 +50,20 @@ public class YarnabyLocation : AutoLocation
         ModifyCursedCheckState("Cursed? 3");
         ModifyCursedCheckState("Cursed? 2");
 
-        var comboBarState = fsm.MustGetState("Combo Bar Prompt");
+        FsmState comboBarState = fsm.MustGetState("Combo Bar Prompt");
         comboBarState.RemoveLastActionOfType<SetFsmString>();
         comboBarState.RemoveLastActionOfType<CreateObject>();
         comboBarState.RemoveTransition("GET ITEM MSG END");
         comboBarState.AddTransition("FINISHED", "Crest Get Antic");
 
-        var crestGetAnticState = fsm.MustGetState("Crest Get Antic");
+        FsmState crestGetAnticState = fsm.MustGetState("Crest Get Antic");
         crestGetAnticState.RemoveLastActionOfType<Wait>();
         crestGetAnticState.RemoveLastActionOfType<HeroControllerMethods>();
         crestGetAnticState.RemoveLastActionMatching(act => 
             act is SendEventByName send
             && send.sendEvent.Value == "CREST CHANGE ANTIC");
 
-        var crestChangeState = fsm.MustGetState("Crest Change");
+        FsmState crestChangeState = fsm.MustGetState("Crest Change");
         crestChangeState.RemoveFirstActionOfType<UnlockCrest>();
         crestChangeState.RemoveFirstActionOfType<AutoEquipCrestV2>();
         crestChangeState.RemoveActionsOfType<CallMethodProper>();
