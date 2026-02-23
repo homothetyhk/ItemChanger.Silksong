@@ -8,7 +8,9 @@ internal static partial class BaseItemList
 {
     //TODO: implement ItemChanger class that supports novelty items
 
-    //silk skills
+    // TODO: determine whether and how to handle the remarks in this file (tagged "// rem:")
+
+    // silk skills
     public static Item Cross_Stitch => ItemChangerSavedItem.Create(
         name: ItemNames.Cross_Stitch,
         id: "Parry",
@@ -39,8 +41,27 @@ internal static partial class BaseItemList
         id: "Thread Sphere",
         type: BaseGameSavedItem.ItemType.ToolItem,
         playerDataBoolName: nameof(PlayerData.hasThreadSphere));
+    // rem: the following set hasSilkSpecial: silk spear, thread storm, sharpdart, cling grip, swift step, clawline, silk soar
+    // rem: the following give 999 silk: silk spear, thread storm, sharpdart, cling grip, swift step, clawline, silk soar, needolin
+    // rem: the following call hc.RefillAll: cross stitch
+    // rem: cross stitch, rune rage do not set hasSilkSpecial. rune rage does not refill any silk.
 
-    //crests
+    // abilities
+    public static Item Swift_Step_Item => new PDBoolItem { Name = ItemNames.Swift_Step, BoolName = nameof(PlayerData.hasDash) };
+    public static Item Cling_Grip_Item => new PDBoolItem { Name = ItemNames.Cling_Grip, BoolName = nameof(PlayerData.hasWalljump) };
+    public static Item Clawline_Item => new PDBoolItem { Name = ItemNames.Clawline, BoolName = nameof(PlayerData.hasHarpoonDash) };
+    public static Item Silk_Soar_Item => new PDBoolItem { Name = ItemNames.Silk_Soar, BoolName = nameof(PlayerData.hasSuperJump) };
+    public static Item Needolin_Item => new PDBoolItem { Name = ItemNames.Needolin, BoolName = nameof(PlayerData.hasNeedolin) };
+    public static Item Sylphsong_Item => new PDBoolItem { Name = ItemNames.Sylphsong, BoolName = nameof(PlayerData.HasBoundCrestUpgrader) };
+    public static Item Beastling_Call_Item => new PDBoolItem { Name = ItemNames.Beastling_Call, BoolName = nameof(PlayerData.UnlockedFastTravelTeleport) };
+    public static Item Elegy_of_the_Deep_Item => new PDBoolItem { Name = ItemNames.Elegy_of_the_Deep, BoolName = nameof(PlayerData.hasNeedolinMemoryPowerup) };
+    public static Item Drifter_s_Cloak_Item => new PDBoolItem { Name = ItemNames.Drifter_s_Cloak, BoolName = nameof(PlayerData.hasBrolly) };
+    public static Item Faydown_Cloak_Item => new PDBoolItem { Name = ItemNames.Faydown_Cloak, BoolName = nameof(PlayerData.hasDoubleJump) };
+    // rem: faydown also sets visitedUpperSlab
+    public static Item Needle_Strike_Item => new PDBoolItem { Name = ItemNames.Needle_Strike, BoolName = nameof(PlayerData.hasChargeSlash) };
+    // rem: needle strike also sets InvNailHasNew, InvPaneHasNew
+
+    // crests
     public static Item Crest_of_Architect => ItemChangerSavedItem.Create(
         name: ItemNames.Crest_of_Architect,
         id: "Toolmaster",
@@ -77,40 +98,12 @@ internal static partial class BaseItemList
         name: ItemNames.Crest_of_Witch,
         id: "Witch",
         type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Cursed_Witch => ItemChangerSavedItem.Create(//not sure to include
+    public static Item Crest_of_Cursed_Witch => ItemChangerSavedItem.Create(
         name: ItemNames.Crest_of_Cursed_Witch,
         id: "Cursed",
         type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Cloakless => ItemChangerSavedItem.Create(//not sure to include
+    public static Item Crest_of_Cloakless => ItemChangerSavedItem.Create(
         name: ItemNames.Crest_of_Cloakless,
         id: "Cloakless",
         type: BaseGameSavedItem.ItemType.ToolCrest);
-
-    //TODO: find a way to implement items that do not follow the CollectableItem class format
-    //they seem to not have a CollectableName field or a function for getting their internal names
-    //they seem to work through bool operations in PlayerData (example: setting hasDash to true gives Swift Step)
-    //listing the ability with corresponding boolean values in PlayerData and other notes
-
-
-    //ancestral arts
-    /*
-        Beastling_Call -> UnlockedFastTravelTeleport [requires needolin beforehand]
-        Clawline -> hasHarpoonDash
-        Cling_Grip -> hasWalljump
-        Elegy_of_the_Deep -> hasNeedolinMemoryPowerup [requires needolin beforehand]
-        Needolin -> hasNeedolin
-        Silk_Soar -> hasSuperJump
-        Swift_Step -> hasDash
-        Sylphsong -> HasBoundCrestUpgrader
-    */
-
-
-    //other abilities
-    //note: drifter cloak and faydown cloak refer to the same internal item Dresses
-    /*
-        Bind -> [unknown]
-        Drifter_s_Cloak -> hasBrolly
-        Faydown_Cloak -> hasDoubleJump [can be used without having drifter cloak beforehand]
-        Needle_Strike -> hasChargeSlash
-    */
 }
