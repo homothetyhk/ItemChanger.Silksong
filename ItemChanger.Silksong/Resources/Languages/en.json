@@ -1,3 +1,14 @@
 {
-  "FMT_PAY_ROSARIES": "{0} Rosaries"
+  "FMT_PAY_ROSARIES": "{0} Rosaries",
+  "CREST_HUNTER_NAME": "Crest of Hunter",
+  "CREST_HUNTER_V2_NAME": "Crest of Hunter Level 2",
+  "CREST_HUNTER_V3_NAME": "Crest of Hunter Level 3",
+  "CREST_BEAST_NAME": "Crest of Beast",
+  "CREST_ARCHITECT_NAME": "Crest of Architect",
+  "CREST_REAPER_NAME": "Crest of Reaper",
+  "CREST_SHAMAN_NAME": "Crest of Shaman",
+  "CREST_WANDERER_NAME": "Crest of Wanderer",
+  "CREST_WITCH_NAME": "Crest of Witch",
+  "CREST_CURSED_NAME": "Crest of Cursed Witch",
+  "CREST_CLOAKLESS_NAME": "Crest of Cloakless"
 }
