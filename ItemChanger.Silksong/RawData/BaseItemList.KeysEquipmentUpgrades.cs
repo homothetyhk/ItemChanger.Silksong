@@ -10,13 +10,11 @@ internal static partial class BaseItemList
     /* note: crafting kit and tool pouch refer to the same internal CollectableItem Tool Pouch&Kit Inv
      * unsure if PlayerData has specific bools for crafting kit and tool pouch; PlayerData values ToolPouchUpgrades and ToolKitUpgrades could control tool pouch and crafting kit
      */
-    /* unimplemented/todo items
-        Mask_Shard
-        Silk_Heart
-        Spool_Fragment
-     */
-    //TODO: implement ItemChanger classes for the above items that support changing health/silk values
     //TODO: extend ItemChangerCollectableItem class to support separate values for crafting kit and tool pouch
+
+    public static Item Silk_Heart => new PDIntItem { Name = ItemNames.Silk_Heart, IntName = nameof(PlayerData.silkRegenMax), Amount = 1, Increment = true, UIDef = null! };
+    public static Item Mask_Shard => new MaskShardItem { Name = ItemNames.Mask_Shard, Shards = 1, UIDef = null! };
+    public static Item Spool_Fragment => new SpoolFragmentItem { Name = ItemNames.Spool_Fragment, Fragments = 1, UIDef = null! };
     public static Item Crafting_Kit => ItemChangerSavedItem.Create(//refers to same internal item as tool pouch
         name: ItemNames.Crafting_Kit,
         id: "Tool Pouch&Kit Inv",

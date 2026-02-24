@@ -107,4 +107,6 @@ internal static partial class BaseItemList
         name: ItemNames.Crest_of_Cloakless,
         id: "Cloakless",
         type: BaseGameSavedItem.ItemType.ToolCrest);
+    public static Item Vesticrest_Blue => new PDBoolItem { Name = ItemNames.Vesticrest_Blue, BoolName = nameof(PlayerData.UnlockedExtraBlueSlot), UIDef = null! };
+    public static Item Vesticrest_Yellow => new PDBoolItem { Name = ItemNames.Vesticrest_Yellow, BoolName = nameof(PlayerData.UnlockedExtraYellowSlot), UIDef = null! };
 }
