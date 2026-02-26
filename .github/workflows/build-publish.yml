@@ -67,7 +67,7 @@ jobs:
         tag: v${{ steps.version.outputs.version }}
     - name: Generate attestation
       id: attest
-      uses: actions/attest-build-provenance@v3
+      uses: actions/attest-build-provenance@v4
       if: github.event_name == 'push' && steps.needs-release.outputs.exists == 'false'
       with:
         subject-path: |
