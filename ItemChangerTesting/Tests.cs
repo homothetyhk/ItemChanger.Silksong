@@ -91,6 +91,11 @@ public enum Tests
 
     [Description("Tests the fast travel stuff")]
     FastTravelTest,
+    
+    [Description("Tests various mask shard items.")]
+    MaskShardItemTest,
+    [Description("Tests various spool fragment items.")]
+    SpoolFragmentItemTest,
 }
 
 public static class TestDispatcher
@@ -666,6 +671,86 @@ public static class TestDispatcher
                  .WithDebugItem(sprite: new AtlasSprite() { BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas", SpriteName = "S_thread_dash" }, text: "Sharpdart?")
                  .WithDebugItem(sprite: new AtlasSprite() { BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas", SpriteName = "Inv_0029_spell_core_outer_icons_0000_1_wall_jump" }, text: "claw")
                  );
+                break;
+
+            case Tests.SpoolFragmentItemTest:
+                StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Middle",
+                    SceneName = SceneNames.Tut_02,
+                    X = 133.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Spool_Fragment)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Left",
+                    SceneName = SceneNames.Tut_02,
+                    X = 130.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Spool_Fragment)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Right",
+                    SceneName = SceneNames.Tut_02,
+                    X = 136.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Full_Spool)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Far right",
+                    SceneName = SceneNames.Tut_02,
+                    X = 143.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Spool_Fragment)!));
+                break;
+
+            case Tests.MaskShardItemTest:
+                StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Middle",
+                    SceneName = SceneNames.Tut_02,
+                    X = 133.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Double_Mask_Shard)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Left",
+                    SceneName = SceneNames.Tut_02,
+                    X = 130.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Mask_Shard)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Right",
+                    SceneName = SceneNames.Tut_02,
+                    X = 136.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Full_Mask)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Far right",
+                    SceneName = SceneNames.Tut_02,
+                    X = 143.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Double_Mask_Shard)!));
                 break;
 
         }

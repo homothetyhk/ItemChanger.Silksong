@@ -74,8 +74,8 @@ internal static partial class BaseItemList
         name: ItemNames.Rune_Harp__Eva,
         id: "Weaver Record Weave_08",
         type: BaseGameSavedItem.ItemType.CollectableRelic);
-    public static Item Vaultkeeper_s_Melody => ItemChangerSavedItem.Create(
-        name: ItemNames.Vaultkeeper_s_Melody,
+    public static Item Sacred_Cylinder => ItemChangerSavedItem.Create(
+        name: ItemNames.Sacred_Cylinder,
         id: "Librarian Melody Cylinder",
         type: BaseGameSavedItem.ItemType.CollectableRelic);
     public static Item Weaver_Effigy__Atla => ItemChangerSavedItem.Create(
