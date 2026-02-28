@@ -15,9 +15,9 @@ public static class MessageUtil
 {
     private static readonly Queue<ColorMsg> messages = [];
 
-    public static void EnqueueMessage(string text, Sprite? sprite = null, Color? modifyTextColor = null)
+    public static void EnqueueMessage(string text, Sprite? sprite = null, Color? modifyTextColor = null, float? spriteScale = null)
     {
-        messages.Enqueue(new(new ICMsg(text, sprite ?? SpriteUtil.Empty), modifyTextColor ?? Color.white));
+        messages.Enqueue(new(new ICMsg(text, sprite ?? SpriteUtil.Empty, spriteScale ?? 1f), modifyTextColor ?? Color.white));
     }
 
     public static void EnqueueMessage(ICollectableUIMsgItem msg, Color? modifyTextColor = null)
@@ -87,17 +87,18 @@ public static class MessageUtil
         public Color Color { get; } = color;
     }
 
-    private class ICMsg(string message, Sprite sprite) : ICollectableUIMsgItem
+    private class ICMsg(string message, Sprite sprite, float spriteScale) : ICollectableUIMsgItem
     {
         public string Message { get; } = message;
         public Sprite Sprite { get; } = sprite;
+        public float SpriteScale { get; } = spriteScale;
 
         public UObject GetRepresentingObject()
         {
             return MessageController.Instance;
         }
 
-        public float GetUIMsgIconScale() => 1f;
+        public float GetUIMsgIconScale() => SpriteScale;
 
         public string GetUIMsgName() => Message;
 

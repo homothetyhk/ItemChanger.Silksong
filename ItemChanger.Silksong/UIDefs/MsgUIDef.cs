@@ -13,6 +13,7 @@ namespace ItemChanger.Silksong.UIDefs
         public required IValueProvider<string> Name { get; init; }
         public IValueProvider<string>? ShopDesc { get; init; }
         public required IValueProvider<Sprite> Sprite { get; init; }
+        public float SpriteScale { get; init; } = 1f;
 
         /// <summary>
         /// Optional string to use as the preview name. If not given, will use the default implementation,
@@ -49,7 +50,7 @@ namespace ItemChanger.Silksong.UIDefs
         {
             if (type.HasFlag(MessageType.SmallPopup))
             {
-                MessageUtil.EnqueueMessage(Name.Value, Sprite.Value);
+                MessageUtil.EnqueueMessage(Name.Value, Sprite.Value, null, SpriteScale);
             }
             callback?.Invoke();
         }
