@@ -88,6 +88,9 @@ public enum Tests
     MaskShardItemTest,
     [Description("Tests various spool fragment items.")]
     SpoolFragmentItemTest,
+
+    [Description("Tests giving 3 Progressive Hunter Crest items from coordinate shinies")]//testing progressive hunter crest
+    Progressive_Hunter_Crest_from_spawned_shinies,
 }
 
 public static class TestDispatcher
@@ -661,6 +664,47 @@ public static class TestDispatcher
                     FlingType = ItemChanger.Enums.FlingType.Everywhere,
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Double_Mask_Shard)!));
+                break;
+
+            case Tests.Progressive_Hunter_Crest_from_spawned_shinies:
+                StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
+                prof.Modules.Add(new ProgressiveHunterCrestModule());
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Progressive Hunter Crest 1 (left)",
+                    SceneName = SceneNames.Tut_02,
+                    X = 130.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Progressive_Hunter_Crest)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Progressive Hunter Crest 2 (middle)",
+                    SceneName = SceneNames.Tut_02,
+                    X = 133.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Progressive_Hunter_Crest)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Progressive Hunter Crest 3 (right)",
+                    SceneName = SceneNames.Tut_02,
+                    X = 136.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Progressive_Hunter_Crest)!));
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Wanderer Crest (far left)",
+                    SceneName = SceneNames.Tut_02,
+                    X = 127.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                }.Wrap().Add(finder.GetItem(ItemNames.Crest_of_Wanderer)!));
                 break;
 
         }

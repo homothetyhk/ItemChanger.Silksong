@@ -417,6 +417,7 @@ public static class ItemNames
     public const string Vintage_Nectar = "Vintage_Nectar";
 
     // Novelty/cursed items
+    public const string Progressive_Hunter_Crest = "Progressive_Hunter_Crest";
     public const string Left_Cling_Grip = "Left_Cling_Grip";
     public const string Right_Cling_Grip = "Right_Cling_Grip";
     public const string Left_Clawline = "Left_Clawline";
