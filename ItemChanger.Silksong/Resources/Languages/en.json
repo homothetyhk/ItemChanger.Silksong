@@ -1,3 +1,4 @@
 {
-  "FMT_PAY_ROSARIES": "{0} Rosaries"
+    "FMT_PAY_ROSARIES": "{0} Rosaries",
+    "FMT_FAST_TRAVEL_PATTERN": "{STATION_NAME} {TRAVEL_TYPE}"
 }

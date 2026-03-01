@@ -1,11 +1,16 @@
 using Benchwarp.Data;
+using BepInEx.Logging;
+using GlobalEnums;
 using ItemChanger;
 using ItemChanger.Items;
 using ItemChanger.Locations;
 using ItemChanger.Modules;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong;
+using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Modules;
+using ItemChanger.Silksong.Modules.FastTravel;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.StartDefs;
@@ -84,6 +89,9 @@ public enum Tests
     [Description("Tests atlas sprites")]
     AtlasSpriteItems,
 
+    [Description("Tests the fast travel stuff")]
+    FastTravelTest,
+    
     [Description("Tests various mask shard items.")]
     MaskShardItemTest,
     [Description("Tests various spool fragment items.")]
@@ -103,12 +111,13 @@ public static class TestDispatcher
 
     private static void StartNear(string scene, string gate)
     {
-        ModuleCollection modules = ItemChangerHost.Singleton.ActiveProfile!.Modules;
-        if (modules.Get<StartDefModule>() is { } m)
+        ModuleCollection mods = ItemChangerHost.Singleton.ActiveProfile!.Modules;
+
+        if (mods.Get<StartDefModule>() is StartDefModule mod)
         {
-            modules.Remove(m);
+            mods.Remove(mod);
         }
-        modules.Add(new StartDefModule
+        mods.Add(new StartDefModule
         {
             StartDef = new TransitionOffsetStartDef { SceneName = scene, GateName = gate, },
         });
@@ -127,6 +136,83 @@ public static class TestDispatcher
         Finder finder = ItemChangerHost.Singleton.Finder;
         switch (ItemChangerTestingPlugin.Instance.cfgTest.Value)
         {
+            case Tests.FastTravelTest:
+                StartNear(SceneNames.Bellway_Shadow, PrimitiveGateNames.left1);
+
+                // Add modules
+                prof.Modules.CreateBellwayModules();
+                prof.Modules.CreateVentricaModules();
+                
+                {
+                    // Add location to test unlocking a bellway in the correct scene
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Bellway Shadow location",
+                        Managed = false,
+                        SceneName = SceneNames.Bellway_Shadow,
+                        X = 44.11f,
+                        Y = 22.57f,
+                    }.Wrap()
+                     .Add(finder.GetItem(ItemNames.Bellway__Bilewater)!);
+                    prof.AddPlacement(pmt);
+                }
+
+                {
+                    // Add locations for bone bottom and marrow bellways
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Bellway Bonebottom location",
+                        Managed = false,
+                        SceneName = SceneNames.Bellway_01,
+                        X = 52.37f,
+                        Y = 21.59f,
+                    }.Wrap()
+                     .Add(finder.GetItem(ItemNames.Bellway__Bone_Bottom)!);
+                    prof.AddPlacement(pmt);
+                }
+
+                {
+                    // Add locations for bone bottom and marrow bellways
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Bellway Marrow location",
+                        Managed = false,
+                        SceneName = SceneNames.Bone_05,
+                        X = 137.18f,
+                        Y = 4.57f,
+                    }.Wrap()
+                     .Add(finder.GetItem(ItemNames.Bellway__The_Marrow)!);
+                    prof.AddPlacement(pmt);
+                }
+
+                {
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Ventrica Terminus location",
+                        Managed = false,
+                        SceneName = SceneNames.Tube_Hub,
+                        X = 68.77f,
+                        Y = 39.57f,
+                    }.Wrap()
+                     .Add(finder.GetItem(ItemNames.Ventrica__Terminus)!);
+                    prof.AddPlacement(pmt);
+                }
+
+                {
+                    Placement pmt = new CoordinateLocation()
+                    {
+                        Name = "Ventrica Hang location",
+                        Managed = false,
+                        SceneName = SceneNames.Hang_06b,
+                        X = 23.14f,
+                        Y = 4.57f,
+                    }.Wrap()
+                     .Add(finder.GetItem(ItemNames.Ventrica__High_Halls)!);
+                    prof.AddPlacement(pmt);
+                }
+
+                break;
+
             case Tests.StartInTut_02:
                 StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
                 break;
@@ -184,6 +270,8 @@ public static class TestDispatcher
                 }.Wrap().Add(finder.GetItem(ItemNames.Surgeon_s_Key)!));
                 break;
 
+
+            #region Please consolidate these into a single test
             case Tests.Everbloom_from_spawned_shiny:
                 StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
                 prof.AddPlacement(new CoordinateLocation
@@ -557,6 +645,8 @@ public static class TestDispatcher
                     Managed = false,
                 }.Wrap().Add(finder.GetItem(ItemNames.Plasmium)!));
                 break;
+            #endregion
+
 
             case Tests.Surgeon_s_Key_at_Whispering_Vaults:
                 StartNear(SceneNames.Library_03, PrimitiveGateNames.left1);
