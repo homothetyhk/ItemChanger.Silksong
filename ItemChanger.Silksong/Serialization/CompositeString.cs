@@ -1,4 +1,5 @@
-﻿using IString = ItemChanger.Serialization.IValueProvider<string>;
+﻿using Newtonsoft.Json;
+using IString = ItemChanger.Serialization.IValueProvider<string>;
 
 namespace ItemChanger.Silksong.Serialization;
 
@@ -7,6 +8,7 @@ public class CompositeString : IString
     public required IString Pattern { get; init; }
     public required Dictionary<string, IString> Params { get; init; }
 
+    [JsonIgnore]
     public string Value
     {
         get
