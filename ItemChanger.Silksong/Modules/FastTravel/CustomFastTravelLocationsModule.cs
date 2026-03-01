@@ -25,7 +25,7 @@ public sealed class CustomFastTravelLocationsModule<TLocation> : Module where TL
         return $"{BoolStringPrefix}__{location}";
     }
 
-    public Hook? _hook;
+    private Hook? _hook;
 
     protected override void DoLoad()
     {
