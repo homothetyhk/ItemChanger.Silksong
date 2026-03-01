@@ -29,10 +29,11 @@ internal static partial class BaseItemList
         return new CompositeString()
         {
             Pattern = new LanguageString($"Mods.{ItemChangerPlugin.Id}", "FMT_FAST_TRAVEL_PATTERN"),
-            Params = [
-                new LanguageString("UI", "KEY_BELLWAY"),
-                new LanguageString("Fast Travel", baseLanguageKey)
-                ]
+            Params = new()
+            {
+                ["TRAVEL_TYPE"] = new LanguageString("UI", "KEY_BELLWAY"),
+                ["STATION_NAME"] = new LanguageString("Fast Travel", baseLanguageKey)
+            }
         };
     }
 
@@ -41,10 +42,11 @@ internal static partial class BaseItemList
         return new CompositeString()
         {
             Pattern = new LanguageString($"Mods.{ItemChangerPlugin.Id}", "FMT_FAST_TRAVEL_PATTERN"),
-            Params = [
-                new LanguageString("UI", "KEY_TUBE"),
-                new LanguageString("Fast Travel", baseLanguageKey)
-                ]
+            Params = new()
+            {
+                ["TRAVEL_TYPE"] = new LanguageString("UI", "KEY_TUBE"),
+                ["STATION_NAME"] = new LanguageString("Fast Travel", baseLanguageKey)
+            }
         };
     }
 
