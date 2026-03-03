@@ -48,11 +48,16 @@ internal static partial class BaseAtlasSprites
         BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas",
         SpriteName = "Shop_map_icon__0007_bellhart"
     };
-    public static AtlasSprite Bilewater_Map = new AtlasSprite()//broken with bilewater bundle location
-    {
-        BundleName = "dataassets_assets_assets/dataassets/shopitems",
-        SpriteName = "Shop_map_icon__0004_bilewater"
-    };
+
+    /*
+    Bilewater Map notes
+    -the sprite for the bilewater map does not count as an AtlasSprite and will not work with the BaseAtlasSprite system
+    -the sprite then requires an implementation for cached sprites based on AssetHelper similar to the FleaSprite implementation
+    -the following are important details needed for the AssetHelper implementation:
+        -bundleName: "dataassets_assets_assets/dataassets/shopitems.bundle"
+        -assetName: "Assets/Data Assets/Shop Items/Mapper Shadow Map.asset"
+    */
+
     public static AtlasSprite Blasted_Steps_Map = new AtlasSprite()
     {
         BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas",
