@@ -81,6 +81,9 @@ public enum Tests
     [Description("Tests modifying the Pale_Oil-Whispering_Vaults shiny in-place")]
     Surgeon_s_Key_at_Whispering_Vaults,
 
+    [Description("Tests spawning a multi-item chest in Tut_02")]
+    MultiItemChest_in_Tut_02,
+
     [Description("Tests atlas sprites")]
     AtlasSpriteItems,
 
@@ -92,13 +95,13 @@ public enum Tests
 
 public static class TestDispatcher
 {
-    private static void Init()
+    private static ItemChangerProfile Init()
     {
         GameManager.instance.profileID = ItemChangerTestingPlugin.Instance.cfgSaveSlot.Value;
         GameManager.instance.ClearSaveFile(ItemChangerTestingPlugin.Instance.cfgSaveSlot.Value, (b) => { });
         UIManager.instance.StartCoroutine(UIManager.instance.HideCurrentMenu());
         ItemChangerHost.Singleton.ActiveProfile?.Dispose();
-        new ItemChangerProfile(host: ItemChangerHost.Singleton);
+        return new ItemChangerProfile(host: ItemChangerHost.Singleton);
     }
 
     private static void StartNear(string scene, string gate)
@@ -121,8 +124,7 @@ public static class TestDispatcher
 
     public static void StartTest()
     {
-        Init();
-        ItemChangerProfile prof = ItemChangerHost.Singleton.ActiveProfile!;
+        ItemChangerProfile prof = Init();
         prof.Modules.GetOrAdd<ConsistentRandomnessModule>().Seed = 12345;
         Finder finder = ItemChangerHost.Singleton.Finder;
         switch (ItemChangerTestingPlugin.Instance.cfgTest.Value)
@@ -562,6 +564,23 @@ public static class TestDispatcher
                 StartNear(SceneNames.Library_03, PrimitiveGateNames.left1);
                 prof.AddPlacement(finder.GetLocation(LocationNames.Pale_Oil__Whispering_Vaults)!
                     .Wrap().Add(finder.GetItem(ItemNames.Surgeon_s_Key)!));
+                break;
+
+            case Tests.MultiItemChest_in_Tut_02:
+                StartNear(SceneNames.Tut_02, PrimitiveGateNames.right1);
+                prof.AddPlacement(new CoordinateLocation
+                {
+                    Name = "Multi-item chest test",
+                    SceneName = SceneNames.Tut_02,
+                    X = 133.6f,
+                    Y = 31.57f,
+                    FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                    Managed = false,
+                    ForceDefaultContainer = false,
+                }.Wrap()
+                 .Add(finder.GetItem(ItemNames.Surgeon_s_Key)!)
+                 .Add(finder.GetItem(ItemNames.Everbloom)!)
+                 .Add(finder.GetItem(ItemNames.Pale_Oil)!));
                 break;
 
             case Tests.AtlasSpriteItems:
