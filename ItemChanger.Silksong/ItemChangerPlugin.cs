@@ -27,6 +27,7 @@ namespace ItemChanger.Silksong
                 Instance = this;
                 RequestAssets();
                 CreateHost();
+                ICObjectCache.Init(SilksongHost.Instance);
                 Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
             }
             catch (Exception e)
