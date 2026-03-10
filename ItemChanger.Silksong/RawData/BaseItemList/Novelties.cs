@@ -1,7 +1,9 @@
 ﻿using ItemChanger.Items;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Modules.CustomSkills;
 using ItemChanger.Silksong.UIDefs;
+using ItemChanger.Tags;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -154,4 +156,26 @@ internal partial class BaseItemList
     public static Item Double_Mask_Shard => new MaskShardItem { Name = ItemNames.Double_Mask_Shard, Shards = 2, UIDef = null! };
     public static Item Full_Mask => new MaskShardItem { Name = ItemNames.Full_Mask, Shards = 4, UIDef = null! };
     public static Item Full_Spool => new SpoolFragmentItem { Name = ItemNames.Full_Spool, Fragments = 2, UIDef = null! };
+
+    // Grounded Sprint → Swift Step progression
+    public static Item Grounded_Sprint_Item => WithChainTag(
+        new CustomSkillItem
+        {
+            Name = ItemNames.Grounded_Sprint,
+            BoolName = nameof(GroundedSprintModule.hasGroundedSprint),
+            ModuleTypeName = typeof(GroundedSprintModule).FullName,
+            UIDef = new MsgUIDef
+            {
+                Name = new BoxedString("Grounded Sprint"),
+                ShopDesc = new BoxedString("Allows sprinting while grounded. Midair speed is capped to walking speed."),
+                Sprite = null!,
+            },
+        },
+        successor: ItemNames.Swift_Step);
+
+    private static T WithChainTag<T>(T item, string? predecessor = null, string? successor = null) where T : Item
+    {
+        item.AddTag(new ItemChainTag { Predecessor = predecessor, Successor = successor });
+        return item;
+    }
 }
