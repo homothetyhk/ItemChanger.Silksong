@@ -114,6 +114,23 @@ public class EvaLocation : AutoLocation
 
         FsmState setPreDlgState = fsm.MustGetState("Set Pre Dlg");
         setPreDlgState.InsertMethod(0, GivePayableItems);
+
+        FsmState breakState = fsm.MustGetState("Break");
+        breakState.InsertMethod(0, () =>
+        {
+            if (!placement.AllObtainedIncludingDefault())
+            {
+                fsm.SendEvent("FINISHED");
+            }
+        });
+        int j = breakState.IndexLastActionMatching(act => act is ActivateGameObject ago && ago.gameObject.GameObject.name == "Talk Camlock");
+        if (j != -1)
+        {
+            FsmStateAction act = breakState.actions[j];
+            breakState.RemoveAction(i);
+            // This will run before the short-circuit above.
+            breakState.InsertAction(0, act);
+        }
     }
 
     private void GivePayableItems()
