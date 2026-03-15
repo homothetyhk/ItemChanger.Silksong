@@ -48,9 +48,9 @@
       },
       "ItemChanger.Core": {
         "type": "Direct",
-        "requested": "[0.6.1, )",
-        "resolved": "0.6.1",
-        "contentHash": "9ehYW8Hgc5RcS+4TBkyefZ9APpV2quRmRcJsEy2ihe+CZT4sjpABQDGd7dMnV89lfSV8nCciClQvFgHlqeOjkw==",
+        "requested": "[0.6.2, )",
+        "resolved": "0.6.2",
+        "contentHash": "KwpX6Zxzv3L4m6fZM8YOdIH0lzLzYp9xy9VUgukQb119dEbdqz+n/DqL8mlyrKVtuuSzqvwrWVW6PreMAPkZAQ==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3"
         }

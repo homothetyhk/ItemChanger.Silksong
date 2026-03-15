@@ -72,25 +72,21 @@ internal static partial class BaseItemList
         name: ItemNames.Crest_of_Beast,
         id: "Warrior",
         nameKey: "CREST_BEAST_NAME");
-    public static Item Crest_of_Hunter => WithChainTag(
-        ItemChangerSavedItem.Create(
-            name: ItemNames.Crest_of_Hunter,
-            id: "Hunter",
-            nameKey: "CREST_HUNTER_NAME"),
-        successor: ItemNames.Crest_of_Hunter__Upgrade_1);
-    public static Item Crest_of_Hunter__Upgrade_1 => WithChainTag(
-        ItemChangerSavedItem.Create(
-            name: ItemNames.Crest_of_Hunter__Upgrade_1,
-            id: "Hunter_v2",
-            nameKey: "CREST_HUNTER+V2_NAME"),
-        predecessor: ItemNames.Crest_of_Hunter,
-        successor: ItemNames.Crest_of_Hunter__Upgrade_2);
-    public static Item Crest_of_Hunter__Upgrade_2 => WithChainTag(
-        ItemChangerSavedItem.Create(
-            name: ItemNames.Crest_of_Hunter__Upgrade_2,
-            id: "Hunter_v3",
-            nameKey: "CREST_HUNTER_V3_NAME"),
-        predecessor: ItemNames.Crest_of_Hunter__Upgrade_1);
+    public static Item Crest_of_Hunter => ItemChangerSavedItem.CreateCrest(
+        name: ItemNames.Crest_of_Hunter,
+        id: "Hunter",
+        nameKey: "CREST_HUNTER_NAME")
+        .WithTag(new ItemChainTag { Successor = ItemNames.Crest_of_Hunter__Upgrade_1 });
+    public static Item Crest_of_Hunter__Upgrade_1 => ItemChangerSavedItem.CreateCrest(
+        name: ItemNames.Crest_of_Hunter__Upgrade_1,
+        id: "Hunter_v2",
+        nameKey: "CREST_HUNTER_V2_NAME")
+        .WithTag(new ItemChainTag { Predecessor = ItemNames.Crest_of_Hunter, Successor = ItemNames.Crest_of_Hunter__Upgrade_2 });
+    public static Item Crest_of_Hunter__Upgrade_2 => ItemChangerSavedItem.CreateCrest(
+        name: ItemNames.Crest_of_Hunter__Upgrade_2,
+        id: "Hunter_v3",
+        nameKey: "CREST_HUNTER_V3_NAME")
+        .WithTag(new ItemChainTag { Predecessor = ItemNames.Crest_of_Hunter__Upgrade_1 });
     public static Item Crest_of_Reaper => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Reaper,
         id: "Reaper",

@@ -30,10 +30,4 @@ internal static partial class BaseItemList
     {
         return typeof(BaseItemList).GetProperties().Select(p => (Item)p.GetValue(null)).ToDictionary(i => i.Name);
     }
-
-    private static T WithChainTag<T>(T item, string? predecessor = null, string? successor = null) where T : Item
-    {
-        item.AddTag(new ItemChainTag { Predecessor = predecessor, Successor = successor });
-        return item;
-    }
 }
