@@ -31,6 +31,13 @@
     <NeutralLanguage>DEFAULT</NeutralLanguage>
   </PropertyGroup>
 
+  <!--Set InternalsVisibleTo for the testing plugin so we can more easily access RawData members-->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>ItemChangerTesting</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
   <ItemGroup>
     <None Include="..\README.md" Pack="True" PackagePath="README.md" />
     <None Include="..\thunderstore\icon.png" Pack="True" PackagePath="icon.png" />
@@ -74,7 +81,7 @@
     <PackageReference Include="Hamunii.BepInEx.AutoPlugin" Version="2.1.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.26.0" PrivateAssets="all" />
     <PackageReference Include="MonoDetour" Version="0.7.13" />
-    <PackageReference Include="MonoDetour.HookGen" Version="0.7.13" />
+    <PackageReference Include="MonoDetour.HookGen" Version="0.7.13" PrivateAssets="all" />
     <PackageReference Include="PolySharp" Version="1.15.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

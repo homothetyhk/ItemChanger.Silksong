@@ -2,6 +2,7 @@
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Silksong.Serialization.ModifiedSprites;
 using ItemChanger.Silksong.UIDefs;
 using UnityEngine;
 

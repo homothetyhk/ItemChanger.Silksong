@@ -59,6 +59,11 @@ internal static partial class BaseAtlasSprites
         BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas",
         SpriteName = "I_crimson_cloak_down"
     };
+    public static AtlasSprite Drifter_s_Faydown_Cloak => new()
+    {
+        BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas",
+        SpriteName = "I_spine_cloak_down"
+    };
     public static AtlasSprite Needle_Strike => new()
     {
         BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas",
