@@ -114,11 +114,11 @@ namespace ItemChanger.Silksong.Containers
             UObject.Destroy(go.GetComponent<BreakOnHazard>());
         }
 
-        protected override void Load()
+        protected override void DoLoad()
         {
         }
 
-        protected override void Unload()
+        protected override void DoUnload()
         {
         }
     }

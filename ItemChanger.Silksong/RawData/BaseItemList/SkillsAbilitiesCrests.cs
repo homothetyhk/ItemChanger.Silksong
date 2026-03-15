@@ -63,50 +63,50 @@ internal static partial class BaseItemList
     // rem: needle strike also sets InvNailHasNew, InvPaneHasNew
 
     // crests
-    public static Item Crest_of_Architect => ItemChangerSavedItem.Create(
+    public static Item Crest_of_Architect => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Architect,
         id: "Toolmaster",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Beast => ItemChangerSavedItem.Create(
+        nameKey: "CREST_ARCHITECT_NAME");
+    public static Item Crest_of_Beast => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Beast,
         id: "Warrior",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Hunter => ItemChangerSavedItem.Create(
+        nameKey: "CREST_BEAST_NAME");
+    public static Item Crest_of_Hunter => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Hunter,
         id: "Hunter",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Hunter__Upgrade_1 => ItemChangerSavedItem.Create(
+        nameKey: "CREST_HUNTER_NAME");
+    public static Item Crest_of_Hunter__Upgrade_1 => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Hunter__Upgrade_1,
         id: "Hunter_v2",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Hunter__Upgrade_2 => ItemChangerSavedItem.Create(
+        nameKey: "CREST_HUNTER_V2_NAME");
+    public static Item Crest_of_Hunter__Upgrade_2 => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Hunter__Upgrade_2,
         id: "Hunter_v3",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Reaper => ItemChangerSavedItem.Create(
+        nameKey: "CREST_HUNTER_V3_NAME");
+    public static Item Crest_of_Reaper => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Reaper,
         id: "Reaper",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Shaman => ItemChangerSavedItem.Create(
+        nameKey: "CREST_REAPER_NAME");
+    public static Item Crest_of_Shaman => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Shaman,
         id: "Spell",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Wanderer => ItemChangerSavedItem.Create(
+        nameKey: "CREST_SHAMAN_NAME");
+    public static Item Crest_of_Wanderer => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Wanderer,
         id: "Wanderer",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Witch => ItemChangerSavedItem.Create(
+        nameKey: "CREST_WANDERER_NAME");
+    public static Item Crest_of_Witch => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Witch,
         id: "Witch",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Cursed_Witch => ItemChangerSavedItem.Create(
+        nameKey: "CREST_WITCH_NAME");
+    public static Item Crest_of_Cursed_Witch => ItemChangerSavedItem.CreateCrest(//not sure to include
         name: ItemNames.Crest_of_Cursed_Witch,
         id: "Cursed",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
-    public static Item Crest_of_Cloakless => ItemChangerSavedItem.Create(
+        nameKey: "CREST_CURSED_NAME");
+    public static Item Crest_of_Cloakless => ItemChangerSavedItem.CreateCrest(//not sure to include
         name: ItemNames.Crest_of_Cloakless,
         id: "Cloakless",
-        type: BaseGameSavedItem.ItemType.ToolCrest);
+        nameKey: "CREST_CLOAKLESS_NAME");
     public static Item Vesticrest_Blue => new PDBoolItem { Name = ItemNames.Vesticrest_Blue, BoolName = nameof(PlayerData.UnlockedExtraBlueSlot), UIDef = null! };
     public static Item Vesticrest_Yellow => new PDBoolItem { Name = ItemNames.Vesticrest_Yellow, BoolName = nameof(PlayerData.UnlockedExtraYellowSlot), UIDef = null! };
 }

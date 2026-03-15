@@ -17,11 +17,9 @@ namespace ItemChanger.Silksong.Modules.FastTravel;
 [SingletonModule]
 public sealed class FullMapDisplayModule<TLocation> : Module where TLocation : struct, IComparable
 {
-    private Hook? _hook;
-
     protected override void DoLoad()
     {
-        _hook = new(
+        Using(new Hook(
             AccessTools.PropertyGetter(typeof(FastTravelMapCorePiece), nameof(FastTravelMapCorePiece.IsVisible)),
             static (Func<FastTravelMapCorePiece, bool> orig, FastTravelMapCorePiece self) =>
             {
@@ -35,12 +33,8 @@ public sealed class FullMapDisplayModule<TLocation> : Module where TLocation : s
 
                 ItemChangerPlugin.Instance.Logger.LogInfo($"Skipped");
                 return orig(self);
-            });
+            }));
     }
 
-    protected override void DoUnload()
-    {
-        _hook?.Dispose();
-        _hook = null;
-    }
+    protected override void DoUnload() { }
 }

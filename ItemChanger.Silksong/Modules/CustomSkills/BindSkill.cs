@@ -40,6 +40,7 @@ public class BindSkill : CustomSkillModule
 
     protected override void DoLoad()
     {
+        base.DoLoad();
         Using(Md.HeroController.CanBind.Postfix(OverrideCanBind));
     }
 

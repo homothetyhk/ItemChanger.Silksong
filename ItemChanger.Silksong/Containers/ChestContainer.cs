@@ -24,11 +24,11 @@ namespace ItemChanger.Silksong.Containers
             throw new NotImplementedException();
         }
 
-        protected override void Load()
+        protected override void DoLoad()
         {
         }
 
-        protected override void Unload()
+        protected override void DoUnload()
         {
         }
     }

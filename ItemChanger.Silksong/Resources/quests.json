@@ -1,0 +1,330 @@
+[
+	{
+		"QuestManagerName": "The Great Citadel",
+		"QuestCompletionDataName": "Citadel Seeker"
+	},
+	{
+		"QuestManagerName": "The Threadspun Town",
+		"QuestCompletionDataName": "The Threadspun Town"
+	},
+	{
+		"QuestManagerName": "Grand Gate",
+		"QuestCompletionDataName": "Grand Gate Bellshrines"
+	},
+	{
+		"QuestManagerName": "Silent Halls",
+		"QuestCompletionDataName": "Citadel Investigate"
+	},
+	{
+		"QuestManagerName": "Pharloom’s Crown",
+		"QuestCompletionDataName": "Citadel Ascent"
+	},
+	{
+		"QuestManagerName": "Pharloom’s Crown",
+		"QuestCompletionDataName": "Citadel Ascent Melodies"
+	},
+	{
+		"QuestManagerName": "Pharloom’s Crown",
+		"QuestCompletionDataName": "Citadel Ascent Lift"
+	},
+	{
+		"QuestManagerName": "Pale Monarch",
+		"QuestCompletionDataName": "Citadel Ascent Silk Defeat"
+	},
+	{
+		"QuestManagerName": "Soul Snare",
+		"QuestCompletionDataName": "Silk Defeat Snare"
+	},
+	{
+		"QuestManagerName": "After the Fall",
+		"QuestCompletionDataName": "Black Thread Pt0"
+	},
+	{
+		"QuestManagerName": "Awaiting the End",
+		"QuestCompletionDataName": "Black Thread Pt1 Shamans"
+	},
+	{
+		"QuestManagerName": "Beast in the Bells",
+		"QuestCompletionDataName": "Bellbeast Rescue"
+	},
+	{
+		"QuestManagerName": "The Dark Below",
+		"QuestCompletionDataName": "Black Thread Pt2 Abyss"
+	},
+	{
+		"QuestManagerName": "The Dark Below",
+		"QuestCompletionDataName": "Diving Bell Pt1 Inspect"
+	},
+	{
+		"QuestManagerName": "The Dark Below",
+		"QuestCompletionDataName": "Diving Bell Pt2 Ballow"
+	},
+	{
+		"QuestManagerName": "The Dark Below",
+		"QuestCompletionDataName": "Diving Bell Pt3 Descend"
+	},
+	{
+		"QuestManagerName": "Return to Pharloom",
+		"QuestCompletionDataName": "Black Thread Pt3 Escape"
+	},
+	{
+		"QuestManagerName": "Spell Seeker",
+		"QuestCompletionDataName": "Black Thread Pt4 Return"
+	},
+	{
+		"QuestManagerName": "The Old Hearts",
+		"QuestCompletionDataName": "Black Thread Pt5 Heart"
+	},
+	{
+		"QuestManagerName": "Last Dive",
+		"QuestCompletionDataName": "Black Thread Pt6 Flower"
+	},
+	{
+		"QuestManagerName": "Bone Bottom Repairs",
+		"QuestCompletionDataName": "Building Materials"
+	},
+	{
+		"QuestManagerName": "A Lifesaving Bridge",
+		"QuestCompletionDataName": "Building Materials (Bridge)"
+	},
+	{
+		"QuestManagerName": "An Icon of Hope",
+		"QuestCompletionDataName": "Building Materials (Statue)"
+	},
+	{
+		"QuestManagerName": "Garb of the Pilgrims",
+		"QuestCompletionDataName": "Pilgrim Rags"
+	},
+	{
+		"QuestManagerName": "Berry Picking",
+		"QuestCompletionDataName": "Mossberry Collection Pre"
+	},
+	{
+		"QuestManagerName": "Berry Picking",
+		"QuestCompletionDataName": "Mossberry Collection 1"
+	},
+	{
+		"QuestManagerName": "The Lost Fleas",
+		"QuestCompletionDataName": "Save the Fleas Pre"
+	},
+	{
+		"QuestManagerName": "The Lost Fleas",
+		"QuestCompletionDataName": "Save the Fleas"
+	},
+	{
+		"QuestManagerName": "Volatile Flintbeetles",
+		"QuestCompletionDataName": "Rock Rollers"
+	},
+	{
+		"QuestManagerName": "The Terrible Tyrant",
+		"QuestCompletionDataName": "Skull King"
+	},
+	{
+		"QuestManagerName": "Flexile Spines",
+		"QuestCompletionDataName": "Brolly Get"
+	},
+	{
+		"QuestManagerName": "Bugs of Pharloom",
+		"QuestCompletionDataName": "Journal"
+	},
+	{
+		"QuestManagerName": "Restoration of Bellhart",
+		"QuestCompletionDataName": "Belltown House Start"
+	},
+	{
+		"QuestManagerName": "Bellhart’s Glory",
+		"QuestCompletionDataName": "Belltown House Mid"
+	},
+	{
+		"QuestManagerName": "Pinmaster’s Oil",
+		"QuestCompletionDataName": "A Pinsmiths Tools"
+	},
+	{
+		"QuestManagerName": "Silver Bells",
+		"QuestCompletionDataName": "Shiny Bell Goomba"
+	},
+	{
+		"QuestManagerName": "My Missing Courier",
+		"QuestCompletionDataName": "Save Courier Short"
+	},
+	{
+		"QuestManagerName": "My Missing Brother",
+		"QuestCompletionDataName": "Save Courier Tall"
+	},
+	{
+		"QuestManagerName": "Bone Bottom Supplies",
+		"QuestCompletionDataName": "Courier Delivery Bonebottom"
+	},
+	{
+		"QuestManagerName": "Pilgrim’s Rest Supplies",
+		"QuestCompletionDataName": "Courier Delivery Pilgrims Rest"
+	},
+	{
+		"QuestManagerName": "Songclave Supplies",
+		"QuestCompletionDataName": "Courier Delivery Songclave"
+	},
+	{
+		"QuestManagerName": "Fleatopia Supplies",
+		"QuestCompletionDataName": "Courier Delivery Fleatopia"
+	},
+	{
+		"QuestManagerName": "Liquid Lacquer",
+		"QuestCompletionDataName": "Courier Delivery Mask Maker"
+	},
+	{
+		"QuestManagerName": "Queen’s Egg",
+		"QuestCompletionDataName": "Courier Delivery Dustpens Slave"
+	},
+	{
+		"QuestManagerName": "Survivor’s Camp Supplies",
+		"QuestCompletionDataName": "Courier Delivery Fixer"
+	},
+	{
+		"QuestManagerName": "Crawbug Clearing",
+		"QuestCompletionDataName": "Crow Feathers Pre"
+	},
+	{
+		"QuestManagerName": "Crawbug Clearing",
+		"QuestCompletionDataName": "Crow Feathers"
+	},
+	{
+		"QuestManagerName": "Savage Beastfly",
+		"QuestCompletionDataName": "Beastfly Hunt"
+	},
+	{
+		"QuestManagerName": "Rite of the Pollip",
+		"QuestCompletionDataName": "Shell Flowers"
+	},
+	{
+		"QuestManagerName": "Rite of Rebirth",
+		"QuestCompletionDataName": "Wood Witch Curse"
+	},
+	{
+		"QuestManagerName": "Infestation Operation",
+		"QuestCompletionDataName": "Doctor Curse Cure"
+	},
+	{
+		"QuestManagerName": "Alchemist’s Assistant",
+		"QuestCompletionDataName": "Extractor Blue"
+	},
+	{
+		"QuestManagerName": "Advanced Alchemy",
+		"QuestCompletionDataName": "Extractor Blue Worms"
+	},
+	{
+		"QuestManagerName": "Roach Guts",
+		"QuestCompletionDataName": "Roach Killing"
+	},
+	{
+		"QuestManagerName": "Building Up Songclave",
+		"QuestCompletionDataName": "Songclave Donation 1"
+	},
+	{
+		"QuestManagerName": "Strengthening Songclave",
+		"QuestCompletionDataName": "Songclave Donation 2"
+	},
+	{
+		"QuestManagerName": "Fine Pins",
+		"QuestCompletionDataName": "Fine Pins"
+	},
+	{
+		"QuestManagerName": "The Wandering Merchant",
+		"QuestCompletionDataName": "Save City Merchant"
+	},
+	{
+		"QuestManagerName": "The Lost Merchant",
+		"QuestCompletionDataName": "Save City Merchant Bridge"
+	},
+	{
+		"QuestManagerName": "Cloaks of the Choir",
+		"QuestCompletionDataName": "Song Pilgrim Cloaks"
+	},
+	{
+		"QuestManagerName": "The Wailing Mother",
+		"QuestCompletionDataName": "Broodmother Hunt"
+	},
+	{
+		"QuestManagerName": "Great Taste of Pharloom",
+		"QuestCompletionDataName": "Great Gourmand"
+	},
+	{
+		"QuestManagerName": "Balm for the Wounded",
+		"QuestCompletionDataName": "Save Sherma"
+	},
+	{
+		"QuestManagerName": "Final Audience",
+		"QuestCompletionDataName": "Song Knight"
+	},
+	{
+		"QuestManagerName": "Broodfeast",
+		"QuestCompletionDataName": "Huntress Quest"
+	},
+	{
+		"QuestManagerName": "Runtfeast",
+		"QuestCompletionDataName": "Huntress Quest Runt"
+	},
+	{
+		"QuestManagerName": "Trail’s End",
+		"QuestCompletionDataName": "Shakra Final Quest"
+	},
+	{
+		"QuestManagerName": "Silk and Soul",
+		"QuestCompletionDataName": "Soul Snare"
+	},
+	{
+		"QuestManagerName": "Fatal Resolve",
+		"QuestCompletionDataName": "Pinstress Battle Pre"
+	},
+	{
+		"QuestManagerName": "Fatal Resolve",
+		"QuestCompletionDataName": "Pinstress Battle"
+	},
+	{
+		"QuestManagerName": "Fastest in Pharloom",
+		"QuestCompletionDataName": "Sprintmaster Race"
+	},
+	{
+		"QuestManagerName": "Hero’s Call",
+		"QuestCompletionDataName": "Garmond Black Threaded"
+	},
+	{
+		"QuestManagerName": "Pain",
+		"QuestCompletionDataName": "Anguish and Misery"
+	},
+	{
+		"QuestManagerName": "The Hidden Hunter",
+		"QuestCompletionDataName": "Ant Trapper"
+	},
+	{
+		"QuestManagerName": "Ecstasy of the End",
+		"QuestCompletionDataName": "Flea Games Pre"
+	},
+	{
+		"QuestManagerName": "Ecstasy of the End",
+		"QuestCompletionDataName": "Flea Games"
+	},
+	{
+		"QuestManagerName": "A Vassal Lost",
+		"QuestCompletionDataName": "Steel Sentinel"
+	},
+	{
+		"QuestManagerName": "A Vassal Lost",
+		"QuestCompletionDataName": "Steel Sentinel Pt2"
+	},
+	{
+		"QuestManagerName": "Passing of the Age",
+		"QuestCompletionDataName": "Mr Mushroom"
+	},
+	{
+		"QuestManagerName": "Dark Hearts",
+		"QuestCompletionDataName": "Destroy Thread Cores"
+	},
+	{
+		"QuestManagerName": "Fastest in Pharloom",
+		"QuestCompletionDataName": "Sprintmaster Pre"
+	},
+	{
+		"QuestManagerName": "Silk and Soul",
+		"QuestCompletionDataName": "Soul Snare Pre"
+	}
+]

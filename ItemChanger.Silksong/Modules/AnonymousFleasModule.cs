@@ -32,26 +32,23 @@ public sealed class AnonymousFleasModule : Module
     [JsonIgnore]  // Ignore from json because it's set by the location tags as they load
     public int RemovedVanillaFleas { get; set; } = 0;
 
-    private readonly List<IDisposable> _hooks = [];
-
     protected override void DoLoad()
     {
-        _hooks.Add(
-            new Hook(
+        Using(new Hook(
                 AccessTools.PropertyGetter(typeof(PlayerData), nameof(PlayerData.SavedFleasCount)),
                 (Func<PlayerData, int> orig, PlayerData self) => orig(self) + AnonymousFleasSaved
             ));
-        _hooks.Add(
-            new ILHook(
+        Using(new ILHook(
                 AccessTools.Method(typeof(SavedFleaActivator), nameof(SavedFleaActivator.Start)),
                 ModifySavedFleaActivator
-                ));
-        _hooks.Add(
-            new Hook(
+            ));
+        Using(new Hook(
                 AccessTools.Method(typeof(QuestTargetPlayerDataBools), nameof(QuestTargetPlayerDataBools.GetCounts)),
                 AddAnonymousFleasToCounts
             ));
     }
+
+    protected override void DoUnload() { }
 
     private delegate void On_QuestTargetPlayerDataBools_orig_GetCounts(QuestTargetPlayerDataBools self, out int completed, out int total);
 
@@ -82,14 +79,5 @@ public sealed class AnonymousFleasModule : Module
             }
             return x;
         });
-    }
-
-    protected override void DoUnload()
-    {
-        foreach (IDisposable hook in _hooks)
-        {
-            hook?.Dispose();
-        }
-        _hooks.Clear();
     }
 }

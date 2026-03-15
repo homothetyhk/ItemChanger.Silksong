@@ -1,5 +1,4 @@
 ﻿using ItemChanger.Modules;
-using Newtonsoft.Json;
 using PrepatcherPlugin;
 
 namespace ItemChanger.Silksong.Modules.CustomSkills;
@@ -35,7 +34,7 @@ public class CustomSkillPlayerDataModule : Module
             }
             catch (ArgumentException)
             {
-                Logger.LogError($"Duplicate custom skill {boolName} declared by modules {modulesBySkillBoolGet[boolName].Name} and {mod.Name}.");
+                Logger.LogError($"Duplicate custom skill {boolName} declared by modules {modulesBySkillBoolGet[boolName].GetType().Name} and {mod.GetType().Name}.");
             }
         }
         foreach (string boolName in mod.SettableSkillBools())
@@ -46,7 +45,7 @@ public class CustomSkillPlayerDataModule : Module
             }
             catch (ArgumentException)
             {
-                Logger.LogError($"Duplicate custom skill {boolName} declared by modules {modulesBySkillBoolGet[boolName].Name} and {mod.Name}.");
+                Logger.LogError($"Duplicate custom skill {boolName} declared by modules {modulesBySkillBoolGet[boolName].GetType().Name} and {mod.GetType().Name}.");
             }
         }
     }

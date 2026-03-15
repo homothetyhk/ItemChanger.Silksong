@@ -5,7 +5,7 @@ namespace ItemChanger.Silksong.Modules.CustomSkills;
 /// <summary>
 /// Base class for modules which define custom skills. Handles interop with <see cref="CustomSkillPlayerDataModule"/> to set up PlayerData hooks for the skills.
 /// </summary>
-public abstract class CustomSkillModule : HookModule
+public abstract class CustomSkillModule : Module
 {
     /// <summary>
     /// Lists the boolNames supported by get operations on <see cref="GetBool(string)"/>.
@@ -30,5 +30,6 @@ public abstract class CustomSkillModule : HookModule
     public abstract void SetBool(string boolName, bool value);
 
     protected override void DoLoad() => ActiveProfile!.Modules.GetOrAdd<CustomSkillPlayerDataModule>().Register(this);
-    protected ArgumentException UnsupportedBoolName(string boolName) => new($"Bool {boolName} is not supported by module {Name}.", nameof(boolName));
+    protected override void DoUnload() { }
+    protected ArgumentException UnsupportedBoolName(string boolName) => new($"Bool {boolName} is not supported by module {GetType().Name}.", nameof(boolName));
 }

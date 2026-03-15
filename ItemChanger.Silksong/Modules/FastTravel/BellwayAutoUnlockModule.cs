@@ -21,23 +21,19 @@ public sealed class BellwayAutoUnlockModule : Module
     /// </summary>
     public bool BypassCentipede { get; set; } = false;
 
-    private FsmEditGroup? _fsmEdits;
-
     protected override void DoLoad()
     {
         PlayerDataVariableEvents.OnGetBool += SetBellwayUnlocked;
-        _fsmEdits = new()
+        Using(new FsmEditGroup()
         {
             { new(SilksongHost.Wildcard, SilksongHost.Wildcard, "Unlock Behaviour"), ModifyUnlockBehaviour },
             { new(SilksongHost.Wildcard, "Bone Beast NPC", "Interaction"), ModifyBellbeast }
-        };
+        });
     }
 
     protected override void DoUnload()
     {
         PlayerDataVariableEvents.OnGetBool -= SetBellwayUnlocked;
-        _fsmEdits?.Dispose();
-        _fsmEdits = null;
     }
 
     private bool SetBellwayUnlocked(PlayerData pd, string fieldName, bool current)

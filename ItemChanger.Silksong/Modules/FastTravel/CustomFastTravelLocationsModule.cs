@@ -25,24 +25,20 @@ public sealed class CustomFastTravelLocationsModule<TLocation> : Module where TL
         return $"{BoolStringPrefix}__{location}";
     }
 
-    private Hook? _hook;
-
     protected override void DoLoad()
     {
         PlayerDataVariableEvents.OnGetBool += CatchCustomBoolGet;
         PlayerDataVariableEvents.OnSetBool += CatchCustomBoolSet;
-        _hook = new(
+        Using(new Hook(
             AccessTools.Method(typeof(FastTravelMapButtonBase<TLocation>), nameof(FastTravelMapButtonBase<>.Awake)),
             SetPlayerDataBoolString
-            );
+            ));
     }
 
     protected override void DoUnload()
     {
         PlayerDataVariableEvents.OnGetBool -= CatchCustomBoolGet;
         PlayerDataVariableEvents.OnGetBool -= CatchCustomBoolSet;
-        _hook?.Dispose();
-        _hook = null;
     }
 
     private static void SetPlayerDataBoolString(Action<FastTravelMapButtonBase<TLocation>> orig, FastTravelMapButtonBase<TLocation> self)

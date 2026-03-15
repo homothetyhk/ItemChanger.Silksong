@@ -1,4 +1,5 @@
 ﻿using ItemChanger.Items;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.UIDefs;
 
@@ -41,6 +42,24 @@ public class ItemChangerSavedItem : Item
         BaseGameSavedItem item = new() { Id = id, Type = type };
         return new() { Name = name, Item = item, PlayerDataBoolName = playerDataBoolName, UIDef = new SavedItemUIDef { Item = item } };
     }
+
+    public static ItemChangerSavedItem CreateWithMsgUIDef(string name, string id, BaseGameSavedItem.ItemType type, string nameSheet, string nameKey, float spriteScale)
+    {
+        BaseGameSavedItem item = new() { Id = id, Type = type };
+        return new() {
+            Name = name,
+            Item = item,
+            UIDef = new MsgUIDef
+            {
+                Name = new LanguageString(nameSheet, nameKey),
+                Sprite = new SavedItemSprite { Item = item },
+                SpriteScale = spriteScale,
+            },
+        };
+    }
+
+    public static ItemChangerSavedItem CreateCrest(string name, string id, string nameKey) =>
+        CreateWithMsgUIDef(name, id, BaseGameSavedItem.ItemType.ToolCrest, $"Mods.{ItemChangerPlugin.Id}", nameKey, 1f / 3);
 
     /* reference implementation for CollectableItem - not fully tested
     

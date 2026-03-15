@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace ItemChangerTesting
 {
-    internal abstract class Test
+    internal abstract class Test : Module
     {
         public static ReadOnlyDictionary<TestFolder, ReadOnlyCollection<Test>> TestGroups { get; } = new(typeof(Test).Assembly.GetTypes()
             .Where(t => t.IsSubclassOf(typeof(Test)) && !t.IsAbstract).Select(t => (Test)Activator.CreateInstance(t))
@@ -51,5 +51,17 @@ namespace ItemChangerTesting
                 StartDef = start,
             });
         }
+
+        protected override void DoLoad() 
+        {
+            ItemChangerHost.Singleton.LifecycleEvents.OnEnterGame += OnEnterGame;
+        }
+
+        protected override void DoUnload()
+        {
+            ItemChangerHost.Singleton.LifecycleEvents.OnEnterGame -= OnEnterGame;
+        }
+
+        protected virtual void OnEnterGame() { }
     }
 }

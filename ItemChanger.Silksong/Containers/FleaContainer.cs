@@ -261,7 +261,7 @@ public class FleaContainer : Container
         // get.InsertMethodAfter(/* code to spawn and fling shinies goes here */);
     }
 
-    protected override void Load()
+    protected override void DoLoad()
     {
         foreach (FleaPrefabData data in _prefabs.Values)
         {
@@ -269,7 +269,7 @@ public class FleaContainer : Container
         }
     }
     
-    protected override void Unload()
+    protected override void DoUnload()
     {
         foreach (FleaPrefabData data in _prefabs.Values)
         {

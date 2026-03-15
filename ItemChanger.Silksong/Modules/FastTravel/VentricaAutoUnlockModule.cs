@@ -12,16 +12,16 @@ namespace ItemChanger.Silksong.Modules.FastTravel;
 [SingletonModule]
 public sealed class VentricaAutoUnlockModule : Module
 {
-    private FsmEditGroup? _fsmEdits;
-
     protected override void DoLoad()
     {
-        _fsmEdits = new()
+        Using(new FsmEditGroup()
         {
             { new(SilksongHost.Wildcard, "tube_toll_machine", "Unlock Behaviour"), ModifyUnlockBehaviour },
             { new(SilksongHost.Wildcard, "City Travel Tube", "Tube Travel"), ModifyVentrica }
-        };
+        });
     }
+
+    protected override void DoUnload() { }
 
     private void ModifyUnlockBehaviour(PlayMakerFSM self)
     {
@@ -35,11 +35,5 @@ public sealed class VentricaAutoUnlockModule : Module
 
         FsmState lockedState = self.GetState("Locked?")!;
         lockedState.ReplaceActionsOfType<PlayerDataBoolTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => true });
-    }
-
-    protected override void DoUnload()
-    {
-        _fsmEdits?.Dispose();
-        _fsmEdits = null;
     }
 }

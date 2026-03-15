@@ -17,35 +17,25 @@ public sealed class FastTravelSourceModule<TLocation, TLockerComponent> : FastTr
     where TLocation : struct, IComparable
     where TLockerComponent : LocationLocker<TLocation>
 {
-    private readonly List<IDisposable> _hooks = [];
-
     protected override void DoLoad()
     {
-        _hooks.Add(new ILHook(
+        Using(new ILHook(
             AccessTools.Method(typeof(FastTravelMapButtonBase<TLocation>), nameof(FastTravelMapButtonBase<>.IsCurrentLocation)),
             RemoveCircularReference
             ));
 
-        _hooks.Add(new Hook(
+        Using(new Hook(
             AccessTools.Method(typeof(FastTravelMapButtonBase<TLocation>), nameof(FastTravelMapButtonBase<>.IsUnlocked)),
             AutoUnlockCurrentLocation
             ));
 
-        _hooks.Add(new Hook(
+        Using(new Hook(
             AccessTools.Method(typeof(FastTravelMapButtonBase<TLocation>), nameof(FastTravelMapButtonBase<>.Awake)),
             LockLockedLocationButton
             ));
     }
 
-    protected override void DoUnload()
-    {
-        foreach (IDisposable hook in _hooks)
-        {
-            hook.Dispose();
-        }
-
-        _hooks.Clear();
-    }
+    protected override void DoUnload() { }
 
     private static void LockLockedLocationButton(
         Action<FastTravelMapButtonBase<TLocation>> orig, FastTravelMapButtonBase<TLocation> self)

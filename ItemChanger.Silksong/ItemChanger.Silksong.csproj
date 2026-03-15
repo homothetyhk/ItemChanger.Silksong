@@ -13,9 +13,10 @@
     <ImplicitUsings>true</ImplicitUsings>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>recommended</AnalysisMode>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>CS1591;CA1859</NoWarn>
+    <NoWarn>$(NoWarn);CS1591;CA1510;CA1711;CA1847;CA1859;CA1864</NoWarn>
     <RestorePackagesWithLockFile>True</RestorePackagesWithLockFile>
     <RestoreLockedMode Condition="'$(CI)' == 'true'">True</RestoreLockedMode>
 
@@ -64,9 +65,17 @@
     <EmbeddedResource Include="Resources\**\*.xml"></EmbeddedResource>
   </ItemGroup>
 
+  <PropertyGroup>
+    <AdditionalFileItemNames>EmbeddedResource</AdditionalFileItemNames>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.8" PrivateAssets="all" />
     <PackageReference Include="BepInEx.Core" Version="5.4.21" />
+    <PackageReference Include="DataDrivenConstants" Version="1.1.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="HarmonyX" Version="2.9.0" />
     <PackageReference Include="Harmonize" Version="1.0.6" PrivateAssets="all" />
     <PackageReference Include="Hamunii.BepInEx.AutoPlugin" Version="2.1.0" PrivateAssets="all" />
@@ -80,7 +89,7 @@
     <PackageReference Include="Silksong.DataManager" Version="1.2.1" />
     <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
     <PackageReference Include="Silksong.GameLibs" Version="*-*" PrivateAssets="all" />
-    <PackageReference Include="ItemChanger.Core" Version="0.5.4" GeneratePathProperty="true" />
+    <PackageReference Include="ItemChanger.Core" Version="0.6.1" GeneratePathProperty="true" />
     <!--Plugin dependencies-->
     <PackageReference Include="Silksong.PrepatcherPlugin" Version="1.3.0" />
     <PackageReference Include="Silksong.AssetHelper" Version="1.2.2" />

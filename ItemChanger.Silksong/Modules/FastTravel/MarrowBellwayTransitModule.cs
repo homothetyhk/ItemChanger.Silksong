@@ -17,22 +17,20 @@ namespace ItemChanger.Silksong.Modules.FastTravel;
 [SingletonModule]
 public class MarrowBellwayTransitModule : Module
 {
-    private ILHook? _salcHook;
-    private FsmEditGroup? _fsmEdits;
-
     protected override void DoLoad()
     {
-        _salcHook = new(
+        Using(new ILHook(
             AccessTools.Method(typeof(SceneAdditiveLoadConditional), nameof(SceneAdditiveLoadConditional.TryTestLoad)),
             ModifySalcPDBoolTest
-            );
-
-        _fsmEdits = new()
+            ));
+        Using(new FsmEditGroup()
         {
             { new(SilksongHost.Wildcard, "Beast","Beast Anim"), HideVineBeast },
             { new(SilksongHost.Wildcard, "Bone Beast NPC", "Interaction"), EnterWake }
-        };
+        });
     }
+
+    protected override void DoUnload() { }
 
     private void HideVineBeast(PlayMakerFSM self)
     {
@@ -92,13 +90,5 @@ public class MarrowBellwayTransitModule : Module
 
             return origValue;
         });
-    }
-
-    protected override void DoUnload()
-    {
-        _salcHook?.Dispose();
-        _salcHook = null;
-        _fsmEdits?.Dispose();
-        _fsmEdits = null;
     }
 }

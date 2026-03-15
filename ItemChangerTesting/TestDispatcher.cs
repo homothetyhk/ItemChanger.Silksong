@@ -23,6 +23,7 @@ internal static class TestDispatcher
     public static void StartTest(Test t)
     {
         Init();
+        ItemChangerHost.Singleton.ActiveProfile!.Modules.Add(t);
         t.Setup(new());
         Run();
     }

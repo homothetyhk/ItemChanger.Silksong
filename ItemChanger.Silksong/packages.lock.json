@@ -18,6 +18,12 @@
           "HarmonyX": "2.7.0"
         }
       },
+      "DataDrivenConstants": {
+        "type": "Direct",
+        "requested": "[1.1.0, )",
+        "resolved": "1.1.0",
+        "contentHash": "HwaWo9+GHQjS8DQnV9L+sPyXfgpkBItQCRbOZ4jaDmYxsJnF2JJWS+wCFFMx5tKDupaaxK8y4m0CkwWRPX3tHA=="
+      },
       "Hamunii.BepInEx.AutoPlugin": {
         "type": "Direct",
         "requested": "[2.1.0, )",
@@ -42,9 +48,9 @@
       },
       "ItemChanger.Core": {
         "type": "Direct",
-        "requested": "[0.5.4, )",
-        "resolved": "0.5.4",
-        "contentHash": "ko0g/RNmduzyKJDIntGeRwXKNO3Na3+A/hKe7EnHO3zBg4YxZQ9PO/MDXpUKMt1zKdFnp7GtEQXaGnh7utrJkg==",
+        "requested": "[0.6.1, )",
+        "resolved": "0.6.1",
+        "contentHash": "9ehYW8Hgc5RcS+4TBkyefZ9APpV2quRmRcJsEy2ihe+CZT4sjpABQDGd7dMnV89lfSV8nCciClQvFgHlqeOjkw==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3"
         }
