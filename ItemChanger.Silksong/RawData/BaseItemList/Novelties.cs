@@ -151,7 +151,8 @@ internal partial class BaseItemList
     };
 
     // combined shards and fragments
-    public static Item Double_Mask_Shard => new MaskShardItem { Name = ItemNames.Double_Mask_Shard, Shards = 2, UIDef = null! };
-    public static Item Full_Mask => new MaskShardItem { Name = ItemNames.Full_Mask, Shards = 4, UIDef = null! };
-    public static Item Full_Spool => new SpoolFragmentItem { Name = ItemNames.Full_Spool, Fragments = 2, UIDef = null! };
+    //TODO: find fitting sprites
+    public static Item Double_Mask_Shard => new MaskShardItem { Name = ItemNames.Double_Mask_Shard, Shards = 2, UIDef = new MsgUIDef { Name = BaseLanguageStrings.Mask_Shard_Multi_Name, ShopDesc = BaseLanguageStrings.Mask_Shard_Multi_Desc, Sprite = null! } };
+    public static Item Full_Mask => new MaskShardItem { Name = ItemNames.Full_Mask, Shards = 4, UIDef = new MsgUIDef { Name = BaseLanguageStrings.Mask_Shard_Full_Name, ShopDesc = BaseLanguageStrings.Mask_Shard_Full_Desc, Sprite = null! } };
+    public static Item Full_Spool => new SpoolFragmentItem { Name = ItemNames.Full_Spool, Fragments = 2, UIDef = new MsgUIDef { Name = BaseLanguageStrings.Spool_Fragment_Full_Name, ShopDesc = BaseLanguageStrings.Spool_Fragment_Full_Desc, Sprite = null! } };
 }

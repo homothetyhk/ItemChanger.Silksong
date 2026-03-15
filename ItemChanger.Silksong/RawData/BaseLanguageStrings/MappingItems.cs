@@ -5,6 +5,15 @@ namespace ItemChanger.Silksong.RawData;
 internal static partial class BaseLanguageStrings
 {
 
+    //quills
+    //NOTE: the quill items share the same name and description regardless of color
+    public static LanguageString Quill_Name => new("UI", "INV_NAME_QUILL");
+    public static LanguageString Quill_Desc => new("UI", "INV_DESC_QUILL");
+    public static LanguageString Map_Name => new("UI", "INV_NAME_MAP");
+    public static LanguageString Map_Desc => new("UI", "INV_DESC_MAP");
+    public static LanguageString Map_and_Quill_Name => new("UI", "INV_NAME_MAPANDQUILL");
+    public static LanguageString Map_and_Quill_Desc => new("UI", "INV_DESC_MAPANDQUILL");
+
     //maps (shakra/non citadel map machines)
     public static LanguageString Bellhart_Map_Name => new("Wanderers", "MAPPER_ITEM_MAP_BELLHART_NAME");
     public static LanguageString Bellhart_Map_Desc => new("Wanderers", "MAPPER_ITEM_MAP_BELLHART_DESC");

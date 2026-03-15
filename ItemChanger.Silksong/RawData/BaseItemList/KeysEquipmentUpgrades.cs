@@ -1,6 +1,7 @@
 ﻿using ItemChanger.Items;
 using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Silksong.UIDefs;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -12,10 +13,10 @@ internal static partial class BaseItemList
      */
     //TODO: extend ItemChangerCollectableItem class to support separate values for crafting kit and tool pouch
 
-    public static Item Silk_Heart => new PDIntItem { Name = ItemNames.Silk_Heart, IntName = nameof(PlayerData.silkRegenMax), Amount = 1, Increment = true, UIDef = null! };
-    public static Item Mask_Shard => new MaskShardItem { Name = ItemNames.Mask_Shard, Shards = 1, UIDef = null! };
-    public static Item Spool_Fragment => new SpoolFragmentItem { Name = ItemNames.Spool_Fragment, Fragments = 1, UIDef = null! };
-    public static Item Hunter_s_Journal => new PDBoolItem { Name = ItemNames.Hunter_s_Journal, BoolName = nameof(PlayerData.hasJournal), };
+    public static Item Silk_Heart => new PDIntItem { Name = ItemNames.Silk_Heart, IntName = nameof(PlayerData.silkRegenMax), Amount = 1, Increment = true, UIDef = new MsgUIDef { Name = BaseLanguageStrings.Silk_Heart_Name, ShopDesc = BaseLanguageStrings.Silk_Heart_Desc, Sprite = BaseAtlasSprites.Silk_Heart } };
+    public static Item Mask_Shard => new MaskShardItem { Name = ItemNames.Mask_Shard, Shards = 1, UIDef = new MsgUIDef { Name = BaseLanguageStrings.Mask_Shard_Name, ShopDesc = BaseLanguageStrings.Mask_Shard_Desc, Sprite = BaseAtlasSprites.Mask_Shard } };
+    public static Item Spool_Fragment => new SpoolFragmentItem { Name = ItemNames.Spool_Fragment, Fragments = 1, UIDef = new MsgUIDef { Name = BaseLanguageStrings.Spool_Fragment_Name, ShopDesc = BaseLanguageStrings.Spool_Fragment_Desc, Sprite = BaseAtlasSprites.Spool_Fragment } };
+    public static Item Hunter_s_Journal => new PDBoolItem { Name = ItemNames.Hunter_s_Journal, BoolName = nameof(PlayerData.hasJournal), UIDef = null! };
     public static Item Crafting_Kit => ItemChangerSavedItem.Create(//refers to same internal item as tool pouch
         name: ItemNames.Crafting_Kit,
         id: "Tool Pouch&Kit Inv",
@@ -43,13 +44,6 @@ internal static partial class BaseItemList
 
 
     //keys
-    /* note: all slab keys refer to the same internal CollectableItem Slab Key
-     * the slab keys have corresponding PLayerData bools
-        Key_of_Apostate -> HasSlabKeyC
-        Key_of_Heretic -> HasSlabKeyB
-        Key_of_Indolent -> HasSlabKeyA
-     */
-    //TODO: extend ItemChangerCollectibleItem class for the slab keys to support changing corresponding PlayerData bools for the different key types
     public static Item Architect_s_Key => ItemChangerSavedItem.Create(
         name: ItemNames.Architect_s_Key,
         id: "Architect Key",
@@ -69,15 +63,18 @@ internal static partial class BaseItemList
     public static Item Key_of_Apostate => ItemChangerSavedItem.Create(//refers to Slab Key; PlayerData bool HasSlabKeyC
         name: ItemNames.Key_of_Apostate,
         id: "Slab Key",
-        type: BaseGameSavedItem.ItemType.CollectableItem);
+        type: BaseGameSavedItem.ItemType.CollectableItem,
+        playerDataBoolName: nameof(PlayerData.HasSlabKeyC));
     public static Item Key_of_Heretic => ItemChangerSavedItem.Create(//refers to Slab Key; PlayerData bool HasSlabKeyB
         name: ItemNames.Key_of_Heretic,
         id: "Slab Key",
-        type: BaseGameSavedItem.ItemType.CollectableItem);
+        type: BaseGameSavedItem.ItemType.CollectableItem,
+        playerDataBoolName: nameof(PlayerData.HasSlabKeyB));
     public static Item Key_of_Indolent => ItemChangerSavedItem.Create(//refers to Slab Key; PlayerData bool HasSlabKeyA
         name: ItemNames.Key_of_Indolent,
         id: "Slab Key",
-        type: BaseGameSavedItem.ItemType.CollectableItem);
+        type: BaseGameSavedItem.ItemType.CollectableItem,
+        playerDataBoolName: nameof(PlayerData.HasSlabKeyA));
     public static Item Simple_Key => ItemChangerSavedItem.Create(
         name: ItemNames.Simple_Key,
         id: "Simple Key",
