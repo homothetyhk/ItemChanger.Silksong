@@ -20,9 +20,9 @@
       },
       "DataDrivenConstants": {
         "type": "Direct",
-        "requested": "[1.1.0, )",
-        "resolved": "1.1.0",
-        "contentHash": "HwaWo9+GHQjS8DQnV9L+sPyXfgpkBItQCRbOZ4jaDmYxsJnF2JJWS+wCFFMx5tKDupaaxK8y4m0CkwWRPX3tHA=="
+        "requested": "[1.2.0, )",
+        "resolved": "1.2.0",
+        "contentHash": "yV+PEyozKoc4CYN8em0wlBODMAc3z6qF7uZDgoAipOX/5U77j9HdInASXctlpsRxpl8AFvxJXlSlP23Q+HRtWw=="
       },
       "Hamunii.BepInEx.AutoPlugin": {
         "type": "Direct",
