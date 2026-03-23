@@ -7,9 +7,24 @@ namespace ItemChanger.Silksong.RawData;
 internal static partial class BaseItemList
 {
     //plot items (melodies)
-    public static Item Architect_s_Melody => new PDBoolItem { Name = ItemNames.Architect_s_Melody, BoolName = nameof(PlayerData.HasMelodyArchitect), UIDef = null! };
-    public static Item Conductor_s_Melody => new PDBoolItem { Name = ItemNames.Conductor_s_Melody, BoolName = nameof(PlayerData.HasMelodyConductor), UIDef = null! };
-    public static Item Vaultkeeper_s_Melody => new PDBoolItem { Name = ItemNames.Vaultkeeper_s_Melody, BoolName = nameof(PlayerData.HasMelodyLibrarian), UIDef = null! };
+    public static Item Architect_s_Melody => new PDBoolItem
+    {
+        Name = ItemNames.Architect_s_Melody,
+        BoolName = nameof(PlayerData.HasMelodyArchitect),
+        UIDef = null!
+    };
+    public static Item Conductor_s_Melody => new PDBoolItem
+    {
+        Name = ItemNames.Conductor_s_Melody,
+        BoolName = nameof(PlayerData.HasMelodyConductor),
+        UIDef = null!
+    };
+    public static Item Vaultkeeper_s_Melody => new PDBoolItem
+    {
+        Name = ItemNames.Vaultkeeper_s_Melody,
+        BoolName = nameof(PlayerData.HasMelodyLibrarian),
+        UIDef = null!
+    };
 
     // plot items (collectable items)
     public static Item Conjoined_Heart => ItemChangerSavedItem.Create(

@@ -37,7 +37,7 @@ public class TransitionOffsetStartDef : StartDef
             TransitionPoint tp = GameManager.instance.FindTransitionPoint(GateName, obj.Scene, fallbackToAnyAvailable: true);
             if (tp == null)
             {
-                Logger.LogError($"Couldn't find gate {GateName} in scene {SceneName}!");
+                LogError($"Couldn't find gate {GateName} in scene {SceneName}!");
             }
             else
             {

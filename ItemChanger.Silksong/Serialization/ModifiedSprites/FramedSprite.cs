@@ -2,10 +2,9 @@
 using ItemChanger.Silksong.Assets;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.Util;
-using Newtonsoft.Json;
 using UnityEngine;
 
-namespace ItemChanger.Silksong.Serialization;
+namespace ItemChanger.Silksong.Serialization.ModifiedSprites;
 
 public enum FrameStyle
 {
@@ -16,13 +15,8 @@ public enum FrameStyle
 /// <summary>
 /// Class that adds a journal-style frame to a sprite.
 /// </summary>
-public class FramedSprite : IValueProvider<Sprite>
+public class FramedSprite : ModifiedSprite
 {
-    /// <summary>
-    /// The sprite to frame.
-    /// </summary>
-    public required IValueProvider<Sprite> BaseSprite { get; init; }
-
     /// <summary>
     /// The scale to apply to the base sprite.
     /// </summary>
@@ -33,32 +27,7 @@ public class FramedSprite : IValueProvider<Sprite>
     /// </summary>
     public FrameStyle FrameStyle { get; init; } = FrameStyle.Completed;
 
-    /// <summary>
-    /// A key used to identify the created sprite.
-    /// This should be unique, in the sense that if a different
-    /// sprite is created (e.g. with a different frame) then a different key should be used.
-    /// </summary>
-    public required string CacheKey { get; init; }
-
-    // Note - sprites created in this way are unmanaged and so we must retain a reference to them
-    // to avoid a memory leak.
-    // We do this by caching them - an alternative would be to Destroy the sprite once we're done with it, but
-    // IValueProviders aren't IDisposable so that requires more infrastructure changes.
-    private static readonly Dictionary<string, Sprite> _cachedSprites = [];
-
-    [JsonIgnore] public Sprite Value
-    {
-        get
-        {
-            if (_cachedSprites.TryGetValue(CacheKey, out Sprite fromCache)) return fromCache;
-
-            Sprite sprite = CreateSprite();
-            _cachedSprites.Add(CacheKey, sprite);
-            return sprite;
-        }
-    }
-
-    private Sprite CreateSprite()
+    protected override Sprite CreateSprite()
     {
         FrameStyle frameStyle = FrameStyle;
 

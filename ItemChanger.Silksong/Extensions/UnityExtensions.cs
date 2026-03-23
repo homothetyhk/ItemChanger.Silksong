@@ -19,7 +19,7 @@ public static class UnityExtensions
         }
         catch (Exception e)
         {
-            GlobalRefs.Logger.LogError(e.ToString());
+            LogError(e.ToString());
             throw;
         }
     }

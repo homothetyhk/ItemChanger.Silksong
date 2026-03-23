@@ -245,12 +245,7 @@ internal static partial class BaseAtlasSprites
         BundleName = "atlases_assets_assets/sprites/_atlases/hornet_map.spriteatlas",
         SpriteName = "pin_tube_station"
     };
-    public static AtlasSprite Flea_Findings_Icon => new()//variant for flea findings icon
-    {
-        BundleName = "atlases_assets_assets/sprites/_atlases/hornet_map.spriteatlas",
-        SpriteName = "pin_flea"
-    };
-    public static AtlasSprite Flea_Findings_Icon_2 => new()//other variant for flea findings icon
+    public static AtlasSprite Flea_Findings_Icon => new()
     {
         BundleName = "atlases_assets_assets/sprites/_atlases/hornet_map.spriteatlas",
         SpriteName = "pin_grub_location"

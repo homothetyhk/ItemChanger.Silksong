@@ -66,7 +66,7 @@ public static class MessageUtil
                 }
                 catch (Exception e)
                 {
-                    GlobalRefs.Logger.LogError($"Error spawning message: {e}");
+                    LogError($"Error spawning message: {e}");
                     canSendMessage = true;
                 }
             }

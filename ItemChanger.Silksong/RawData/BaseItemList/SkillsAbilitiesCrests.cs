@@ -49,18 +49,73 @@ internal static partial class BaseItemList
     // rem: cross stitch, rune rage, pail nails do not set hasSilkSpecial. rune rage does not refill any silk.
 
     // abilities
-    public static Item Swift_Step_Item => new PDBoolItem { Name = ItemNames.Swift_Step, BoolName = nameof(PlayerData.hasDash), UIDef = null! };
-    public static Item Cling_Grip_Item => new PDBoolItem { Name = ItemNames.Cling_Grip, BoolName = nameof(PlayerData.hasWalljump), UIDef = null! };
-    public static Item Clawline_Item => new PDBoolItem { Name = ItemNames.Clawline, BoolName = nameof(PlayerData.hasHarpoonDash), UIDef = null! };
-    public static Item Silk_Soar_Item => new PDBoolItem { Name = ItemNames.Silk_Soar, BoolName = nameof(PlayerData.hasSuperJump) , UIDef = null! };
-    public static Item Needolin_Item => new PDBoolItem { Name = ItemNames.Needolin, BoolName = nameof(PlayerData.hasNeedolin) , UIDef = null! };
-    public static Item Sylphsong_Item => new PDBoolItem { Name = ItemNames.Sylphsong, BoolName = nameof(PlayerData.HasBoundCrestUpgrader) , UIDef = null! };
-    public static Item Beastling_Call_Item => new PDBoolItem { Name = ItemNames.Beastling_Call, BoolName = nameof(PlayerData.UnlockedFastTravelTeleport) , UIDef = null! };
-    public static Item Elegy_of_the_Deep_Item => new PDBoolItem { Name = ItemNames.Elegy_of_the_Deep, BoolName = nameof(PlayerData.hasNeedolinMemoryPowerup) , UIDef = null! };
-    public static Item Drifter_s_Cloak_Item => new PDBoolItem { Name = ItemNames.Drifter_s_Cloak, BoolName = nameof(PlayerData.hasBrolly) , UIDef = null! };
-    public static Item Faydown_Cloak_Item => new PDBoolItem { Name = ItemNames.Faydown_Cloak, BoolName = nameof(PlayerData.hasDoubleJump) , UIDef = null! };
+    public static Item Swift_Step_Item => new PDBoolItem
+    {
+        Name = ItemNames.Swift_Step,
+        BoolName = nameof(PlayerData.hasDash),
+        UIDef = null!
+    };
+    public static Item Cling_Grip_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Cling_Grip,
+        BoolName = nameof(PlayerData.hasWalljump),
+        UIDef = null!
+    };
+    public static Item Clawline_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Clawline,
+        BoolName = nameof(PlayerData.hasHarpoonDash),
+        UIDef = null!
+    };
+    public static Item Silk_Soar_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Silk_Soar,
+        BoolName = nameof(PlayerData.hasSuperJump),
+        UIDef = null!
+    };
+    public static Item Needolin_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Needolin,
+        BoolName = nameof(PlayerData.hasNeedolin),
+        UIDef = null!
+    };
+    public static Item Sylphsong_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Sylphsong,
+        BoolName = nameof(PlayerData.HasBoundCrestUpgrader),
+        UIDef = null!
+    };
+    public static Item Beastling_Call_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Beastling_Call,
+        BoolName = nameof(PlayerData.UnlockedFastTravelTeleport),
+        UIDef = null!
+    };
+    public static Item Elegy_of_the_Deep_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Elegy_of_the_Deep,
+        BoolName = nameof(PlayerData.hasNeedolinMemoryPowerup),
+        UIDef = null!
+    };
+    public static Item Drifter_s_Cloak_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Drifter_s_Cloak,
+        BoolName = nameof(PlayerData.hasBrolly),
+        UIDef = null!
+    };
+    public static Item Faydown_Cloak_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Faydown_Cloak,
+        BoolName = nameof(PlayerData.hasDoubleJump),
+        UIDef = null!
+    };
     // rem: faydown also sets visitedUpperSlab
-    public static Item Needle_Strike_Item => new PDBoolItem { Name = ItemNames.Needle_Strike, BoolName = nameof(PlayerData.hasChargeSlash) , UIDef = null! };
+    public static Item Needle_Strike_Item => new PDBoolItem 
+    {
+        Name = ItemNames.Needle_Strike,
+        BoolName = nameof(PlayerData.hasChargeSlash),
+        UIDef = null!
+    };
     // rem: needle strike also sets InvNailHasNew, InvPaneHasNew
 
     // crests
@@ -111,6 +166,16 @@ internal static partial class BaseItemList
         name: ItemNames.Crest_of_Cloakless,
         id: "Cloakless",
         nameKey: "CREST_CLOAKLESS_NAME");
-    public static Item Vesticrest_Blue => new PDBoolItem { Name = ItemNames.Vesticrest_Blue, BoolName = nameof(PlayerData.UnlockedExtraBlueSlot), UIDef = null! };
-    public static Item Vesticrest_Yellow => new PDBoolItem { Name = ItemNames.Vesticrest_Yellow, BoolName = nameof(PlayerData.UnlockedExtraYellowSlot), UIDef = null! };
+    public static Item Vesticrest_Blue => new PDBoolItem 
+    {
+        Name = ItemNames.Vesticrest_Blue,
+        BoolName = nameof(PlayerData.UnlockedExtraBlueSlot),
+        UIDef = null!
+    };
+    public static Item Vesticrest_Yellow => new PDBoolItem 
+    {
+        Name = ItemNames.Vesticrest_Yellow,
+        BoolName = nameof(PlayerData.UnlockedExtraYellowSlot),
+        UIDef = null!
+    };
 }

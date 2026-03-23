@@ -32,7 +32,7 @@ namespace ItemChanger.Silksong.StartDefs
                 }
                 catch (Exception e)
                 {
-                    Logger.LogError($"Error loading start def {ToString()}:\n{e}");
+                    LogError($"Error loading start def {ToString()}:\n{e}");
                 }
                 Loaded = true;
             }
@@ -57,7 +57,7 @@ namespace ItemChanger.Silksong.StartDefs
                 }
                 catch (Exception e)
                 {
-                    Logger.LogError($"Error unloading start def {ToString()}:\n{e}");
+                    LogError($"Error unloading start def {ToString()}:\n{e}");
                 }
                 Loaded = false;
             }

@@ -31,7 +31,7 @@ namespace ItemChanger.Silksong.Modules
                 }
                 catch (Exception e)
                 {
-                    Logger.LogError($"Error processing {edit}:\n{e}");
+                    LogError($"Error processing {edit}:\n{e}");
                 }
                 PDEditHistory.Add(edit);
             }

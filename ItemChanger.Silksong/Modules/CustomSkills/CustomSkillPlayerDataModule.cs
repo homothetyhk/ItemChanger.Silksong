@@ -34,7 +34,7 @@ public class CustomSkillPlayerDataModule : Module
             }
             catch (ArgumentException)
             {
-                Logger.LogError($"Duplicate custom skill {boolName} declared by modules {modulesBySkillBoolGet[boolName].GetType().Name} and {mod.GetType().Name}.");
+                LogError($"Duplicate custom skill {boolName} declared by modules {modulesBySkillBoolGet[boolName].GetType().Name} and {mod.GetType().Name}.");
             }
         }
         foreach (string boolName in mod.SettableSkillBools())
@@ -45,7 +45,7 @@ public class CustomSkillPlayerDataModule : Module
             }
             catch (ArgumentException)
             {
-                Logger.LogError($"Duplicate custom skill {boolName} declared by modules {modulesBySkillBoolGet[boolName].GetType().Name} and {mod.GetType().Name}.");
+                LogError($"Duplicate custom skill {boolName} declared by modules {modulesBySkillBoolGet[boolName].GetType().Name} and {mod.GetType().Name}.");
             }
         }
     }

@@ -25,6 +25,7 @@ namespace ItemChanger.Silksong
             Finder = new();
             Finder.DefineItemSheet(new(RawData.BaseItemList.GetBaseItems(), 0f));
             Finder.DefineLocationSheet(new(RawData.BaseLocationList.GetBaseLocations(), 0f));
+            ItemChangerPlugin.Instance.BeforeProfileDispose += () => Instance.lifecycleInvoker?.NotifyOnLeaveGame();
         }
 
         public override ILogger Logger { get; } = new PluginLogger();
