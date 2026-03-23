@@ -20,9 +20,9 @@
       },
       "DataDrivenConstants": {
         "type": "Direct",
-        "requested": "[1.1.0, )",
-        "resolved": "1.1.0",
-        "contentHash": "HwaWo9+GHQjS8DQnV9L+sPyXfgpkBItQCRbOZ4jaDmYxsJnF2JJWS+wCFFMx5tKDupaaxK8y4m0CkwWRPX3tHA=="
+        "requested": "[1.3.0, )",
+        "resolved": "1.3.0",
+        "contentHash": "k9GZK1D+Rk5clrb6o0leEkqSBx7HrdW/NCl3R18F2ybUgW0hbu5c4b7axTyTiFWe30pUSA6DHBTrtr224CIEuA=="
       },
       "Hamunii.BepInEx.AutoPlugin": {
         "type": "Direct",
@@ -140,8 +140,8 @@
       "Silksong.GameLibs": {
         "type": "Direct",
         "requested": "[*-*, )",
-        "resolved": "1.2.0-silksong1.0.29315",
-        "contentHash": "MwcUC0FMUn7aCwYHWgQegOBxNGgNBDie9nfg0GeodqbnfrHOjUZ06sZjq+0Iiz9/WBL8yd511YZujFS91FgVMw=="
+        "resolved": "1.2.0-silksong1.0.29980",
+        "contentHash": "YY9yyc0zsIhk78qt7c4yDreUOVV/xF5r6OYfylMcKRec8jJa+mb3lM0BLRKeDrf+VUY8vPX4epvBNszrNc0xww=="
       },
       "Silksong.PrepatcherPlugin": {
         "type": "Direct",
