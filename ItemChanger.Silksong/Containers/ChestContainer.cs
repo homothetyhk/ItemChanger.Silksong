@@ -220,7 +220,7 @@ public class ChestContainer : Container
                     ShinyContainer.Instance.Name,
                     info.GiveInfo.FlingType
                 ),
-                shinyInfo: new() { ShinyFling = fling ? ShinyContainer.ShinyFling.Random : ShinyContainer.ShinyFling.None });
+                shinyInfo: new() { ShinyFling = fling ? ShinyContainer.ShinyFling.Random : ShinyContainer.ShinyFling.Drop });
             GameObject shiny = ShinyContainer.Instance.GetNewContainer(shinyInfo);
             shiny.SetActive(false);
             shiny.transform.SetParent(itemParent);

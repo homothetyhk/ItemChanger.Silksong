@@ -3,6 +3,7 @@ using ItemChanger.Containers;
 using ItemChanger.Extensions;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Tags;
+using Silksong.UnityHelper.Extensions;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
@@ -30,11 +31,12 @@ public class ShinyContainer : Container
 
     public enum ShinyFling
     {
-        None,
+        Drop,
         Random,
         Left,
         Right,
         AwayFromHero,
+        FloatInPlace,
     }
 
     public record ShinyControlInfo
@@ -42,7 +44,7 @@ public class ShinyContainer : Container
         public static ShinyControlInfo Default { get; } = new();
         public ShinyType ShinyType { get; init; } = ShinyType.Normal;
         public ShinyControlFlags ShinyControlFlags { get; init; } = ShinyControlFlags.Default;
-        public ShinyFling ShinyFling { get; init; } = ShinyFling.None;
+        public ShinyFling ShinyFling { get; init; } = ShinyFling.Drop;
     }
 
     /// <summary>
@@ -110,20 +112,26 @@ public class ShinyContainer : Container
         }
 
         ShinyFling fling = shinyInfo.ShinyFling;
-        if (fling == ShinyFling.None)
+        Rigidbody2D rb = shiny.gameObject.GetOrAddComponent<Rigidbody2D>();
+
+        if (fling == ShinyFling.FloatInPlace)
         {
             shiny.fling = false;
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Stand;
         }
         else
         {
             shiny.fling = true;
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Normal;
             shiny.flingDirection = fling switch
             {
                 ShinyFling.Random => CollectableItemPickup.FlingDirection.Either,
                 ShinyFling.Left => CollectableItemPickup.FlingDirection.Left,
                 ShinyFling.Right => CollectableItemPickup.FlingDirection.Right,
                 ShinyFling.AwayFromHero => CollectableItemPickup.FlingDirection.AwayFromHero,
-                _ => CollectableItemPickup.FlingDirection.Drop,
+                ShinyFling.Drop or _ => CollectableItemPickup.FlingDirection.Drop,
             };
         }
     }
