@@ -14,7 +14,6 @@ using UnityEngine;
 
 namespace ItemChangerTesting.ItemTests;
 
-//tests PDIntItem for lacquers, PDBoolItem for desk, CollectableItem for crawbell
 internal class DefaultBigUIDefTest : Test
 {
     public override TestMetadata GetMetadata() => new()
