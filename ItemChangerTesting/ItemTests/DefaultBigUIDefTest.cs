@@ -151,7 +151,7 @@ internal class DefaultBigUIDefTest : Test
             Sprite = BaseAtlasSprites.Cling_Grip_Big.FlipX(),
             Data = new()
             {
-                // ActionString = HeroActionButton.JUMP.ToString(),
+                ActionString = HeroActionButton.JUMP.ToString(),
                 TextSetters = new()
                 {
                     ["Item Name"] = new BoxedString("NAME"),
