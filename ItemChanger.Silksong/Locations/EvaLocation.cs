@@ -1,17 +1,16 @@
 using ItemChanger.Items;
-using ItemChanger.Extensions;
 using ItemChanger.Locations;
 using ItemChanger.Placements;
 using ItemChanger.Tags;
 using ItemChanger.Silksong.Placements;
 using ItemChanger.Silksong.Util;
+using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Assets;
 using Benchwarp.Data;
 using Newtonsoft.Json;
 using Silksong.FsmUtil;
 using Silksong.FsmUtil.Actions;
-using Silksong.AssetHelper.ManagedAssets;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using TeamCherry.Localization;
@@ -49,22 +48,9 @@ public class EvaLocation : AutoLocation
 
     private void SpawnTablet(Scene scene)
     {
-        string inspectRegionName = "Inspect Region (1)";
-        GameObject tabletPrefab = AssetCache.GetAsset<IList<GameObject>>(GameObjectListKeys.LORE_TABLET_WEAVER)
-            .First(obj => obj.FindChild(inspectRegionName) != null);
-        GameObject tablet = scene.Instantiate(tabletPrefab);
+        GameObject tablet = LoreTabletContainer.InstantiateWeaverTablet(scene, BuildDescription);
         tablet.name = "IC Eva Item List Tablet";
         tablet.transform.position = new Vector3(70.94f, 11.47f, tablet.transform.position.z);
-        string modKey = "EVA_ITEM_DESCRIPTION";
-        LocalisedString s = new(Localization.Sheet, modKey);
-        BasicNPC npc = tablet.FindChild(inspectRegionName)!.GetComponent<BasicNPC>();
-        npc.StartingDialogue += () =>
-        {
-            Language._currentEntrySheets[Localization.Sheet][modKey] = BuildDescription();
-        };
-        npc.talkText = [s];
-        npc.repeatText = s;
-        npc.returnText = s;
         tablet.SetActive(true);
     }
 
