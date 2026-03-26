@@ -73,8 +73,10 @@ public class DefaultBigUIDef : CascadingUIDef
         // Execute the callback when the animation finishes
         ExecuteCallbackOnComplete(fsm, callback);
 
-        // Remove the black background - not sure if we want to keep this
-        // HideBackground(fsm);
+        // Remove the black background
+        // I don't like doing this, but it's the easiest way to make everything work if the player
+        // takes damage while the popup is showing
+        HideBackground(fsm);
     }
 
     private void ExecuteCallbackOnComplete(PlayMakerFSM fsm, Action? callback)
