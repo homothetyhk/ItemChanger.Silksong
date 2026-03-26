@@ -48,9 +48,9 @@
       },
       "ItemChanger.Core": {
         "type": "Direct",
-        "requested": "[0.7.0, )",
-        "resolved": "0.7.0",
-        "contentHash": "2nwri3IK22daATY3JTu9A4jZ9KZtbPVXvJbozR7RjMQC9igbhG1gaBaCal51xQVEoz4/yRARHqCTijdubJu+yA==",
+        "requested": "[0.7.1, )",
+        "resolved": "0.7.1",
+        "contentHash": "jjxdBHd4BBsm91YIJi3m1dAeOBW0ONdpPqhsUO4mYGgtu/Pl8f6ZIMDWIwbcpv+0QHGZI6B+LgXcY0HJ1vC4OA==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3"
         }
@@ -140,8 +140,8 @@
       "Silksong.GameLibs": {
         "type": "Direct",
         "requested": "[*-*, )",
-        "resolved": "1.2.0-silksong1.0.29980",
-        "contentHash": "YY9yyc0zsIhk78qt7c4yDreUOVV/xF5r6OYfylMcKRec8jJa+mb3lM0BLRKeDrf+VUY8vPX4epvBNszrNc0xww=="
+        "resolved": "1.2.0-silksong1.0.30000",
+        "contentHash": "2JPRsmFO5dBwLeIHA3kLlEYtu4BQ0Swdp3E4+J35IQGEujW3npMPot83BvY9wd3N7/Ycy2IfWilWC7fx6Sa3bg=="
       },
       "Silksong.PrepatcherPlugin": {
         "type": "Direct",
