@@ -77,6 +77,7 @@ internal static partial class BaseItemList
         customUIDef: orig => new MutatedDefaultBigUIDef()
         {
             BaseStateName = "Set Needle Throw",
+            // The alt sprite for silk spear better fits clawline
             Sprite = BaseAtlasSprites.Silkspear_Big,
             Fallback = orig,
         });
