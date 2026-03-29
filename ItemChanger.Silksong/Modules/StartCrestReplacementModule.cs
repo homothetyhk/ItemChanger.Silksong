@@ -5,6 +5,8 @@ using Mono.Cecil;
 using Mono.Cecil.Cil;
 using System.Reflection;
 
+namespace ItemChanger.Silksong.Modules;
+
 /// <summary>
 /// Module for use when starting the game with an alternative crest.
 /// It removes the Hunter Crest from the start inventory and changes the Act 3 start sequence
