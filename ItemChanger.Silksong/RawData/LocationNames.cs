@@ -124,7 +124,7 @@ public static class LocationNames
     public const string Druid_s_Eye = "Druid's_Eye";
     public const string Druid_s_Eyes = "Druid's_Eyes";
     public const string Egg_of_Flealia = "Egg_of_Flealia";
-      //public const string Fractured_Mask = "Fractured_Mask";
+    public const string Fractured_Mask__Mottled_Skarr_Dead = "Fractured_Mask-Mottled_Skarr_Dead";
     public const string Injector_Band = "Injector_Band";
     public const string Longclaw = "Longclaw";
       //public const string Magma_Bell = "Magma_Bell";
