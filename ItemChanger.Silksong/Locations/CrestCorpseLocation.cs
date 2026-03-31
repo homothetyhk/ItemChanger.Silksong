@@ -1,15 +1,9 @@
 using ItemChanger.Locations;
-using ItemChanger.Items;
-using ItemChanger.Silksong.Items;
-using ItemChanger.Silksong.RawData;
-using ItemChanger.Silksong.Serialization;
 using Silksong.FsmUtil;
 using Silksong.FsmUtil.Actions;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Newtonsoft.Json;
-using System;
-using System.Linq;
 
 namespace ItemChanger.Silksong.Locations;
 
@@ -42,7 +36,7 @@ public class CrestCorpseLocation : AutoLocation
         crestChangeState.RemoveActionsOfType<UnlockCrest>();
         crestChangeState.RemoveActionsOfType<AutoEquipCrestV2>();
         crestChangeState.RemoveActionsOfType<ToolsActiveStateControlV2>();
-        crestChangeState.InsertLambdaMethod(0, GiveAllAndApplyCorpsecrestEffects);
+        crestChangeState.InsertLambdaMethod(0, GiveAll);
 
         FsmState crestMsgState = fsm.MustGetState("Crest Msg");
         crestMsgState.RemoveActionsOfType<ShowToolCrestUIMsg>();
@@ -71,45 +65,4 @@ public class CrestCorpseLocation : AutoLocation
         }
     }
 
-    private void GiveAllAndApplyCorpsecrestEffects(Action callback)
-    {
-        Item[] newlyGrantedItems = Placement!.Items.Where(item => !item.IsObtained()).ToArray();
-        GiveAll(() =>
-        {
-            ApplyCorpsecrestPostGrantEffects(newlyGrantedItems);
-            callback();
-        });
-    }
-
-    private static void ApplyCorpsecrestPostGrantEffects(Item[] newlyGrantedItems)
-    {
-        ToolItem? equippedSkill = newlyGrantedItems.Select(GetSilkSkillTool).FirstOrDefault(tool => tool != null);
-        if (equippedSkill is null)
-        {
-            return;
-        }
-
-        ToolItemManager.AutoEquip(equippedSkill);
-        ToolItemManager.SetActiveState(ToolsActiveStates.Active, skipAnims: true);
-        ToolItemManager.ReportAllBoundAttackToolsUpdated();
-    }
-
-    private static ToolItem? GetSilkSkillTool(Item item)
-    {
-        if (item is not ItemChangerSavedItem { Item.Type: BaseGameSavedItem.ItemType.ToolItem } savedItem)
-        {
-            return null;
-        }
-
-        return item.Name switch
-        {
-            ItemNames.Cross_Stitch or
-            ItemNames.Pale_Nails or
-            ItemNames.Rune_Rage or
-            ItemNames.Sharpdart or
-            ItemNames.Silkspear or
-            ItemNames.Thread_Storm => savedItem.Item.Value as ToolItem,
-            _ => null,
-        };
-    }
 }

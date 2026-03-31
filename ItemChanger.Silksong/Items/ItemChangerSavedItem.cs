@@ -1,5 +1,6 @@
 ﻿using ItemChanger.Items;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.UIDefs;
 
@@ -23,6 +24,7 @@ public class ItemChangerSavedItem : Item
     {
         if (PlayerDataBoolName != null) PlayerData.instance.SetBool(PlayerDataBoolName, true);
         Item.Get();
+        AutoEquipSilkSkill();
     }
 
     public override bool Redundant()
@@ -60,6 +62,30 @@ public class ItemChangerSavedItem : Item
 
     public static ItemChangerSavedItem CreateCrest(string name, string id, string nameKey) =>
         CreateWithMsgUIDef(name, id, BaseGameSavedItem.ItemType.ToolCrest, $"Mods.{ItemChangerPlugin.Id}", nameKey, 1f / 3);
+
+    private void AutoEquipSilkSkill()
+    {
+        if (Item.Type != BaseGameSavedItem.ItemType.ToolItem || Item.Value is not ToolItem tool)
+        {
+            return;
+        }
+
+        switch (Name)
+        {
+            case ItemNames.Cross_Stitch:
+            case ItemNames.Pale_Nails:
+            case ItemNames.Rune_Rage:
+            case ItemNames.Sharpdart:
+            case ItemNames.Silkspear:
+            case ItemNames.Thread_Storm:
+                ToolItemManager.AutoEquip(tool);
+                ToolItemManager.RefreshEquippedState();
+                ToolItemManager.SetActiveState(ToolsActiveStates.Active, skipAnims: true);
+                ToolItemManager.SendEquippedChangedEvent(force: true);
+                ToolItemManager.ReportAllBoundAttackToolsUpdated();
+                break;
+        }
+    }
 
     /* reference implementation for CollectableItem - not fully tested
     
