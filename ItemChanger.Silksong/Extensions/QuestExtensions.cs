@@ -14,7 +14,7 @@ public static class QuestExtensions
         public void SetAccepted()
         {
             QuestCompletionData.Completion c = quest.Completion;
-            c.HasBeenSeen = true;
+            c.IsAccepted = true;
             quest.Completion = c;
         }
 
