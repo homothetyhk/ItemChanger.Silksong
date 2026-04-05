@@ -26,13 +26,11 @@ public class BellHermitLocation : AutoLocation
 
     private void HookBellHermit(PlayMakerFSM fsm)
     {
-        FsmState doSnareConvoState = fsm.MustGetState("Do Snare Convo?");
-        doSnareConvoState.InsertMethod(3, () =>
+        FsmState snareConvoDialogState = fsm.MustGetState("Snare Soul Dlg");
+        snareConvoDialogState.RemoveActionsOfType<CollectableItemGetDataV2>();
+        snareConvoDialogState.InsertMethod(1, () =>
         {
-            if (Placement!.AllObtained())
-            {
-                fsm.SendEvent("FALSE");
-            }
+            fsm.SetFsmBoolIfExists("Has Any", Placement!.AllObtained());
         });
         
         FsmState giveSoulState = fsm.MustGetState("Give Soul");
