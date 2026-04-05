@@ -24,6 +24,8 @@ internal static partial class BaseLocationList
             SceneName = SceneNames.Belltown_basement_03,
             Name = LocationNames.Hermit_s_Soul,
         },
-        Test = new PDBool(nameof(PlayerData.blackThreadWorld))
+        Test = CompositeValueProvider.Or(
+            new PDBool(nameof(PlayerData.blackThreadWorld)), new PDBool(nameof(PlayerData.soulSnareReady))
+        ),
     };
 }
