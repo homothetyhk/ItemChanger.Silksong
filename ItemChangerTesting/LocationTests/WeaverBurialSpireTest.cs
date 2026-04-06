@@ -37,6 +37,12 @@ internal class WeaverBurialSpireTest : Test
 
         foreach (var location in shrineLocations)
         {
+            if (location == LocationNames.Silkspear)
+            {
+                Profile.AddPlacement(Finder.GetLocation(location)!.Wrap()
+                    .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
+                continue;
+            }
             Profile.AddPlacement(Finder.GetLocation(location)!.Wrap()
                 .Add(Finder.GetItem(ItemNames.Rosary_String)!)
                 .Add(Finder.GetItem(ItemNames.Flea)!));

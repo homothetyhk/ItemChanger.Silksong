@@ -1,50 +1,69 @@
 using Benchwarp.Data;
 using ItemChanger.Locations;
-using ItemChanger.Silksong.Locations;
+using ItemChanger.Silksong.Containers;
+using ItemChanger.Tags;
 
 namespace ItemChanger.Silksong.RawData;
 
 internal static partial class BaseLocationList
 {
-    public static Location Silkspear => new WeaverBurialSpireLocation()
+    private static Location CreateWeaverCorpseLocation(
+        string name,
+        string sceneName,
+        string logicObjectName = "Shrine Weaver Ability",
+        string spriteObjectPath = "Ability Scene/Burst Deactivate"
+    )
     {
-        Name = LocationNames.Silkspear,
-        SceneName = SceneNames.Mosstown_02,
-    };
-    
-    public static Location Thread_Storm => new WeaverBurialSpireLocation()
-    {
-        Name = LocationNames.Thread_Storm,
-        SceneName = SceneNames.Greymoor_22,
-    };
+        return new ObjectLocation()
+        {
+            Name = name,
+            SceneName = sceneName,
+            ObjectName = logicObjectName,
+            Correction = default,
+            Tags =
+            [
+                new OriginalContainerTag() { ContainerType = ContainerNames.WeaverCorpse },
+                new DestroyOnContainerReplaceTag() { ObjectPath = spriteObjectPath },
+            ]
+        };
+    }
 
-    public static Location Swift_Step => new WeaverBurialSpireLocation()
-    {
-        Name = LocationNames.Swift_Step,
-        SceneName = SceneNames.Bone_East_05,
-    };
+    public static Location Silkspear => CreateWeaverCorpseLocation(
+        LocationNames.Silkspear,
+        SceneNames.Mosstown_02
+    );
 
-    public static Location Sharpdart => new WeaverBurialSpireLocation()
-    {
-        Name = LocationNames.Sharpdart,
-        SceneName = SceneNames.Crawl_05,
-    };
-    
-    public static Location Cling_Grip => new WeaverBurialSpireLocation()
-    {
-        Name = LocationNames.Cling_Grip,
-        SceneName = SceneNames.Shellwood_10,
-    };
-    
-    public static Location Clawline => new WeaverBurialSpireLocation()
-    {
-        Name = LocationNames.Clawline,
-        SceneName = SceneNames.Under_18,
-    };
-    
-    public static Location Silk_Soar => new WeaverBurialSpireLocation()
-    {
-        Name = LocationNames.Silk_Soar,
-        SceneName = SceneNames.Abyss_08,
-    };
+    public static Location Thread_Storm => CreateWeaverCorpseLocation(
+        LocationNames.Thread_Storm,
+        SceneNames.Greymoor_22
+    );
+
+    public static Location Swift_Step => CreateWeaverCorpseLocation(
+        LocationNames.Swift_Step,
+        SceneNames.Bone_East_05,
+        spriteObjectPath: "Ability Scene (1)/Burst Deactivate"
+    );
+
+    public static Location Sharpdart => CreateWeaverCorpseLocation(
+        LocationNames.Sharpdart,
+        SceneNames.Crawl_05,
+        spriteObjectPath: "Ability Scene (2)/Burst Deactivate"
+    );
+
+    public static Location Cling_Grip => CreateWeaverCorpseLocation(
+        LocationNames.Cling_Grip,
+        SceneNames.Shellwood_10,
+        spriteObjectPath: "Ability Scene (1)/Burst Deactivate"
+    );
+
+    public static Location Clawline => CreateWeaverCorpseLocation(
+        LocationNames.Clawline,
+        SceneNames.Under_18
+    );
+
+    public static Location Silk_Soar => CreateWeaverCorpseLocation(
+        LocationNames.Silk_Soar,
+        SceneNames.Abyss_08,
+        spriteObjectPath: "weaver_spire_base control/Burst Deactivate"
+    );
 }
