@@ -35,7 +35,7 @@ public record CompositeValueProvider(
 
     public static CompositeValueProvider Or(params IValueProvider<bool>[] providers)
         => new(Operator.Or, providers);
-    
+
     public static CompositeValueProvider And(params IValueProvider<bool>[] providers)
         => new(Operator.And, providers);
 }

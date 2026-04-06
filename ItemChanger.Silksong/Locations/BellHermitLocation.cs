@@ -1,5 +1,4 @@
 using ItemChanger.Locations;
-using Newtonsoft.Json;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Silksong.FsmUtil;
