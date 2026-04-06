@@ -8,21 +8,15 @@ namespace ItemChanger.Silksong.Locations;
 
 public class BellHermitLocation : AutoLocation
 {
-    [JsonIgnore] private FsmEditGroup? fsmEdits;
-
     protected override void DoLoad()
     {
-        fsmEdits = new()
+        Using(new FsmEditGroup()
         {
             { new(SceneName!, "Bell Hermit", "Dialogue"), HookBellHermit }
-        };
+        });
     }
 
-    protected override void DoUnload()
-    {
-        fsmEdits!.Dispose();
-        fsmEdits = null;
-    }
+    protected override void DoUnload() { }
 
     private void HookBellHermit(PlayMakerFSM fsm)
     {
@@ -32,7 +26,7 @@ public class BellHermitLocation : AutoLocation
         {
             fsm.SetFsmBoolIfExists("Has Any", Placement!.AllObtained());
         });
-        
+
         FsmState giveSoulState = fsm.MustGetState("Give Soul");
         giveSoulState.RemoveActionsOfType<SavedItemGetV2>();
         giveSoulState.InsertMethod(4, GiveAll);

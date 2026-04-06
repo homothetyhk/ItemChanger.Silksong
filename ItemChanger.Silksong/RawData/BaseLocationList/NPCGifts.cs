@@ -17,7 +17,6 @@ internal static partial class BaseLocationList
             X = 97.38f,
             Y = 102.57f,
             Managed = false,
-            
         },
         FalseLocation = new BellHermitLocation()
         {

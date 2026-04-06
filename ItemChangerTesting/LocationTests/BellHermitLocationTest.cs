@@ -28,7 +28,7 @@ internal class BellHermitLocationTest : Test
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
             .Add(Finder.GetItem(ItemNames.Flea)!));
     }
-    
+
     protected override void OnEnterGame()
     {
         base.OnEnterGame();
