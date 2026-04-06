@@ -117,9 +117,9 @@
       },
       "Silksong.DataManager": {
         "type": "Direct",
-        "requested": "[1.2.1, )",
-        "resolved": "1.2.1",
-        "contentHash": "qUhd5uCyhjNWUosnAjyb5qndmObPVBa5sTGgn8Jl8d7zsbnMoyqqzopNB1Hl94ULrYa2cGxOIyNWxyCBBU8/uw==",
+        "requested": "[1.2.2, )",
+        "resolved": "1.2.2",
+        "contentHash": "xqm5gC1scpak43W98DQDHxDoGhCmjrJnSHL6Ah8HQBJiUL1ewI3zmg5ZsgwviRDa4YA2Zwn96VaGHxc2A52w7g==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
@@ -140,8 +140,8 @@
       "Silksong.GameLibs": {
         "type": "Direct",
         "requested": "[*-*, )",
-        "resolved": "1.2.0-silksong1.0.29980",
-        "contentHash": "YY9yyc0zsIhk78qt7c4yDreUOVV/xF5r6OYfylMcKRec8jJa+mb3lM0BLRKeDrf+VUY8vPX4epvBNszrNc0xww=="
+        "resolved": "1.2.0-silksong1.0.30000",
+        "contentHash": "2JPRsmFO5dBwLeIHA3kLlEYtu4BQ0Swdp3E4+J35IQGEujW3npMPot83BvY9wd3N7/Ycy2IfWilWC7fx6Sa3bg=="
       },
       "Silksong.PrepatcherPlugin": {
         "type": "Direct",
