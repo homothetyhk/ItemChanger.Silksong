@@ -28,6 +28,20 @@ namespace ItemChanger.Silksong.RawData
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
 
+        // Shared tag for non-CollectableItemPickup interactables (Heart Piece, Silk Spool, Silk Grub, etc.)
+        // IC replaces the object with a new shiny. ShinyType.Instant uses the contact-pickup prefab
+        // (same mechanic as mossberry drops), bypassing the interactEvents system which does not
+        // reliably detect the player for runtime-spawned shinies. FloatInPlace keeps the shiny
+        // stationary at the original object's position rather than letting it fall.
+        internal static ShinyControlTag FloatShiny => new()
+        {
+            Info = new ShinyContainer.ShinyControlInfo
+            {
+                ShinyType = ShinyContainer.ShinyType.Instant,
+                ShinyFling = ShinyContainer.ShinyFling.FloatInPlace,
+            }
+        };
+
         public static Dictionary<string, Location> GetBaseLocations()
         {
             return typeof(BaseLocationList).GetProperties().Select(p => (Location)p.GetValue(null)).ToDictionary(l => l.Name);
