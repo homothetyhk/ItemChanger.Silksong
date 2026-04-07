@@ -98,6 +98,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+    <PackageReference Include="Silksong.ModMenu" Version="0.5.0" />
     <Reference Include="MMHOOK_Assembly-CSharp">
       <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_Assembly-CSharp.dll</HintPath>
     </Reference>
