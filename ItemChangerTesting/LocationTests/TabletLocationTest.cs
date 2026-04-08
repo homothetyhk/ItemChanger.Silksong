@@ -58,6 +58,7 @@ internal class TabletLocationTest : Test
                 Name = "Debug-Cradle2-1",
                 UIDef = Finder.GetItem(ItemNames.Cling_Grip)!.UIDef,
             }.WithTag(new PersistentItemTag() { Persistence = ItemChanger.Enums.Persistence.Persistent }))
+            .Add(Finder.GetItem(ItemNames.Lore_Tablet__Abyss_Bottom_Left)!)
             );
 
         Profile.AddPlacement(
