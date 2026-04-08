@@ -9,11 +9,11 @@ using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Serialization.ModifiedSprites;
 using ItemChanger.Silksong.StartDefs;
+using ItemChanger.Silksong.Tags;
 using ItemChanger.Silksong.UIDefs;
 using ItemChanger.Silksong.UIDefs.BigUIDefs;
 using ItemChanger.Tags;
 using UnityEngine;
-using static Mono.Security.X509.X520;
 
 namespace ItemChangerTesting.ItemTests;
 
@@ -24,7 +24,7 @@ internal class DefaultBigUIDefTest : Test
         Folder = TestFolder.ItemTests,
         MenuName = "Default Big UIDef",
         MenuDescription = "Tests the default big UI def",
-        Revision = 2026032700,
+        Revision = 2026040800,
     };
 
     public override void Setup(TestArgs args)
@@ -156,7 +156,7 @@ internal class DefaultBigUIDefTest : Test
             FlingType = ItemChanger.Enums.FlingType.Everywhere,
             ForceDefaultContainer = true,
             Managed = false,
-        }.Wrap();
+        }.Wrap().WithTag(new ShinyControlTag() { Info = new() { ShinyType = ItemChanger.Silksong.Containers.ShinyContainer.ShinyType.Instant } });
 
         foreach (string itemName in (string[])[ItemNames.Cling_Grip, ItemNames.Left_Cling_Grip, ItemNames.Right_Cling_Grip])
         {
