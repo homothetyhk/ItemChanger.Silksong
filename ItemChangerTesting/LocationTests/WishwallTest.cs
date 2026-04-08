@@ -8,12 +8,16 @@ namespace ItemChangerTesting.LocationTests;
 
 /// <summary>
 /// Tests WishwallLocation using the "Bone Bottom Repairs" quest (Building Materials).
+/// This quest has no vanilla reward icon (<c>rewardIconType == None</c>), so it also
+/// verifies that IC forces the reward icon to be shown anyway, using the IC item's
+/// sprite with <see cref="FullQuestBase.IconTypes.Image"/> material.
 ///
 /// Test steps:
 ///   1. Load the test save → arrive near Bellway_01.
 ///   2. Walk to the Bone Bottom Repairs quest board and interact.
 ///   3. The quest should appear as completable (200 shards are given on start).
-///   4. Turn it in → IC should give a Surgeon's Key instead of the vanilla reward.
+///   4. The quest detail and inventory views should show the Surgeon's Key icon.
+///   5. Turn it in → IC should give a Surgeon's Key instead of the vanilla reward.
 /// </summary>
 internal class WishwallTest : Test
 {
