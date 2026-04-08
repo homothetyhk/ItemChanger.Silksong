@@ -38,5 +38,9 @@
   "CHEST_PILGRIM": {
     "SceneName": "Dust_05",
     "ObjPath": "Pilgrim Chest"
+  },
+  "BENCH_PARTICLE": {
+    "SceneName": "Bone_04",
+    "ObjPath": "RestBench/Particle Rest"
   }
 }

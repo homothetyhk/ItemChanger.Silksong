@@ -5,3 +5,4 @@ using MonoDetour.HookGen;
 [assembly: MonoDetourTargets(typeof(HeroController), GenerateControlFlowVariants = true)]
 [assembly: MonoDetourTargets(typeof(InventoryItemConditional))]
 [assembly: MonoDetourTargets(typeof(ListenForTauntV2), GenerateControlFlowVariants = true)]
+[assembly: MonoDetourTargets(typeof(BasicNPCBase), GenerateControlFlowVariants = true)]

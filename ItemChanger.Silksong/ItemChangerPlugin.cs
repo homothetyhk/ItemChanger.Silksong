@@ -55,6 +55,7 @@ namespace ItemChanger.Silksong
         private void DefineContainers()
         {
             ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new FleaContainer());
+            ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new TabletContainer());
         }
     }
 }
