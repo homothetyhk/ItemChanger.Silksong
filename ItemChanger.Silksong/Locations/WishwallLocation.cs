@@ -1,7 +1,9 @@
 using HarmonyLib;
+using ItemChanger.Items;
 using ItemChanger.Locations;
 using MonoMod.RuntimeDetour;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
@@ -50,11 +52,28 @@ public class WishwallLocation : AutoLocation
     // The original rewardItem, saved so we can restore it on DoUnload.
     private SavedItem? _originalRewardItem;
 
-    // ─── Reflected field (cached once) ─────────────────────────────────────────
+    // ─── Reflected fields (cached once) ────────────────────────────────────────
 
     private static readonly FieldInfo s_rewardItemField =
         typeof(FullQuestBase)
             .GetField("rewardItem", BindingFlags.NonPublic | BindingFlags.Instance)!;
+
+    private static readonly FieldInfo s_qidRewardGroupField =
+        typeof(QuestItemDescription)
+            .GetField("rewardGroup", BindingFlags.NonPublic | BindingFlags.Instance)!;
+
+    private static readonly FieldInfo s_qidDonateCostGroupField =
+        typeof(QuestItemDescription)
+            .GetField("donateCostGroup", BindingFlags.NonPublic | BindingFlags.Instance)!;
+
+    // Horizontal distance (in local-space units) to place rewardGroup to the right of
+    // donateCostGroup when both must coexist on a donation quest.
+    // Positive = right, negative = left.
+    private const float RewardBesideDonateOffset = 3.0f;
+
+    // Per-QuestItemDescription instance: the prefab-original localPosition of rewardGroup,
+    // cached the first time we see each instance so we can restore it for non-donate quests.
+    private readonly Dictionary<int, Vector3> _rewardGroupOriginalPositions = new();
 
     // ─── Location lifecycle ─────────────────────────────────────────────────────
 
@@ -62,6 +81,86 @@ public class WishwallLocation : AutoLocation
     {
         _savedItem = ScriptableObject.CreateInstance<WishwallSavedItem>();
         _savedItem.Location = this;
+
+        // Hook RewardIcon and RewardIconType together so every consumer — the quest board
+        // detail view, the turn-in confirmation box, the inventory view — sees the IC
+        // item's sprite regardless of whether the vanilla quest has an icon configured.
+        //
+        // RewardIconType must also be hooked because QuestItemDescription indexes into
+        // its counterMaterials array with (int)RewardIconType, and IconTypes.None == -1
+        // would produce an out-of-range crash.  We return IconTypes.Image (0) so the
+        // sprite is rendered with a plain image material.
+        Using(new Hook(
+            AccessTools.PropertyGetter(typeof(FullQuestBase), nameof(FullQuestBase.RewardIcon)),
+            (Func<FullQuestBase, Sprite> orig, FullQuestBase self) =>
+            {
+                if (_savedItem != null && self.name == QuestName)
+                {
+                    return _savedItem.GetPopupIcon();
+                }
+                return orig(self);
+            }
+        ));
+
+        Using(new Hook(
+            AccessTools.PropertyGetter(typeof(FullQuestBase), nameof(FullQuestBase.RewardIconType)),
+            (Func<FullQuestBase, FullQuestBase.IconTypes> orig, FullQuestBase self) =>
+            {
+                if (_savedItem != null && self.name == QuestName)
+                {
+                    return FullQuestBase.IconTypes.Image;
+                }
+                return orig(self);
+            }
+        ));
+
+        // Hook QuestItemDescription.SetDisplay so that when a donation quest's reward
+        // icon is forced visible (both rewardGroup and donateCostGroup active), we move
+        // rewardGroup above donateCostGroup to avoid overlap.
+        // The prefab-original localPosition of rewardGroup is cached per-instance on first
+        // contact and restored before each orig() call so non-donate quests are unaffected.
+        Using(new Hook(
+            AccessTools.Method(typeof(QuestItemDescription), "SetDisplay"),
+            (Action<QuestItemDescription, BasicQuestBase> orig,
+             QuestItemDescription self, BasicQuestBase quest) =>
+            {
+                int id = self.GetInstanceID();
+                var rewardGroup = s_qidRewardGroupField.GetValue(self) as GameObject;
+
+                // Cache the prefab-original position the very first time we see this instance,
+                // before any of our hooks have had a chance to move it.
+                if (rewardGroup != null && !_rewardGroupOriginalPositions.ContainsKey(id))
+                {
+                    _rewardGroupOriginalPositions[id] = rewardGroup.transform.localPosition;
+                }
+
+                // Restore to prefab position before orig() so vanilla layout is always correct.
+                if (rewardGroup != null && _rewardGroupOriginalPositions.TryGetValue(id, out Vector3 saved))
+                {
+                    rewardGroup.transform.localPosition = saved;
+                }
+
+                orig(self, quest);
+
+                // If this is our donation quest and both groups ended up active, shift
+                // rewardGroup above donateCostGroup to prevent the overlap.
+                if (_savedItem == null
+                    || quest is not FullQuestBase fq
+                    || fq.name != QuestName
+                    || !fq.IsDonateType)
+                    return;
+
+                var donateCostGroup = s_qidDonateCostGroupField.GetValue(self) as GameObject;
+                if (rewardGroup  == null || !rewardGroup.activeSelf
+                    || donateCostGroup == null || !donateCostGroup.activeSelf)
+                    return;
+
+                Vector3 donatePos = donateCostGroup.transform.localPosition;
+                _rewardGroupOriginalPositions.TryGetValue(id, out Vector3 origPos);
+                rewardGroup.transform.localPosition =
+                    new Vector3(donatePos.x + RewardBesideDonateOffset, origPos.y, origPos.z);
+            }
+        ));
 
         // Hook FullQuestBase.TryEndQuest globally.  This fires for every quest
         // completion path, including FSM-driven donation quests that bypass
@@ -85,6 +184,8 @@ public class WishwallLocation : AutoLocation
             _patchedQuest       = null;
             _originalRewardItem = null;
         }
+
+        _rewardGroupOriginalPositions.Clear();
 
         if (_savedItem != null)
         {
@@ -153,6 +254,28 @@ public class WishwallLocation : AutoLocation
 
         public override bool CanGetMore() =>
             Location?.Placement?.AllObtained() == false;
+
+        /// <summary>
+        /// Returns the preview sprite of the first unobtained IC item so the quest
+        /// completion popup shows the randomized reward instead of the vanilla item.
+        /// </summary>
+        public override Sprite GetPopupIcon()
+        {
+            if (Location?.Placement is not { } placement) return null!;
+            Item? item = placement.Items.FirstOrDefault(i => !i.IsObtained());
+            return item?.GetPreviewSprite(placement)!;
+        }
+
+        /// <summary>
+        /// Returns the preview name of the first unobtained IC item so the quest
+        /// completion popup labels the randomized reward correctly.
+        /// </summary>
+        public override string GetPopupName()
+        {
+            if (Location?.Placement is not { } placement) return null!;
+            Item? item = placement.Items.FirstOrDefault(i => !i.IsObtained());
+            return (item?.GetResolvedUIDef(placement)?.GetPreviewName())!;
+        }
 
         // GetTakesHeroControl() returns false (base default), so quest processing
         // continues normally after our give.

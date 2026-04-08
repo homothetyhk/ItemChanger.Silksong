@@ -295,15 +295,16 @@ public static class LocationNames
     public const string Pristine_Core__Cogwork_Clappers = "Pristine_Core-Cogwork_Clappers";  // Cogwork Core, dropped after defeating both Clappers (Act 3)
     public const string Pristine_Core__Twelfth_Architect = "Pristine_Core-Twelfth_Architect";  // Corpse of Twelfth Architect after quest sequence
 
-    // silkeaters - 8 total
-    public const string Silkeater__Bilewater = "Silkeater-Bilewater";  // Inside Exhaust Organ
-    public const string Silkeater__Blasted_Steps = "Silkeater-Blasted_Steps";  // East of Shakra (replaced by Steel Seer Zi in Steel Soul Mode)
-    public const string Silkeater__Choral_Chambers_East = "Silkeater-Choral_Chambers_East";  // East of Great Gourmand's dining room
-    public const string Silkeater__Choral_Chambers_West = "Silkeater-Choral_Chambers_West";  // West of Grand Bellway
-    public const string Silkeater__Deep_Docks = "Silkeater-Deep_Docks";  // Southeast of sauna bench
-    public const string Silkeater__Greymoor = "Silkeater-Greymoor";  // Top of tower west of Halfway Home
-    public const string Silkeater__Whiteward = "Silkeater-Whiteward";  // In the centre
-    public const string Silkeater__Whispering_Vaults = "Silkeater-Whispering_Vaults";  // North of Vaultkeeper Cardinius's lair
+    // silkeaters - 9 total
+    public const string Silkeater__Bilewater = "Silkeater-Bilewater";  // Inside Exhaust Organ (Organ_01)
+    public const string Silkeater__Blasted_Steps = "Silkeater-Blasted_Steps";  // East of Shakra (Coral_37); replaced by Steel Seer Zi in Steel Soul Mode
+    public const string Silkeater__Choral_Chambers_East = "Silkeater-Choral_Chambers_East";  // East of Great Gourmand's dining room (Song_09b)
+    public const string Silkeater__Choral_Chambers_West = "Silkeater-Choral_Chambers_West";  // West of Grand Bellway (Song_24)
+    public const string Silkeater__Deep_Docks = "Silkeater-Deep_Docks";  // Southeast of sauna bench (Dock_14)
+    public const string Silkeater__Greymoor = "Silkeater-Greymoor";  // Top of tower west of Halfway Home (Greymoor_04)
+    public const string Silkeater__The_Cradle = "Silkeater-The_Cradle";  // Underground tunnel beneath breakable floor (Tube_Hub)
+    public const string Silkeater__Whiteward = "Silkeater-Whiteward";  // In the centre (Ward_04)
+    public const string Silkeater__Whispering_Vaults = "Silkeater-Whispering_Vaults";  // North of Vaultkeeper Cardinius's lair (Library_14)
 
     // keys (note: architect's key and two simple keys are shop items)
     // public const string Architect_s_Key = "Architect's_Key";
@@ -710,4 +711,71 @@ public static class LocationNames
 
     
     // Shard Deposits
+
+    // wishwall (quest board) locations — one entry per QuestCompletionDataName
+    // Bone Bottom board
+    public const string Wishwall__Building_Materials = "Wishwall-Building_Materials";               // Bone Bottom Repairs
+    public const string Wishwall__Building_Materials_Bridge = "Wishwall-Building_Materials_Bridge"; // A Lifesaving Bridge
+    public const string Wishwall__Building_Materials_Statue = "Wishwall-Building_Materials_Statue"; // An Icon of Hope
+    public const string Wishwall__Pilgrim_Rags = "Wishwall-Pilgrim_Rags";                           // Garb of the Pilgrims
+    public const string Wishwall__Mossberry_Collection_Pre = "Wishwall-Mossberry_Collection_Pre";   // Berry Picking (pre)
+    public const string Wishwall__Mossberry_Collection_1 = "Wishwall-Mossberry_Collection_1";       // Berry Picking
+    public const string Wishwall__Save_the_Fleas_Pre = "Wishwall-Save_the_Fleas_Pre";               // The Lost Fleas (pre)
+    public const string Wishwall__Save_the_Fleas = "Wishwall-Save_the_Fleas";                       // The Lost Fleas
+    public const string Wishwall__Rock_Rollers = "Wishwall-Rock_Rollers";                           // Volatile Flintbeetles
+    public const string Wishwall__Skull_King = "Wishwall-Skull_King";                               // The Terrible Tyrant
+    // Belltown board
+    public const string Wishwall__Brolly_Get = "Wishwall-Brolly_Get";                               // Flexile Spines
+    public const string Wishwall__Journal = "Wishwall-Journal";                                      // Bugs of Pharloom
+    public const string Wishwall__Belltown_House_Start = "Wishwall-Belltown_House_Start";            // Restoration of Bellhart
+    public const string Wishwall__Belltown_House_Mid = "Wishwall-Belltown_House_Mid";                // Bellhart's Glory
+    public const string Wishwall__A_Pinsmiths_Tools = "Wishwall-A_Pinsmiths_Tools";                 // Pinmaster's Oil
+    public const string Wishwall__Shiny_Bell_Goomba = "Wishwall-Shiny_Bell_Goomba";                 // Silver Bells
+    public const string Wishwall__Save_Courier_Short = "Wishwall-Save_Courier_Short";               // My Missing Courier
+    public const string Wishwall__Save_Courier_Tall = "Wishwall-Save_Courier_Tall";                 // My Missing Brother
+    public const string Wishwall__Courier_Delivery_Bonebottom = "Wishwall-Courier_Delivery_Bonebottom";     // Bone Bottom Supplies
+    public const string Wishwall__Courier_Delivery_Pilgrims_Rest = "Wishwall-Courier_Delivery_Pilgrims_Rest"; // Pilgrim's Rest Supplies
+    public const string Wishwall__Courier_Delivery_Songclave = "Wishwall-Courier_Delivery_Songclave";   // Songclave Supplies
+    public const string Wishwall__Courier_Delivery_Fleatopia = "Wishwall-Courier_Delivery_Fleatopia";   // Fleatopia Supplies
+    public const string Wishwall__Courier_Delivery_Mask_Maker = "Wishwall-Courier_Delivery_Mask_Maker"; // Liquid Lacquer
+    public const string Wishwall__Courier_Delivery_Dustpens_Slave = "Wishwall-Courier_Delivery_Dustpens_Slave"; // Queen's Egg
+    public const string Wishwall__Courier_Delivery_Fixer = "Wishwall-Courier_Delivery_Fixer";       // Survivor's Camp Supplies
+    public const string Wishwall__Crow_Feathers_Pre = "Wishwall-Crow_Feathers_Pre";                 // Crawbug Clearing (pre)
+    public const string Wishwall__Crow_Feathers = "Wishwall-Crow_Feathers";                         // Crawbug Clearing
+    public const string Wishwall__Beastfly_Hunt = "Wishwall-Beastfly_Hunt";                         // Savage Beastfly
+    public const string Wishwall__Shell_Flowers = "Wishwall-Shell_Flowers";                         // Rite of the Pollip
+    public const string Wishwall__Wood_Witch_Curse = "Wishwall-Wood_Witch_Curse";                   // Rite of Rebirth
+    public const string Wishwall__Doctor_Curse_Cure = "Wishwall-Doctor_Curse_Cure";                 // Infestation Operation
+    public const string Wishwall__Extractor_Blue = "Wishwall-Extractor_Blue";                       // Alchemist's Assistant
+    public const string Wishwall__Extractor_Blue_Worms = "Wishwall-Extractor_Blue_Worms";           // Advanced Alchemy
+    public const string Wishwall__Roach_Killing = "Wishwall-Roach_Killing";                         // Roach Guts
+    public const string Wishwall__Shakra_Final_Quest = "Wishwall-Shakra_Final_Quest";               // Trail's End
+    public const string Wishwall__Soul_Snare = "Wishwall-Soul_Snare";                               // Silk and Soul
+    public const string Wishwall__Pinstress_Battle_Pre = "Wishwall-Pinstress_Battle_Pre";           // Fatal Resolve (pre)
+    public const string Wishwall__Pinstress_Battle = "Wishwall-Pinstress_Battle";                   // Fatal Resolve
+    public const string Wishwall__Sprintmaster_Race = "Wishwall-Sprintmaster_Race";                 // Fastest in Pharloom
+    public const string Wishwall__Garmond_Black_Threaded = "Wishwall-Garmond_Black_Threaded";       // Hero's Call
+    public const string Wishwall__Anguish_and_Misery = "Wishwall-Anguish_and_Misery";               // Pain
+    public const string Wishwall__Ant_Trapper = "Wishwall-Ant_Trapper";                             // The Hidden Hunter
+    public const string Wishwall__Flea_Games_Pre = "Wishwall-Flea_Games_Pre";                       // Ecstasy of the End (pre)
+    public const string Wishwall__Flea_Games = "Wishwall-Flea_Games";                               // Ecstasy of the End
+    public const string Wishwall__Steel_Sentinel = "Wishwall-Steel_Sentinel";                       // A Vassal Lost
+    public const string Wishwall__Steel_Sentinel_Pt2 = "Wishwall-Steel_Sentinel_Pt2";               // A Vassal Lost (pt.2)
+    public const string Wishwall__Mr_Mushroom = "Wishwall-Mr_Mushroom";                             // Passing of the Age
+    public const string Wishwall__Destroy_Thread_Cores = "Wishwall-Destroy_Thread_Cores";           // Dark Hearts
+    public const string Wishwall__Sprintmaster_Pre = "Wishwall-Sprintmaster_Pre";                   // Fastest in Pharloom (pre)
+    public const string Wishwall__Soul_Snare_Pre = "Wishwall-Soul_Snare_Pre";                       // Silk and Soul (pre)
+    // Songclave board
+    public const string Wishwall__Songclave_Donation_1 = "Wishwall-Songclave_Donation_1";           // Building Up Songclave
+    public const string Wishwall__Songclave_Donation_2 = "Wishwall-Songclave_Donation_2";           // Strengthening Songclave
+    public const string Wishwall__Fine_Pins = "Wishwall-Fine_Pins";                                 // Fine Pins
+    public const string Wishwall__Save_City_Merchant = "Wishwall-Save_City_Merchant";               // The Wandering Merchant
+    public const string Wishwall__Save_City_Merchant_Bridge = "Wishwall-Save_City_Merchant_Bridge"; // The Lost Merchant
+    public const string Wishwall__Song_Pilgrim_Cloaks = "Wishwall-Song_Pilgrim_Cloaks";             // Cloaks of the Choir
+    public const string Wishwall__Broodmother_Hunt = "Wishwall-Broodmother_Hunt";                   // The Wailing Mother
+    public const string Wishwall__Great_Gourmand = "Wishwall-Great_Gourmand";                       // Great Taste of Pharloom
+    public const string Wishwall__Save_Sherma = "Wishwall-Save_Sherma";                             // Balm for the Wounded
+    public const string Wishwall__Song_Knight = "Wishwall-Song_Knight";                             // Final Audience
+    public const string Wishwall__Huntress_Quest = "Wishwall-Huntress_Quest";                       // Broodfeast
+    public const string Wishwall__Huntress_Quest_Runt = "Wishwall-Huntress_Quest_Runt";             // Runtfeast
 }
