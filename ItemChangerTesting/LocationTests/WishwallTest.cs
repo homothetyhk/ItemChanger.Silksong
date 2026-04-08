@@ -1,43 +1,40 @@
 using Benchwarp.Data;
 using ItemChanger;
-using ItemChanger.Items;
+using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.RawData;
 
 namespace ItemChangerTesting.LocationTests;
 
 /// <summary>
-/// Tests WishwallLocation: verifies that IC gives the placement's item instead of
-/// the vanilla quest reward when the player turns in a quest at a QuestBoardInteractable.
+/// Tests WishwallLocation using the "Bone Bottom Repairs" quest (Building Materials).
 ///
 /// Test steps:
-///   1. Load save → arrive near the Flintbeetle quest board.
-///   2. Walk to the quest board and interact.
-///   3. The "Volatile Flintbeetles" quest should appear as completable.
-///   4. Select it → confirm → IC should give a Surgeon's Key instead of the vanilla Memory Locket.
+///   1. Load the test save → arrive near Bellway_01.
+///   2. Walk to the Bone Bottom Repairs quest board and interact.
+///   3. The quest should appear as completable (200 shards are given on start).
+///   4. Turn it in → IC should give a Surgeon's Key instead of the vanilla reward.
 /// </summary>
 internal class WishwallTest : Test
 {
     public override TestMetadata GetMetadata() => new()
     {
         Folder = TestFolder.LocationTests,
-        MenuName = "Wishwall (Volatile Flintbeetles → Surgeon's Key)",
-        MenuDescription = "Turns in the Volatile Flintbeetles quest at a quest board; " +
-                          "IC should give a Surgeon's Key instead of the vanilla Memory Locket.",
-        Revision = 2026040700,
+        MenuName = "Wishwall (Bone Bottom Repairs → Surgeon's Key)",
+        MenuDescription = "Turns in the Bone Bottom Repairs quest at the quest board; " +
+                          "IC should give a Surgeon's Key instead of the vanilla reward.",
+        Revision = 2026040704,
     };
 
     public override void Setup(TestArgs args)
     {
-        // TODO: Replace with the scene + gate nearest to the Volatile Flintbeetles quest board
-        //       (QuestCompletionDataName = "Rock Rollers").  Verify in-game and update.
-        StartNear(SceneNames.Tut_05, PrimitiveGateNames.left1);
+        StartNear(SceneNames.Bellway_01, PrimitiveGateNames.left1);
 
         Profile.AddPlacement(
             new WishwallLocation
             {
-                Name = LocationNames.Memory_Locket__Quest_Flintbeetles,
-                QuestName = Quests.Rock_Rollers,
+                Name = "Wishwall_Test-Bone_Bottom_Repairs",
+                QuestName = Quests.Building_Materials,
                 FlingType = ItemChanger.Enums.FlingType.DirectDeposit,
             }.Wrap()
              .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
@@ -47,16 +44,25 @@ internal class WishwallTest : Test
     {
         base.OnEnterGame();
 
-        // Pre-fulfil the Volatile Flintbeetles quest so it's immediately ready to turn in.
-        if (QuestManager.TryGetFullQuestBase(Quests.Rock_Rollers, out FullQuestBase? flintbeetleQuest)
-            && flintbeetleQuest != null)
+        // Mark the Bellbeast as defeated so the Bone Bottom quest board spawns.
+        PlayerData.instance.defeatedBellBeast = true;
+
+        if (QuestManager.TryGetFullQuestBase(Quests.Building_Materials, out FullQuestBase? quest)
+            && quest != null)
         {
-            flintbeetleQuest.SetReadyToComplete();
+            // Mark the quest as seen and accepted.
+            quest.SetSeen();
+            quest.SetAccepted();
+
+            // Bone Bottom Repairs is a donation quest: its target is a QuestTargetCurrency
+            // (shell shards) which does not implement Get().  Set ShellShards directly on
+            // PlayerData so CanComplete returns true when the player opens the board.
+            PlayerData.instance.ShellShards = 200;
         }
         else
         {
             ItemChangerTestingPlugin.Instance.Logger.LogWarning(
-                $"[WishwallTest] Could not find quest '{Quests.Rock_Rollers}' — test may not work correctly.");
+                $"[WishwallTest] Could not find quest '{Quests.Building_Materials}'.");
         }
     }
 }

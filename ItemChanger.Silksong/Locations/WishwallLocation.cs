@@ -2,16 +2,16 @@ using HarmonyLib;
 using ItemChanger.Locations;
 using MonoMod.RuntimeDetour;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
 namespace ItemChanger.Silksong.Locations;
 
 /// <summary>
-/// Location that intercepts reward delivery from a <see cref="QuestBoardInteractable"/>
-/// (Silksong's "wishwall" quest board). When the specified quest is turned in at the
-/// board, ItemChanger gives the placement's items instead of the quest's vanilla reward.
+/// Location that intercepts reward delivery when a quest is completed via a
+/// <see cref="QuestBoardInteractable"/> (Silksong's "wishwall" quest board).
+/// When the specified quest is turned in, ItemChanger gives the placement's items
+/// instead of the quest's vanilla reward.
 /// </summary>
 /// <remarks>
 /// <para>
@@ -21,10 +21,16 @@ namespace ItemChanger.Silksong.Locations;
 /// <see cref="RawData.Quests"/> constants.
 /// </para>
 /// <para>
-/// The hook is global: one <see cref="QuestBoardInteractable.ProcessQueuedCompletions"/>
-/// hook is registered per location instance, so <see cref="QuestName"/> values must be
-/// unique across all loaded <see cref="WishwallLocation"/> instances (which they are
-/// because each FullQuestBase has a unique Unity name).
+/// The hook intercepts <see cref="FullQuestBase.TryEndQuest"/> globally and wraps
+/// the <c>afterPrompt</c> callback to inject <c>GiveAll()</c>. This approach works
+/// for all completion paths: both the standard <c>ProcessQueuedCompletions</c> route
+/// and FSM-driven donation quests that call <c>TryEndQuest</c> directly with an
+/// <c>afterPrompt</c> that does not invoke <c>rewardItem.Get()</c>.
+/// </para>
+/// <para>
+/// <see cref="QuestName"/> values must be unique across all loaded
+/// <see cref="WishwallLocation"/> instances (which they are because each
+/// <see cref="FullQuestBase"/> has a unique Unity Object name).
 /// </para>
 /// </remarks>
 public class WishwallLocation : AutoLocation
@@ -44,11 +50,7 @@ public class WishwallLocation : AutoLocation
     // The original rewardItem, saved so we can restore it on DoUnload.
     private SavedItem? _originalRewardItem;
 
-    // ─── Reflected fields (cached once) ────────────────────────────────────────
-
-    private static readonly FieldInfo s_queuedCompletionsField =
-        typeof(QuestBoardInteractable)
-            .GetField("queuedCompletions", BindingFlags.NonPublic | BindingFlags.Instance)!;
+    // ─── Reflected field (cached once) ─────────────────────────────────────────
 
     private static readonly FieldInfo s_rewardItemField =
         typeof(FullQuestBase)
@@ -61,14 +63,15 @@ public class WishwallLocation : AutoLocation
         _savedItem = ScriptableObject.CreateInstance<WishwallSavedItem>();
         _savedItem.Location = this;
 
-        // Register a global hook that fires whenever any QuestBoardInteractable
-        // processes a completion.  We peek the queue and swap rewardItem for the
-        // quest that matches ours.  Using() disposes the hook on DoUnload.
+        // Hook FullQuestBase.TryEndQuest globally.  This fires for every quest
+        // completion path, including FSM-driven donation quests that bypass
+        // QuestBoardInteractable.ProcessQueuedCompletions.
         Using(new Hook(
-            AccessTools.Method(typeof(QuestBoardInteractable),
-                               nameof(QuestBoardInteractable.ProcessQueuedCompletions)),
-            (Action orig, QuestBoardInteractable self) =>
-                InterceptProcessQueuedCompletions(orig, self)
+            AccessTools.Method(typeof(FullQuestBase), nameof(FullQuestBase.TryEndQuest)),
+            (Func<FullQuestBase, Action, bool, bool, bool, bool> orig,
+             FullQuestBase self, Action afterPrompt, bool consumeCurrency,
+             bool forceEnd, bool showPrompt) =>
+                InterceptTryEndQuest(orig, self, afterPrompt, consumeCurrency, forceEnd, showPrompt)
         ));
     }
 
@@ -92,35 +95,46 @@ public class WishwallLocation : AutoLocation
 
     // ─── Hook implementation ────────────────────────────────────────────────────
 
-    private void InterceptProcessQueuedCompletions(Action orig, QuestBoardInteractable self)
+    private bool InterceptTryEndQuest(
+        Func<FullQuestBase, Action, bool, bool, bool, bool> orig,
+        FullQuestBase self, Action afterPrompt, bool consumeCurrency,
+        bool forceEnd, bool showPrompt)
     {
-        // Peek the next quest to be processed.  Only replace rewardItem when it
-        // matches our QuestName; other locations' hooks will handle their quests.
-        if (_savedItem != null &&
-            s_queuedCompletionsField.GetValue(self) is Queue<FullQuestBase> queue &&
-            queue.Count > 0)
+        if (_savedItem != null && self.name == QuestName)
         {
-            FullQuestBase next = queue.Peek();
-            if (next.name == QuestName)
+            // Substitute rewardItem for completion paths that call rewardItem.Get()
+            // inside afterPrompt (e.g. QuestBoardInteractable.ProcessQueuedCompletions).
+            if (_patchedQuest == null)
             {
-                // Save the original rewardItem the first time we intercept this quest.
-                if (_patchedQuest == null)
-                {
-                    _patchedQuest       = next;
-                    _originalRewardItem = s_rewardItemField.GetValue(next) as SavedItem;
-                }
-                s_rewardItemField.SetValue(next, _savedItem);
+                _patchedQuest       = self;
+                _originalRewardItem = s_rewardItemField.GetValue(self) as SavedItem;
             }
+            s_rewardItemField.SetValue(self, _savedItem);
+
+            // Wrap afterPrompt so GiveAll() is called when the completion callback
+            // fires (sync or async via ShowQuestCompleted).  This covers FSM-driven
+            // donation paths whose afterPrompt does not call rewardItem.Get().
+            // AllObtained() guards against double-give if both paths fire.
+            Action? originalAfterPrompt = afterPrompt;
+            afterPrompt = () =>
+            {
+                originalAfterPrompt?.Invoke();
+                if (Placement?.AllObtained() == false)
+                {
+                    GiveAll();
+                }
+            };
         }
 
-        orig();
+        return orig(self, afterPrompt, consumeCurrency, forceEnd, showPrompt);
     }
 
     // ─── WishwallSavedItem ──────────────────────────────────────────────────────
 
     /// <summary>
     /// Placeholder <see cref="SavedItem"/> that temporarily replaces the quest's
-    /// vanilla reward. Forwards item delivery to ItemChanger's give flow.
+    /// vanilla reward. Forwards item delivery to ItemChanger's give flow for
+    /// completion paths that call <c>rewardItem.Get()</c> inside <c>afterPrompt</c>.
     /// </summary>
     private class WishwallSavedItem : SavedItem
     {
@@ -140,8 +154,7 @@ public class WishwallLocation : AutoLocation
         public override bool CanGetMore() =>
             Location?.Placement?.AllObtained() == false;
 
-        // GetTakesHeroControl() returns false (base default), so
-        // ProcessQueuedCompletions continues to ExecuteDelayed(1f, ProcessQueuedCompletions)
-        // after our give, allowing subsequent queued quests to be processed.
+        // GetTakesHeroControl() returns false (base default), so quest processing
+        // continues normally after our give.
     }
 }
