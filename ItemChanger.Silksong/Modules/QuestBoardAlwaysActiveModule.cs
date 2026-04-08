@@ -1,7 +1,6 @@
 using HarmonyLib;
 using ItemChanger.Modules;
 using MonoMod.RuntimeDetour;
-using System.Reflection;
 
 namespace ItemChanger.Silksong.Modules;
 
@@ -21,18 +20,6 @@ namespace ItemChanger.Silksong.Modules;
 [SingletonModule]
 public sealed class QuestBoardAlwaysActiveModule : ItemChanger.Modules.Module
 {
-    // ─── Reflected fields (cached once) ────────────────────────────────────────
-
-    private static readonly FieldInfo s_activeObjectsField =
-        typeof(QuestBoardInteractable)
-            .GetField("activeObjects", BindingFlags.NonPublic | BindingFlags.Instance)!;
-
-    private static readonly FieldInfo s_inactiveObjectsField =
-        typeof(QuestBoardInteractable)
-            .GetField("inactiveObjects", BindingFlags.NonPublic | BindingFlags.Instance)!;
-
-    // ─── Module lifecycle ───────────────────────────────────────────────────────
-
     protected override void DoLoad()
     {
         Using(new Hook(
@@ -42,29 +29,17 @@ public sealed class QuestBoardAlwaysActiveModule : ItemChanger.Modules.Module
                 orig(self);
 
                 if (!self.IsDisabled)
-                {
                     return;
-                }
 
                 // The board's activeCondition was not fulfilled — re-enable it.
                 self.Activate();
 
                 // Flip the visual game objects to the "active board" state.
-                if (s_activeObjectsField.GetValue(self) is GameObject[] activeObjects)
-                {
-                    foreach (GameObject obj in activeObjects)
-                    {
-                        obj?.SetActive(true);
-                    }
-                }
+                foreach (GameObject obj in self.activeObjects)
+                    obj?.SetActive(true);
 
-                if (s_inactiveObjectsField.GetValue(self) is GameObject[] inactiveObjects)
-                {
-                    foreach (GameObject obj in inactiveObjects)
-                    {
-                        obj?.SetActive(false);
-                    }
-                }
+                foreach (GameObject obj in self.inactiveObjects)
+                    obj?.SetActive(false);
             }
         ));
     }

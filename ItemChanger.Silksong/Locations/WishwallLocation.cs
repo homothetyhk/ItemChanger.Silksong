@@ -4,7 +4,7 @@ using ItemChanger.Locations;
 using MonoMod.RuntimeDetour;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using UnityEngine;
 
 namespace ItemChanger.Silksong.Locations;
@@ -52,20 +52,6 @@ public class WishwallLocation : AutoLocation
     // The original rewardItem, saved so we can restore it on DoUnload.
     private SavedItem? _originalRewardItem;
 
-    // ─── Reflected fields (cached once) ────────────────────────────────────────
-
-    private static readonly FieldInfo s_rewardItemField =
-        typeof(FullQuestBase)
-            .GetField("rewardItem", BindingFlags.NonPublic | BindingFlags.Instance)!;
-
-    private static readonly FieldInfo s_qidRewardGroupField =
-        typeof(QuestItemDescription)
-            .GetField("rewardGroup", BindingFlags.NonPublic | BindingFlags.Instance)!;
-
-    private static readonly FieldInfo s_qidDonateCostGroupField =
-        typeof(QuestItemDescription)
-            .GetField("donateCostGroup", BindingFlags.NonPublic | BindingFlags.Instance)!;
-
     // Horizontal distance (in local-space units) to place rewardGroup to the right of
     // donateCostGroup when both must coexist on a donation quest.
     // Positive = right, negative = left.
@@ -95,9 +81,7 @@ public class WishwallLocation : AutoLocation
             (Func<FullQuestBase, Sprite> orig, FullQuestBase self) =>
             {
                 if (_savedItem != null && self.name == QuestName)
-                {
                     return _savedItem.GetPopupIcon();
-                }
                 return orig(self);
             }
         ));
@@ -107,16 +91,40 @@ public class WishwallLocation : AutoLocation
             (Func<FullQuestBase, FullQuestBase.IconTypes> orig, FullQuestBase self) =>
             {
                 if (_savedItem != null && self.name == QuestName)
-                {
                     return FullQuestBase.IconTypes.Image;
-                }
                 return orig(self);
+            }
+        ));
+
+        // Hook GetDescription to append IC item preview names to the quest description.
+        // This supports multiple items in the placement: all unobtained items are listed.
+        Using(new Hook(
+            AccessTools.Method(typeof(FullQuestBase), nameof(FullQuestBase.GetDescription)),
+            (Func<FullQuestBase, BasicQuestBase.ReadSource, string> orig,
+             FullQuestBase self, BasicQuestBase.ReadSource readSource) =>
+            {
+                string baseDesc = orig(self, readSource);
+                if (_savedItem == null || self.name != QuestName || Placement is not { } placement)
+                    return baseDesc;
+
+                var unobtained = placement.Items.Where(i => !i.IsObtained()).ToList();
+                if (unobtained.Count == 0)
+                    return baseDesc;
+
+                string label    = unobtained.Count == 1 ? "Reward" : "Rewards";
+                string itemList = string.Join(", ", unobtained
+                    .Select(i => i.GetResolvedUIDef(placement)?.GetPreviewName())
+                    .Where(n => !string.IsNullOrEmpty(n)));
+
+                return string.IsNullOrEmpty(baseDesc)
+                    ? $"{label}: {itemList}"
+                    : $"{baseDesc}\n{label}: {itemList}";
             }
         ));
 
         // Hook QuestItemDescription.SetDisplay so that when a donation quest's reward
         // icon is forced visible (both rewardGroup and donateCostGroup active), we move
-        // rewardGroup above donateCostGroup to avoid overlap.
+        // rewardGroup beside donateCostGroup to avoid overlap.
         // The prefab-original localPosition of rewardGroup is cached per-instance on first
         // contact and restored before each orig() call so non-donate quests are unaffected.
         Using(new Hook(
@@ -125,39 +133,30 @@ public class WishwallLocation : AutoLocation
              QuestItemDescription self, BasicQuestBase quest) =>
             {
                 int id = self.GetInstanceID();
-                var rewardGroup = s_qidRewardGroupField.GetValue(self) as GameObject;
 
                 // Cache the prefab-original position the very first time we see this instance,
                 // before any of our hooks have had a chance to move it.
-                if (rewardGroup != null && !_rewardGroupOriginalPositions.ContainsKey(id))
-                {
-                    _rewardGroupOriginalPositions[id] = rewardGroup.transform.localPosition;
-                }
+                if (!_rewardGroupOriginalPositions.ContainsKey(id))
+                    _rewardGroupOriginalPositions[id] = self.rewardGroup.transform.localPosition;
 
                 // Restore to prefab position before orig() so vanilla layout is always correct.
-                if (rewardGroup != null && _rewardGroupOriginalPositions.TryGetValue(id, out Vector3 saved))
-                {
-                    rewardGroup.transform.localPosition = saved;
-                }
+                if (_rewardGroupOriginalPositions.TryGetValue(id, out Vector3 saved))
+                    self.rewardGroup.transform.localPosition = saved;
 
                 orig(self, quest);
 
-                // If this is our donation quest and both groups ended up active, shift
-                // rewardGroup above donateCostGroup to prevent the overlap.
                 if (_savedItem == null
                     || quest is not FullQuestBase fq
                     || fq.name != QuestName
                     || !fq.IsDonateType)
                     return;
 
-                var donateCostGroup = s_qidDonateCostGroupField.GetValue(self) as GameObject;
-                if (rewardGroup  == null || !rewardGroup.activeSelf
-                    || donateCostGroup == null || !donateCostGroup.activeSelf)
+                if (!self.rewardGroup.activeSelf || !self.donateCostGroup.activeSelf)
                     return;
 
-                Vector3 donatePos = donateCostGroup.transform.localPosition;
+                Vector3 donatePos = self.donateCostGroup.transform.localPosition;
                 _rewardGroupOriginalPositions.TryGetValue(id, out Vector3 origPos);
-                rewardGroup.transform.localPosition =
+                self.rewardGroup.transform.localPosition =
                     new Vector3(donatePos.x + RewardBesideDonateOffset, origPos.y, origPos.z);
             }
         ));
@@ -180,7 +179,7 @@ public class WishwallLocation : AutoLocation
         // doesn't leave the ScriptableObject permanently modified.
         if (_patchedQuest != null)
         {
-            s_rewardItemField.SetValue(_patchedQuest, _originalRewardItem);
+            _patchedQuest.rewardItem = _originalRewardItem;
             _patchedQuest       = null;
             _originalRewardItem = null;
         }
@@ -208,9 +207,9 @@ public class WishwallLocation : AutoLocation
             if (_patchedQuest == null)
             {
                 _patchedQuest       = self;
-                _originalRewardItem = s_rewardItemField.GetValue(self) as SavedItem;
+                _originalRewardItem = self.rewardItem;
             }
-            s_rewardItemField.SetValue(self, _savedItem);
+            self.rewardItem = _savedItem;
 
             // Wrap afterPrompt so GiveAll() is called when the completion callback
             // fires (sync or async via ShowQuestCompleted).  This covers FSM-driven
@@ -221,9 +220,7 @@ public class WishwallLocation : AutoLocation
             {
                 originalAfterPrompt?.Invoke();
                 if (Placement?.AllObtained() == false)
-                {
                     GiveAll();
-                }
             };
         }
 
@@ -247,9 +244,7 @@ public class WishwallLocation : AutoLocation
         {
             // Guard against double-give in case the board calls Get() more than once.
             if (Location?.Placement?.AllObtained() == false)
-            {
                 Location.GiveAll();
-            }
         }
 
         public override bool CanGetMore() =>
@@ -257,7 +252,7 @@ public class WishwallLocation : AutoLocation
 
         /// <summary>
         /// Returns the preview sprite of the first unobtained IC item so the quest
-        /// completion popup shows the randomized reward instead of the vanilla item.
+        /// reward icon shows the randomized item instead of the vanilla reward sprite.
         /// </summary>
         public override Sprite GetPopupIcon()
         {
