@@ -28,7 +28,7 @@ internal class WishwallPilgrimRagsTest : Test
         MenuDescription = "Turns in the Garb of the Pilgrims quest at the Bone Bottom board; " +
                           "IC should give a Surgeon's Key and the completion popup should " +
                           "show the Surgeon's Key icon (this quest has a reward icon configured).",
-        Revision = 2026040701,
+        Revision = 2026040800,
     };
 
     public override void Setup(TestArgs args)
@@ -42,7 +42,10 @@ internal class WishwallPilgrimRagsTest : Test
                 QuestName = Quests.Pilgrim_Rags,
                 FlingType = ItemChanger.Enums.FlingType.DirectDeposit,
             }.Wrap()
-             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
+             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
+             .Add(Finder.GetItem(ItemNames.Cogfly)!)
+             .Add(Finder.GetItem(ItemNames.Crest_of_Hunter)!)
+             .Add(Finder.GetItem(ItemNames.Quick_Sling)!));
     }
 
     protected override void OnEnterGame()
