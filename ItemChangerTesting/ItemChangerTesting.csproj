@@ -60,25 +60,25 @@
   <ItemGroup>
     <ProjectReference Include="..\ItemChanger.Silksong\ItemChanger.Silksong.csproj" />
     <Reference Include="Benchwarp">
-      <HintPath>$(SilksongFolder)/BepInEx/plugins/homothety-Benchwarp/Benchwarp.dll</HintPath>
+      <HintPath>$(SilksongPluginsFolder)/homothety-Benchwarp/Benchwarp.dll</HintPath>
     </Reference>
     <Reference Include="MMHOOK_Assembly-CSharp">
-      <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_Assembly-CSharp.dll</HintPath>
+      <HintPath>$(SilksongPluginsFolder)/MMHOOK/Managed/MMHOOK_Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="MMHOOK_PlayMaker">
-      <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_PlayMaker.dll</HintPath>
+      <HintPath>$(SilksongPluginsFolder)/MMHOOK/Managed/MMHOOK_PlayMaker.dll</HintPath>
     </Reference>
     <Reference Include="MMHOOK_TeamCherry.Localization">
-      <HintPath>$(SilksongFolder)/BepInEx/plugins/MMHOOK/Managed/MMHOOK_TeamCherry.Localization.dll</HintPath>
+      <HintPath>$(SilksongPluginsFolder)/MMHOOK/Managed/MMHOOK_TeamCherry.Localization.dll</HintPath>
     </Reference>
   </ItemGroup>
 
-  <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="'$(SilksongFolder)' != ''">
+  <Target Name="CopyMod" AfterTargets="PostBuildEvent" Condition="'$(SilksongPluginsFolder)' != ''">
     <ItemGroup>
       <Binaries Include="$(TargetPath)" />
       <Binaries Include="$(TargetDir)/$(TargetName).pdb" />
     </ItemGroup>
 
-    <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongFolder)/BepInEx/plugins/homothety-$(TargetName)" />
+    <Copy SourceFiles="@(Binaries)" DestinationFolder="$(SilksongPluginsFolder)/homothety-$(TargetName)" />
   </Target>
 </Project>
