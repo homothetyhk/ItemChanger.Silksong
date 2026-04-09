@@ -5,6 +5,9 @@ using ItemChanger.Silksong.UIDefs;
 
 namespace ItemChanger.Silksong.RawData;
 
+// TODO - think of if we want the lore tablet item to do anything else
+// TODO - add a sprite
+
 internal static partial class BaseItemList
 {
     public static Item CreateLoreItem(string name, string sheet, string key)
@@ -16,7 +19,7 @@ internal static partial class BaseItemList
             {
                 Fallback = new MsgUIDef()
                 {
-                    Name = new BoxedString("Lore"),
+                    Name = ItemChangerLanguageStrings.INV_NAME_LORE,
                     Sprite = new EmptySprite(),
                 },
                 Text = new LanguageString(sheet, key)

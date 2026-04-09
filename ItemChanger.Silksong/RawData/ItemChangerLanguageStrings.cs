@@ -32,6 +32,7 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString INV_NAME_UPSLASH => LanguageString.FromItemChanger(nameof(INV_NAME_UPSLASH));
     public static LanguageString INV_NAME_DOWNSLASH => LanguageString.FromItemChanger(nameof(INV_NAME_DOWNSLASH));
     public static LanguageString INV_DESC_ANYSLASH => LanguageString.FromItemChanger(nameof(INV_DESC_ANYSLASH));
+    public static LanguageString INV_NAME_LORE => LanguageString.FromItemChanger(nameof(INV_NAME_LORE));
 
     public static CompositeString CreatePayRosariesString(IValueProvider<int> rosaryCount)
     {

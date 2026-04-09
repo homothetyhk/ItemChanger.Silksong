@@ -46,8 +46,11 @@ public class TabletContainer : Container
 
     protected override void DoUnload() { }
 
+    // I'm doing this rather than setting the items in the tablet because
+    // we need to avoid showing text
     private ReturnFlow OverrideStartLoreDialogue(BasicNPCBase self)
     {
+        // TODO - use ContainerInfo in IC.Core
         // ContainerInfo? info = ContainerInfo.FindContainerInfo(self.gameObject);
         ContainerInfo? info = null;
         ContainerInfoComponent? infoCpt = self.gameObject.GetComponent<ContainerInfoComponent>();
