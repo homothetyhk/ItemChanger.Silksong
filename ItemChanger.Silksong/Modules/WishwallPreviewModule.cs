@@ -10,33 +10,22 @@ using UnityEngine;
 namespace ItemChanger.Silksong.Modules;
 
 /// <summary>
-/// Singleton module that manages reward-icon and description preview for all
-/// active <see cref="ItemChanger.Silksong.Locations.WishwallLocation"/> instances.
+/// Singleton module that handles reward-icon and description preview for all active
+/// <see cref="ItemChanger.Silksong.Locations.WishwallLocation"/> instances.
+/// Registers one set of hooks and dispatches by quest name via a static registry,
+/// keeping the hook chain O(1) regardless of how many wishwall locations are loaded.
+/// Auto-installed and managed by <see cref="ItemChanger.Silksong.Locations.WishwallLocation"/>.
 /// </summary>
-/// <remarks>
-/// Rather than each location registering its own hooks on
-/// <see cref="FullQuestBase.RewardIcon"/>, <see cref="FullQuestBase.RewardIconType"/>,
-/// <see cref="FullQuestBase.GetDescription"/>, and <see cref="QuestItemDescription"/>,
-/// this module registers the hooks once and dispatches based on quest name, keeping
-/// the hook chain O(1) regardless of how many wishwall locations are loaded.
-///
-/// <see cref="ItemChanger.Silksong.Locations.WishwallLocation"/> calls
-/// <see cref="Register"/> and <see cref="Unregister"/> from its own
-/// <c>DoLoad</c>/<c>DoUnload</c>. Consumers do not need to manage this module
-/// directly — it is auto-added the first time a wishwall location loads.
-/// </remarks>
 [SingletonModule]
 public sealed class WishwallPreviewModule : ItemChanger.Modules.Module
 {
-    // Registry: questName → Placement. Populated by WishwallLocation.DoLoad/DoUnload.
+    // questName → Placement. Populated by WishwallLocation.DoLoad/DoUnload.
     private static readonly Dictionary<string, Placement> s_registry = new();
 
-    // Per-QuestItemDescription instance: prefab-original localPosition of rewardGroup,
-    // cached on first contact so we can restore it when the quest is not one of ours.
+    // Per-QuestItemDescription instance: cached prefab-original localPosition of rewardGroup.
     private static readonly Dictionary<int, Vector3> s_rewardGroupOriginalPositions = new();
 
-    // Horizontal offset (local-space units) used to shift rewardGroup clear of
-    // donateCostGroup for donation quests. Positive = right.
+    // Local-space units to shift rewardGroup right of donateCostGroup on donation quests.
     private const float RewardBesideDonateOffset = 3.0f;
 
     // ─── Registration API (called by WishwallLocation) ──────────────────────────
@@ -51,9 +40,7 @@ public sealed class WishwallPreviewModule : ItemChanger.Modules.Module
 
     protected override void DoLoad()
     {
-        // Return the IC item's preview sprite instead of the vanilla reward sprite.
-        // Also covers quests whose rewardIconType is None — they previously showed
-        // no icon; we force one here.
+        // Return the IC item's preview sprite; also forces an icon for quests with rewardIconType == None.
         Using(new Hook(
             AccessTools.PropertyGetter(typeof(FullQuestBase), nameof(FullQuestBase.RewardIcon)),
             (Func<FullQuestBase, Sprite> orig, FullQuestBase self) =>
@@ -64,9 +51,8 @@ public sealed class WishwallPreviewModule : ItemChanger.Modules.Module
             }
         ));
 
-        // Return IconTypes.Image so QuestItemDescription can safely index
-        // counterMaterials[(int)RewardIconType] without an out-of-range crash
-        // (IconTypes.None == -1 would crash).
+        // Return IconTypes.Image so QuestItemDescription doesn't crash indexing
+        // counterMaterials with IconTypes.None (-1).
         Using(new Hook(
             AccessTools.PropertyGetter(typeof(FullQuestBase), nameof(FullQuestBase.RewardIconType)),
             (Func<FullQuestBase, FullQuestBase.IconTypes> orig, FullQuestBase self) =>
@@ -77,8 +63,7 @@ public sealed class WishwallPreviewModule : ItemChanger.Modules.Module
             }
         ));
 
-        // Append IC item preview names to the quest description, supporting placements
-        // with multiple items ("Rewards: A, B, C").
+        // Append IC item names to the quest description ("Reward: X" or "Rewards: X, Y").
         Using(new Hook(
             AccessTools.Method(typeof(FullQuestBase), nameof(FullQuestBase.GetDescription)),
             (Func<FullQuestBase, BasicQuestBase.ReadSource, string> orig,
@@ -103,9 +88,8 @@ public sealed class WishwallPreviewModule : ItemChanger.Modules.Module
             }
         ));
 
-        // For donation quests, both rewardGroup and donateCostGroup become active
-        // simultaneously, which causes them to overlap (the layout was never designed
-        // for both to coexist). Shift rewardGroup to the right of donateCostGroup.
+        // For donation quests, rewardGroup and donateCostGroup are both active and overlap.
+        // Shift rewardGroup to the right of donateCostGroup to avoid the overlap.
         Using(new Hook(
             AccessTools.Method(typeof(QuestItemDescription), "SetDisplay"),
             (Action<QuestItemDescription, BasicQuestBase> orig,
@@ -113,12 +97,10 @@ public sealed class WishwallPreviewModule : ItemChanger.Modules.Module
             {
                 int id = self.GetInstanceID();
 
-                // Cache the prefab-original position the first time we see this instance.
                 if (!s_rewardGroupOriginalPositions.ContainsKey(id))
                     s_rewardGroupOriginalPositions[id] = self.rewardGroup.transform.localPosition;
 
-                // Restore to the prefab position before calling orig() so the vanilla
-                // layout is used for non-wishwall quests.
+                // Restore prefab position before orig() so non-wishwall quests are unaffected.
                 if (s_rewardGroupOriginalPositions.TryGetValue(id, out Vector3 saved))
                     self.rewardGroup.transform.localPosition = saved;
 
