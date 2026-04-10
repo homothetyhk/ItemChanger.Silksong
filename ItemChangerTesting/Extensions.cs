@@ -54,6 +54,12 @@ internal static class Extensions
         }
     }
 
+    public static void SetCompleted(this FullQuestBase quest)
+    {
+        quest.SetReadyToComplete();
+        quest.ModifyCompletion((ref c) => c.SetCompleted());
+    }
+
     public static void Fulfill(this PlayerDataTest test)
     {
         if (test is null || test.TestGroups is null || test.TestGroups.Length == 0)
