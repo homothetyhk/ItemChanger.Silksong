@@ -29,5 +29,14 @@ internal class MossDruidTest : Test
         Profile.AddPlacement(
             Finder.GetLocation(LocationNames.Druid_s_Eyes)!.Wrap()
                 .Add(Finder.GetItem(ItemNames.Simple_Key)!));
+        Profile.AddPlacement(
+            Finder.GetLocation(LocationNames.Moss_Druid_Payout_1)!.Wrap()
+                .Add(Finder.GetItem(ItemNames.Frayed_Rosary_String)!));
+        Profile.AddPlacement(
+            Finder.GetLocation(LocationNames.Moss_Druid_Payout_2)!.Wrap()
+                .Add(Finder.GetItem(ItemNames.Rosary_String)!));
+        Profile.AddPlacement(
+            Finder.GetLocation(LocationNames.Moss_Druid_Payout_3)!.Wrap()
+                .Add(Finder.GetItem(ItemNames.Rosary_Necklace)!));
     }
 }
