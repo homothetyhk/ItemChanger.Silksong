@@ -28,11 +28,17 @@ public class MossDruidRosaryLocation : AutoLocation
     {
         FsmState payCompleteState = fsm.MustGetState("Pay Complete");
         // This is idempotent, so it will work even if there are multiple of these locations.
-        payCompleteState.RemoveFirstActionMatching(act => act is CallMethodProper call && call.methodName.Value == "AddGeo");
-        int i = payCompleteState.IndexFirstActionOfType<Wait>();
-        // It's OK if i is -1; if there is no Wait, there's no reason to wait for it before giving items,
-        // so i + 1 == 0 is an appropriate place to put the new action.
-        payCompleteState.InsertMethod(i + 1, () =>
+        payCompleteState.RemoveFirstActionMatching(act =>
+            act is CallMethodProper call 
+            && call.methodName.Value == nameof(HeroController.AddGeo));
+        int i = payCompleteState.IndexFirstActionMatching(act =>
+            act is CallMethodProper call
+            && call.methodName.Value == nameof(HeroController.StartAnimationControl));
+        if (i == -1)
+        {
+            throw new InvalidOperationException("call to StartAnimationControl not found");
+        }
+        payCompleteState.InsertMethod(i, () =>
         {
             if (PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold)) == Index)
             {
