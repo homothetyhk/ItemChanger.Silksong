@@ -54,6 +54,24 @@ public class WishwallLocation : AutoLocation
              bool forceEnd, bool showPrompt) =>
                 InterceptTryEndQuest(orig, self, afterPrompt, consumeCurrency, forceEnd, showPrompt)
         ));
+
+        // Give respawning items when the player opens the board but the quest is already
+        // done (so TryEndQuest won't fire). Items are given before the board UI opens.
+        Using(new Hook(
+            AccessTools.Method(typeof(QuestBoardInteractable), "OnStartDialogue"),
+            (Action<QuestBoardInteractable> orig, QuestBoardInteractable self) =>
+            {
+                if (_savedItem != null
+                    && Placement?.AllObtained() == false
+                    && BoardHasPendingRespawn(self))
+                {
+                    _boardTransform ??= self.transform;
+                    GiveAll(() => orig(self));
+                }
+                else
+                    orig(self);
+            }
+        ));
     }
 
     protected override void DoUnload()
@@ -106,18 +124,37 @@ public class WishwallLocation : AutoLocation
             }
             self.rewardItem = _savedItem;
 
-            // Wrap afterPrompt to call GiveAll() for FSM-driven paths that skip rewardItem.Get().
-            // AllObtained() guards against double-give if both paths fire.
+            // Give items before the afterPrompt callback (quest completion UI) fires.
+            // Using GiveAll(callback) ensures the IC item popup appears first, then the
+            // quest UI opens — including for respawning items that need to be given again
+            // on subsequent turn-ins. If all items are already obtained, skip straight to
+            // the original callback.
             Action? originalAfterPrompt = afterPrompt;
             afterPrompt = () =>
             {
-                originalAfterPrompt?.Invoke();
                 if (Placement?.AllObtained() == false)
-                    GiveAll();
+                    GiveAll(() => originalAfterPrompt?.Invoke());
+                else
+                    originalAfterPrompt?.Invoke();
             };
         }
 
         return orig(self, afterPrompt, consumeCurrency, forceEnd, showPrompt);
+    }
+
+    // Returns true if the board contains our quest, the quest is NOT ready to turn in
+    // (so TryEndQuest won't fire), and IC has already given at least one item from this
+    // placement (ObtainedAnyItem guards against giving before the first turn-in).
+    private bool BoardHasPendingRespawn(QuestBoardInteractable board)
+    {
+        if (Placement?.Visited.HasFlag(ItemChanger.Enums.VisitState.ObtainedAnyItem) != true)
+            return false;
+
+        FullQuestBase? quest = board.Quests
+            .SelectMany(g => g.GetQuests())
+            .OfType<FullQuestBase>()
+            .FirstOrDefault(q => q.name == QuestName);
+        return quest != null && !quest.GetIsReadyToTurnIn(atQuestBoard: true);
     }
 
     // ─── WishwallSavedItem ──────────────────────────────────────────────────────
