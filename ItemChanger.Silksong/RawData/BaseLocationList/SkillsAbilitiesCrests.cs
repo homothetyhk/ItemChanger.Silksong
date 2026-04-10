@@ -1,6 +1,7 @@
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Locations;
 using Benchwarp.Data;
+using ItemChanger.Silksong.Serialization;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -40,6 +41,23 @@ internal static partial class BaseLocationList
     {
         SceneName = SceneNames.Belltown_Room_doctor,
         Name = LocationNames.Crest_of_Witch,
+    };
+
+    public static Location Drifter_s_Cloak => new DualLocation
+    {
+        SceneName = SceneNames.Bone_East_Umbrella,
+        Name = LocationNames.Drifter_s_Cloak,
+        Test = new QuestCompletionBool(Quests.Brolly_Get),
+        FalseLocation = new DriftersCloakLocation(),
+        TrueLocation = new CoordinateLocation()
+        {
+            SceneName = SceneNames.Bone_East_Umbrella,
+            Name = LocationNames.Drifter_s_Cloak,
+            X = 23.75f,
+            Y = 8f,
+            FlingType = Enums.FlingType.Everywhere,
+            Managed = false,
+        },
     };
 
     public static Location Eva => new EvaLocation
