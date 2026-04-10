@@ -28,12 +28,6 @@ internal static partial class BaseLocationList
         QuestName = Quests.Building_Materials_Statue,
     };
 
-    public static Location Wishwall__Pilgrim_Rags => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Pilgrim_Rags,
-        QuestName = Quests.Pilgrim_Rags,
-    };
-
     public static Location Wishwall__Mossberry_Collection_Pre => new WishwallLocation
     {
         Name = LocationNames.Wishwall__Mossberry_Collection_Pre,
@@ -56,18 +50,6 @@ internal static partial class BaseLocationList
     {
         Name = LocationNames.Wishwall__Save_the_Fleas,
         QuestName = Quests.Save_the_Fleas,
-    };
-
-    public static Location Wishwall__Rock_Rollers => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Rock_Rollers,
-        QuestName = Quests.Rock_Rollers,
-    };
-
-    public static Location Wishwall__Skull_King => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Skull_King,
-        QuestName = Quests.Skull_King,
     };
 
     // ─── Belltown board ───────────────────────────────────────────────────────
@@ -100,12 +82,6 @@ internal static partial class BaseLocationList
     {
         Name = LocationNames.Wishwall__A_Pinsmiths_Tools,
         QuestName = Quests.A_Pinsmiths_Tools,
-    };
-
-    public static Location Wishwall__Shiny_Bell_Goomba => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Shiny_Bell_Goomba,
-        QuestName = Quests.Shiny_Bell_Goomba,
     };
 
     public static Location Wishwall__Save_Courier_Short => new WishwallLocation
@@ -172,12 +148,6 @@ internal static partial class BaseLocationList
     {
         Name = LocationNames.Wishwall__Crow_Feathers,
         QuestName = Quests.Crow_Feathers,
-    };
-
-    public static Location Wishwall__Beastfly_Hunt => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Beastfly_Hunt,
-        QuestName = Quests.Beastfly_Hunt,
     };
 
     public static Location Wishwall__Shell_Flowers => new WishwallLocation
@@ -258,12 +228,6 @@ internal static partial class BaseLocationList
         QuestName = Quests.Anguish_and_Misery,
     };
 
-    public static Location Wishwall__Ant_Trapper => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Ant_Trapper,
-        QuestName = Quests.Ant_Trapper,
-    };
-
     public static Location Wishwall__Flea_Games_Pre => new WishwallLocation
     {
         Name = LocationNames.Wishwall__Flea_Games_Pre,
@@ -294,12 +258,6 @@ internal static partial class BaseLocationList
         QuestName = Quests.Mr_Mushroom,
     };
 
-    public static Location Wishwall__Destroy_Thread_Cores => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Destroy_Thread_Cores,
-        QuestName = Quests.Destroy_Thread_Cores,
-    };
-
     public static Location Wishwall__Sprintmaster_Pre => new WishwallLocation
     {
         Name = LocationNames.Wishwall__Sprintmaster_Pre,
@@ -326,12 +284,6 @@ internal static partial class BaseLocationList
         QuestName = Quests.Songclave_Donation_2,
     };
 
-    public static Location Wishwall__Fine_Pins => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Fine_Pins,
-        QuestName = Quests.Fine_Pins,
-    };
-
     public static Location Wishwall__Save_City_Merchant => new WishwallLocation
     {
         Name = LocationNames.Wishwall__Save_City_Merchant,
@@ -342,18 +294,6 @@ internal static partial class BaseLocationList
     {
         Name = LocationNames.Wishwall__Save_City_Merchant_Bridge,
         QuestName = Quests.Save_City_Merchant_Bridge,
-    };
-
-    public static Location Wishwall__Song_Pilgrim_Cloaks => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Song_Pilgrim_Cloaks,
-        QuestName = Quests.Song_Pilgrim_Cloaks,
-    };
-
-    public static Location Wishwall__Broodmother_Hunt => new WishwallLocation
-    {
-        Name = LocationNames.Wishwall__Broodmother_Hunt,
-        QuestName = Quests.Broodmother_Hunt,
     };
 
     public static Location Wishwall__Great_Gourmand => new WishwallLocation
@@ -384,5 +324,71 @@ internal static partial class BaseLocationList
     {
         Name = LocationNames.Wishwall__Huntress_Quest_Runt,
         QuestName = Quests.Huntress_Quest_Runt,
+    };
+
+    // ─── Quest reward locations ───────────────────────────────────────────────
+    // Quests whose board rewards are known specific items, named by the reward rather than the quest.
+
+    // Bone Bottom board
+    public static Location Rosary_Necklace__Quest_Pilgrims => new WishwallLocation  // Garb of the Pilgrims
+    {
+        Name = LocationNames.Rosary_Necklace__Quest_Pilgrims,
+        QuestName = Quests.Pilgrim_Rags,
+    };
+
+    public static Location Memory_Locket__Quest_Flintbeetles => new WishwallLocation  // Volatile Flintbeetles
+    {
+        Name = LocationNames.Memory_Locket__Quest_Flintbeetles,
+        QuestName = Quests.Rock_Rollers,
+    };
+
+    public static Location Heavy_Rosary_Necklace__Skull_Tyrant => new WishwallLocation  // The Terrible Tyrant
+    {
+        Name = LocationNames.Heavy_Rosary_Necklace__Skull_Tyrant,
+        QuestName = Quests.Skull_King,
+    };
+
+    // Belltown board
+    public static Location Rosary_Necklace__Silver_Bells => new WishwallLocation  // Silver Bells
+    {
+        Name = LocationNames.Rosary_Necklace__Silver_Bells,
+        QuestName = Quests.Shiny_Bell_Goomba,
+    };
+
+    public static Location Mask_Shard__Savage_Beastfly => new WishwallLocation  // Savage Beastfly
+    {
+        Name = LocationNames.Mask_Shard__Savage_Beastfly,
+        QuestName = Quests.Beastfly_Hunt,
+    };
+
+    public static Location Mask_Shard__Dark_Hearts => new WishwallLocation  // Dark Hearts
+    {
+        Name = LocationNames.Mask_Shard__Dark_Hearts,
+        QuestName = Quests.Destroy_Thread_Cores,
+    };
+
+    public static Location Mask_Shard__Gurr => new WishwallLocation  // The Hidden Hunter
+    {
+        Name = LocationNames.Mask_Shard__Gurr,
+        QuestName = Quests.Ant_Trapper,
+    };
+
+    // Songclave board
+    public static Location Heavy_Rosary_Necklace__Fine_Pins => new WishwallLocation  // Fine Pins
+    {
+        Name = LocationNames.Heavy_Rosary_Necklace__Fine_Pins,
+        QuestName = Quests.Fine_Pins,
+    };
+
+    public static Location Heavy_Rosary_Necklace__Cloaks_of_Choir => new WishwallLocation  // Cloaks of the Choir
+    {
+        Name = LocationNames.Heavy_Rosary_Necklace__Cloaks_of_Choir,
+        QuestName = Quests.Song_Pilgrim_Cloaks,
+    };
+
+    public static Location Heavy_Rosary_Necklace__Wailing_Mother => new WishwallLocation  // The Wailing Mother
+    {
+        Name = LocationNames.Heavy_Rosary_Necklace__Wailing_Mother,
+        QuestName = Quests.Broodmother_Hunt,
     };
 }
