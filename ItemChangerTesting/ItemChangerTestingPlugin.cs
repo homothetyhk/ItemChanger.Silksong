@@ -3,6 +3,7 @@ using BepInEx.Configuration;
 using ItemChanger.Events;
 using ItemChanger.Silksong;
 using Silksong.ModMenu.Elements;
+using Silksong.ModMenu.Models;
 using Silksong.ModMenu.Plugin;
 using Silksong.ModMenu.Screens;
 
@@ -38,8 +39,10 @@ namespace ItemChangerTesting
             MenuElementGenerators.CreateIntSliderGenerator()(cfgSaveSlot, out MenuElement? saveSlotSelector);
             ConfigEntryFactory.GenerateEnumChoiceElement(cfgTestFolder, out MenuElement? testFolderSelector);
 
-            DynamicChoiceModel model = new();
-            cfgTestFolder.SettingChanged += model.UpdateFolder;
+            ListChoiceModel<Test> model = new([.. Test.TestGroups[cfgTestFolder.Value]])
+            {
+                DisplayFn = (_, t) => t.GetMetadata().MenuName
+            };
             DynamicDescriptionChoiceElement<Test> testSelector = new("Test", model, "The test to launch.", t => t.GetMetadata().MenuDescription);
 
             TextButton run = new("Erase save slot and launch test.");
@@ -49,7 +52,9 @@ namespace ItemChangerTesting
             screen.Add(testSelector!);
             screen.Add(run);
 
-            screen.OnDispose += () => cfgTestFolder.SettingChanged -= model.UpdateFolder;
+            void UpdateFolder(object sender, EventArgs args) => model.UpdateValues([.. Test.TestGroups[cfgTestFolder.Value]], 0);
+            cfgTestFolder.SettingChanged += UpdateFolder;
+            screen.OnDispose += () => cfgTestFolder.SettingChanged -= UpdateFolder;
 
             return screen;
 
