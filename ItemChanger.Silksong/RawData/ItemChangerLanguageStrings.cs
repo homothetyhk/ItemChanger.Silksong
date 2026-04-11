@@ -6,10 +6,12 @@ using TeamCherry.Localization;
 
 namespace ItemChanger.Silksong.RawData;
 
+// TODO: These static properties should be generated from default.json.
 internal static class ItemChangerLanguageStrings
 {
     public static LanguageString FMT_PAY_ROSARIES => LanguageString.FromItemChanger(nameof(FMT_PAY_ROSARIES));
     public static LanguageString FMT_PAY_SHELL_SHARDS => LanguageString.FromItemChanger(nameof(FMT_PAY_SHELL_SHARDS));
+    public static LanguageString FMT_PAY_TOOLS => LanguageString.FromItemChanger(nameof(FMT_PAY_TOOLS));
     public static LanguageString FMT_FAST_TRAVEL_PATTERN => LanguageString.FromItemChanger(nameof(FMT_FAST_TRAVEL_PATTERN));
     public static LanguageString FMT_MATERIUM_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_MATERIUM_ENTRY_NAME));
     public static LanguageString FMT_JOURNAL_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_JOURNAL_ENTRY_NAME));
