@@ -34,7 +34,7 @@ public partial class SilksongHost
                 UObject.FindObjectsByType<TransitionPoint>(UnityEngine.FindObjectsSortMode.None)
                 .FirstOrDefault(t => t.targetScene == info.SceneName && t.entryPoint == info.EntryGateName);
 
-        if (info.GetType() != typeof(GameManager.SceneLoadInfo)) return; // do not modify transitions with custom sceneloadinfo; e.g. Doorwarp
+        if (!info.IsBaseGameSceneLoadInfo()) return; // do not modify transitions with custom sceneloadinfo; e.g. Doorwarp
 
         if (FindTransition(info) is not TransitionPoint tp || !tp)
         {
@@ -62,6 +62,7 @@ public partial class SilksongHost
         {
             info.SceneName = modifyArgs.TargetScene;
             info.EntryGateName = modifyArgs.TargetGate; // TODO: handle merged gate denormalization based on facing direction (i.e. mantis village bot1 bot3)
+            info.SceneResourceLocation = null;
             try
             {
                 Host.OnTransitionOverride?.Invoke(new(modifyArgs));
@@ -132,7 +133,14 @@ public partial class SilksongHost
         [HarmonyPatch(typeof(GameManager), nameof(GameManager.BeginSceneTransition))]
         private static void BeforeBeginSceneTransition(GameManager __instance, GameManager.SceneLoadInfo info)
         {
-            Host.DoModifyTransition(info);
+            try
+            {
+                Host.DoModifyTransition(info);
+            }
+            catch (Exception e)
+            {
+                LogError($"Error in DoModifyTransition:\n{e}");
+            }
 
             string targetScene = info.SceneName;
             string targetGate = info.EntryGateName;
