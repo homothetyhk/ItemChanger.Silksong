@@ -2,27 +2,19 @@
 
 public static class QuestExtensions
 {
-    extension(FullQuestBase quest)
+    public delegate void CompletionModifier(ref QuestCompletionData.Completion c);
+
+    extension(FullQuestBase self)
     {
-        public void SetSeen()
-        {
-            QuestCompletionData.Completion c = quest.Completion;
-            c.HasBeenSeen = true;
-            quest.Completion = c;
-        }
+        public void SetSeen() => self.ModifyCompletion((ref c) => c.HasBeenSeen = true);
 
-        public void SetAccepted()
-        {
-            QuestCompletionData.Completion c = quest.Completion;
-            c.IsAccepted = true;
-            quest.Completion = c;
-        }
+        public void SetAccepted() => self.ModifyCompletion((ref c) => c.IsAccepted = true);
 
-        public void ModifyCompletion(Action<QuestCompletionData.Completion> action)
+        public void ModifyCompletion(CompletionModifier modifier)
         {
-            QuestCompletionData.Completion c = quest.Completion;
-            action(c);
-            quest.Completion = c;
+            QuestCompletionData.Completion c = self.Completion;
+            modifier(ref c);
+            self.Completion = c;
         }
     }
 }

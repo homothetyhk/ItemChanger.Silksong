@@ -35,7 +35,7 @@ internal static class Extensions
             }
             else if (!target.Counter)
             {
-                quest.ModifyCompletion(c => c.CompletedCount = target.Count);
+                quest.ModifyCompletion((ref c) => c.CompletedCount = target.Count);
             }
             else
             {
@@ -52,6 +52,12 @@ internal static class Extensions
                 }
             }
         }
+    }
+
+    public static void SetCompleted(this FullQuestBase quest)
+    {
+        quest.SetReadyToComplete();
+        quest.ModifyCompletion((ref c) => c.SetCompleted());
     }
 
     public static void Fulfill(this PlayerDataTest test)

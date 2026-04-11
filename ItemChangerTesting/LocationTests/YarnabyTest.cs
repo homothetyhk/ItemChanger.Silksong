@@ -27,14 +27,7 @@ internal class YarnabyTest : Test
     protected override void OnEnterGame()
     {
         base.OnEnterGame();
-        if (QuestManager.TryGetFullQuestBase(Quests.Doctor_Curse_Cure, out FullQuestBase doctorQuest))
-        {
-            doctorQuest.SetReadyToComplete();
-        }
-        else
-        {
-            ItemChangerTestingPlugin.Instance.Logger.LogWarning($"Unable to locate quest {Quests.Doctor_Curse_Cure}.");
-        }
+        QuestUtil.SetReadyToComplete(Quests.Doctor_Curse_Cure);
         ToolItemManager.SetEquippedCrest("Cursed");
     }
 }
