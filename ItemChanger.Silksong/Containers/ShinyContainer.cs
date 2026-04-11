@@ -5,7 +5,6 @@ using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Tags;
 using Silksong.UnityHelper.Extensions;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using UnityEngine;
 
 namespace ItemChanger.Silksong.Containers;
@@ -160,17 +159,9 @@ public class ShinyContainer : Container
             rb.bodyType = RigidbodyType2D.Kinematic;
             shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Stand;
             // FloatInPlace shinies are already static — the prefab's waitForStoppedMoving
-            // behavior (designed for flung shinies that need to land) would temporarily
-            // deactivate interactEvents and only re-enable it once the rigidbody velocity
-            // drops below 0.1. Since the body is kinematic (velocity always zero), this
-            // would re-enable after canPickupDelay — but we want immediate interactability.
-            // Disable waitForStoppedMoving and zero canPickupDelay so interactEvents
-            // is never suppressed and the shiny is pickable the moment it appears.
-            Type cipType = typeof(CollectableItemPickup);
-            cipType.GetField("waitForStoppedMoving", BindingFlags.NonPublic | BindingFlags.Instance)
-                   ?.SetValue(shiny, false);
-            cipType.GetField("canPickupDelay", BindingFlags.NonPublic | BindingFlags.Instance)
-                   ?.SetValue(shiny, 0f);
+            // behavior would deactivate interactEvents until the rigidbody settles, but a
+            // kinematic body never moves so we force-activate interactEvents immediately.
+            shiny.gameObject.GetComponent<InteractEvents>()?.Activate();
 
         }
         else

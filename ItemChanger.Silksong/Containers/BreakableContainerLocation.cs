@@ -2,11 +2,10 @@ using ItemChanger.Containers;
 using ItemChanger.Enums;
 using ItemChanger.Extensions;
 using ItemChanger.Locations;
-using ItemChanger.Silksong.Containers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace ItemChanger.Silksong.Locations;
+namespace ItemChanger.Silksong.Containers;
 
 /// <summary>
 /// Location for items held inside a breakable container. The child object named
