@@ -78,7 +78,7 @@ public partial class SilksongHost
 
 
     [HarmonyPatch]
-    private static class Patches
+    internal static partial class Patches
     {
         [HarmonyPatch(typeof(GameManager), nameof(GameManager.StartNewGame))]
         [HarmonyPrefix]
