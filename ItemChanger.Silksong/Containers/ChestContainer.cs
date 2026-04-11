@@ -104,16 +104,7 @@ public class ChestContainer : Container
     {
         RemoveExistingItems(chest);
         RemovePersistentData(chest);
-        if (chest.activeInHierarchy)
-        {
-            AddGiveEffectToChestControlFsm(chest.LocateMyFSM("Chest Control"), info);
-        }
-        else
-        {
-            EditFsmOnEnable edit = chest.AddComponent<EditFsmOnEnable>();
-            edit.FsmName = "Chest Control";
-            edit.Edit = (fsm) => AddGiveEffectToChestControlFsm(fsm, info);
-        }
+        chest.EditFsm("Chest Control", fsm => AddGiveEffectToChestControlFsm(fsm, info));
     }
 
     protected override void DoLoad()

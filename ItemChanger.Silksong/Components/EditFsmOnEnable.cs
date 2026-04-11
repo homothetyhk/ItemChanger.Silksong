@@ -41,5 +41,4 @@ internal class EditFsmOnEnable : MonoBehaviour
             LogError($"Error applying deferred fsm edit to fsm {FsmName} on {gameObject.name}:\n{e}");
         }
     }
-
 }

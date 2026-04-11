@@ -48,9 +48,9 @@
       },
       "ItemChanger.Core": {
         "type": "Direct",
-        "requested": "[0.7.0, )",
-        "resolved": "0.7.0",
-        "contentHash": "2nwri3IK22daATY3JTu9A4jZ9KZtbPVXvJbozR7RjMQC9igbhG1gaBaCal51xQVEoz4/yRARHqCTijdubJu+yA==",
+        "requested": "[0.7.1, )",
+        "resolved": "0.7.1",
+        "contentHash": "jjxdBHd4BBsm91YIJi3m1dAeOBW0ONdpPqhsUO4mYGgtu/Pl8f6ZIMDWIwbcpv+0QHGZI6B+LgXcY0HJ1vC4OA==",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3"
         }
@@ -87,9 +87,9 @@
       },
       "Silksong.AssetHelper": {
         "type": "Direct",
-        "requested": "[1.3.0, )",
-        "resolved": "1.3.0",
-        "contentHash": "EsWdQxoT6KcApI44gFhadlEGah76CMa8UPeWTZtlok8JjZf3stGoYTNaJNrL3647b3ZWwgGtJQRjWTV0qk/Gtw==",
+        "requested": "[1.3.1, )",
+        "resolved": "1.3.1",
+        "contentHash": "ZllCZa4qJZfDgTzUNmUHJ6trmxIyJecR4dRdhsphp/bjpmLPPve6cJca3DIBdcOzy8hLgdf3lf8QXgD1k81odQ==",
         "dependencies": {
           "AssetHelperLib": "0.12.1",
           "AssetsTools.NET": "3.0.4",
@@ -101,25 +101,25 @@
       },
       "Silksong.Benchwarp": {
         "type": "Direct",
-        "requested": "[1.1.1, )",
-        "resolved": "1.1.1",
-        "contentHash": "DnwUzSS77744UVZNw6+w01I6W4jgO5nkXgzyogNOY3NG7U9iWCPT4JH9vNUvTBS3rfWMn6BJgn5Daf+vAIq7HA==",
+        "requested": "[1.1.3, )",
+        "resolved": "1.1.3",
+        "contentHash": "7OurnjKJx0bzjEpkJLOl+qEpWADJ4PHPTiC9EFHZLncX4vEo9zGtKTMWTKSADCWZLTPsiW1ctRyFSNP3pCFtIA==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
-          "Silksong.AssetHelper": "1.2.2",
-          "Silksong.DataManager": "1.2.1",
-          "Silksong.FsmUtil": "0.3.13",
-          "Silksong.ModMenu": "0.4.3",
-          "Silksong.PrepatcherPlugin": "1.3.0",
+          "Silksong.AssetHelper": "1.3.1",
+          "Silksong.DataManager": "1.2.2",
+          "Silksong.FsmUtil": "0.3.16",
+          "Silksong.ModMenu": "0.5.2",
+          "Silksong.PrepatcherPlugin": "1.4.0",
           "UnityEngine.Modules": "6000.0.50"
         }
       },
       "Silksong.DataManager": {
         "type": "Direct",
-        "requested": "[1.2.1, )",
-        "resolved": "1.2.1",
-        "contentHash": "qUhd5uCyhjNWUosnAjyb5qndmObPVBa5sTGgn8Jl8d7zsbnMoyqqzopNB1Hl94ULrYa2cGxOIyNWxyCBBU8/uw==",
+        "requested": "[1.2.2, )",
+        "resolved": "1.2.2",
+        "contentHash": "xqm5gC1scpak43W98DQDHxDoGhCmjrJnSHL6Ah8HQBJiUL1ewI3zmg5ZsgwviRDa4YA2Zwn96VaGHxc2A52w7g==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
@@ -145,9 +145,9 @@
       },
       "Silksong.PrepatcherPlugin": {
         "type": "Direct",
-        "requested": "[1.3.1, )",
-        "resolved": "1.3.1",
-        "contentHash": "SOOn8TtmoWyAj1bMva5x6voyGOFWa62k5DpfK/SZPwqpH+RQWED2pB2UDzjVq2PHNjtpD1J6VQac3yvYZ0iQ6A==",
+        "requested": "[1.4.0, )",
+        "resolved": "1.4.0",
+        "contentHash": "LvPs6okxm1z53RWo32XA7S3GUYWCK2n950ab7XOjp03m2Hcmus1q5tN5NCX3h0cN+k8yzM6C3BevF0SScNyDwQ==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
@@ -229,21 +229,20 @@
       },
       "Silksong.ModMenu": {
         "type": "Transitive",
-        "resolved": "0.4.3",
-        "contentHash": "uRI5SS6NIX3ivv/eLFLD9elYdLEfg6s6yHX/SY2N7ps4Ijdt28KMMlRyNI09Z0oXRULRIUSl02nasFUxEB+RPg==",
+        "resolved": "0.5.2",
+        "contentHash": "i+ttTX6A9TcXlBkS2+epqAKVlvP+Jh60R7GjbTM2RliVoU3UDM2QO+15Pknkl3VyuyLEhtIycTqCpATekoTKpw==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
-          "MonoDetour": "0.7.5",
-          "MonoDetour.HookGen": "0.7.3",
-          "Silksong.UnityHelper": "1.0.1",
+          "MonoDetour": "0.7.13",
+          "Silksong.UnityHelper": "1.2.0",
           "UnityEngine.Modules": "6000.0.50"
         }
       },
       "Silksong.UnityHelper": {
         "type": "Transitive",
-        "resolved": "1.0.1",
-        "contentHash": "e9pIwaIKjEjtV+gzvTXKiI3i/0qxSdCgOV6sMGlm6U4f2HeSSIgmhi0DVLJ7qU2LaAUTpLqQEt9q5duPUouK0g==",
+        "resolved": "1.2.0",
+        "contentHash": "qneRu5HQnYPM9o4u3G09Ir4Xj2yIwIz80OREZqBko9WFVTvZcu+wKiFzGS3PoNbN8gGJIAW42s/3HPO+nQhCzQ==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
