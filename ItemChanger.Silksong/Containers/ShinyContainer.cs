@@ -4,7 +4,6 @@ using ItemChanger.Extensions;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Tags;
 using Silksong.UnityHelper.Extensions;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using UnityEngine;
@@ -173,15 +172,6 @@ public class ShinyContainer : Container
             cipType.GetField("canPickupDelay", BindingFlags.NonPublic | BindingFlags.Instance)
                    ?.SetValue(shiny, 0f);
 
-            // Some Heart Piece / Silk Spool objects are parented to (or start inactive inside)
-            // a breakable container (e.g. Library_05 jar). ObjectLocation parents our
-            // replacement shiny to that same container and mirrors the Heart Piece's active
-            // state. If the Heart Piece was inactive, Unity cancels the shiny's Start()
-            // call when SetActive(false) is applied — so a Start()-based detach never runs.
-            // ShinyDetachScheduler uses a DontDestroyOnLoad MonoBehaviour whose LateUpdate
-            // fires reliably after sceneLoaded (when IC edits run) regardless of active state,
-            // detaching the shiny from the container and ensuring it is active.
-            ShinyDetachScheduler.Schedule(shiny.gameObject);
         }
         else
         {
@@ -260,51 +250,4 @@ public class ShinyContainer : Container
     {
     }
 
-    /// <summary>
-    /// Schedules FloatInPlace shinies to be detached from their parent container and
-    /// activated after the current frame's scene edits complete.
-    ///
-    /// Why not Start(): IC's ApplyTargetContext can call SetActive(false) on the shiny
-    /// (mirroring an inactive Heart Piece inside a closed container). Unity cancels
-    /// pending Start() calls when an object is deactivated, so Start()-based detach
-    /// never runs. Using a persistent DontDestroyOnLoad MonoBehaviour's LateUpdate
-    /// guarantees execution after sceneLoaded + ApplyTargetContext, regardless of
-    /// the shiny's active state.
-    /// </summary>
-    private static class ShinyDetachScheduler
-    {
-        private static SchedulerBehaviour? _instance;
-
-        internal static void Schedule(GameObject go)
-        {
-            if (!_instance)
-            {
-                var host = new GameObject("IC_Silksong_ShinyDetach");
-                UnityEngine.Object.DontDestroyOnLoad(host);
-                _instance = host.AddComponent<SchedulerBehaviour>();
-            }
-            _instance!.Pending.Add(go);
-        }
-
-        private class SchedulerBehaviour : MonoBehaviour
-        {
-            internal readonly List<GameObject> Pending = new();
-
-            private void LateUpdate()
-            {
-                if (Pending.Count == 0) return;
-                foreach (var go in Pending)
-                {
-                    if (go == null) continue;
-                    // Detach from container so destroying the container doesn't destroy the shiny.
-                    go.transform.SetParent(null, worldPositionStays: true);
-                    // If the Heart Piece was inactive (hidden inside the container), activate
-                    // the shiny now so it's immediately contactable without opening the container.
-                    if (!go.activeSelf)
-                        go.SetActive(true);
-                }
-                Pending.Clear();
-            }
-        }
-    }
 }

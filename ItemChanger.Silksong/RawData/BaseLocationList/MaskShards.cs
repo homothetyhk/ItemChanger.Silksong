@@ -1,5 +1,6 @@
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Containers;
+using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Tags;
 
 namespace ItemChanger.Silksong.RawData;
@@ -115,13 +116,11 @@ internal static partial class BaseLocationList
         Tags = [FloatShiny]
     };
 
-    public static Location Mask_Shard__Whispering_Vaults => new ObjectLocation
+    public static Location Mask_Shard__Whispering_Vaults => new BreakableContainerLocation
     {
         Name = LocationNames.Mask_Shard__Whispering_Vaults,
         SceneName = "Library_05",
         ObjectName = "Heart Piece",
-        Correction = default,
-        Tags = [FloatShiny]
     };
 
     public static Location Mask_Shard__Wisp_Thicket => new ObjectLocation
