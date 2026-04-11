@@ -1,7 +1,7 @@
 using Benchwarp.Data;
 using ItemChanger.Locations;
-using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Containers;
+using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
@@ -123,6 +123,26 @@ internal static partial class BaseLocationList
     {
         SceneName = SceneNames.Cradle_03_Destroyed,
         Name = LocationNames.Pale_Nails
+    };
+
+    public static Location Rune_Rage => new DualLocation
+    {
+        SceneName = SceneNames.Slab_10b,
+        Name = LocationNames.Rune_Rage,
+        Test = new PDBool(nameof(PlayerData.defeatedFirstWeaver)),
+        FalseLocation = new RuneRageLocation()
+        {
+            SceneName = SceneNames.Slab_10b,
+            Name = LocationNames.Rune_Rage
+        },
+        TrueLocation = new CoordinateLocation()
+        {
+            SceneName = SceneNames.Slab_10b,
+            Name = LocationNames.Rune_Rage,
+            X = 39,
+            Y = 10,
+            Managed = false,
+        },
     };
 
     public static Location Silkspear => CreateWeaverCorpseLocation(
