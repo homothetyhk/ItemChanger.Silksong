@@ -5,6 +5,9 @@ using Silksong.FsmUtil;
 
 namespace ItemChanger.Silksong.Locations;
 
+/// <summary>
+/// Location corresponding to the 
+/// </summary>
 public class MossDruidRosaryLocation : MossDruidLocation
 {
     /// <summary>

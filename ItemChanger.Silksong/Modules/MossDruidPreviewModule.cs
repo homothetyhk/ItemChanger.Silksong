@@ -12,6 +12,10 @@ using Newtonsoft.Json;
 
 namespace ItemChanger.Silksong.Modules;
 
+/// <summary>
+/// Module that displays a preview lore tablet near the Moss Druid.
+/// Added automatically to the profile if any item is placed at a Moss Druid location.
+/// </summary>
 [SingletonModule]
 public class MossDruidPreviewModule : Module
 {
