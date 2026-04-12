@@ -5,7 +5,7 @@ namespace ItemChanger.Silksong.Util;
 
 public static class CostDialogue
 {
-    public static void Prompt(Cost cost, Action onAccept, Action onDecline)
+    public static void Prompt(Cost cost, string rewardDescription, Action onAccept, Action onDecline)
     {
         UISelectionListItem yesButton = DialogueYesNoBox._instance.yesButton;
         Func<string> origCondition = yesButton.InactiveConditionText;
@@ -43,6 +43,6 @@ public static class CostDialogue
         }
 
         yesButton.InactiveConditionText = () => cost.CanPay() ? "" : DialogueYesNoBox._instance.notEnoughText;
-        DialogueYesNoBox.Open(Accept, Decline, false, cost.GetCostText());
+        DialogueYesNoBox.Open(Accept, Decline, false, $"{cost.GetCostText()}: {rewardDescription}");
     }
 }

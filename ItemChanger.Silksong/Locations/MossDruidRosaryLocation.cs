@@ -44,7 +44,6 @@ public class MossDruidRosaryLocation : AutoLocation
         }
         offerAnswerState.InsertMethod(i, () =>
         {
-            LogInfo($"offer answer: {PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold))} / {Index - 1}");
             if (PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold)) != Index - 1)
             {
                 return;
@@ -57,6 +56,7 @@ public class MossDruidRosaryLocation : AutoLocation
             }
             CostDialogue.Prompt(
                     cost,
+                    Placement!.GetUIName(),
                     () => fsm.SendEvent("ACCEPT"),
                     () => fsm.SendEvent("REFUSE"));
         });

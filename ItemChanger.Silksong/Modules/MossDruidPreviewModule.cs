@@ -60,12 +60,13 @@ public class MossDruidPreviewModule : Module
                 costDescription = c.GetCostText();
             }
 
-            string itemsDescription = string.Join(", ", p.Items.Select(it => it.GetPreviewName(p)));
+            string[] itemDescriptions = p.Items
+                .Select(it => (it.IsObtained() ? "OBTAINED".GetLanguageString() : it.GetPreviewName(p)) + " - " + costDescription)
+                .ToArray();
 
-            string line = itemsDescription + " - " + costDescription;
-            p.GetOrAddTag<PreviewRecordTag>().PreviewText = line;
+            p.GetOrAddTag<PreviewRecordTag>().PreviewText = string.Join(", ", itemDescriptions);
             p.AddVisitFlag(VisitState.Previewed);
-            return line;
+            return string.Join("<br>", itemDescriptions);
         }));
     }
 }
