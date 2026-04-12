@@ -1,5 +1,6 @@
 {
   "FMT_PAY_ROSARIES": "{ROSARY_COUNT} {ROSARY_NAME}",
+  "FMT_PAY_SHELL_SHARDS": "{SHELL_SHARDS_COUNT} {SHELL_SHARDS_NAME}",
   "FMT_PAY_TOOL_SLOTS": "{0} Tool Slots",
   "FMT_FAST_TRAVEL_PATTERN": "{TRAVEL_TYPE} - {STATION_NAME}",
   "FMT_MATERIUM_ENTRY_NAME": "{0} Entry",
@@ -22,6 +23,8 @@
   "INV_NAME_UPSLASH": "Upslash",
   "INV_NAME_DOWNSLASH": "Downslash",
   "INV_DESC_ANYSLASH": "TODO",
+
+  "SHOP_DESC_ROSARIES": "We're having a firesale today, go ahead and collect your rebate.",
 
   "CREST_HUNTER_NAME": "Crest of Hunter",
   "CREST_HUNTER_V2_NAME": "Crest of Hunter Level 2",
