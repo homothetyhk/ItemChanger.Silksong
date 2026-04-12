@@ -1,5 +1,6 @@
 using Benchwarp.Data;
 using ItemChanger.Locations;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
 
@@ -23,7 +24,7 @@ internal static partial class BaseLocationList
             SceneName = SceneNames.Belltown_basement_03,
             Name = LocationNames.Hermit_s_Soul,
         },
-        Test = CompositeValueProvider.Or(
+        Test = new Disjunction(
             new PDBool(nameof(PlayerData.blackThreadWorld)), new PDBool(nameof(PlayerData.soulSnareReady))
         ),
     };
