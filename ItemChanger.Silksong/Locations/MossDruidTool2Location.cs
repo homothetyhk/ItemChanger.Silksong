@@ -1,8 +1,4 @@
-using ItemChanger.Costs;
 using ItemChanger.Locations;
-using ItemChanger.Placements;
-using ItemChanger.Silksong.Modules;
-using ItemChanger.Silksong.Util;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Silksong.FsmUtil;
@@ -10,20 +6,9 @@ using Silksong.FsmUtil.Actions;
 
 namespace ItemChanger.Silksong.Locations;
 
-public class MossDruidTool2Location : AutoLocation
+public class MossDruidTool2Location : MossDruidLocation
 {
-    protected override void DoLoad()
-    {
-        Using(new FsmEditGroup()
-        {
-            {new(SceneName!, "Moss Creep NPC", "Conversation Control"), HookDruid},
-        });
-        ActiveProfile!.Modules.GetOrAdd<MossDruidPreviewModule>().Add(Placement!);
-    }
-
-    protected override void DoUnload() {}
-
-    private void HookDruid(PlayMakerFSM fsm)
+    protected override void HookDruid(PlayMakerFSM fsm)
     {
         FsmState offerAnswerState = fsm.MustGetState("Offer Answer");
         int i = offerAnswerState.IndexLastActionOfType<DialogueYesNoItemV4>();
@@ -37,21 +22,10 @@ public class MossDruidTool2Location : AutoLocation
         }
         offerAnswerState.InsertMethod(i, () =>
         {
-            if (PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold)) != 3)
+            if (PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold)) == 3)
             {
-                return;
+                PromptCost(fsm, "ACCEPT", "REFUSE");
             }
-            Cost? cost = ((ISingleCostPlacement)Placement!).Cost;
-            if (cost == null)
-            {
-                fsm.SendEvent("ACCEPT");
-                return;
-            }
-            CostDialogue.Prompt(
-                    cost,
-                    Placement!.GetUIName(),
-                    () => fsm.SendEvent("ACCEPT"),
-                    () => fsm.SendEvent("REFUSE"));
         });
 
         FsmState giveRewardFState = fsm.MustGetState("Give Reward F");

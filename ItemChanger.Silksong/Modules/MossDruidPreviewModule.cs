@@ -61,7 +61,7 @@ public class MossDruidPreviewModule : Module
             }
 
             string[] itemDescriptions = p.Items
-                .Select(it => (it.IsObtained() ? "OBTAINED".GetLanguageString() : it.GetPreviewName(p)) + " - " + costDescription)
+                .Select(it => it.GetPreviewName(p) + " - " + (it.IsObtained() ? "OBTAINED".GetLanguageString() : costDescription))
                 .ToArray();
 
             p.GetOrAddTag<PreviewRecordTag>().PreviewText = string.Join(", ", itemDescriptions);
