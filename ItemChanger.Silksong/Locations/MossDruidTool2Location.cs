@@ -49,6 +49,7 @@ public class MossDruidTool2Location : AutoLocation
             }
             CostDialogue.Prompt(
                     cost,
+                    Placement!.GetUIName(),
                     () => fsm.SendEvent("ACCEPT"),
                     () => fsm.SendEvent("REFUSE"));
         });
