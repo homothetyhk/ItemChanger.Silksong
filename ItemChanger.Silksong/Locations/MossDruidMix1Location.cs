@@ -6,7 +6,7 @@ using Silksong.FsmUtil.Actions;
 
 namespace ItemChanger.Silksong.Locations;
 
-public class MossDruidTool1Location : MossDruidLocation
+public class MossDruidMix1Location : MossDruidLocation
 {
     protected override void HookDruid(PlayMakerFSM fsm)
     {
