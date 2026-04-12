@@ -1,5 +1,9 @@
 using Benchwarp.Data;
+using ItemChanger.Costs;
 using ItemChanger.Locations;
+using ItemChanger.Placements;
+using ItemChanger.Silksong.Modules;
+using ItemChanger.Silksong.Util;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Silksong.FsmUtil;
@@ -20,18 +24,49 @@ public class MossDruidRosaryLocation : AutoLocation
         {
             {new(SceneName!, "Moss Creep NPC", "Conversation Control"), HookDruid},
         });
+        ActiveProfile!.Modules.GetOrAdd<MossDruidPreviewModule>().Add(Placement!);
     }
 
     protected override void DoUnload() {}
 
     private void HookDruid(PlayMakerFSM fsm)
     {
+        FsmState offerAnswerState = fsm.MustGetState("Offer Answer");
+
+        int i = offerAnswerState.IndexLastActionOfType<DialogueYesNoItemV4>();
+        if (i == -1)
+        {
+            i = offerAnswerState.actions.Length;
+        }
+        else
+        {
+            offerAnswerState.RemoveAction(i);
+        }
+        offerAnswerState.InsertMethod(i, () =>
+        {
+            LogInfo($"offer answer: {PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold))} / {Index - 1}");
+            if (PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold)) != Index - 1)
+            {
+                return;
+            }
+            Cost? cost = ((ISingleCostPlacement)Placement!).Cost;
+            if (cost == null)
+            {
+                fsm.SendEvent("ACCEPT");
+                return;
+            }
+            CostDialogue.Prompt(
+                    cost,
+                    () => fsm.SendEvent("ACCEPT"),
+                    () => fsm.SendEvent("REFUSE"));
+        });
+
         FsmState payCompleteState = fsm.MustGetState("Pay Complete");
         // This is idempotent, so it will work even if there are multiple of these locations.
         payCompleteState.RemoveFirstActionMatching(act =>
             act is CallMethodProper call 
             && call.methodName.Value == nameof(HeroController.AddGeo));
-        int i = payCompleteState.IndexFirstActionMatching(act =>
+        i = payCompleteState.IndexFirstActionMatching(act =>
             act is CallMethodProper call
             && call.methodName.Value == nameof(HeroController.StartAnimationControl));
         if (i == -1)
