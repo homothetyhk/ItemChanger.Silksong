@@ -1,7 +1,6 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Locations;
-using QuestPlaymakerActions;
 using Silksong.FsmUtil;
 
 namespace ItemChanger.Silksong.Locations;
@@ -34,21 +33,13 @@ public class ElegyOfTheDeepLocation : AutoLocation
                 fsm.SendEvent("GET MELODY");
         });
 
-        // Reroute to melody dialogue path when not all items are obtained - 
-        // required to support persistent items.
-        FsmState checkMelodyState = fsm.MustGetState("Melody State?");
-        checkMelodyState.RemoveLastActionOfType<CheckQuestState>();
-        checkMelodyState.InsertLambdaMethod(16, _ =>
-        {
-            if (Placement!.AllObtained())
-                fsm.SendEvent("MELODY ACTIVE");
-        });
-        checkMelodyState.AddLambdaMethod(_ => { fsm.SendEvent("FINISHED"); });
-
         // Skip the Elegy popup, grant the placement whilst the screen is black.
         FsmState popupState = fsm.MustGetState("Get Item Msg");
         popupState.InsertLambdaMethod(0, GiveAll);
-        popupState.InsertLambdaMethod(1, _ => { fsm.SendEvent("GET ITEM MSG END"); });
+        popupState.InsertLambdaMethod(1, _ =>
+        {
+            fsm.SendEvent("GET ITEM MSG END");
+        });
 
         // Avoid granting Elegy.
         FsmState updateQuestState = fsm.MustGetState("Update Quest");

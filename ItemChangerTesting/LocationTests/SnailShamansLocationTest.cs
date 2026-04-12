@@ -1,6 +1,7 @@
 using Benchwarp.Data;
 using ItemChanger;
 using ItemChanger.Enums;
+using ItemChanger.Items;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Tags;
 
@@ -20,18 +21,19 @@ internal class SnailShamansLocationTest : Test
     {
         StartNear(SceneNames.Tut_04, PrimitiveGateNames.left1);
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Elegy_of_the_Deep)!.Wrap()
-            .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
+            .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!.WithTag(new PersistentItemTag()
+                { Persistence = Persistence.Persistent })));
     }
 
     protected override void OnEnterGame()
     {
         base.OnEnterGame();
-        
+
         // Act 3
         PlayerData.instance.blackThreadWorld = true;
         PlayerData.instance.act3_enclaveWakeSceneCompleted = true;
         PlayerData.instance.act3_wokeUp = true;
-        
+
         // Preconditions for placement obtainable
         PlayerData.instance.visitedAbyss = true;
         QuestUtil.SetAccepted(Quests.Black_Thread_Pt4_Return);
