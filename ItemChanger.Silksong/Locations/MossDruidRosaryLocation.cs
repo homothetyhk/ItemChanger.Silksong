@@ -1,16 +1,11 @@
-using Benchwarp.Data;
-using ItemChanger.Costs;
 using ItemChanger.Locations;
-using ItemChanger.Placements;
-using ItemChanger.Silksong.Modules;
-using ItemChanger.Silksong.Util;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Silksong.FsmUtil;
 
 namespace ItemChanger.Silksong.Locations;
 
-public class MossDruidRosaryLocation : AutoLocation
+public class MossDruidRosaryLocation : MossDruidLocation
 {
     /// <summary>
     /// The 1-based index of this location among the Moss Druid rosary payouts. Should be between 1 and 3
@@ -18,21 +13,9 @@ public class MossDruidRosaryLocation : AutoLocation
     /// </summary>
     public required int Index { get; init; }
 
-    protected override void DoLoad()
-    {
-        Using(new FsmEditGroup()
-        {
-            {new(SceneName!, "Moss Creep NPC", "Conversation Control"), HookDruid},
-        });
-        ActiveProfile!.Modules.GetOrAdd<MossDruidPreviewModule>().Add(Placement!);
-    }
-
-    protected override void DoUnload() {}
-
-    private void HookDruid(PlayMakerFSM fsm)
+    protected override void HookDruid(PlayMakerFSM fsm)
     {
         FsmState offerAnswerState = fsm.MustGetState("Offer Answer");
-
         int i = offerAnswerState.IndexLastActionOfType<DialogueYesNoItemV4>();
         if (i == -1)
         {
@@ -44,21 +27,10 @@ public class MossDruidRosaryLocation : AutoLocation
         }
         offerAnswerState.InsertMethod(i, () =>
         {
-            if (PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold)) != Index - 1)
+            if (PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold)) == Index - 1)
             {
-                return;
+                PromptCost(fsm, "ACCEPT", "REFUSE");
             }
-            Cost? cost = ((ISingleCostPlacement)Placement!).Cost;
-            if (cost == null)
-            {
-                fsm.SendEvent("ACCEPT");
-                return;
-            }
-            CostDialogue.Prompt(
-                    cost,
-                    Placement!.GetUIName(),
-                    () => fsm.SendEvent("ACCEPT"),
-                    () => fsm.SendEvent("REFUSE"));
         });
 
         FsmState payCompleteState = fsm.MustGetState("Pay Complete");
