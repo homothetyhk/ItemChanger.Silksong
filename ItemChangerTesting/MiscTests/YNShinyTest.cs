@@ -1,12 +1,16 @@
 ﻿using Benchwarp.Data;
 using ItemChanger;
 using ItemChanger.Costs;
+using ItemChanger.Items;
 using ItemChanger.Locations;
+using ItemChanger.Placements;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Costs;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
+using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
+using UnityEngine.Profiling;
 
 namespace ItemChangerTesting.MiscTests;
 
@@ -57,6 +61,27 @@ internal class YNShinyTest : Test
             })
             .Wrap()
             .WithDebugItem(persistence: ItemChanger.Enums.Persistence.Persistent)
+            );
+
+        Profile.AddPlacement(
+            new CoordinateLocation()
+            {
+                Name = "Damage",
+                SceneName = SceneNames.Bone_East_17,
+                Y = 81.57f,
+                X = 62.10f,
+                FlingType = ItemChanger.Enums.FlingType.Everywhere,
+                ForceDefaultContainer = true,
+                Managed = false,
+            }
+            .WithTag(new DefaultCostTag() { Cost = new RosaryCost(1300) })
+            .Wrap()
+            .Add(new DebugItem()
+            {
+                Name = "Debug Item - Damage",
+                Tags = [new PersistentItemTag() { Persistence = ItemChanger.Enums.Persistence.Persistent}],
+                UIDef = Finder.GetItem(ItemNames.Taunt)!.UIDef
+            })
             );
 
         void TestCost(Cost cost)

@@ -121,7 +121,7 @@ internal class DefaultBigUIDefTest : Test
         }
 
         // Placement for all big uidefs in the item list
-        Placement finderPlacement = upper = new CoordinateLocation()
+        Placement finderPlacement = new CoordinateLocation()
         {
             Name = "FinderPlacement",
             SceneName = SceneNames.Coral_34,
@@ -147,7 +147,7 @@ internal class DefaultBigUIDefTest : Test
         Profile.AddPlacement(finderPlacement);
 
         // Placement for whatever I'm working on right now
-        Placement tempPlacement = upper = new CoordinateLocation()
+        Placement tempPlacement = new CoordinateLocation()
         {
             Name = "TempPlacement",
             SceneName = SceneNames.Coral_34,
