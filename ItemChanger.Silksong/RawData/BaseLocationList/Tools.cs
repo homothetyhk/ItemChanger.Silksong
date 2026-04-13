@@ -13,11 +13,11 @@ internal static partial class BaseLocationList
     {
         Name = LocationNames.Druid_s_Eye,
         SceneName = SceneNames.Mosstown_02c,
-    }.WithTag(new ImplicitCostTag { Cost = new MossberryCost { Value = 3 } });
+    }.WithTag(new DefaultCostTag { Cost = new MossberryCost { Value = 3 } });
 
     public static Location Druid_s_Eyes => new MossDruidMix2Location
     {
         Name = LocationNames.Druid_s_Eyes,
         SceneName = SceneNames.Mosstown_02c,
-    }.WithTag(new ImplicitCostTag { Cost = new MossberryCost { Value = 7 } });
+    }.WithTag(new DefaultCostTag { Cost = new MossberryCost { Value = 7 } });
 }
