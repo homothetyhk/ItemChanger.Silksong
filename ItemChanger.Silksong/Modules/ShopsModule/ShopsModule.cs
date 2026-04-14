@@ -1,8 +1,8 @@
-﻿using ItemChanger.Items;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Placements;
 using ItemChanger.Silksong.RawData;
+using Silksong.FsmUtil;
 using Silksong.UnityHelper.Extensions;
 
 namespace ItemChanger.Silksong.Modules.ShopsModule;
@@ -41,24 +41,29 @@ public class ShopsModule : Module
         var modStock = ShopOwnerBase._spawnedShop.gameObject.GetOrAddComponent<ModShopMenuStock>();
         modStock.Module = this;
         modStock.BaseShop = baseShop;
+        modStock.BaseStock = ShopOwnerBase._spawnedShop;
         modStock.BuildItemList();
     }
-
-    internal IEnumerable<(Item item, ShopPlacement placement)> ICShopItems(BaseShop baseShop)
-    {
-        if (!shopPlacements.TryGetValue(baseShop.Name, out var placements))
-            return [];
-        else
-            return placements.OrderBy(p => p.Name).SelectMany(p => p.Items.Select(i => (i, p)));
-    }
+ 
+    internal IEnumerable<ShopPlacement> ShopPlacements(BaseShop baseShop) => shopPlacements.TryGetValue(baseShop.Name, out var placements) ? placements.OrderBy(p => p.Name) : [];
 
     protected override void DoLoad()
     {
         Using(new HarmonyPatchGroup() { typeof(ShopsPatches) });
         PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable += SuppressPDBools;
+        Using(new FsmEditGroup() { { new("*", "*", "shop_control"), SetVisitState } });
     }
 
     protected override void DoUnload() => PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable -= SuppressPDBools;
+
+    private void SetVisitState(PlayMakerFSM fsm)
+    {
+        var afterShopUp = fsm.MustGetState("Stock?");
+        afterShopUp.InsertMethod(0, action =>
+        {
+            if (action.Fsm.GameObject.TryGetComponent<ModShopMenuStock>(out var modStock)) modStock.SetPreviewed();
+        });
+    }
 
     private bool SuppressPDBools(PlayerData pd, string name, bool current) => current && !suppressedPDBools.Contains(name);
 }
