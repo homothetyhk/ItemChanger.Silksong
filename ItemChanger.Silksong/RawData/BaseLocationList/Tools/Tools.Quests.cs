@@ -31,10 +31,6 @@ namespace ItemChanger.Silksong.RawData
          * Name = LocationNames.Plasmium_Phial,
          * SceneName = SceneNames.Crawl_08
 
-        tacks from roach guts (benjin and crull)
-         * Name = LocationNames.Tacks,
-         * SceneName = SceneNames.Dust_Shack
-
         throwing ring from trail's end (shakra)
          * Name = LocationNames.Throwing_Ring,
          * SceneName = SceneNames.Shadow_24
@@ -44,7 +40,7 @@ namespace ItemChanger.Silksong.RawData
         //blue tools
         /*
 
-        druid's eye from berry picking (moss druid)
+        druid's eye from berry picking (moss druid) [https://github.com/homothetyhk/ItemChanger.Silksong/issues/124]
          * Name = LocationNames.Druid_s_Eye,
          * SceneName = SceneNames.Mosstown_02c
 
@@ -52,7 +48,7 @@ namespace ItemChanger.Silksong.RawData
          * Name = LocationNames.Longclaw,
          * SceneName = SceneNames.Room_Huntress
 
-        pin badge from fatal resolve (pinstress)
+        pin badge from fatal resolve (pinstress) [https://github.com/homothetyhk/ItemChanger.Silksong/issues/140]
          * Name = LocationNames.Pin_Badge,
          * SceneName = SceneNames.Peak_07
 

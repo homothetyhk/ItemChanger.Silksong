@@ -20,15 +20,6 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Curveclaw__Mottled_Skarr_Dead => new ObjectLocation
-        {
-            Name = LocationNames.Curveclaw__Mottled_Skarr_Dead,
-            SceneName = SceneNames.Ant_21,
-            ObjectName = "ant_item_string/Item Holder/Collectable Item Pickup",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
-        };
         public static Location Curvesickle => new ObjectLocation
         {
             Name = LocationNames.Curvesickle,
@@ -92,26 +83,17 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Voltvessels => new ObjectLocation
+        public static Location Voltvessels => new ObjectLocation //note: flea item does not work in this location; regular items do work though
         {
             Name = LocationNames.Voltvessels,
             SceneName = SceneNames.Arborium_07,
             ObjectName = "Battle Scene/End Scene/Collectable Item Pickup Battle",
             FlingType = Enums.FlingType.Everywhere,
             Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true }]
         };
 
         //blue tools
-        public static Location Fractured_Mask__Mottled_Skarr_Dead => new ObjectLocation
-        {
-            Name = LocationNames.Fractured_Mask__Mottled_Skarr_Dead,
-            SceneName = SceneNames.Ant_Merchant,
-            ObjectName = "_NPCs/Ant Merchant States/Ant Merchant Dead/Collectable Item Pickup",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
-        };
         public static Location Injector_Band => new ObjectLocation
         {
             Name = LocationNames.Injector_Band,
@@ -177,15 +159,6 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Magnetite_Dice => new ObjectLocation//version as shiny near lumble's corpse
-        {
-            Name = LocationNames.Magnetite_Dice,
-            SceneName = SceneNames.Coral_33,
-            ObjectName = "Black Thread States/Normal World/Dice Game Control/Dice Game Corpse/Collectable Item Pickup",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
-        };
         public static Location Shard_Pendant => new ObjectLocation
         {
             Name = LocationNames.Shard_Pendant,
@@ -200,15 +173,6 @@ namespace ItemChanger.Silksong.RawData
             Name = LocationNames.Shell_Satchel,
             SceneName = SceneNames.Crawl_01,
             ObjectName = "Tool Conditions/Collectable Item Pickup - Satchel",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
-        };
-        public static Location Weighted_Belt__Mort_Dead => new ObjectLocation
-        {
-            Name = LocationNames.Weighted_Belt__Mort_Dead,
-            SceneName = SceneNames.Bone_East_07,
-            ObjectName = "Mort Death Scene/Collectable Item Pickup",
             FlingType = Enums.FlingType.Everywhere,
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]

@@ -7,55 +7,10 @@ using ItemChanger.Tags;
 
 namespace ItemChanger.Silksong.RawData
 {
-    //tool locations based on items that have costs (shops, crafting, etc)
+    //tool locations based on items that have costs
 
     internal static partial class BaseLocationList
     {
-        //shops
-        /* forge daughter
-         * sting shard
-         * magma bell
-         * silkshot (forge daughter)
-        */
-
-        /* frey
-         * multibinder
-        */
-
-        /* grindle
-         * thief's mark
-         * snitch pick
-        */
-
-        /* jubilana
-         * ascendant's grip
-         * spool extender
-         * spider strings
-        */
-
-        /* mort
-         * weighted belt (implement separate from shiny version)
-        */
-
-        /* mottled skarr
-         * curveclaw (implement separate from shiny version)
-         * fractured mask (implement separate from shiny version)
-        */
-
-        /* pebb
-         * magnetite brooch
-        */
-
-        /* shakra
-         * compass
-        */
-
-        /* twelfth architect
-         * scuttlebrace
-         * cogwork wheel
-         * sawtooth circlet
-         * silkshot (twelfth architect)
-        */
 
         //crafting
         /*

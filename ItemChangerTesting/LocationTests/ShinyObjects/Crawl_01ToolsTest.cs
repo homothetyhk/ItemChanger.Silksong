@@ -8,7 +8,7 @@ internal class Crawl_01ToolsTest : Test
     public override TestMetadata GetMetadata() => new()
     {
         Folder = TestFolder.LocationTests,
-        MenuName = "Crawl_01 Tools",
+        MenuName = "Modify Crawl_01 Tools",
         MenuDescription = "Tests modifying Dead_Bug_s_Purse and Shell_Satchel in-place to give Surgeon's_Key.",
         Revision = 2026032200,
     };
