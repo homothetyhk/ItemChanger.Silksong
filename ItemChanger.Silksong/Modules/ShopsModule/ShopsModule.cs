@@ -1,5 +1,6 @@
 ﻿using ItemChanger.Items;
 using ItemChanger.Modules;
+using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Placements;
 using ItemChanger.Silksong.RawData;
 using Silksong.UnityHelper.Extensions;
@@ -51,7 +52,11 @@ public class ShopsModule : Module
             return placements.OrderBy(p => p.Name).SelectMany(p => p.Items.Select(i => (i, p)));
     }
 
-    protected override void DoLoad() => PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable += SuppressPDBools;
+    protected override void DoLoad()
+    {
+        Using(new HarmonyPatchGroup() { typeof(ShopsPatches) });
+        PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable += SuppressPDBools;
+    }
 
     protected override void DoUnload() => PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable -= SuppressPDBools;
 
