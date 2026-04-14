@@ -8,20 +8,30 @@ internal class ModShopMenuStock : MonoBehaviour
 {
     public required ShopsModule Module;
     public required BaseShop BaseShop;
+    public required ShopMenuStock BaseStock;
 
-    private ShopMenuStock baseStock;
-
-    private void Awake() => baseStock = gameObject.GetComponent<ShopMenuStock>();
-
-    private IEnumerable<ShopItem> ShopItems()
+    private readonly List<ShopItem> shopItems = [];
+    private void UpdateShopItems()
     {
+        shopItems.Clear();
+
         // List randomized items first, then vanilla.
-        foreach (var (item, placement) in Module.ICShopItems(BaseShop)) yield return ModShopItem.CreateInstance(item, placement);
-        
-        // Filter out items disallowed by the module.
-        for (int i = 0; i < baseStock.stock.Length; i++)
+        foreach (var placement in Module.ShopPlacements(BaseShop))
         {
-            if (i >= BaseShop.Inventory.Count || Module.IncludeCategory(BaseShop.Inventory[i].category)) yield return baseStock.stock[i];
+            foreach (var item in placement.Items)
+            {
+                var shopItem = ModShopItem.CreateInstance(item, placement);
+                if (!shopItem.IsAvailable) continue;
+
+                shopItems.Add(shopItem);
+            }
+        }
+
+        // Filter out items disallowed by the module.
+        for (int i = 0; i < BaseStock.stock.Length; i++)
+        {
+            if (i < BaseShop.Inventory.Count && !Module.IncludeCategory(BaseShop.Inventory[i].category)) continue;
+            shopItems.Add(BaseStock.stock[i]);
         }
     }
 
@@ -43,50 +53,43 @@ internal class ModShopMenuStock : MonoBehaviour
         if (parentInactive) template.transform.parent!.gameObject.SetActive(false);
     }
 
-    private readonly List<ShopItem> shopItems = [];
-    private void UpdateShopItems()
-    {
-        shopItems.Clear();
-        shopItems.AddRange(ShopItems().Where(i => i.IsAvailable));
-    }
-
     public void BuildItemList()
     {
         UpdateShopItems();
 
         // Expand stock list.
-        SpawnTemplates(baseStock.spawnedStock, baseStock.templateItem, shopItems.Count);
+        SpawnTemplates(BaseStock.spawnedStock, BaseStock.templateItem, shopItems.Count);
         int subItemsRequired = shopItems.Select(i => i.SubItemsCount).DefaultIfEmpty().Max();
-        SpawnTemplates(baseStock.spawnedSubItems, baseStock.templateSubItem, subItemsRequired);
+        SpawnTemplates(BaseStock.spawnedSubItems, BaseStock.templateSubItem, subItemsRequired);
 
         // Set and position items.
-        baseStock.availableStock.Clear();
+        BaseStock.availableStock.Clear();
         Vector3 pos = Vector3.zero;
-        for (int i = 0; i < baseStock.spawnedStock.Count; i++)
+        for (int i = 0; i < BaseStock.spawnedStock.Count; i++)
         {
-            var item = baseStock.spawnedStock[i];
+            var stock = BaseStock.spawnedStock[i];
 
-            item.transform.localPosition = pos;
+            stock.transform.localPosition = pos;
             if (i < shopItems.Count)
             {
-                baseStock.availableStock.Add(item);
+                BaseStock.availableStock.Add(stock);
 
-                item.Item = shopItems[i];
-                item.ItemNumber = i;
-                item.gameObject.SetActive(true);
-                item.UpdateAppearance();
+                stock.Item = shopItems[i];
+                stock.ItemNumber = i;
+                stock.gameObject.SetActive(true);
+                stock.UpdateAppearance();
             }
             else
             {
-                item.Item = null;
-                item.gameObject.SetActive(false);
+                stock.Item = null;
+                stock.gameObject.SetActive(false);
             }
 
-            pos.y += baseStock.yDistance;
+            pos.y += BaseStock.yDistance;
         }
 
         // Turn off sub-items.
-        foreach (var subItem in baseStock.spawnedSubItems) subItem.gameObject.SetActive(false);
+        foreach (var subItem in BaseStock.spawnedSubItems) subItem.gameObject.SetActive(false);
     }
 
     public void DisplayCurrencyCounters()
@@ -127,9 +130,18 @@ internal class ModShopMenuStock : MonoBehaviour
         return shopItems;
     }
 
+    public void SetPreviewed()
+    {
+        foreach (var placement in Module.ShopPlacements(BaseShop))
+        {
+            if (placement.Location.Test != null && !placement.Location.Test.Value) continue;
+            placement.AddVisitFlag(Enums.VisitState.Previewed);
+        }
+    }
+
     public void SetStock(ShopItem[] stock)
     {
-        baseStock.stock = stock;
+        BaseStock.stock = stock;
         BuildItemList();
     }
 
