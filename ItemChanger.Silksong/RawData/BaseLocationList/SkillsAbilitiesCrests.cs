@@ -47,4 +47,10 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Weave_10,
         Name = LocationNames.Eva,
     };
+
+    public static Location Cross_Stitch => new PhantomLocation
+    {
+        SceneName = "Organ_01",
+        Name = LocationNames.Cross_Stitch,
+    };
 }
