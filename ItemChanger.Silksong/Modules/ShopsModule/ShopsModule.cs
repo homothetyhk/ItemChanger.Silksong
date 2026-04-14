@@ -1,4 +1,5 @@
-﻿using ItemChanger.Items;
+﻿using HarmonyLib;
+using ItemChanger.Items;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Placements;
 using ItemChanger.Silksong.RawData;
@@ -51,9 +52,23 @@ public class ShopsModule : Module
             return placements.OrderBy(p => p.Name).SelectMany(p => p.Items.Select(i => (i, p)));
     }
 
-    protected override void DoLoad() => PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable += SuppressPDBools;
+    private Harmony? harmony;
 
-    protected override void DoUnload() => PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable -= SuppressPDBools;
+    protected override void DoLoad()
+    {
+        harmony = new(typeof(ShopsPatches).FullName);
+        harmony.PatchAll(typeof(ShopsPatches));
+
+        PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable += SuppressPDBools;
+    }
+
+    protected override void DoUnload()
+    {
+        PrepatcherPlugin.PlayerDataVariableEvents<bool>.OnGetVariable -= SuppressPDBools;
+
+        harmony?.UnpatchSelf();
+        harmony = null;
+    }
 
     private bool SuppressPDBools(PlayerData pd, string name, bool current) => current && !suppressedPDBools.Contains(name);
 }
