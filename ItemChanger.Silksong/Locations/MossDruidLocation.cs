@@ -22,6 +22,8 @@ public abstract class MossDruidLocation : AutoLocation
 
     protected override void DoUnload() {}
 
+    public override bool SupportsCost => true;
+
     private void HookDruidWithRefreshedItems(PlayMakerFSM fsm)
     {
         FsmState choiceState = fsm.MustGetState("Choice");
