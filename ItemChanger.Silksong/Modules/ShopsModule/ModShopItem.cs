@@ -54,12 +54,13 @@ internal class ModShopItem : ShopItem
         if (PlayerDataAccess.ShellShards < ICurrencyCost.Get(ICCost, CurrencyType.Shard)) CurrencyCounter.ReportFail(CurrencyType.Shard);
     }
 
-    public bool CanBuy() => ICCost.CanPay();
+    public bool CanBuy() => ICCost.Paid || ICCost.CanPay();
 
     public new int Cost
     {
         get
         {
+            if (ICCost.Paid) return 0;
             if (ICurrencyCost.Get(ICCost, CurrencyType.Money) is int rosaries && rosaries > 0) return rosaries;
             if (ICurrencyCost.Get(ICCost, CurrencyType.Shard) is int shards && shards > 0) return shards;
             if (RequiredItemAmount is int amount && amount > 0) return amount;
@@ -72,6 +73,12 @@ internal class ModShopItem : ShopItem
     // TODO: Integrate properly with a cost display strategy, and show cost text on the confirm page.
     private bool GetExtraCostText(out string text)
     {
+        if (ICCost.Paid || ICCost.IsFree)
+        {
+            text = "";
+            return false;
+        }
+
         List<Cost> atoms = [.. ICCost.Flatten()];
 
         bool currency = false;
