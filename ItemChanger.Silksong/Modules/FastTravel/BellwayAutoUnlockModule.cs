@@ -60,7 +60,7 @@ public sealed class BellwayAutoUnlockModule : Module
 
         if (BypassCentipede)
         {
-            self.GetState("Centipede")!.ReplaceActionsOfType<PlayerDataVariableTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => false });
+            self.GetState("Centipede?")!.ReplaceActionsOfType<PlayerDataVariableTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => false });
             self.GetState("Appear Delay")!.ReplaceActionsOfType<PlayerDataVariableTest>(oldTest => new CustomCheckFsmStateAction(oldTest) { GetIsTrue = () => false });
         }
     }

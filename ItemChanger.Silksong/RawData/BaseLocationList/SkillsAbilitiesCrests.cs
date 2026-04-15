@@ -47,4 +47,10 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Weave_10,
         Name = LocationNames.Eva,
     };
+
+    public static Location Beastling_Call => new BeastlingCallLocation()
+    {
+        SceneName = SceneNames.Bellway_Centipede_Arena,
+        Name = LocationNames.Beastling_Call,
+    };
 }
