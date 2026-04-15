@@ -48,15 +48,11 @@ internal class BeastlingCallLocationTest : Test
     protected override void OnEnterGame()
     {
         base.OnEnterGame();
-
         
         // Act 3
         PlayerData.instance.blackThreadWorld = true;
         PlayerData.instance.act3_enclaveWakeSceneCompleted = true;
         PlayerData.instance.act3_wokeUp = true;
-
-        // Preconditions for placement obtainable
-        PlayerData.instance.UnlockedFastTravel = true;
     }
     
     private void WeakenBoss(Scene scene)
