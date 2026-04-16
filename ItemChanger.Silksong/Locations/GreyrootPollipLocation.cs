@@ -1,4 +1,5 @@
 using ItemChanger.Locations;
+using ItemChanger.Enums;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Silksong.FsmUtil;
@@ -20,6 +21,18 @@ public class GreyrootPollipLocation : AutoLocation
 
     private void HookWitch(PlayMakerFSM fsm)
     {
+        FsmState rewardQueryState = fsm.MustGetState("Pollip Reward?");
+        rewardQueryState.ReplaceFirstActionOfType<CheckIfToolUnlocked>(new LambdaAction
+        {
+            Method = () =>
+            {
+                if (!Placement!.CheckVisitedAny(VisitState.ObtainedAnyItem))
+                {
+                    fsm.SendEvent("POLLIP REWARD");
+                }
+            }
+        });
+
         FsmState rewardState = fsm.MustGetState("Flower Quest Reward");
         rewardState.ReplaceFirstActionOfType<SetToolUnlocked>(new LambdaAction
         {

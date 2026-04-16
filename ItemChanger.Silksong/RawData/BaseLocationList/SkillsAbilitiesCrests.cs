@@ -42,6 +42,12 @@ internal static partial class BaseLocationList
         Name = LocationNames.Crest_of_Witch,
     };
 
+    public static Location Crest_of_Cursed_Witch => new GreyrootCrestLocation
+    {
+        SceneName = SceneNames.Room_Witch,
+        Name = LocationNames.Crest_of_Cursed_Witch,
+    };
+
     public static Location Eva => new EvaLocation
     {
         SceneName = SceneNames.Weave_10,
