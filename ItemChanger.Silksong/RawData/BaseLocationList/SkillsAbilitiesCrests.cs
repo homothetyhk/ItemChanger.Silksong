@@ -83,6 +83,12 @@ internal static partial class BaseLocationList
             Managed = false,
         },
     };
+    
+    public static Location Crest_of_Cursed_Witch => new GreyrootCrestLocation
+    {
+        SceneName = SceneNames.Room_Witch,
+        Name = LocationNames.Crest_of_Cursed_Witch,
+    };
 
     public static Location Eva => new EvaLocation
     {
