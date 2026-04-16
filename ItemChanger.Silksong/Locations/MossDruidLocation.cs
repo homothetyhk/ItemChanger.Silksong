@@ -17,7 +17,10 @@ public abstract class MossDruidLocation : AutoLocation
         {
             {new(SceneName!, "Moss Creep NPC", "Conversation Control"), HookDruidWithRefreshedItems},
         });
-        ActiveProfile!.Modules.GetOrAdd<MossDruidPreviewModule>().Add(Placement!);
+        if (SupportsCost)
+        {
+            ActiveProfile!.Modules.GetOrAdd<MossDruidPreviewModule>().Add(Placement!);
+        }
     }
 
     protected override void DoUnload() {}
@@ -34,6 +37,9 @@ public abstract class MossDruidLocation : AutoLocation
 
         HookDruid(fsm);
     }
+
+    // Correct as long as items are given using GiveAll.
+    protected bool Checked() => Placement!.CheckVisitedAny(VisitState.ObtainedAnyItem);
 
     protected void PromptCost(PlayMakerFSM fsm, string acceptEvent, string declineEvent)
     {
