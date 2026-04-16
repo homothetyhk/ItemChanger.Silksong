@@ -13,6 +13,12 @@ namespace ItemChanger.Silksong.Containers
     {
         public required ContainerInfo ContainerInfo { get; set; }
         public MessageType SupportedMessageTypes { get; set; } = MessageType.SmallPopup;
+        
+        /// <summary>
+        /// If this is true, the saved item will retain control during the give procedure.
+        /// This will only be necessary for certain containers.
+        /// </summary>
+        public bool RetainControl { get; set; } = false;
         public required Transform ContainerTransform { get; set; }
         public Action? Callback { get; set; } = null;
 
@@ -26,7 +32,7 @@ namespace ItemChanger.Silksong.Containers
             // while it is giving items; large popups should not take control themselves.
             // If not, we should not take control at all.
             Action? callback = Callback;
-            if (SupportedMessageTypes.HasFlag(MessageType.LargePopup))
+            if (RetainControl)
             {
                 GameObject controlKeeper = new("ItemChanger Control Keeper");
                 UObject.DontDestroyOnLoad(controlKeeper);

@@ -143,6 +143,7 @@ public class ShinyContainer : Container
         else
         {
             item.SupportedMessageTypes = Enums.MessageType.Any;
+            item.RetainControl = true;
         }
         shiny.SetItem(item);
 
