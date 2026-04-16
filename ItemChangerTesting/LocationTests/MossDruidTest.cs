@@ -38,5 +38,14 @@ internal class MossDruidTest : Test
         Profile.AddPlacement(
             Finder.GetLocation(LocationNames.Moss_Druid_Payout_3)!.Wrap()
                 .Add(Finder.GetItem(ItemNames.Rosary_Necklace)!));
+        Profile.AddPlacement(
+            Finder.GetLocation(LocationNames.Mossberry_Stew)!.Wrap()
+                .Add(Finder.GetItem(ItemNames.Heavy_Rosary_Necklace)!));
+    }
+
+    protected override void OnEnterGame()
+    {
+        base.OnEnterGame();
+        QuestUtil.SetAccepted(Quests.Great_Gourmand);
     }
 }

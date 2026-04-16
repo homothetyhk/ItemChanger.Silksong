@@ -40,7 +40,7 @@ public class MossDruidMix2Location : MossDruidLocation
         {
             Method = () =>
             {
-                if (Placement!.AllObtained())
+                if (Checked())
                 {
                     fsm.SendEvent("COMPLETE");
                 }
