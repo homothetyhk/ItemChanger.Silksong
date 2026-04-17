@@ -1,10 +1,13 @@
 ﻿using ItemChanger.Containers;
 using ItemChanger.Costs;
+using ItemChanger.Enums;
 using ItemChanger.Items;
+using ItemChanger.Locations;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.RawData;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace ItemChanger.Silksong.Extensions;
 
@@ -18,6 +21,28 @@ internal static class ICExtensions
     /// Converts a struct-returning value provider to an object-returning value provider.
     /// </summary>
     public static IValueProvider<object> Embox<T>(this IValueProvider<T> t) where T : struct => new Box<T> { Source = t };
+    /// <summary>
+    /// Spawn all unobtained items for this location at the specified coordinate.
+    /// Generally intended as a convenient alternative to codifying DualLocations, particularly when the coordinates can be inferred from existing objects.
+    /// </summary>
+    public static void SpawnItemsAtCoordinate(this Location loc, Vector3 pos, FlingType flingType = FlingType.Everywhere)
+    {
+        CoordinateLocation newLoc = new()
+        {
+            SceneName = loc.SceneName,
+            Name = loc.Name,
+            X = pos.x,
+            Y = pos.y,
+            Z = pos.z,
+            FlingType = flingType,
+            Managed = false,
+        };
+        newLoc.Placement = newLoc.Wrap();
+        newLoc.Placement.Items.AddRange(loc.Placement!.Items);
+
+        newLoc.GetContainer(UnityEngine.SceneManagement.SceneManager.GetActiveScene(), out var container, out var info);
+        newLoc.PlaceContainer(container, info);
+    }
     /// <summary>
     /// Returns a name incorporating the name of the placement and the indices of the items associated with the container.
     /// </summary>
