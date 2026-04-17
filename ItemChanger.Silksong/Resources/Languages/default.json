@@ -27,6 +27,8 @@
   "INV_NAME_TAUNT": "Taunt",
   "INV_DESC_TAUNT": "Learn the power to skip Sister Splinter",
   "GET_TAUNT_1": "Goad enemies into attacking",
+ 
+  "CITADEL_MAP_PROMPT_PREVIEW":  "A machine displaying a model of {PREVIEW_TEXT}.",
   "SHOP_DESC_ROSARIES": "We're having a firesale today, go ahead and collect your rebate.",
 
   "CREST_HUNTER_NAME": "Crest of Hunter",

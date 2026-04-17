@@ -44,6 +44,10 @@ internal static class ICExtensions
         newLoc.PlaceContainer(container, info);
     }
     /// <summary>
+    /// Returns a string provider for the items placed at this location.
+    /// </summary>
+    public static IValueProvider<string> UINameProvider(this Location l) => new UIName(l);
+    /// <summary>
     /// Returns a name incorporating the name of the placement and the indices of the items associated with the container.
     /// </summary>
     public static string GetGameObjectName(this ContainerInfo info, string prefix)
@@ -122,15 +126,20 @@ internal static class ICExtensions
         public object Value => Source.Value;
     }
 
-    private class LiftedT<T> : IWritableValueProvider<T>
-    {
-        public required T Value { get; set; }
-    }
-
     private class CastingProvider<TBase, TDerived> : IValueProvider<TDerived> where TDerived : TBase
     {
         public required IValueProvider<TBase> Inner { get; init; }
 
         [JsonIgnore] public TDerived Value => (TDerived)Inner.Value!;
+    }
+
+    private class LiftedT<T> : IWritableValueProvider<T>
+    {
+        public required T Value { get; set; }
+    }
+
+    private class UIName(Location Location) : IValueProvider<string>
+    {
+        public string Value => Location.Placement?.GetUIName() ?? "???";
     }
 }
