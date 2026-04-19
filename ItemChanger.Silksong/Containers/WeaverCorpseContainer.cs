@@ -48,18 +48,19 @@ public class WeaverCorpseContainer : Container
         FsmState fadeToBlackState = fsm.MustGetState("Fade To Black");
         fadeToBlackState.AddTransition("SKIP_MSG", "Heal");
         fadeToBlackState.RemoveActionsOfType<Wait>();
-        fadeToBlackState.AddMethod(() =>
+        fadeToBlackState.AddLambdaMethod(_ =>
         {
             fsm.SendEvent("SKIP_MSG");
         });
         
         // Give ability slightly early - so the pickup shows during the stand-up animation
         FsmState getUpState = fsm.MustGetState("Get Up Pause");
-        getUpState.AddMethod(() => placement.GiveAll(new GiveInfo{
+        getUpState.GetFirstActionOfType<Wait>()!.finishEvent = null;
+        getUpState.AddLambdaMethod(cb => placement.GiveAll(new GiveInfo{
             Container = info.ContainerType,
             FlingType = info.GiveInfo.FlingType,
             MessageType = MessageType.Any
-        }));
+        }, cb));
         
         // Remove original ability gain
         FsmState animationFinishedState = fsm.MustGetState("End");

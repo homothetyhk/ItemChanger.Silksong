@@ -1,6 +1,9 @@
 using Benchwarp.Data;
+using ItemChanger;
+using ItemChanger.Enums;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
+using ItemChanger.Tags;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -40,12 +43,13 @@ internal class WeaverBurialSpireTest : Test
             if (location == LocationNames.Silkspear)
             {
                 Profile.AddPlacement(Finder.GetLocation(location)!.Wrap()
-                    .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
+                    .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!.WithTag(new PersistentItemTag()
+                        { Persistence = Persistence.Persistent })));
                 continue;
             }
+
             Profile.AddPlacement(Finder.GetLocation(location)!.Wrap()
-                .Add(Finder.GetItem(ItemNames.Rosary_String)!)
-                .Add(Finder.GetItem(ItemNames.Flea)!));
+                .Add(Finder.GetItem(ItemNames.Silkspear)!));
         }
     }
 }
