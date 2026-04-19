@@ -12,28 +12,18 @@ using Silksong.FsmUtil;
 namespace ItemChanger.Silksong.Modules;
 
 /// <summary>
-/// Optional module for the Sprintmaster Swift race quest. When added to the profile alongside
-/// the two <see cref="Locations.SprintmasterLocation"/> instances, inserts a yes/no skip prompt
-/// at the start of the Sprintmaster conversation.
+/// Inserts a yes/no skip prompt at the start of the Sprintmaster conversation.
+/// Choosing yes jumps to the final race and awards all bypassed rewards on quest completion:
+/// Race 1 Rosary String (IC placement if registered, vanilla otherwise),
+/// Race 2 Beast Shard (IC placement if registered), and Race 3 Mask Shard (via SprintmasterLocation).
 /// </summary>
-/// <remarks>
-/// Choosing yes skips to the final race directly and, upon quest completion, awards all
-/// bypassed rewards together with the final race reward:
-/// <list type="bullet">
-/// <item>Race 1 vanilla reward (Rosary String) — captured at runtime and given at quest end</item>
-/// <item>Race 2 IC placement (Beast Shard) — given at quest end if present and unobtained</item>
-/// <item>Race 3 IC placement (Mask Shard) — given via <see cref="Locations.SprintmasterLocation"/> as normal</item>
-/// </list>
-/// The module advances the quest completion counter for the two skipped races so the FSM's
-/// normal <c>Was Extra?</c> check correctly routes to <c>Quest End</c> after the final race win.
-/// </remarks>
 public class SprintmasterSkipModule : Module
 {
-    // skipActive: set when player chooses yes; cleared once Array Track? applies the jump.
+    // skipActive: set on yes, cleared when Array Track? applies the jump.
     private bool skipActive;
-    // skipApplied: set after the race jump is applied; cleared once End Dialogue 3 gives extras.
+    // skipApplied: set after the jump, cleared when End Dialogue 3 gives bypassed rewards.
     private bool skipApplied;
-    // Race 1 vanilla SavedItem (Rosary String), captured at Array Track? time.
+    // Race 1 vanilla reward (Rosary String), captured when the skip is applied.
     private SavedItem? race1Reward;
 
     protected override void DoLoad()
@@ -55,10 +45,6 @@ public class SprintmasterSkipModule : Module
 
     private void HookSkipPrompt(PlayMakerFSM fsm)
     {
-        // Insert the async yes/no prompt at the very start of the opening conversation state,
-        // before anything else in Setup Convo Jog runs.
-        // Read the same PD field and array that Array Track? uses so we can suppress the prompt
-        // when the player is already on the final race (nothing left to skip).
         FsmState setupConvoJog = fsm.MustGetState("Setup Convo Jog");
         FsmState arrayTrackState = fsm.MustGetState("Array Track?");
         ArrayGet arrayGetAction = arrayTrackState.GetFirstActionOfType<ArrayGet>()!;
@@ -73,24 +59,17 @@ public class SprintmasterSkipModule : Module
 
     private void HookArrayTrack(PlayMakerFSM fsm)
     {
-        // Array Track? reads the current race index from PlayerData via GetPlayerDataVariable,
-        // then uses ArrayGet to fetch the corresponding track GameObject from the race array.
-        // The separate Set Track state does the same independently, so we must write back to the
-        // actual PlayerData field — not just override the local FsmInt — so both states pick up
-        // the correct (final) race index without us having to hook Set Track separately.
+        // Insert at index 0 (before GetPlayerDataVariable) and write the target race index to
+        // PlayerData directly, so both Array Track? and Set Track naturally read the final race.
         FsmState arrayTrackState = fsm.MustGetState("Array Track?");
         ArrayGet arrayGetAction = arrayTrackState.GetFirstActionOfType<ArrayGet>()!;
         GetPlayerDataVariable pdVarAction = arrayTrackState.GetFirstActionOfType<GetPlayerDataVariable>()!;
 
-        // Locate the CheckQuestStateV2 action anywhere in the FSM to reach the quest object.
-        // This is used to pre-increment the quest completion counter for the skipped races.
         CheckQuestStateV2? questCheckAction = fsm.FsmStates
             .SelectMany(static s => s.Actions ?? [])
             .OfType<CheckQuestStateV2>()
             .FirstOrDefault();
 
-        // Insert at index 0, before GetPlayerDataVariable runs, so the PD field is already
-        // set to lastRaceIdx when GetPlayerDataVariable reads it in both Array Track? and Set Track.
         arrayTrackState.InsertMethod(0, () =>
         {
             if (!skipActive) return;
@@ -99,46 +78,31 @@ public class SprintmasterSkipModule : Module
 
             int lastRaceIdx = arrayGetAction.array.Length - 1;
 
-            // Capture Race 1's vanilla SavedItem (Rosary String) so we can give it at quest end.
             race1Reward ??= (arrayGetAction.array.Get(0) as GameObject)
                 ?.GetComponent<SprintRaceController>()?.Reward;
 
-            // Advance the quest completion counter for each race being skipped (all but the last).
-            // This ensures the FSM's Was Extra? → CheckQuestStateV2 check sees CanComplete = true
-            // after the player wins the final race.
-            if (questCheckAction != null)
+            // Pre-increment the quest counter for each skipped race so Was Extra? routes to Quest End.
+            FullQuestBase? quest = questCheckAction?.Quest.Value as FullQuestBase;
+            if (quest != null)
             {
-                FullQuestBase? quest = questCheckAction.Quest.Value as FullQuestBase;
-                if (quest != null)
-                {
-                    for (int i = 0; i < lastRaceIdx; i++)
-                    {
-                        quest.IncrementQuestCounter();
-                    }
-                }
+                for (int i = 0; i < lastRaceIdx; i++)
+                    quest.IncrementQuestCounter();
             }
 
-            // Write lastRaceIdx into the actual PlayerData field so that GetPlayerDataVariable
-            // in Array Track? and the identical action in Set Track both naturally read it.
-            // This causes Set Track to activate race 3's terrain colliders (not race 1's),
-            // fixing the "terrain collider is inactive" coroutine error that prevented laps
-            // from being counted.
             PlayerData.instance.SetInt(pdVarAction.VariableName.Value, lastRaceIdx);
         });
     }
 
     private void HookEndDialogue3(PlayMakerFSM fsm)
     {
-        // End Dialogue 3 fires on the quest-completion path (Quest End → Win After Wish → End Dialogue 3).
-        // SprintmasterLocation (IsQuestCompletion = true) hooks the SavedItemGet here to give the Mask Shard IC item.
-        // Our inserted method runs first (index 0) to give the two bypassed rewards before that.
+        // Runs before SprintmasterLocation's hook (index 0) to give bypassed Race 1 and Race 2 rewards.
         FsmState endDialogue3 = fsm.MustGetState("End Dialogue 3");
         endDialogue3.InsertMethod(0, () =>
         {
             if (!skipApplied) return;
             skipApplied = false;
 
-            // Give the Race 1 Rosary String: IC placement if present in profile, vanilla otherwise.
+            // Race 1: IC placement if registered, vanilla otherwise.
             if (ActiveProfile != null
                 && ActiveProfile.TryGetPlacement(LocationNames.Rosary_String__Sprintmaster_Race_1, out Placement? race1Placement)
                 && !race1Placement!.AllObtained())
@@ -156,7 +120,7 @@ public class SprintmasterSkipModule : Module
                 race1Reward?.Get();
             }
 
-            // Give the Race 2 IC placement (Beast Shard) if it is in the profile and unobtained.
+            // Race 2: IC placement if registered.
             if (ActiveProfile != null
                 && ActiveProfile.TryGetPlacement(LocationNames.Beast_Shard__Sprintmaster_Race_2, out Placement? race2Placement)
                 && !race2Placement!.AllObtained())
@@ -173,9 +137,8 @@ public class SprintmasterSkipModule : Module
     }
 
     /// <summary>
-    /// Custom async FSM action that opens the skip yes/no dialogue without blocking.
-    /// Does not call <see cref="FsmStateAction.Finish"/> until the player responds.
-    /// Suppresses the prompt entirely if the player is already on the final race.
+    /// Async FSM action that opens the skip yes/no dialogue.
+    /// Suppressed if the player is already on the final race.
     /// </summary>
     private sealed class SprintmasterSkipPromptAction : FsmStateAction
     {
@@ -192,7 +155,6 @@ public class SprintmasterSkipModule : Module
 
         public override void OnEnter()
         {
-            // Suppress the prompt if the player is already at or past the final race index.
             int currentRaceIdx = PlayerData.instance.GetInt(pdVarAction.VariableName.Value);
             int lastRaceIdx = arrayGetAction.array.Length - 1;
             if (currentRaceIdx >= lastRaceIdx)
@@ -207,7 +169,6 @@ public class SprintmasterSkipModule : Module
                 returnHud: true,
                 text: "Skip to the final race and collect all Sprintmaster rewards?"
             );
-            // Intentionally do NOT call Finish() here — the dialogue callback does it asynchronously.
         }
     }
 }

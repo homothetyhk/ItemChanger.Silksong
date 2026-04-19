@@ -8,22 +8,13 @@ namespace ItemChanger.Silksong.Locations;
 
 /// <summary>
 /// Location for Sprintmaster Swift race rewards in Sprintmaster_Cave.
-/// </summary>
-/// <remarks>
-/// Two instances of this class are needed for the two randomized locations:
+/// Two instances are needed:
 /// <list type="bullet">
-/// <item><see cref="IsQuestCompletion"/> = false: Race 2 Beast Shard reward
-/// (<see cref="RawData.LocationNames.Beast_Shard__Sprintmaster_Race_2"/>).
-/// Hooks the <c>Give Reward</c> FSM state; identified at runtime by the SavedItem name
-/// <c>"Great Shard"</c>. Race 1 (Rosary String) passes through the same state unchanged.</item>
-/// <item><see cref="IsQuestCompletion"/> = true: Final quest Mask Shard reward
-/// (<see cref="RawData.LocationNames.Mask_Shard__Sprintmaster"/>).
-/// Hooks the <c>End Dialogue 3</c> FSM state, which only carries a non-null item on the
-/// quest-completion path (via <c>Quest End</c> → <c>GetQuestReward</c>).</item>
+/// <item><see cref="IsQuestCompletion"/> = false — Race 2 Beast Shard (<c>Give Reward</c> state, identified by SavedItem name <c>"Great Shard"</c>).</item>
+/// <item><see cref="IsQuestCompletion"/> = true — final Mask Shard (<c>End Dialogue 3</c> state, quest-completion path only).</item>
 /// </list>
-/// Both instances hook the <c>Sprintmaster Runner / Behaviour</c> FSM but modify different
-/// states, so they coexist without conflict.
-/// </remarks>
+/// Both instances hook the same FSM but different states, so they coexist without conflict.
+/// </summary>
 public class SprintmasterLocation : AutoLocation
 {
     /// <summary>
@@ -45,24 +36,15 @@ public class SprintmasterLocation : AutoLocation
     private void HookSprintmaster(PlayMakerFSM fsm)
     {
         if (IsQuestCompletion)
-        {
             HookQuestCompletion(fsm);
-        }
         else
-        {
             HookRace2BeastShard(fsm);
-        }
     }
 
     private void HookQuestCompletion(PlayMakerFSM fsm)
     {
-        // Final race path:
-        //   Quest End (GetQuestReward stores quest.RewardItem into FSM var)
-        //   → Win After Wish
-        //   → End Dialogue 3 (SavedItemGet reads that FSM var and gives the Mask Shard)
-        //
-        // On non-quest-completion paths the FSM var is null, so SavedItemGet does nothing.
-        // Capture the original action before replacing it to retain its FsmObject binding.
+        // Quest End → Win After Wish → End Dialogue 3 (SavedItemGet gives Mask Shard).
+        // FSM var is null on non-quest-completion paths, so SavedItemGet does nothing there.
         FsmState endDialogue3 = fsm.MustGetState("End Dialogue 3");
         SavedItemGet questRewardAction = endDialogue3.GetFirstActionOfType<SavedItemGet>()!;
 
@@ -72,23 +54,15 @@ public class SprintmasterLocation : AutoLocation
             {
                 SavedItem? rewardItem = questRewardAction.Item.Value as SavedItem;
                 if (rewardItem != null && !Placement!.AllObtained())
-                {
                     GiveAll();
-                }
-                // rewardItem null  → non-quest-completion path; do nothing.
-                // AllObtained true → IC item already given; suppress vanilla to avoid double-give.
             }
         });
     }
 
     private void HookRace2BeastShard(PlayMakerFSM fsm)
     {
-        // Normal race wins go through Give Reward → SavedItemGet.
-        //   Race 1 gives a Rosary String.
-        //   Race 2 gives the Beast Shard (SavedItem name "Great Shard").
-        // The current race track's reward is written to the FSM variable by SetCurrentRaceTrack
-        // before the race starts, and SavedItemGet reads it.
-        // We identify Race 2 by checking the SavedItem's Unity object name.
+        // Give Reward → SavedItemGet gives the current race's reward.
+        // Race 2 is identified by SavedItem name "Great Shard"; Race 1 (Rosary String) passes through.
         const string BeastShardSavedItemName = "Great Shard";
 
         FsmState giveRewardState = fsm.MustGetState("Give Reward");
@@ -100,22 +74,15 @@ public class SprintmasterLocation : AutoLocation
             {
                 SavedItem? rewardItem = raceRewardAction.Item.Value as SavedItem;
                 if (rewardItem == null)
-                {
                     return;
-                }
 
                 if (rewardItem.name == BeastShardSavedItemName)
                 {
-                    // Race 2: IC intercepts. Give the IC item if not yet obtained;
-                    // suppress the vanilla Beast Shard in all cases.
                     if (!Placement!.AllObtained())
-                    {
                         GiveAll();
-                    }
                 }
                 else
                 {
-                    // Race 1 or any other non-IC race: give vanilla item unchanged.
                     rewardItem.Get();
                 }
             }
