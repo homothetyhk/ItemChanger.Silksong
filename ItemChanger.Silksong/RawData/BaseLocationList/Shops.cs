@@ -80,4 +80,6 @@ internal static partial class BaseLocationList
     public static ShopLocation Twelfth_Architect => Twelfth_Architect_Base(LocationNames.Twelfth_Architect);
 
     public static ShopLocation Twelfth_Architect_Requires_Tools => Twelfth_Architect_Base(LocationNames.Twelfth_Architect_Requires_Tools);
+
+    public static VogShopLocation Vog => new() { Name = LocationNames.Vog };
 }

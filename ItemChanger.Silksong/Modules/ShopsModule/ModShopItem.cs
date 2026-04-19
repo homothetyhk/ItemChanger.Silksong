@@ -1,5 +1,6 @@
 ﻿using ItemChanger.Costs;
 using ItemChanger.Items;
+using ItemChanger.Placements;
 using ItemChanger.Silksong.Costs;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Placements;
@@ -9,9 +10,9 @@ using UnityEngine;
 
 namespace ItemChanger.Silksong.Modules.ShopsModule;
 
-internal class ModShopItem : ShopItem
+internal class ModShopItem : ShopItem, ISimpleShopItem
 {
-    public static ModShopItem CreateInstance(Item item, ShopPlacement placement)
+    public static ModShopItem CreateInstance(Item item, Placement placement)
     {
         var obj = CreateInstance<ModShopItem>();
         obj.Item = item;
@@ -36,7 +37,7 @@ internal class ModShopItem : ShopItem
         get => field ?? throw new NullReferenceException(nameof(Item));
         private set => field = value ?? throw new NullReferenceException(nameof(Item));
     }
-    public ShopPlacement Placement
+    public Placement Placement
     {
         get => field ?? throw new NullReferenceException(nameof(Placement));
         private set => field = value ?? throw new NullReferenceException(nameof(Placement));
@@ -134,7 +135,7 @@ internal class ModShopItem : ShopItem
         get
         {
             if (Item.IsObtained()) return false;
-            if (Placement.Location.Test != null && !Placement.Location.Test.Value) return false;
+            if (Placement is ShopPlacement s && s.Location.Test != null && !s.Location.Test.Value) return false;
 
             return true;
         }
@@ -159,4 +160,12 @@ internal class ModShopItem : ShopItem
             MessageType = Enums.MessageType.Any,
         });
     }
+
+    string ISimpleShopItem.GetDisplayName() => Item.GetPreviewName();
+
+    Sprite ISimpleShopItem.GetIcon() => UIDef?.GetSprite()!;
+
+    int ISimpleShopItem.GetCost() => Cost;
+
+    bool ISimpleShopItem.DelayPurchase() => false;
 }
