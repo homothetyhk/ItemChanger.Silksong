@@ -19,7 +19,7 @@ public class RaiseFsmEventOnGiveTag : Tag
     public required string ObjectPath { get; init; }
     public required string Event { get; init; }
 
-    private PlayMakerFSM? fsm;
+    private PlayMakerFSM? _fsm;
 
     protected override void DoLoad(TaggableObject parent)
     {
@@ -45,7 +45,7 @@ public class RaiseFsmEventOnGiveTag : Tag
         }
         
         ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneName, FindFsm);
-        this.fsm = null;
+        _fsm = null;
     }
 
     private void OnVisitStateChanged(VisitStateChangedEventArgs obj)
@@ -62,14 +62,14 @@ public class RaiseFsmEventOnGiveTag : Tag
     private void FindFsm(Scene scene)
     {
         GameObject? fsmGameObject = scene.FindGameObject(ObjectPath);
-        if (fsmGameObject is null)
+        if (fsmGameObject == null)
         {
             LogWarn($"FSM game object {ObjectPath} not found.");
             return;
         }
         
-        this.fsm = fsmGameObject.GetComponent<PlayMakerFSM>();
-        if (this.fsm is null)
+        _fsm = fsmGameObject.GetComponent<PlayMakerFSM>();
+        if (_fsm == null)
         {
             LogWarn($"FSM component on game object {ObjectPath} not found.");
         }
@@ -77,9 +77,9 @@ public class RaiseFsmEventOnGiveTag : Tag
 
     private void RaiseEvent()
     {
-        if (fsm == null)
+        if (_fsm == null)
             return;
         
-        fsm.SendEvent(Event);
+        _fsm.SendEvent(Event);
     }
 }
