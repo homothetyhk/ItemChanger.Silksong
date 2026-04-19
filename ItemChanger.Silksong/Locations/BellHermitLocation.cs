@@ -28,6 +28,6 @@ public class BellHermitLocation : AutoLocation
 
         FsmState giveSoulState = fsm.MustGetState("Give Soul");
         giveSoulState.RemoveActionsOfType<SavedItemGetV2>();
-        giveSoulState.InsertMethod(4, GiveAll);
+        giveSoulState.InsertLambdaMethod(4, GiveAll);
     }
 }
