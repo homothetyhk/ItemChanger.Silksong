@@ -45,7 +45,13 @@ public class ShopsModule : Module
         modStock.BuildItemList();
     }
 
-    internal IEnumerable<ShopPlacement> ShopPlacements(BaseShop baseShop) => shopPlacements.TryGetValue(baseShop.Name, out var placements) ? placements.OrderBy(p => p.Name) : [];
+    internal IEnumerable<ShopPlacement> ShopPlacements(BaseShop baseShop)
+    {
+        if (shopPlacements.TryGetValue(baseShop.Name, out var placements))
+            return placements.OrderBy(p => -(p.Location.Priority?.Value ?? 0)).ThenBy(p => p.Name);
+        else
+            return [];
+    }
 
     private readonly Harmony harmony = new(typeof(ShopsPatches).FullName);
 

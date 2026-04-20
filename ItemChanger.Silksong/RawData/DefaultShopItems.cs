@@ -5,6 +5,8 @@ public enum DefaultShopItems
     BellhomeFurniture,
     Craftmetal,
     Keys,
+    MapAccessories,
+    Maps,
     MaskShards,
     MemoryLockets,
     PsalmCylinders,

@@ -525,20 +525,20 @@ public static class LocationNames
     public const string Ventrica__Underworks = "Ventrica-Underworks";
 
     // Maps - Purchased from Shakra (shop items, no per-item constants)
-    // - Mosslands Map (40)
-    // - The Marrow Map (50)
-    // - Deep Docks Map (50)
-    // - Far Fields Map (50)
-    // - Wormways Map (70)
-    // - Hunter's March Map (70)
-    // - Greymoor Map (70)
-    // - Bellhart Map (40)
-    // - Shellwood Map (70)
-    // - Blasted Steps Map (70)
-    // - Sinner's Road Map (90)
-    // - Mount Fay Map (40)
-    // - Sands of Karak Map (90)
-    // - Bilewater Map (90)
+    public const string Map__Bellhart = "Map-Bellhart";  // 40 rosary
+    public const string Map__Bilewater = "Map-Bilewater";  // 90 rosary
+    public const string Map__Blasted_Steps = "Map-Blasted_Steps";  // 70 rosary
+    public const string Map__Deep_Docks = "Map-Deep_Docks";  // 50 rosary
+    public const string Map__Far_Fields = "Map-Far_Fields";  // 50 rosary
+    public const string Map__Greymoor = "Map-Greymoor";  // 70 rosary
+    public const string Map__Hunter_s_March = "Map-Hunter's_March";  // 70 rosary
+    public const string Map__Marrow = "Map-Marrow";  // 50 rosary
+    public const string Map__Mosslands = "Map-Mosslands";  // 40 rosary
+    public const string Map__Mount_Fay = "Map-Mount_Fay";  // 40 rosary
+    public const string Map__Sands_of_Karak = "Map-Sands_of_Karak";  // 90 rosary
+    public const string Map__Shellwood = "Map-Shellwood";  // 70 rosary
+    public const string Map__Sinner_s_Road = "Map-Sinner's_Road";  // 90 rosary
+    public const string Map__Wormways = "Map-Wormways";  // 70 rosary
 
     // Maps - From map machines
     public const string Map__Grand_Gate = "Map-Grand_Gate";  // 40 rosary

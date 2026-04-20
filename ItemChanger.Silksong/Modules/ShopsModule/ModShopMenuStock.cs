@@ -1,4 +1,5 @@
 ﻿using ItemChanger.Silksong.RawData;
+using ItemChanger.Tags;
 using UnityEngine;
 
 namespace ItemChanger.Silksong.Modules.ShopsModule;
@@ -18,9 +19,9 @@ internal class ModShopMenuStock : MonoBehaviour
         // List randomized items first, then vanilla.
         foreach (var placement in Module.ShopPlacements(BaseShop))
         {
-            foreach (var item in placement.Items)
+            foreach (var (items, cost) in placement.GetItemsWithCosts())
             {
-                var shopItem = ModShopItem.CreateInstance(item, placement);
+                var shopItem = ModShopItem.CreateInstance(items, cost, placement);
                 if (!shopItem.IsAvailable) continue;
 
                 shopItems.Add(shopItem);

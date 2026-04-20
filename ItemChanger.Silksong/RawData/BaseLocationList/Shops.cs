@@ -69,6 +69,12 @@ internal static partial class BaseLocationList
         SuppressedPDBools = [nameof(PlayerData.BoneBottomShopKeepWillLeave), nameof(PlayerData.BoneBottomShopKeepLeft)],
     };
 
+    public static ShopLocation Shakra__Global => new()
+    {
+        Name = LocationNames.Shakra__Global,
+        BaseShopName = nameof(BaseShopList.Shakra),
+    };
+
     private static ShopLocation Twelfth_Architect_Base(string name) => new()
     {
         SceneName = SceneNames.Under_17,
