@@ -1,4 +1,4 @@
-using ItemChanger.Modules;
+﻿using ItemChanger.Modules;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Placements;
 using ItemChanger.Silksong.RawData;
@@ -44,8 +44,14 @@ public class ShopsModule : Module
         modStock.BaseStock = ShopOwnerBase._spawnedShop;
         modStock.BuildItemList();
     }
- 
-    internal IEnumerable<ShopPlacement> ShopPlacements(BaseShop baseShop) => shopPlacements.TryGetValue(baseShop.Name, out var placements) ? placements.OrderBy(p => p.Name) : [];
+
+    internal IEnumerable<ShopPlacement> ShopPlacements(BaseShop baseShop)
+    {
+        if (shopPlacements.TryGetValue(baseShop.Name, out var placements))
+            return placements.OrderBy(p => -(p.Location.Priority?.Value ?? 0)).ThenBy(p => p.Name);
+        else
+            return [];
+    }
 
     protected override void DoLoad()
     {

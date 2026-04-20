@@ -4,7 +4,6 @@ using ItemChanger.Placements;
 using ItemChanger.Silksong.Costs;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Placements;
-using ItemChanger.Tags;
 using PrepatcherPlugin;
 using UnityEngine;
 
@@ -12,10 +11,11 @@ namespace ItemChanger.Silksong.Modules.ShopsModule;
 
 internal class ModShopItem : ShopItem, ISimpleShopItem
 {
-    public static ModShopItem CreateInstance(Item item, Placement placement)
+    public static ModShopItem CreateInstance(IEnumerable<Item> items, Cost? cost, Placement placement)
     {
         var obj = CreateInstance<ModShopItem>();
-        obj.Item = item;
+        obj.Items = [.. items];
+        obj.ICCost = cost ?? new FreeCost();
         obj.Placement = placement;
 
         var requiredToolsAmount = ToolCountCost.Get(obj.ICCost);
@@ -34,20 +34,25 @@ internal class ModShopItem : ShopItem, ISimpleShopItem
         return obj;
     }
 
-    public new Item Item
+    public IReadOnlyList<Item> Items
     {
-        get => field ?? throw new NullReferenceException(nameof(Item));
-        private set => field = value ?? throw new NullReferenceException(nameof(Item));
+        get;
+        private set
+        {
+            if (value == null || value.Count == 0 || value.Any(i => i == null)) throw new NullReferenceException(nameof(Items));
+            field = value;
+        }
+    } = [];
+    public Cost ICCost
+    {
+        get => field ?? throw new NullReferenceException(nameof(ICCost));
+        private set => field = value ?? throw new NullReferenceException(nameof(ICCost));
     }
     public Placement Placement
     {
         get => field ?? throw new NullReferenceException(nameof(Placement));
         private set => field = value ?? throw new NullReferenceException(nameof(Placement));
     }
-
-    public UIDef? UIDef => Item.GetResolvedUIDef(Placement);
-
-    public Cost ICCost => Item.GetTag<CostTag>()?.Cost ?? FreeCost.Instance;
 
     public void BuyFail()
     {
@@ -68,11 +73,17 @@ internal class ModShopItem : ShopItem, ISimpleShopItem
         }
     }
 
-    public new string DisplayName => UIDef?.GetPreviewName() ?? $"!!{Item.Name}!!";
+    public new string DisplayName => string.Join(", ", Items.Where(i => !i.IsObtained()).Select(i => i.GetResolvedUIDef()?.GetPreviewName() ?? $"!!{i.Name}!!"));
 
     // TODO: Integrate properly with a cost display strategy, and show cost text on the confirm page.
     private bool GetExtraCostText(out string text)
     {
+        if (ICCost.Paid)
+        {
+            text = "";
+            return false;
+        }
+
         List<Cost> atoms = [.. ICCost.Flatten()];
 
         bool currency = false;
@@ -127,7 +138,7 @@ internal class ModShopItem : ShopItem, ISimpleShopItem
     {
         get
         {
-            string desc = UIDef?.GetLongDescription() ?? $"!!{Item.Name}_DESCRIPTION!!";
+            string desc = string.Join("\n\n", Items.Where(i => !i.IsObtained()).Select(i => i.GetResolvedUIDef()?.GetLongDescription() ?? $"!!{i.Name}_DESCRIPTION!!"));
             return GetExtraCostText(out var extra) ? $"{desc}\n\n{extra}" : desc;
         }
     }
@@ -136,34 +147,36 @@ internal class ModShopItem : ShopItem, ISimpleShopItem
     {
         get
         {
-            if (Item.IsObtained()) return false;
+            if (Items.All(i => i.IsObtained())) return false;
             if (Placement is ShopPlacement s && s.Location.Test != null && !s.Location.Test.Value) return false;
 
             return true;
         }
     }
 
-    public new bool IsAvailableNotInfinite => IsAvailable && !Item.WasEverObtained();
+    public new bool IsAvailableNotInfinite => IsAvailable && Items.Any(i => !i.WasEverObtained());
 
-    public new bool IsPurchased => Item.IsObtained();
+    public new bool IsPurchased => Items.All(i => i.IsObtained());
 
-    public new Sprite ItemSprite => UIDef?.GetSprite()!;
+    public new Sprite ItemSprite => Items.Where(i => !i.IsObtained()).Select(i => i.GetResolvedUIDef()?.GetSprite()).FirstOrDefault()!;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter")]
     public new void SetPurchased(Action onComplete, int subItemIndex)
     {
         ICCost.Pay();
-        Item.Give(Placement, new()
-        {
-            Callback = _ => onComplete(),
-            FlingType = Enums.FlingType.DirectDeposit,
-            MessageType = Enums.MessageType.Any,
-        });
+        Placement.GiveSome(
+            Items,
+            new()
+            {
+                FlingType = Enums.FlingType.DirectDeposit,
+                MessageType = Enums.MessageType.Any,
+            },
+            callback: onComplete);
     }
 
-    string ISimpleShopItem.GetDisplayName() => Item.GetPreviewName();
+    string ISimpleShopItem.GetDisplayName() => DisplayName;
 
-    Sprite ISimpleShopItem.GetIcon() => UIDef?.GetSprite()!;
+    Sprite ISimpleShopItem.GetIcon() => ItemSprite;
 
     int ISimpleShopItem.GetCost() => Cost;
 

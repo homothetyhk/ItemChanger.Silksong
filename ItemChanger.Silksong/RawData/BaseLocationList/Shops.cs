@@ -1,4 +1,3 @@
-﻿
 using Benchwarp.Data;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Locations;
@@ -67,6 +66,12 @@ internal static partial class BaseLocationList
         Name = LocationNames.Pebb,
         BaseShopName = nameof(BaseShopList.Pebb),
         SuppressedPDBools = [nameof(PlayerData.BoneBottomShopKeepWillLeave), nameof(PlayerData.BoneBottomShopKeepLeft)],
+    };
+
+    public static ShopLocation Shakra => new()
+    {
+        Name = LocationNames.Shakra,
+        BaseShopName = nameof(BaseShopList.Shakra),
     };
 
     private static ShopLocation Twelfth_Architect_Base(string name) => new()

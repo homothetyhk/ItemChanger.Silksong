@@ -51,7 +51,7 @@ public class VogShopPlacement(string Name) : Placement(Name), IMultiCostPlacemen
     internal List<ISimpleShopItem> GetItems()
     {
         currentItems.Clear();
-        currentItems.AddRange(Items.Select(i => ModShopItem.CreateInstance(i, this)).Where(i => i.IsAvailable));
+        currentItems.AddRange(Items.Select(i => ModShopItem.CreateInstance([i], i.GetTag<CostTag>()?.Cost, this)).Where(i => i.IsAvailable));
         return [.. currentItems];
     }
 
@@ -60,7 +60,7 @@ public class VogShopPlacement(string Name) : Placement(Name), IMultiCostPlacemen
         if (itemIndex < 0 || itemIndex >= currentItems.Count) return;
 
         currentItems[itemIndex].ICCost.Paid = true;
-        GiveSome([currentItems[itemIndex].Item], new()
+        GiveSome(currentItems[itemIndex].Items, new()
         {
             FlingType = Enums.FlingType.DirectDeposit,
             MessageType = Enums.MessageType.SmallPopup,
