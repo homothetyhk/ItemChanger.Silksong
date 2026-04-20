@@ -24,6 +24,12 @@ public class ShopLocation : Location
     /// </summary>
     public List<string> SuppressedPDBools = [];
 
+    /// <summary>
+    /// Shop locations with the same BaseShopName are sorted first by priority (descending), then by name (ascending) in the shop menu.
+    /// Vanilla inventory is always sorted last.
+    /// </summary>
+    public IValueProvider<int>? Priority = null;
+
     [JsonIgnore]
     public BaseShop BaseShop => BaseShopList.TryGetBaseShop(BaseShopName, out var shop) ? shop : throw new KeyNotFoundException($"{BaseShopName}");
 
@@ -31,5 +37,5 @@ public class ShopLocation : Location
 
     protected override void DoUnload() { }
 
-    public override Placement Wrap() => new ShopPlacement(Name) { Location = this };
+    public override Placement Wrap() => new ShopMultiPlacement(Name) { Location = this };
 }

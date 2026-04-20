@@ -51,7 +51,7 @@ public class VogShopPlacement(string Name) : Placement(Name), IMultiCostPlacemen
     internal List<ISimpleShopItem> GetItems()
     {
         currentItems.Clear();
-        currentItems.AddRange(Items.Select(i => ModShopItem.CreateInstance(i, this)).Where(i => i.IsAvailable));
+        currentItems.AddRange(Items.Select(i => ModShopItem.CreateInstance([i], i.GetTag<CostTag>()?.Cost, this)).Where(i => i.IsAvailable));
         return [.. currentItems];
     }
 
@@ -61,15 +61,13 @@ public class VogShopPlacement(string Name) : Placement(Name), IMultiCostPlacemen
 
         // Rosary cost is handled by the base game, so we don't invoke Pay() directly.
         currentItems[itemIndex].ICCost.Paid = true;
-
-        GiveSome([currentItems[itemIndex].Item], new()
+        GiveSome(currentItems[itemIndex].Items, new()
         {
             FlingType = Enums.FlingType.DirectDeposit,
             MessageType = Enums.MessageType.SmallPopup,
             Transform = transform,
         });
     }
-
 
     // The only other subclass of SimpleShopMenuOwner is the 'caravan spider', which is cut content??
     // So we handle CaravanTroupeHunter directly.

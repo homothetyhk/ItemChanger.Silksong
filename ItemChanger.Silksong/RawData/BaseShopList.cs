@@ -1,4 +1,5 @@
 ﻿using ItemChanger.Items;
+using ItemChanger.Silksong.Modules.ShopsModule;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ItemChanger.Silksong.RawData;
@@ -123,6 +124,39 @@ internal static class BaseShopList
         ],
     };
 
+    public static BaseShop Shakra => new()
+    {
+        Name = nameof(Shakra),
+        Matcher = ShopOwnerMatcher(ShakraModule.SHAKRA_OBJECT_NAMES),
+        Inventory = [
+            (BaseItemList.Mosslands_Map, DefaultShopItems.Maps),
+            (BaseItemList.The_Marrow_Map, DefaultShopItems.Maps),
+            (BaseItemList.Deep_Docks_Map, DefaultShopItems.Maps),
+            (BaseItemList.Far_Fields_Map, DefaultShopItems.Maps),
+            (BaseItemList.Wormways_Map, DefaultShopItems.Maps),
+            (BaseItemList.Hunter_s_March_Map, DefaultShopItems.Maps),
+            (BaseItemList.Greymoor_Map, DefaultShopItems.Maps),
+            (BaseItemList.Bellhart_Map, DefaultShopItems.Maps),
+            (BaseItemList.Shellwood_Map, DefaultShopItems.Maps),
+            (BaseItemList.Blasted_Steps_Map, DefaultShopItems.Maps),
+            (BaseItemList.Sinner_s_Road_Map, DefaultShopItems.Maps),
+            (BaseItemList.Mount_Fay_Map, DefaultShopItems.Maps),
+            (BaseItemList.Sands_of_Karak_Map, DefaultShopItems.Maps),
+            (BaseItemList.Bilewater_Map, DefaultShopItems.Maps),
+            (BaseItemList.Quill__White, DefaultShopItems.Maps),
+            (BaseItemList.Compass, DefaultShopItems.Tools),
+            (BaseItemList.Bench_Pins, DefaultShopItems.MapAccessories),
+            (BaseItemList.Bellway_Pins, DefaultShopItems.MapAccessories),
+            (BaseItemList.Vendor_Pins, DefaultShopItems.MapAccessories),
+            (BaseItemList.Ventrica_Pins, DefaultShopItems.MapAccessories),
+            (BaseItemList.Shell_Marker, DefaultShopItems.MapAccessories),
+            (BaseItemList.Ring_Marker, DefaultShopItems.MapAccessories),
+            (BaseItemList.Hunt_Marker, DefaultShopItems.MapAccessories),
+            (BaseItemList.Dark_Marker, DefaultShopItems.MapAccessories),
+            (BaseItemList.Bronze_Marker, DefaultShopItems.MapAccessories)
+        ],
+    };
+
     public static BaseShop Twelfth_Architect => new()
     {
         Name = nameof(Twelfth_Architect),
@@ -169,4 +203,10 @@ internal static class BaseShopList
     private static IEnumerable<BaseShop> GetBaseShops() => typeof(BaseShopList).GetProperties().Select(p => (BaseShop)p.GetValue(null));
 
     private static Func<ShopOwnerBase, bool> ShopOwnerMatcher(string ownerName) => arg => arg.gameObject.name == ownerName;
+
+    private static Func<ShopOwnerBase, bool> ShopOwnerMatcher(IEnumerable<string> ownerNames)
+    {
+        HashSet<string> set = [.. ownerNames];
+        return arg => set.Contains(arg.gameObject.name);
+    }
 }
