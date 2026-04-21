@@ -1,5 +1,6 @@
 using HutongGames.PlayMaker;
 using ItemChanger.Containers;
+using ItemChanger.Extensions;
 using ItemChanger.Locations;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Tags;
@@ -9,10 +10,6 @@ using Silksong.FsmUtil;
 using UnityEngine.SceneManagement;
 
 namespace ItemChanger.Silksong.Locations;
-
-// TODO:
-// - Benchwarp crash when warping to locked bench
-// - Freeze on save+quit - cannot reproduce?
 
 public class CrawSummonsLocation : ObjectLocation
 {
@@ -28,7 +25,7 @@ public class CrawSummonsLocation : ObjectLocation
         Benchwarp.Data.SceneNames.Shellwood_01b, // Shellwood tall hub room
         Benchwarp.Data.SceneNames.Mosstown_03, // Shellwood room outside Chapel of the Witch
         Benchwarp.Data.SceneNames.Shellwood_08c, // Shellwood lower left toll bench
-        Benchwarp.Data.SceneNames.Dust_10, // Sinners road troll bench
+        Benchwarp.Data.SceneNames.Dust_10, // Sinners road broken toll bench
         Benchwarp.Data.SceneNames.Dust_11, // Sinners road Styx bench
         Benchwarp.Data.SceneNames.Wisp_04 // Wisp Thicket bench
     ];
@@ -88,6 +85,17 @@ public class CrawSummonsLocation : ObjectLocation
     {
         void CancelIfRequirementsNotMet(Action cb)
         {
+            // When Craw Summons spawns while warping to a locked bell bench using BenchWarp, the screen fills black
+            // until moving through a scene transition.
+            // This fix prevents the Craw Summons from spawning at a locked bench, which probably makes sense anyway.
+            Scene activeScene = fsm.gameObject.scene;
+            GameObject? bellBench = activeScene.FindGameObjectByName("bell_bench");
+            if (bellBench != null && !bellBench.GetComponent<BellBench>().isActivated)
+            {
+                fsm.SendEvent("CANCEL");
+                return;
+            }
+
             if (!QuestManager.TryGetFullQuestBase(Quests.Black_Thread_Pt1_Shamans, out var quest))
             {
                 LogWarn($"Unable to locate quest '{quest}'.");
