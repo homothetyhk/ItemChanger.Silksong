@@ -3,6 +3,7 @@ using HutongGames.PlayMaker.Actions;
 using ItemChanger.Locations;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.Serialization;
+using Newtonsoft.Json;
 using PrepatcherPlugin;
 using Silksong.FsmUtil;
 using UnityEngine;
@@ -37,12 +38,13 @@ public class CrawSummonsLocation : AutoLocation
     /// List of scenes that the Craw Summons location should spawn at. Defaults to all possible
     /// vanilla locations simultaneously.
     /// </summary>
-    public List<string> SceneNames { get; init; } = [..CRAW_SUMMONS_SCENES];
+    public required List<string> SceneNames { get; init; } = [..CRAW_SUMMONS_SCENES];
 
     /// <summary>
     /// List of scenes that have the Craw summon pin present. Should be initialized empty.
     /// </summary>
-    public List<string> ScenesWithSpawnedSummons { get; init; } = [];
+    [JsonProperty]
+    private List<string> ScenesWithSpawnedSummons { get; init; } = [];
 
     protected override void DoLoad()
     {
