@@ -1,7 +1,9 @@
 using HutongGames.PlayMaker;
 using ItemChanger.Extensions;
 using ItemChanger.Modules;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.Serialization;
 using Newtonsoft.Json;
 using PrepatcherPlugin;
 using Silksong.FsmUtil;
@@ -36,6 +38,15 @@ public class DeterministicCrawSummonsModule : Module
     /// vanilla locations simultaneously.
     /// </summary>
     public List<string> SceneNames { get; init; } = [..CRAW_SUMMONS_SCENES];
+
+    /// <summary>
+    /// Conditions for Craw Summons to spawn. Defaults to vanilla conditions.
+    /// </summary>
+    public IValueProvider<bool> SpawnConditions { get; init; } = new Conjunction(
+        new PDBool(nameof(PlayerData.blackThreadWorld)),
+        new PDBool(nameof(PlayerData.hitCrowCourtSwitch)),
+        new QuestCompletionBool(Quests.Black_Thread_Pt1_Shamans, QuestCompletion.IsCompleted)
+    );
 
     /// <summary>
     /// List of scenes that have the Craw summon pin present. Initialized empty.
@@ -94,18 +105,10 @@ public class DeterministicCrawSummonsModule : Module
                 return;
             }
 
-            if (!QuestManager.TryGetFullQuestBase(Quests.Black_Thread_Pt1_Shamans, out var quest))
-            {
-                LogWarn($"Unable to locate quest '{quest}'.");
-                return;
-            }
-
-            if (ScenesWithSpawnedSummons.Contains(sceneName)
-                || !PlayerDataAccess.blackThreadWorld
-                || !PlayerDataAccess.hitCrowCourtSwitch
-                || !quest.Completion.IsCompleted)
+            if (ScenesWithSpawnedSummons.Contains(sceneName) || !SpawnConditions.Value)
             {
                 fsm.SendEvent("CANCEL");
+                return;
             }
 
             ScenesWithSpawnedSummons.Add(sceneName);
