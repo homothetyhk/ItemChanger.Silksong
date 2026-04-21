@@ -44,14 +44,9 @@ public class CrawSummonsContainer : Container
 
         // Replace the craw summons item
         FsmState setPickupState = fsm.MustGetState("Set Pickup");
-        PlacementSavedItem icItem = ScriptableObject.CreateInstance<PlacementSavedItem>();
-        icItem.Placement = info.GiveInfo.Placement;
-        icItem.GiveInfo = new GiveInfo()
-        {
-            FlingType = info.GiveInfo.FlingType,
-            Container = Name,
-            MessageType = MessageType.Any
-        };
+        SavedContainerItem icItem = ScriptableObject.CreateInstance<SavedContainerItem>();
+        icItem.ContainerInfo = info;
+        icItem.ContainerTransform = obj.transform;
         setPickupState.GetFirstActionOfType<SetCollectablePickupItem>()!.Item = icItem;
     }
 }
