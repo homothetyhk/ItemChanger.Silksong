@@ -1,9 +1,6 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Containers;
-using ItemChanger.Enums;
-using ItemChanger.Items;
-using ItemChanger.Silksong.Serialization;
 using Silksong.FsmUtil;
 using UnityEngine;
 
@@ -19,18 +16,14 @@ public class CrawSummonsContainer : Container
     public override bool SupportsInstantiate => false;
     public override bool SupportsModifyInPlace => true;
 
-    protected override void DoLoad()
-    {
-    }
+    protected override void DoLoad() { }
 
-    protected override void DoUnload()
-    {
-    }
+    protected override void DoUnload() { }
 
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
         PlayMakerFSM fsm = obj.LocateMyFSM("FSM");
-        
+
         // Remove the summons cloth from the pin iff the placement is obtained
         FsmState emptyState = fsm.MustGetState("Empty?");
         emptyState.Actions = [];

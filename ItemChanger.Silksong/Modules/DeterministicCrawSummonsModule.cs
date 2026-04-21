@@ -92,6 +92,16 @@ public class DeterministicCrawSummonsModule : Module
 
     private void ForceSummonsSpawn(PlayMakerFSM fsm, string sceneName)
     {
+        // Replace RunFsm (craw_summons_spawn_check) states with equivalent check without any randomness
+        FsmState respawnCheck = fsm.MustGetState("Set Custom Wake Up?");
+        respawnCheck.RemoveAction(3);
+        respawnCheck.InsertLambdaMethod(3, CancelIfRequirementsNotMet);
+
+        FsmState sitCheck = fsm.MustGetState("Craw summons check");
+        sitCheck.RemoveAction(3);
+        sitCheck.InsertLambdaMethod(3, CancelIfRequirementsNotMet);
+        return;
+
         void CancelIfRequirementsNotMet(Action cb)
         {
             // When Craw Summons spawns while warping to a locked bell bench using BenchWarp, the screen fills black
@@ -114,15 +124,6 @@ public class DeterministicCrawSummonsModule : Module
             ScenesWithSpawnedSummons.Add(sceneName);
             cb();
         }
-
-        // Replace RunFsm (craw_summons_spawn_check) states with equivalent check without any randomness
-        FsmState respawnCheck = fsm.MustGetState("Set Custom Wake Up?");
-        respawnCheck.RemoveAction(3);
-        respawnCheck.InsertLambdaMethod(3, CancelIfRequirementsNotMet);
-
-        FsmState sitCheck = fsm.MustGetState("Craw summons check");
-        sitCheck.RemoveAction(3);
-        sitCheck.InsertLambdaMethod(3, CancelIfRequirementsNotMet);
     }
 
     private void ForceNoSummonsSpawn(PlayMakerFSM fsm)

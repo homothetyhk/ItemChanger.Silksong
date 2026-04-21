@@ -4,7 +4,7 @@ using PrepatcherPlugin;
 
 namespace ItemChangerTesting.LocationTests;
 
-internal class CrawSumonsLocationTest : Test
+internal class CrawSummonsLocationTest : Test
 {
     public override TestMetadata GetMetadata() => new()
     {

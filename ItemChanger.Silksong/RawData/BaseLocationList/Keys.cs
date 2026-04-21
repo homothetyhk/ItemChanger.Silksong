@@ -13,12 +13,6 @@ internal static partial class BaseLocationList
         FlingType = Enums.FlingType.Everywhere,
         ObjectName = "craw_court_summons_pin",
         Correction = default,
-        Tags =
-        [
-            new OriginalContainerTag()
-            {
-                ContainerType = ContainerNames.CrawSummons
-            }
-        ]
+        Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.CrawSummons }]
     };
 }
