@@ -1,8 +1,44 @@
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
+using ItemChangerTesting.ModuleTests;
 
 namespace ItemChangerTesting.LocationTests;
+
+/// <summary>
+/// Logs all Sprintmaster FSM state transitions for the bonus memento race.
+/// Complete the race and check BepInEx/LogOutput.log for [Sprintmaster Memento FSM] entries
+/// to identify which state delivers the memento reward.
+/// </summary>
+internal class SprintmasterMementoLoggerTest : Test
+{
+    public override TestMetadata GetMetadata() => new()
+    {
+        Folder = TestFolder.LocationTests,
+        MenuName = "Sprintmaster - Memento FSM Logger",
+        MenuDescription = "Logs all FSM state entries for the bonus memento race. Complete the race and check BepInEx log.",
+        Revision = 2026042200,
+    };
+
+    public override void Setup(TestArgs args)
+    {
+        StartAt(new CoordinateStartDef() { SceneName = "Sprintmaster_Cave", X = 60.82f, Y = 8.57f, MapZone = GlobalEnums.MapZone.NONE });
+        Profile.Modules.GetOrAdd<SprintmasterMementoFsmLoggerModule>();
+    }
+
+    protected override void OnEnterGame()
+    {
+        base.OnEnterGame();
+
+        PlayerData.instance.silkRegenMax = 3;
+        PlayerData.instance.hasDash = true;
+        PlayerData.instance.hasWalljump = true;
+        PlayerData.instance.hasDoubleJump = true;
+        PlayerData.instance.hasHarpoonDash = true;
+        PlayerData.instance.HasWildsMap = true;
+        PlayerData.instance.SprintMasterExtraRaceAvailable = true;
+    }
+}
 
 /// <summary>
 /// Tests the Race 2 Beast Shard reward hook (Give Reward FSM state, IsQuestCompletion = false).
