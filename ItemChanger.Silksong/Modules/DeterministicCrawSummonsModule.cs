@@ -37,7 +37,7 @@ public class DeterministicCrawSummonsModule : Module
     /// List of scenes that the Craw Summons should spawn at. Defaults to all possible
     /// vanilla locations simultaneously.
     /// </summary>
-    public List<string> SceneNames { get; init; } = [..CRAW_SUMMONS_SCENES];
+    public IEnumerable<string> SceneNames { get; init; } = CRAW_SUMMONS_SCENES;
 
     /// <summary>
     /// Conditions for Craw Summons to spawn. Defaults to vanilla conditions.
