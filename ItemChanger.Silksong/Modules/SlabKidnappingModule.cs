@@ -50,8 +50,8 @@ public class SlabKidnappingModule : Module
 
     protected override void DoUnload()
     {
-        ItemChangerHost.Singleton.GameEvents.AddSceneEdit(SceneNames.Bone_East_04c, ForceJailerDocks);
-        ItemChangerHost.Singleton.GameEvents.AddSceneEdit(SceneNames.Shadow_21, ForceJailerBilewater);
+        ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneNames.Bone_East_04c, ForceJailerDocks);
+        ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneNames.Shadow_21, ForceJailerBilewater);
         ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneNames.Greymoor_05, ForceJailerGreymoor);
     }
 
