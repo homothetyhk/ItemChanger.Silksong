@@ -17,6 +17,7 @@ public class RaiseFsmEventOnGiveTag : Tag
 {
     public required string SceneName { get; init; }
     public required string ObjectPath { get; init; }
+    public string? FsmName { get; init; } = null;
     public required string Event { get; init; }
 
     private PlayMakerFSM? _fsm;
@@ -32,7 +33,7 @@ public class RaiseFsmEventOnGiveTag : Tag
         {
             LogInfo($"Not a valid location with placement: {parent}");
         }
-        
+
         ItemChangerHost.Singleton.GameEvents.AddSceneEdit(SceneName, FindFsm);
     }
 
@@ -43,7 +44,7 @@ public class RaiseFsmEventOnGiveTag : Tag
         {
             placement.OnVisitStateChanged -= OnVisitStateChanged;
         }
-        
+
         ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneName, FindFsm);
         _fsm = null;
     }
@@ -67,8 +68,9 @@ public class RaiseFsmEventOnGiveTag : Tag
             LogWarn($"FSM game object {ObjectPath} not found.");
             return;
         }
-        
-        _fsm = fsmGameObject.GetComponent<PlayMakerFSM>();
+
+        _fsm = FsmName == null ? fsmGameObject.GetComponent<PlayMakerFSM>() : fsmGameObject.LocateMyFSM(FsmName);
+
         if (_fsm == null)
         {
             LogWarn($"FSM component on game object {ObjectPath} not found.");
@@ -79,7 +81,6 @@ public class RaiseFsmEventOnGiveTag : Tag
     {
         if (_fsm == null)
             return;
-        
         _fsm.SendEvent(Event);
     }
 }
