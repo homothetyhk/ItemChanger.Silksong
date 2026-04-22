@@ -450,7 +450,7 @@ public static class LocationNames
     public const string Rosary_String__Far_Fields_Seamstress = "Rosary_String-Far_Fields_Seamstress";
     public const string Rosary_String__Shellwood_Bench = "Rosary_String-Shellwood_Bench";
     public const string Rosary_String__Shellwood_Chapel = "Rosary_String-Shellwood_Chapel";
-    public const string Rosary_String__Sprintmaster_Race_1 = "Rosary_String-Sprintmaster_Race_1";  // Race 1 reward (skip path only)
+    public const string Rosary_String__Sprintmaster_Race_1 = "Rosary_String-Sprintmaster_Race_1";  // Race 1 reward
 
     // rosary necklaces (pickup locations)
     public const string Rosary_Necklace__Choral_Chambers_Gourmand = "Rosary_Necklace-Choral_Chambers_Gourmand";

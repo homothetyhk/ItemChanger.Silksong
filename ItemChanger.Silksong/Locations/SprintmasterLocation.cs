@@ -1,6 +1,9 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Locations;
+using ItemChanger.Placements;
+using ItemChanger.Silksong.RawData;
+using QuestPlaymakerActions;
 using Silksong.FsmUtil;
 using Silksong.FsmUtil.Actions;
 
@@ -10,16 +13,18 @@ namespace ItemChanger.Silksong.Locations;
 /// Location for Sprintmaster Swift race rewards in Sprintmaster_Cave.
 /// Two instances are needed:
 /// <list type="bullet">
-/// <item><see cref="IsQuestCompletion"/> = false — Race 2 Beast Shard (<c>Give Reward</c> state, identified by SavedItem name <c>"Great Shard"</c>).</item>
+/// <item><see cref="IsQuestCompletion"/> = false — Race 1 Rosary String or Race 2 Beast Shard (<c>Give Reward</c> state,
+/// dispatched by race index: 0 = Race 1, 1 = Race 2).</item>
 /// <item><see cref="IsQuestCompletion"/> = true — final Mask Shard (<c>End Dialogue 3</c> state, quest-completion path only).</item>
 /// </list>
-/// Both instances hook the same FSM but different states, so they coexist without conflict.
+/// Both hooks target different states and coexist without conflict. Multiple non-quest-completion instances share one
+/// <c>Give Reward</c> hook that dispatches dynamically via the active profile.
 /// </summary>
 public class SprintmasterLocation : AutoLocation
 {
     /// <summary>
     /// When true, hooks the quest completion reward path (Mask Shard, <c>End Dialogue 3</c> state).
-    /// When false, hooks the Race 2 Beast Shard path (<c>Give Reward</c> state).
+    /// When false, hooks the race reward path (<c>Give Reward</c> state) for the race whose index maps to this location's name.
     /// </summary>
     public bool IsQuestCompletion { get; set; }
 
@@ -38,7 +43,7 @@ public class SprintmasterLocation : AutoLocation
         if (IsQuestCompletion)
             HookQuestCompletion(fsm);
         else
-            HookRace2BeastShard(fsm);
+            HookRaceReward(fsm);
     }
 
     private void HookQuestCompletion(PlayMakerFSM fsm)
@@ -59,27 +64,40 @@ public class SprintmasterLocation : AutoLocation
         });
     }
 
-    private void HookRace2BeastShard(PlayMakerFSM fsm)
+    private void HookRaceReward(PlayMakerFSM fsm)
     {
         // Give Reward → SavedItemGet gives the current race's reward.
-        // Race 2 is identified by SavedItem name "Great Shard"; Race 1 (Rosary String) passes through.
-        const string BeastShardSavedItemName = "Great Shard";
+        // The race index (0 = Race 1, 1 = Race 2) is read from PlayerData at reward time and mapped to a
+        // location name. Multiple SprintmasterLocation instances share this hook; only the first to load
+        // replaces SavedItemGet — subsequent instances return early and rely on the dynamic ActiveProfile lookup.
+        FsmState arrayTrackState = fsm.MustGetState("Array Track?");
+        GetPlayerDataVariable pdVarAction = arrayTrackState.GetFirstActionOfType<GetPlayerDataVariable>()!;
+        string raceIndexVarName = pdVarAction.VariableName.Value;
 
         FsmState giveRewardState = fsm.MustGetState("Give Reward");
-        SavedItemGet raceRewardAction = giveRewardState.GetFirstActionOfType<SavedItemGet>()!;
+        SavedItemGet? raceRewardAction = giveRewardState.GetFirstActionOfType<SavedItemGet>();
+        if (raceRewardAction == null) return; // Give Reward already hooked by another SprintmasterLocation instance.
 
         giveRewardState.ReplaceFirstActionOfType<SavedItemGet>(new LambdaAction
         {
             Method = () =>
             {
                 SavedItem? rewardItem = raceRewardAction.Item.Value as SavedItem;
-                if (rewardItem == null)
-                    return;
+                if (rewardItem == null) return;
 
-                if (rewardItem.name == BeastShardSavedItemName)
+                int raceIdx = PlayerData.instance.GetInt(raceIndexVarName);
+                string? locationName = raceIdx switch
                 {
-                    if (!Placement!.AllObtained())
-                        GiveAll();
+                    0 => LocationNames.Rosary_String__Sprintmaster_Race_1,
+                    1 => LocationNames.Beast_Shard__Sprintmaster_Race_2,
+                    _ => null
+                };
+
+                if (locationName != null
+                    && ActiveProfile?.TryGetPlacement(locationName, out Placement? p) == true
+                    && p != null)
+                {
+                    p.GiveAll(GetGiveInfo());
                 }
                 else
                 {

@@ -15,7 +15,8 @@ namespace ItemChanger.Silksong.Modules;
 /// Inserts a yes/no skip prompt at the start of the Sprintmaster conversation.
 /// Choosing yes jumps to the final race and awards all bypassed rewards on quest completion:
 /// Race 1 Rosary String (IC placement if registered, vanilla otherwise),
-/// Race 2 Beast Shard (IC placement if registered), and Race 3 Mask Shard (via SprintmasterLocation).
+/// Race 2 Beast Shard (IC placement if registered, vanilla otherwise),
+/// and Race 3 Mask Shard (via SprintmasterLocation).
 /// </summary>
 public class SprintmasterSkipModule : Module
 {
@@ -23,8 +24,9 @@ public class SprintmasterSkipModule : Module
     private bool skipActive;
     // skipApplied: set after the jump, cleared when End Dialogue 3 gives bypassed rewards.
     private bool skipApplied;
-    // Race 1 vanilla reward (Rosary String), captured when the skip is applied.
+    // Vanilla rewards for bypassed races, captured when the skip is applied.
     private SavedItem? race1Reward;
+    private SavedItem? race2Reward;
 
     protected override void DoLoad()
     {
@@ -77,15 +79,19 @@ public class SprintmasterSkipModule : Module
             skipApplied = true;
 
             int lastRaceIdx = arrayGetAction.array.Length - 1;
+            int currentRaceIdx = PlayerData.instance.GetInt(pdVarAction.VariableName.Value);
 
             race1Reward ??= (arrayGetAction.array.Get(0) as GameObject)
                 ?.GetComponent<SprintRaceController>()?.Reward;
+            race2Reward ??= arrayGetAction.array.Length > 1
+                ? (arrayGetAction.array.Get(1) as GameObject)?.GetComponent<SprintRaceController>()?.Reward
+                : null;
 
             // Pre-increment the quest counter for each skipped race so Was Extra? routes to Quest End.
             FullQuestBase? quest = questCheckAction?.Quest.Value as FullQuestBase;
             if (quest != null)
             {
-                for (int i = 0; i < lastRaceIdx; i++)
+                for (int i = currentRaceIdx; i < lastRaceIdx; i++)
                     quest.IncrementQuestCounter();
             }
 
@@ -102,37 +108,25 @@ public class SprintmasterSkipModule : Module
             if (!skipApplied) return;
             skipApplied = false;
 
-            // Race 1: IC placement if registered, vanilla otherwise.
-            if (ActiveProfile != null
-                && ActiveProfile.TryGetPlacement(LocationNames.Rosary_String__Sprintmaster_Race_1, out Placement? race1Placement)
-                && !race1Placement!.AllObtained())
+            GiveInfo giveInfo = new()
             {
-                race1Placement.GiveAll(new GiveInfo
-                {
-                    Container = ContainerNames.Shiny,
-                    FlingType = FlingType.DirectDeposit,
-                    Transform = fsm.gameObject.transform,
-                    MessageType = MessageType.SmallPopup,
-                });
-            }
-            else
-            {
-                race1Reward?.Get();
-            }
+                Container = ContainerNames.Shiny,
+                FlingType = FlingType.DirectDeposit,
+                Transform = fsm.gameObject.transform,
+                MessageType = MessageType.SmallPopup,
+            };
 
-            // Race 2: IC placement if registered.
-            if (ActiveProfile != null
-                && ActiveProfile.TryGetPlacement(LocationNames.Beast_Shard__Sprintmaster_Race_2, out Placement? race2Placement)
-                && !race2Placement!.AllObtained())
-            {
-                race2Placement.GiveAll(new GiveInfo
-                {
-                    Container = ContainerNames.Shiny,
-                    FlingType = FlingType.DirectDeposit,
-                    Transform = fsm.gameObject.transform,
-                    MessageType = MessageType.SmallPopup,
-                });
-            }
+            // Race 1: IC placement if registered, vanilla otherwise.
+            if (ActiveProfile?.TryGetPlacement(LocationNames.Rosary_String__Sprintmaster_Race_1, out Placement? race1Placement) == true)
+                race1Placement!.GiveAll(giveInfo);
+            else
+                race1Reward?.Get();
+
+            // Race 2: IC placement if registered, vanilla otherwise.
+            if (ActiveProfile?.TryGetPlacement(LocationNames.Beast_Shard__Sprintmaster_Race_2, out Placement? race2Placement) == true)
+                race2Placement!.GiveAll(giveInfo);
+            else
+                race2Reward?.Get();
         });
     }
 

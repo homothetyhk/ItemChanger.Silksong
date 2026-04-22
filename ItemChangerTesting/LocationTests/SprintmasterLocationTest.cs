@@ -1,4 +1,3 @@
-using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
@@ -24,12 +23,8 @@ internal class SprintmasterRace2LocationTest : Test
     {
         StartAt(new CoordinateStartDef() { SceneName = "Sprintmaster_Cave", X = 60.82f, Y = 8.57f, MapZone = GlobalEnums.MapZone.NONE });
 
-        Profile.AddPlacement(new SprintmasterLocation
-        {
-            SceneName = "Sprintmaster_Cave",
-            Name = LocationNames.Beast_Shard__Sprintmaster_Race_2,
-            IsQuestCompletion = false,
-        }.Wrap().Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Beast_Shard__Sprintmaster_Race_2)!
+            .Wrap().Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
     }
 
     protected override void OnEnterGame()
@@ -63,12 +58,8 @@ internal class SprintmasterQuestLocationTest : Test
     {
         StartAt(new CoordinateStartDef() { SceneName = "Sprintmaster_Cave", X = 60.82f, Y = 8.57f, MapZone = GlobalEnums.MapZone.NONE });
 
-        Profile.AddPlacement(new SprintmasterLocation
-        {
-            SceneName = "Sprintmaster_Cave",
-            Name = LocationNames.Mask_Shard__Sprintmaster,
-            IsQuestCompletion = true,
-        }.Wrap().Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Mask_Shard__Sprintmaster)!
+            .Wrap().Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
     }
 
     protected override void OnEnterGame()
@@ -85,45 +76,33 @@ internal class SprintmasterQuestLocationTest : Test
 }
 
 /// <summary>
-/// Tests the full skip flow via <see cref="SprintmasterSkipModule"/>.
-/// All three IC placements (Race 1 Rosary String + Race 2 Beast Shard + Mask Shard) are registered.
-/// On talking to Sprintmaster choose YES at the skip prompt to jump straight to the final race.
-/// Winning the final race should yield all three IC items.
+/// Tests <see cref="SprintmasterSkipModule"/> with all three IC placements registered.
+/// Either choice at the skip prompt should yield all three IC items:
+/// choose YES to receive Race 1 and Race 2 rewards immediately on quest completion,
+/// or choose NO to win each race normally and collect one IC item per race.
 /// </summary>
-internal class SprintmasterSkipTest : Test
+internal class SprintmasterSkipModuleTest : Test
 {
     public override TestMetadata GetMetadata() => new()
     {
         Folder = TestFolder.LocationTests,
         MenuName = "Sprintmaster - Skip Module (all rewards)",
-        MenuDescription = "Tests skip prompt. Choose YES, win final race, expect three IC items (Race 1, Race 2, Mask Shard).",
-        Revision = 2026041700,
+        MenuDescription = "All three IC placements active. Choose YES to skip races or NO to play normally — all three IC items should be received either way.",
+        Revision = 2026042200,
     };
 
     public override void Setup(TestArgs args)
     {
         StartAt(new CoordinateStartDef() { SceneName = "Sprintmaster_Cave", X = 60.82f, Y = 8.57f, MapZone = GlobalEnums.MapZone.NONE });
 
-        Profile.AddPlacement(new SprintmasterLocation
-        {
-            SceneName = "Sprintmaster_Cave",
-            Name = LocationNames.Rosary_String__Sprintmaster_Race_1,
-            IsQuestCompletion = false,
-        }.Wrap().Add(Finder.GetItem(ItemNames.Compass)!));
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Rosary_String__Sprintmaster_Race_1)!
+            .Wrap().Add(Finder.GetItem(ItemNames.Compass)!));
 
-        Profile.AddPlacement(new SprintmasterLocation
-        {
-            SceneName = "Sprintmaster_Cave",
-            Name = LocationNames.Beast_Shard__Sprintmaster_Race_2,
-            IsQuestCompletion = false,
-        }.Wrap().Add(Finder.GetItem(ItemNames.Crest_of_Beast)!));
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Beast_Shard__Sprintmaster_Race_2)!
+            .Wrap().Add(Finder.GetItem(ItemNames.Crest_of_Beast)!));
 
-        Profile.AddPlacement(new SprintmasterLocation
-        {
-            SceneName = "Sprintmaster_Cave",
-            Name = LocationNames.Mask_Shard__Sprintmaster,
-            IsQuestCompletion = true,
-        }.Wrap().Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Mask_Shard__Sprintmaster)!
+            .Wrap().Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
 
         Profile.Modules.GetOrAdd<SprintmasterSkipModule>();
     }
