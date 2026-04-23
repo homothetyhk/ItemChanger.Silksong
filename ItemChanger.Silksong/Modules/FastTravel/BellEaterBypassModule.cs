@@ -13,6 +13,7 @@ namespace ItemChanger.Silksong.Modules.FastTravel;
 /// Module that, in Act 3, automatically unlocks all entrances to the Bell Eater arena
 /// and enables fast travel without defeating them.
 /// </summary>
+[SingletonModule]
 public class BellEaterBypassModule : Module
 {
     public static readonly Dictionary<string, FastTravelLocations> FastTravelScenes = new()
