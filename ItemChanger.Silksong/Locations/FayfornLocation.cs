@@ -1,6 +1,7 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Locations;
+using PrepatcherPlugin;
 using Silksong.FsmUtil;
 using Silksong.FsmUtil.Actions;
 
@@ -35,22 +36,22 @@ public class FayfornLocation : AutoLocation
 
         // Remove ability grant and skill popup from Msg, keep ActivateGameObject/ScreenFader
         // since they manage UI state (including any pause blockers). Add GiveAll in their place.
-        // Add FINISHED → Fade Back Pause since we suppress GET ITEM MSG END.
         FsmState msgState = fsm.MustGetState("Msg");
         msgState.Actions = msgState.Actions
-            .Where(a => a.GetType().Name is not "SetPlayerDataVariable"
-                                          and not "CreateUIMsgGetItem"
-                                          and not "SetFsmString"
-                                          and not "SendMessage"
-                                          and not "Comment")
+            .Where(a => a is not SetPlayerDataVariable
+                          and not CreateUIMsgGetItem
+                          and not SetFsmString
+                          and not SendMessage
+                          and not Comment)
             .ToArray();
-        msgState.InsertLambdaMethod(0, GiveAll);
-        // After GiveAll completes, explicitly restore disablePause. UIMsgProxy.SetIsInMsg saves
-        // and restores the prior value, so if the cutscene set disablePause=true before the IC
-        // popup ran, SetIsInMsg(false) would restore it to true. Reset it here so menus work.
-        msgState.InsertAction(1, new LambdaAction { Method = () =>
-            PlayerData.instance.disablePause = false
-        });
-        fsm.AddTransition("Msg", "FINISHED", "Fade Back Pause");
+        // Pass disablePause reset and FSM advance as the GiveAll callback so both run after all
+        // items are given. UIMsgProxy.SetIsInMsg restores the prior value of disablePause, so if
+        // the cutscene set it to true, the callback resets it so menus work. Reusing the original
+        // "GET ITEM MSG END" event means no transition edits are needed.
+        msgState.InsertMethod(0, () => GiveAll(() =>
+        {
+            PlayerDataAccess.disablePause = false;
+            fsm.SendEvent("GET ITEM MSG END");
+        }));
     }
 }

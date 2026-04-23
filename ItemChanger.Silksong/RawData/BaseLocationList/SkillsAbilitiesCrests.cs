@@ -50,7 +50,7 @@ internal static partial class BaseLocationList
 
     public static Location Faydown_Cloak => new FayfornLocation
     {
-        SceneName = "Peak_08b",
+        SceneName = SceneNames.Peak_08b,
         Name = LocationNames.Faydown_Cloak,
     };
 }
