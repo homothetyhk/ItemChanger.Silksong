@@ -1,6 +1,7 @@
 using HutongGames.PlayMaker;
 using ItemChanger.Containers;
 using ItemChanger.Locations;
+using ItemChanger.Modules;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Tags;
 using Silksong.FsmUtil;
@@ -10,8 +11,21 @@ namespace ItemChanger.Silksong.Locations;
 
 public class CrawSummonsLocation : ObjectLocation
 {
-    private DeterministicCrawSummonsModule CrawSummonsModule =>
-        ItemChangerHost.Singleton.ActiveProfile!.Modules.GetOrAdd<DeterministicCrawSummonsModule>();
+    private DeterministicCrawSummonsModule CrawSummonsModule
+    {
+        get
+        {
+            ModuleCollection modules = ItemChangerHost.Singleton.ActiveProfile!.Modules;
+            var mod = modules.Get<DeterministicCrawSummonsModule>();
+            if (mod != null) return mod;
+            mod = new DeterministicCrawSummonsModule
+            {
+                SceneNames = [..DeterministicCrawSummonsModule.AllCrawSummonsScenes]
+            };
+            return modules.Add(mod);
+        }
+    }
+
 
     protected override void DoLoad()
     {
@@ -46,7 +60,7 @@ public class CrawSummonsLocation : ObjectLocation
             PositionNewContainer();
             fsm.SendEvent("TRUE");
         });
-        
+
         // Additional handling for benchwarp/respawn/save+quit summons spawn - otherwise there's a delay before
         // replacement occurs while the screen is fading in
         FsmState appearInBlackState = fsm.MustGetState("Appear In Black");

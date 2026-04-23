@@ -19,7 +19,7 @@ public class DeterministicCrawSummonsModule : Module
     /// <summary>
     /// List of all scenes that support Craw Summons
     /// </summary>
-    private static readonly string[] CRAW_SUMMONS_SCENES =
+    public static readonly IReadOnlyList<string> AllCrawSummonsScenes =
     [
         Benchwarp.Data.SceneNames.Belltown, // Bellhart
         Benchwarp.Data.SceneNames.Bellway_Shadow, // Bilewater bellway
@@ -37,7 +37,7 @@ public class DeterministicCrawSummonsModule : Module
     /// List of scenes that the Craw Summons should spawn at. Defaults to all possible
     /// vanilla locations simultaneously.
     /// </summary>
-    public IEnumerable<string> SceneNames { get; init; } = CRAW_SUMMONS_SCENES;
+    public required List<string> SceneNames { get; init; }
 
     /// <summary>
     /// Conditions for Craw Summons to spawn. Defaults to vanilla conditions.
@@ -58,7 +58,7 @@ public class DeterministicCrawSummonsModule : Module
     {
         FsmEditGroup editGroup = new();
 
-        foreach (var scene in CRAW_SUMMONS_SCENES)
+        foreach (var scene in AllCrawSummonsScenes)
         {
             if (SceneNames.Contains(scene))
             {
