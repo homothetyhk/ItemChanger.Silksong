@@ -26,4 +26,11 @@ internal static partial class BaseLocationList
         Name = LocationNames.Mask_Shard__Sprintmaster,
         IsQuestCompletion = true,
     };
+
+    public static Location Sprintmaster_Memento => new SprintmasterLocation
+    {
+        SceneName = SceneNames.Sprintmaster_Cave,
+        Name = LocationNames.Sprintmaster_Memento,
+        IsQuestCompletion = false,
+    };
 }

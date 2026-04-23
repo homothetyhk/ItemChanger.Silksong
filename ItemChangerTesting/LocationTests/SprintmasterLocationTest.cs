@@ -6,6 +6,44 @@ using ItemChangerTesting.ModuleTests;
 namespace ItemChangerTesting.LocationTests;
 
 /// <summary>
+/// Tests the bonus Memento reward hook (Give Reward FSM state, Extra Track path).
+/// Requires <see cref="PlayerData.SprintMasterExtraRaceAvailable"/> (set after completing the main quest
+/// and delivering three hearts to the snail shamans). Accept the bonus race offer and win to receive
+/// the IC item instead of the vanilla Sprintmaster Memento.
+/// </summary>
+internal class SprintmasterMementoLocationTest : Test
+{
+    public override TestMetadata GetMetadata() => new()
+    {
+        Folder = TestFolder.LocationTests,
+        MenuName = "Sprintmaster - Bonus Memento",
+        MenuDescription = "Hooks bonus Memento reward. Accept the extra race offer and win to receive IC item.",
+        Revision = 2026042200,
+    };
+
+    public override void Setup(TestArgs args)
+    {
+        StartAt(new CoordinateStartDef() { SceneName = "Sprintmaster_Cave", X = 60.82f, Y = 8.57f, MapZone = GlobalEnums.MapZone.NONE });
+
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Sprintmaster_Memento)!
+            .Wrap().Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
+    }
+
+    protected override void OnEnterGame()
+    {
+        base.OnEnterGame();
+
+        PlayerData.instance.silkRegenMax = 3;
+        PlayerData.instance.hasDash = true;
+        PlayerData.instance.hasWalljump = true;
+        PlayerData.instance.hasDoubleJump = true;
+        PlayerData.instance.hasHarpoonDash = true;
+        PlayerData.instance.HasWildsMap = true;
+        PlayerData.instance.SprintMasterExtraRaceAvailable = true;
+    }
+}
+
+/// <summary>
 /// Logs all Sprintmaster FSM state transitions for the bonus memento race.
 /// Complete the race and check BepInEx/LogOutput.log for [Sprintmaster Memento FSM] entries
 /// to identify which state delivers the memento reward.

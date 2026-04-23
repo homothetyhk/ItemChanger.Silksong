@@ -1,5 +1,6 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
+using ItemChanger.Items;
 using ItemChanger.Locations;
 using ItemChanger.Placements;
 using ItemChanger.Silksong.RawData;
@@ -13,8 +14,8 @@ namespace ItemChanger.Silksong.Locations;
 /// Location for Sprintmaster Swift race rewards in Sprintmaster_Cave.
 /// Two instances are needed:
 /// <list type="bullet">
-/// <item><see cref="IsQuestCompletion"/> = false — Race 1 Rosary String or Race 2 Beast Shard (<c>Give Reward</c> state,
-/// dispatched by race index: 0 = Race 1, 1 = Race 2).</item>
+/// <item><see cref="IsQuestCompletion"/> = false — Race 1 Rosary String, Race 2 Beast Shard, or bonus Memento (<c>Give Reward</c>
+/// state, dispatched by race index: 0 = Race 1, 1 = Race 2; bonus race detected via <c>Extra Track</c> flag).</item>
 /// <item><see cref="IsQuestCompletion"/> = true — final Mask Shard (<c>End Dialogue 3</c> state, quest-completion path only).</item>
 /// </list>
 /// Both hooks target different states and coexist without conflict. Multiple non-quest-completion instances share one
@@ -68,8 +69,10 @@ public class SprintmasterLocation : AutoLocation
     {
         // Give Reward → SavedItemGet gives the current race's reward.
         // The race index (0 = Race 1, 1 = Race 2) is read from PlayerData at reward time and mapped to a
-        // location name. Multiple SprintmasterLocation instances share this hook; only the first to load
-        // replaces SavedItemGet — subsequent instances return early and rely on the dynamic ActiveProfile lookup.
+        // location name. The bonus memento race is detected by a flag set in Extra Track (which runs before
+        // Give Reward only on the bonus race path). Multiple SprintmasterLocation instances share this hook;
+        // only the first to load replaces SavedItemGet — subsequent instances return early and rely on the
+        // dynamic ActiveProfile lookup.
         FsmState arrayTrackState = fsm.MustGetState("Array Track?");
         GetPlayerDataVariable pdVarAction = arrayTrackState.GetFirstActionOfType<GetPlayerDataVariable>()!;
         string raceIndexVarName = pdVarAction.VariableName.Value;
@@ -78,12 +81,27 @@ public class SprintmasterLocation : AutoLocation
         SavedItemGet? raceRewardAction = giveRewardState.GetFirstActionOfType<SavedItemGet>();
         if (raceRewardAction == null) return; // Give Reward already hooked by another SprintmasterLocation instance.
 
+        bool isExtraRace = false;
+        fsm.MustGetState("Extra Track").InsertMethod(0, () => isExtraRace = true);
+
         giveRewardState.ReplaceFirstActionOfType<SavedItemGet>(new LambdaAction
         {
             Method = () =>
             {
                 SavedItem? rewardItem = raceRewardAction.Item.Value as SavedItem;
                 if (rewardItem == null) return;
+
+                GiveInfo giveInfo = GetGiveInfo();
+
+                if (isExtraRace)
+                {
+                    isExtraRace = false;
+                    if (ActiveProfile?.TryGetPlacement(LocationNames.Sprintmaster_Memento, out Placement? p) == true && p != null)
+                        p.GiveAll(giveInfo);
+                    else
+                        rewardItem.Get();
+                    return;
+                }
 
                 int raceIdx = PlayerData.instance.GetInt(raceIndexVarName);
                 string? locationName = raceIdx switch
@@ -94,10 +112,10 @@ public class SprintmasterLocation : AutoLocation
                 };
 
                 if (locationName != null
-                    && ActiveProfile?.TryGetPlacement(locationName, out Placement? p) == true
-                    && p != null)
+                    && ActiveProfile?.TryGetPlacement(locationName, out Placement? racePlacement) == true
+                    && racePlacement != null)
                 {
-                    p.GiveAll(GetGiveInfo());
+                    racePlacement.GiveAll(giveInfo);
                 }
                 else
                 {
