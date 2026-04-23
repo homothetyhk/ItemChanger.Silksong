@@ -17,6 +17,7 @@ namespace ItemChanger.Silksong.Modules;
 /// - Wardenflies always spawn throughout Pharloom, including after already being kidnapped
 /// - Getting kidnapped does not remove items
 /// </summary>
+[SingletonModule]
 public class SlabKidnappingModule : Module
 {
     /// <summary>
