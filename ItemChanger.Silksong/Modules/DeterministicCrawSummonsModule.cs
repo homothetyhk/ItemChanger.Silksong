@@ -12,8 +12,9 @@ using UnityEngine.SceneManagement;
 namespace ItemChanger.Silksong.Modules;
 
 /// <summary>
-/// A module which controls the spawning of Craw Summons in act 3.
+/// A module which controls the spawning of Craw Summons.
 /// </summary>
+[SingletonModule]
 public class DeterministicCrawSummonsModule : Module
 {
     /// <summary>
