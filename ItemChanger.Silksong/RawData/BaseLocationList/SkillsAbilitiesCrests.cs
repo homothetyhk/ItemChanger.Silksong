@@ -50,7 +50,7 @@ internal static partial class BaseLocationList
 
     public static Location Cross_Stitch => new PhantomLocation
     {
-        SceneName = "Organ_01",
+        SceneName = SceneNames.Organ_01,
         Name = LocationNames.Cross_Stitch,
     };
 }

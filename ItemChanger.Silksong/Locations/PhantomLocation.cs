@@ -1,8 +1,8 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Locations;
+using PrepatcherPlugin;
 using Silksong.FsmUtil;
-using Silksong.FsmUtil.Actions;
 
 namespace ItemChanger.Silksong.Locations;
 
@@ -26,8 +26,11 @@ public class PhantomLocation : AutoLocation
         // vanilla transition fires on a skill-screen event that we've suppressed.
         FsmState uiMsgState = fsm.MustGetState("UI Msg");
         uiMsgState.Actions = [];
-        uiMsgState.InsertLambdaMethod(0, GiveAll);
-        uiMsgState.InsertAction(1, new LambdaAction { Method = () => PlayerData.instance.SetBool(nameof(PlayerData.defeatedPhantom), true) });
+        uiMsgState.InsertMethod(0, () => GiveAll(() =>
+        {
+            PlayerDataAccess.defeatedPhantom = true;
+            fsm.SendEvent("FINISHED");
+        }));
         fsm.AddTransition("UI Msg", "FINISHED", "Get Control");
 
         // Remove the ScreenFader from Get Control — it fades to black for the vanilla skill-get screen,
