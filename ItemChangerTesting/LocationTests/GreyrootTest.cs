@@ -1,5 +1,8 @@
 using Benchwarp.Data;
 using ItemChanger.Placements;
+using ItemChanger.Enums;
+using ItemChanger.Tags;
+using ItemChanger.Items;
 using ItemChanger.Silksong.RawData;
 
 namespace ItemChangerTesting.LocationTests;
@@ -27,9 +30,11 @@ internal class GreyrootTest : Test
         Profile.AddPlacement(
             Finder.GetLocation(LocationNames.Pollip_Pouch)!.Wrap()
                 .Add(Finder.GetItem(ItemNames.Simple_Key)!));
+        Item bud = Finder.GetItem(ItemNames.Twisted_Bud)!;
+        bud.AddTag(new PersistentItemTag { Persistence = Persistence.Persistent });
         Profile.AddPlacement(
             Finder.GetLocation(LocationNames.Crest_of_Cursed_Witch)!.Wrap()
-                .Add(Finder.GetItem(ItemNames.Twisted_Bud)!));
+                .Add(bud));
     }
 
     protected override void OnEnterGame()
