@@ -1,10 +1,15 @@
 using Benchwarp.Data;
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Locations;
+<<<<<<< HEAD
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
+=======
+using ItemChanger.Silksong.Serialization;
+using Benchwarp.Data;
+>>>>>>> 45d2f6f (Allow the Cursed Crest location to appear as a shiny after the item is obtained the first time)
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -84,10 +89,24 @@ internal static partial class BaseLocationList
         },
     };
     
-    public static Location Crest_of_Cursed_Witch => new GreyrootCrestLocation
+    public static Location Crest_of_Cursed_Witch => new DualLocation
     {
         SceneName = SceneNames.Room_Witch,
         Name = LocationNames.Crest_of_Cursed_Witch,
+        Test = new QuestCompletedBool { QuestName = Quests.Wood_Witch_Curse },
+        FalseLocation = new GreyrootCrestLocation
+        {
+            SceneName = SceneNames.Room_Witch,
+            Name = LocationNames.Crest_of_Cursed_Witch,
+        },
+        TrueLocation = new CoordinateLocation
+        {
+            SceneName = SceneNames.Room_Witch,
+            Name = LocationNames.Crest_of_Cursed_Witch,
+            X = 19.0f,
+            Y = 6.57f,
+            Managed = false,
+        },
     };
 
     public static Location Eva => new EvaLocation
