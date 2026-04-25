@@ -26,7 +26,12 @@ public class GreyrootPollipLocation : AutoLocation
         {
             Method = () =>
             {
-                if (!Placement!.CheckVisitedAny(VisitState.ObtainedAnyItem))
+                if (Placement!.CheckVisitedAny(VisitState.ObtainedAnyItem))
+                {
+                    Placement!.GiveSome(Placement!.Items.Where(it => !it.IsObtained() && it.WasEverObtained()), GetGiveInfo());
+                    fsm.SendEvent("FINISHED");
+                }
+                else
                 {
                     fsm.SendEvent("POLLIP REWARD");
                 }
