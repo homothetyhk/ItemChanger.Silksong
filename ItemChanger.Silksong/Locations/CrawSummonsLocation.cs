@@ -1,4 +1,5 @@
 using HutongGames.PlayMaker;
+using HutongGames.PlayMaker.Actions;
 using ItemChanger.Containers;
 using ItemChanger.Locations;
 using ItemChanger.Modules;
@@ -64,7 +65,11 @@ public class CrawSummonsLocation : ObjectLocation
         // Additional handling for benchwarp/respawn/save+quit summons spawn - otherwise there's a delay before
         // replacement occurs while the screen is fading in
         FsmState appearInBlackState = fsm.MustGetState("Appear In Black");
-        appearInBlackState.InsertMethod(9, _ => PositionNewContainer());
+        appearInBlackState.InsertMethod(9, _ =>
+        {
+            PositionNewContainer();
+            fsm.MustGetState("Set Empty").GetFirstActionOfType<AnimatorPlay>()!.DoAnimatorPlay();
+        });
         appearInBlackState.AddTransition("EMPTY", "Set Empty");
         appearInBlackState.AddMethod(_ => fsm.SendEvent("EMPTY"));
 

@@ -34,6 +34,13 @@ public class CrawSummonsContainer : Container
             else
                 fsm.SendEvent("FINISHED");
         });
+        
+        // When loading in from respawn/save+quit/benchwarp, play the animation that removes the cloth
+        fsm.InsertMethod("Appear In Black", 8, _ =>
+        {
+            if (info.GiveInfo.Placement.AllObtained())
+                fsm.MustGetState("Set Empty").GetFirstActionOfType<AnimatorPlay>()!.DoAnimatorPlay();
+        });
 
         // Replace the craw summons item
         FsmState setPickupState = fsm.MustGetState("Set Pickup");
