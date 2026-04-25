@@ -6,6 +6,10 @@ using Silksong.FsmUtil;
 
 namespace ItemChanger.Silksong.Modules;
 
+/// <summary>
+/// Module that prevents entry to the Chapel of the Witch from giving the Cursed Crest.
+/// Added automatically to the profile if any item is placed at the Greyroot crest location.
+/// </summary>
 [SingletonModule]
 public class CurseSuppressionModule : Module
 {
