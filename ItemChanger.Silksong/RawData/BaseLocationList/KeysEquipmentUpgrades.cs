@@ -27,6 +27,7 @@ internal static partial class BaseLocationList
         },
         FalseLocation = new NuuToolPouchLocation()
         {
+            RequiredBossKills = 10,
             SceneName = SceneNames.Halfway_01,
             Name = LocationNames.Tool_Pouch__Nuu
         }

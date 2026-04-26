@@ -11,7 +11,7 @@ namespace ItemChanger.Silksong;
 
 public partial class SilksongHost : ItemChangerHost
 {
-    internal SilksongHost() 
+    internal SilksongHost()
     {
         MessageUtil.Setup();
         Finder = new();
@@ -32,11 +32,16 @@ public partial class SilksongHost : ItemChangerHost
 
     public override IEnumerable<Module> BuildDefaultModules()
     {
-        return [
+        BossKillsCounterModule killsCounterModule = new();
+        killsCounterModule.AddDefaultBosses();
+
+        return
+        [
+            killsCounterModule,
             new ConsistentRandomnessModule(),
             new ObstacleHandlerModule(),
             new ChapelDoorObstacleModule(),
-            ];
+        ];
     }
 
     private LifecycleEvents.Invoker? lifecycleInvoker;

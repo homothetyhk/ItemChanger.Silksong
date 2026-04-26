@@ -1,7 +1,6 @@
 using Benchwarp.Data;
 using ItemChanger;
 using ItemChanger.Enums;
-using ItemChanger.Locations;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Tags;
@@ -38,12 +37,14 @@ internal class NuuLocationsTest : Test
         PlayerDataAccess.act3_enclaveWakeSceneCompleted = true;
         PlayerDataAccess.act3_wokeUp = true;
 
-        var mod = Modules.GetOrAdd<NuuChecksBossKillsModule>();
-        foreach (var boss in mod.Bosses)
+        var mod = Modules.GetOrAdd<BossKillsCounterModule>();
+        foreach (var boss in mod.BossDefinitions)
         {
-            var killData = PlayerDataAccess.EnemyJournalKillData.GetKillData(boss);
+            if (boss is not JournalEntryBossDefinition entryDefinition)
+                continue;
+            var killData = PlayerDataAccess.EnemyJournalKillData.GetKillData(entryDefinition.BossName);
             killData.Kills += 1;
-            PlayerDataAccess.EnemyJournalKillData.RecordKillData(boss, killData);
+            PlayerDataAccess.EnemyJournalKillData.RecordKillData(entryDefinition.BossName, killData);
         }
     }
 }

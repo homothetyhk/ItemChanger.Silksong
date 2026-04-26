@@ -25,8 +25,9 @@ internal static partial class BaseLocationList
             Y = 20.57f,
             Managed = false,
         },
-        FalseLocation = new NuuMememtoLocation()
+        FalseLocation = new NuuMementoLocation()
         {
+            RequiredBossKills = 30,
             SceneName = SceneNames.Halfway_01,
             Name = LocationNames.Hunter_s_Memento
         }
