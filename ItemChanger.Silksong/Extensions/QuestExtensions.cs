@@ -16,5 +16,15 @@ public static class QuestExtensions
             modifier(ref c);
             self.Completion = c;
         }
+
+        public void ModifyTargetAmount(int newTargetAmount)
+        {
+            self.ModifyTargetAmount(0, newTargetAmount);
+        }
+
+        public void ModifyTargetAmount(int targetIndex, int newTargetAmount)
+        {
+            self.targets[targetIndex].Count = newTargetAmount;
+        }
     }
 }
