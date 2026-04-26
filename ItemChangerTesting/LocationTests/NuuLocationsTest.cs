@@ -23,6 +23,9 @@ internal class NuuLocationsTest : Test
     {
         StartNear(SceneNames.Halfway_01, PrimitiveGateNames.left1);
 
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Tool_Pouch__Nuu)!.Wrap()
+            .Add(Finder.GetItem(ItemNames.Flea)!));
+
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Hunter_s_Memento)!.Wrap()
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!.WithTag(new PersistentItemTag()
                 { Persistence = Persistence.Persistent })));
