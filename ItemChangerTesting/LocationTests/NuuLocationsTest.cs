@@ -22,6 +22,10 @@ internal class NuuLocationsTest : Test
     public override void Setup(TestArgs args)
     {
         StartNear(SceneNames.Halfway_01, PrimitiveGateNames.left1);
+
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Hunter_s_Memento)!.Wrap()
+            .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!.WithTag(new PersistentItemTag()
+                { Persistence = Persistence.Persistent })));
     }
 
     protected override void OnEnterGame()
