@@ -13,7 +13,7 @@ public class GreyrootPollipLocation : AutoLocation
     {
         Using(new FsmEditGroup()
         {
-            {new(SceneName!, "Wood Witch", "Dialogue"), HookWitch},
+            {new(UnsafeSceneName, "Wood Witch", "Dialogue"), HookWitch},
         });
     }
 
@@ -22,26 +22,28 @@ public class GreyrootPollipLocation : AutoLocation
     private void HookWitch(PlayMakerFSM fsm)
     {
         FsmState rewardQueryState = fsm.MustGetState("Pollip Reward?");
-        rewardQueryState.ReplaceFirstActionOfType<CheckIfToolUnlocked>(new LambdaAction
+        int i = rewardQueryState.IndexFirstActionOfType<CheckIfToolUnlocked>();
+        rewardQueryState.RemoveAction(i);
+        rewardQueryState.InsertLambdaMethod(i, (finish) =>
         {
-            Method = () =>
+            if (Placement!.CheckVisitedAny(VisitState.ObtainedAnyItem))
             {
-                if (Placement!.CheckVisitedAny(VisitState.ObtainedAnyItem))
+                Placement!.GiveSome(Placement!.Items.Where(it => !it.IsObtained() && it.WasEverObtained()), GetGiveInfo(), () =>
                 {
-                    Placement!.GiveSome(Placement!.Items.Where(it => !it.IsObtained() && it.WasEverObtained()), GetGiveInfo());
                     fsm.SendEvent("FINISHED");
-                }
-                else
-                {
-                    fsm.SendEvent("POLLIP REWARD");
-                }
+                    finish();
+                });
+            }
+            else
+            {
+                fsm.SendEvent("POLLIP REWARD");
+                finish();
             }
         });
 
         FsmState rewardState = fsm.MustGetState("Flower Quest Reward");
-        rewardState.ReplaceFirstActionOfType<SetToolUnlocked>(new LambdaAction
-        {
-            Method = GiveAll
-        });
+        i = rewardState.IndexFirstActionOfType<SetToolUnlocked>();
+        rewardState.RemoveAction(i);
+        rewardState.InsertLambdaMethod(i, GiveAll);
     }
 }
