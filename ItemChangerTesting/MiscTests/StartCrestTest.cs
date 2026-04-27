@@ -20,6 +20,6 @@ internal class StartCrestTest : Test
     public override void Setup(TestArgs args)
     {
         StartNear(SceneNames.Bonetown, PrimitiveGateNames.right1);
-        StartCrestReplacementModule.ApplyStartCrest(Profile, ItemNames.Crest_of_Beast);
+        Profile.ApplyStartCrest(ItemNames.Crest_of_Beast);
     }
 }

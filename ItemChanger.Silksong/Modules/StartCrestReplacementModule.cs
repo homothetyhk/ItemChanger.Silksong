@@ -15,7 +15,7 @@ namespace ItemChanger.Silksong.Modules;
 /// to equip the alternative starting crest.
 /// 
 /// It does not by itself give or equip the alternative crest at the start of the game;
-/// the <see cref="ApplyStartCrest"/> method should be used instead.
+/// the <see cref="StartCrestExtensions.ApplyStartCrest"/> method should be used instead.
 /// </summary>
 [SingletonModule]
 public class StartCrestReplacementModule : ItemChanger.Modules.Module
@@ -64,14 +64,17 @@ public class StartCrestReplacementModule : ItemChanger.Modules.Module
     }
 
     private ToolCrest GetStartingCrest() => ToolItemManager.GetCrestByName(ReplacementCrestID);
+}
 
+public static class StartCrestExtensions
+{
     /// <summary>
     /// Set the given crest to be the starting crest, by adding an instance of this module as
     /// well as using StartLocation and PlayerDataEditModule (editing the CurrentCrestID field).
     /// </summary>
     /// <param name="profile">The active profile.</param>
     /// <param name="crestName">The name of the crest. This should be the item name, not the crest ID.</param>
-    public static void ApplyStartCrest(ItemChangerProfile profile, string crestName)
+    public static void ApplyStartCrest(this ItemChangerProfile profile, string crestName)
     {
         if (SilksongHost.Instance.Finder.GetItem(crestName) is not ItemChangerSavedItem crestItem)
         {
