@@ -13,7 +13,7 @@ public class GreyrootCrestLocation : AutoLocation
     {
         Using(new FsmEditGroup()
         {
-            {new(SceneName!, "Wood Witch", "Dialogue"), HookWitch},
+            {new(UnsafeSceneName, "Wood Witch", "Dialogue"), HookWitch},
         });
         // We don't want to do the curse suppression directly in this location
         // because the DualLocation will disable it once the curse quest is complete,
@@ -27,7 +27,11 @@ public class GreyrootCrestLocation : AutoLocation
 
     private void HookWitch(PlayMakerFSM fsm)
     {
+        FsmState giveState = fsm.AddState("Give Crest Items");
+        giveState.AddLambdaMethod(GiveAll);
+        giveState.AddTransition("FINISHED", "Set Black");
+
         FsmState neckSnapState = fsm.MustGetState("Neck Snap");
-        neckSnapState.AddMethod(GiveAll);
+        neckSnapState.ChangeTransition("FINISHED", giveState.Name);
     }
 }
