@@ -143,6 +143,19 @@
         "resolved": "1.2.0-silksong1.0.30000",
         "contentHash": "2JPRsmFO5dBwLeIHA3kLlEYtu4BQ0Swdp3E4+J35IQGEujW3npMPot83BvY9wd3N7/Ycy2IfWilWC7fx6Sa3bg=="
       },
+      "Silksong.ModMenu": {
+        "type": "Direct",
+        "requested": "[0.6.0, )",
+        "resolved": "0.6.0",
+        "contentHash": "ckP9EpPUPRmXXDRcYunOhVV/jQrCr3ppZ+naRm0MUfIGLr4oIIS03aIPe5vsB5AziDhowa4VfoguKlcGS6HTOA==",
+        "dependencies": {
+          "BepInEx.Core": "5.4.21",
+          "HarmonyX": "2.9.0",
+          "MonoDetour": "0.7.13",
+          "Silksong.UnityHelper": "1.2.0",
+          "UnityEngine.Modules": "6000.0.50"
+        }
+      },
       "Silksong.PrepatcherPlugin": {
         "type": "Direct",
         "requested": "[1.4.0, )",
@@ -226,18 +239,6 @@
         "type": "Transitive",
         "resolved": "13.0.3",
         "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
-      },
-      "Silksong.ModMenu": {
-        "type": "Transitive",
-        "resolved": "0.5.2",
-        "contentHash": "i+ttTX6A9TcXlBkS2+epqAKVlvP+Jh60R7GjbTM2RliVoU3UDM2QO+15Pknkl3VyuyLEhtIycTqCpATekoTKpw==",
-        "dependencies": {
-          "BepInEx.Core": "5.4.21",
-          "HarmonyX": "2.9.0",
-          "MonoDetour": "0.7.13",
-          "Silksong.UnityHelper": "1.2.0",
-          "UnityEngine.Modules": "6000.0.50"
-        }
       },
       "Silksong.UnityHelper": {
         "type": "Transitive",
