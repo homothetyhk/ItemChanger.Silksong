@@ -48,11 +48,15 @@ public class MossDruidRosaryLocation : MossDruidLocation
         {
             throw new InvalidOperationException("call to StartAnimationControl not found");
         }
-        payCompleteState.InsertMethod(i, () =>
+        payCompleteState.InsertLambdaMethod(i, (finish) =>
         {
             if (PlayerData.instance.GetInt(nameof(PlayerData.druidMossBerriesSold)) == Index)
             {
-                GiveAll();
+                GiveAll(finish);
+            }
+            else
+            {
+                finish();
             }
         });
     }

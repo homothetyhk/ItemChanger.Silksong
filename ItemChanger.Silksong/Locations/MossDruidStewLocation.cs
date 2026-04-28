@@ -27,10 +27,9 @@ public class MossDruidStewLocation : MossDruidLocation
         });
 
         FsmState giveIngredientState = fsm.MustGetState("Give Ingredient?");
-        giveIngredientState.ReplaceFirstActionOfType<CollectableItemCollect>(new LambdaAction
-        {
-            Method = GiveAll
-        });
+        i = giveIngredientState.IndexFirstActionOfType<CollectableItemCollect>();
+        giveIngredientState.RemoveAction(i);
+        giveIngredientState.InsertLambdaMethod(i, GiveAll);
     }
 
     public override bool SupportsCost => false;

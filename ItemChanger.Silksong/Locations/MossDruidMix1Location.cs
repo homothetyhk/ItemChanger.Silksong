@@ -20,9 +20,8 @@ public class MossDruidMix1Location : MossDruidLocation
         });
 
         FsmState giveRewardState = fsm.MustGetState("Give Reward");
-        giveRewardState.ReplaceFirstActionOfType<SetToolUnlocked>(new LambdaAction
-        {
-            Method = GiveAll,
-        });
+        int i = giveRewardState.IndexFirstActionOfType<SetToolUnlocked>();
+        giveRewardState.RemoveAction(i);
+        giveRewardState.InsertLambdaMethod(i, GiveAll);
     }
 }
