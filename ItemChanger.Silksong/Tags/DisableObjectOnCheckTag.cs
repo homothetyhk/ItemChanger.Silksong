@@ -38,20 +38,20 @@ public class DisableObjectOnCheckTag : Tag
                 go.SetActive(false);
             }
         }));
-        _location.Placement!.OnVisitStateChanged += DisableObjectOnCheckLocation;
+        _location.Placement!.OnVisited += DisableObjectOnCheckLocation;
     }
 
     protected override void DoUnload(TaggableObject parent)
     {
-        _location!.Placement!.OnVisitStateChanged -= DisableObjectOnCheckLocation;
+        _location!.Placement!.OnVisited -= DisableObjectOnCheckLocation;
         _location = null;
     }
 
-    private void DisableObjectOnCheckLocation(VisitStateChangedEventArgs args)
+    private void DisableObjectOnCheckLocation(PlacementVisitedEventArgs args)
     {
         if (ShouldExecute?.Value == false) return;
 
-        if (args.NewFlags.HasFlag(Enums.VisitState.ObtainedAnyItem))
+        if (args.ProposedNewFlags.HasFlag(Enums.VisitState.ObtainedAnyItem))
         {
             GameObject? go = UnityEngine.SceneManagement.SceneManager.GetActiveScene().FindGameObject(ObjectPath);
             if (go != null)
