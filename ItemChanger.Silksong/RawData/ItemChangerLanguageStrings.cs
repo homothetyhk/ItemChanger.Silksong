@@ -29,6 +29,11 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString INV_NAME_UPSLASH => LanguageString.FromItemChanger(nameof(INV_NAME_UPSLASH));
     public static LanguageString INV_NAME_DOWNSLASH => LanguageString.FromItemChanger(nameof(INV_NAME_DOWNSLASH));
     public static LanguageString INV_DESC_ANYSLASH => LanguageString.FromItemChanger(nameof(INV_DESC_ANYSLASH));
+    public static LanguageString INV_NAME_LORE => LanguageString.FromItemChanger(nameof(INV_NAME_LORE));
+
+    public static LanguageString INV_NAME_TAUNT => LanguageString.FromItemChanger(nameof(INV_NAME_TAUNT));
+    public static LanguageString INV_DESC_TAUNT => LanguageString.FromItemChanger(nameof(INV_DESC_TAUNT));
+    public static LanguageString GET_TAUNT_1 => LanguageString.FromItemChanger(nameof(GET_TAUNT_1));
 
     public static LanguageString SHOP_DESC_ROSARIES => LanguageString.FromItemChanger(nameof(SHOP_DESC_ROSARIES));
 

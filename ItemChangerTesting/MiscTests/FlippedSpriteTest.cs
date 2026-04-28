@@ -6,6 +6,7 @@ using ItemChanger.Serialization;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Serialization.ModifiedSprites;
+using ItemChanger.Silksong.Serialization.SpecialSprites;
 using ItemChanger.Silksong.UIDefs;
 using UnityEngine;
 
