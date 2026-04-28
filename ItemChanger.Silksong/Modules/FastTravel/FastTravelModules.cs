@@ -12,6 +12,7 @@ public static class FastTravelModules
         mods.Add<BellwayAutoUnlockModule>();
         mods.Add(FastTravelSourceModule.BellwayType);
         mods.Add<MarrowBellwayTransitModule>();
+        mods.Add<BellEaterBypassModule>();
     }
 
     public static void CreateVentricaModules(this ModuleCollection mods)
