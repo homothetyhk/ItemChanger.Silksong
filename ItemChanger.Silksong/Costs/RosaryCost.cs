@@ -1,6 +1,8 @@
 ﻿using ItemChanger.Costs;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.RawData;
+using Newtonsoft.Json;
+using PrepatcherPlugin;
 using UnityEngine;
 
 namespace ItemChanger.Silksong.Costs;
@@ -12,9 +14,10 @@ public class RosaryCost(int amount) : Cost, ICurrencyCost, IDisplayCost
     /// <summary>
     /// Amount after accounting for any discount rate.
     /// </summary>
+    [JsonIgnore]
     public int ActualAmount => (int)(Amount * base.DiscountRate);
 
-    public override bool CanPay() => PlayerData.instance.GetInt(nameof(PlayerData.geo)) >= ActualAmount;
+    public override bool CanPay() => PlayerDataAccess.geo >= ActualAmount;
 
     public override string GetCostText() => RawData.ItemChangerLanguageStrings.CreatePayRosariesString(ActualAmount.ToValueProvider()).Value;
 
@@ -35,4 +38,5 @@ public class RosaryCost(int amount) : Cost, ICurrencyCost, IDisplayCost
 
     Sprite IDisplayCost.DisplaySprite => BaseAtlasSprites.Rosaries.Value;
 
+    public static int GetRosaryCost(Cost cost) => cost.GetCostsOfType<RosaryCost>().Select(c => c.ActualAmount).Sum();
 }

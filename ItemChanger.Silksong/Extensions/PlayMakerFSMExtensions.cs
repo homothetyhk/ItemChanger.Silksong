@@ -1,4 +1,5 @@
-﻿using ItemChanger.Silksong.Components;
+﻿using HutongGames.PlayMaker;
+using ItemChanger.Silksong.Components;
 
 namespace ItemChanger.Silksong.Extensions;
 
