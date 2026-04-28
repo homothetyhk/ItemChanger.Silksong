@@ -8,10 +8,12 @@ public static class LocationNames
     public const string Forge_Daughter = "Forge_Daughter";
     // Sells: Sting_Shard, Magma_Bell, Crafting_Kit, Silkshot
     public const string Frey = "Frey";
+    public const string Frey_Requires_Bellhome = "Frey_(Requires_Bellhome)";
     // Sells: Memory_Locket, Spool_Fragment, Multibinder
     public const string Grindle = "Grindle";
     // Sells: Thief's_Mark, Spool_Fragment, Crafting_Kit, Snitch_Pick, Magnetite_Dice
     public const string Jubilana = "Jubilana";
+    public const string Jubilana_Requires_Rescue = "Jubilana_(Requires_Rescue)";
     // Sells: Ascendant's_Grip, Simple_Key, Spool_Extender, Spider_Strings, Spool_Fragment, Mask_Shard
     public const string Mort = "Mort";
     // Sells: Weighted_Belt, Tool_Pouch, Memory_Locket
@@ -21,6 +23,7 @@ public static class LocationNames
     // Sells: Magnetite_Brooch, Mask_Shard, Craftmetal, Simple_Key
     public const string Shakra__Global = "Shakra-Global";
     public const string Twelfth_Architect = "Twelfth_Architect";
+    public const string Twelfth_Architect_Requires_Tools = "Twelfth_Architect_(Requires_Tools)";
     // Sells: Cogwork_Wheel, Scuttlebrace, Silkshot, Crafting_Kit, Architect's_Key
     public const string Eva = "Eva";
     // Sells: Crest_of_Hunter__Upgrade_1, Vesticrest_Yellow, Vesticrest_Blue, Crest_of_Hunter__Upgrade_2, Sylphsong
