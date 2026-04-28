@@ -250,6 +250,7 @@ public class FleaContainer : Container
         SavedContainerItem item = ScriptableObject.CreateInstance<SavedContainerItem>();
         item.ContainerInfo = info;
         item.ContainerTransform = fsm.transform;
+        item.SupportedMessageTypes = Enums.MessageType.SmallPopup;
         get.Item.Value = item;
 
         // TODO - give some items by flinging shinies

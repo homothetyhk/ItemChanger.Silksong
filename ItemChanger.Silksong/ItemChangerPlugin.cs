@@ -2,6 +2,8 @@ using BepInEx;
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Assets;
+using Newtonsoft.Json.UnityConverters.Math;
+using ItemChanger.Serialization;
 
 namespace ItemChanger.Silksong
 {
@@ -24,6 +26,7 @@ namespace ItemChanger.Silksong
                 Logger.LogInfo("Loading ItemChanger...");
                 Instance = this;
                 CreateHost();
+                SerializationHelper.Serializer.Converters.Add(new ColorConverter());
                 AssetCache.Init(SilksongHost.Instance);
                 Logger.LogInfo($"Plugin {Name} ({Id}) has loaded!");
             }
@@ -55,6 +58,7 @@ namespace ItemChanger.Silksong
         private void DefineContainers()
         {
             ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new FleaContainer());
+            ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new TabletContainer());
         }
     }
 }

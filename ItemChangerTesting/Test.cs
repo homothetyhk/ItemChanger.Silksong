@@ -24,7 +24,7 @@ namespace ItemChangerTesting
         /// </summary>
         public abstract void Setup(TestArgs args);
 
-        protected static void StartNear(string scene, string gate)
+        protected internal static void StartNear(string scene, string gate)
         {
             ModuleCollection mods = ItemChangerHost.Singleton.ActiveProfile!.Modules;
 
@@ -38,7 +38,7 @@ namespace ItemChangerTesting
             });
         }
 
-        protected static void StartAt(StartDef start)
+        protected internal static void StartAt(StartDef start)
         {
             ModuleCollection mods = ItemChangerHost.Singleton.ActiveProfile!.Modules;
 
