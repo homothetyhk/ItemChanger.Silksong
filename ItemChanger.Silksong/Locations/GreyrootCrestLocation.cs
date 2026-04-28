@@ -18,7 +18,7 @@ public class GreyrootCrestLocation : AutoLocation
         // We don't want to do the curse suppression directly in this location
         // because the DualLocation will disable it once the curse quest is complete,
         // which is before the Chapel of the Witch scene loads.
-        // Furthermore, the curse suppression is also be necessary upon reentering the Chapel
+        // Furthermore, the curse suppression is also necessary upon reentering the Chapel
         // from a reusable warp.
         ActiveProfile!.Modules.GetOrAdd<CurseSuppressionModule>();
     }
