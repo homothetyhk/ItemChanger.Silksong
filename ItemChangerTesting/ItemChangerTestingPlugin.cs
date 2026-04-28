@@ -2,7 +2,6 @@
 using BepInEx.Configuration;
 using ItemChanger.Events;
 using ItemChanger.Silksong;
-using ItemChanger.Silksong.Assets;
 using Silksong.ModMenu.Elements;
 using Silksong.ModMenu.Plugin;
 using Silksong.ModMenu.Screens;

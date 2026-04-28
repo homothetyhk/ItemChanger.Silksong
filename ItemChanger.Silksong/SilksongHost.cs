@@ -5,6 +5,7 @@ using ItemChanger.Logging;
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.Modules.Obstacles;
+using ItemChanger.Silksong.Modules.YNBox;
 using ItemChanger.Silksong.Util;
 
 namespace ItemChanger.Silksong;
@@ -33,6 +34,11 @@ public partial class SilksongHost : ItemChangerHost
     public override IEnumerable<Module> BuildDefaultModules()
     {
         return [
+            new CustomYNEnableModule(),
+            new YNBoxDamageControlModule(),
+            new UIProxyControlBlockerModule(),
+            new SkipEndDialogueAnimModule(),
+            new CrestUIMsgRepairModule(),
             new ConsistentRandomnessModule(),
             new ObstacleHandlerModule(),
             new ChapelDoorObstacleModule(),

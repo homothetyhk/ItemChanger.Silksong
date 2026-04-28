@@ -44,7 +44,7 @@ public class EvaLocation : AutoLocation
 
     private void SpawnTablet(Scene scene)
     {
-        GameObject tablet = LoreTabletContainer.InstantiateWeaverTablet(scene, BuildAndSetPreview);
+        GameObject tablet = TabletContainer.InstantiateWeaverTablet(scene, BuildAndSetPreview);
         tablet.name = "IC Eva Item List Tablet";
         tablet.transform.position = new Vector3(70.94f, 11.47f, tablet.transform.position.z);
         tablet.SetActive(true);

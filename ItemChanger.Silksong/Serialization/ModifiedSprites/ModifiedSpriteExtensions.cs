@@ -31,6 +31,8 @@ public static class ModifiedSpriteExtensions
 
     public static FlippedSprite Rotate180(this AtlasSprite self) => self.DoFlip(flipX: true, flipY: true);
 
+    public static FlippedSprite Project(this AtlasSprite self) => self.DoFlip(flipX: false, flipY: false);
+
 
 
     // Method used for testing; in a perfect world this would be the identity map (the world is not perfect)

@@ -15,6 +15,8 @@ public partial class SilksongHost
     private readonly Dictionary<FsmId, Action<PlayMakerFSM>?> fsmEdits = [];
     private readonly Dictionary<LanguageString, List<Func<string, string>>> languageEdits = [];
 
+    public const string ITEMCHANGER_EXACT_SHEET = "ItemChanger.Exact";
+
     private void OnActiveSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
     {
         if (from.name == SceneNames.Menu_Title)
@@ -175,6 +177,20 @@ public partial class SilksongHost
             }
         }
 
+        // Run this as a prefix to avoid logging messages when the sheet does not exist
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(Language), nameof(Language.Get), [typeof(string), typeof(string)])]
+        private static bool LanguageGetPrefix(string key, string sheetTitle, ref string __result)
+        {
+            if (sheetTitle == ITEMCHANGER_EXACT_SHEET)
+            {
+                __result = key;
+                return false;
+            }
+
+            return true;
+        }
+
         [HarmonyPatch(typeof(Language), nameof(Language.Get), [typeof(string), typeof(string)])]
         private static void Postfix(string key, string sheetTitle, ref string __result)
         {
@@ -194,5 +210,26 @@ public partial class SilksongHost
                 }
             }
         }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(Language), nameof(Language.Has), [typeof(string), typeof(string)])]
+        private static bool LanguageHas(string key, string sheetTitle, ref bool __result)
+        {
+            if (sheetTitle == ITEMCHANGER_EXACT_SHEET)
+            {
+                __result = true;
+                return false;
+            }
+
+            LanguageString id = new(sheetTitle, key);
+            if (Host.languageEdits.ContainsKey(id))
+            {
+                __result = true;
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }
