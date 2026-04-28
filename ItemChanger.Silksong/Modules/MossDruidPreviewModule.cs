@@ -39,7 +39,7 @@ public class MossDruidPreviewModule : Module
 
     private void SpawnTablet(Scene scene)
     {
-        GameObject tablet = LoreTabletContainer.InstantiateWeaverTablet(scene, BuildAndSetDescription);
+        GameObject tablet = TabletContainer.InstantiateWeaverTablet(scene, BuildAndSetDescription);
         tablet.name = "IC Moss Druid Item List Tablet";
         tablet.transform.position = new Vector3(27.3f, 3.9f, tablet.transform.position.z);
         tablet.SetActive(true);

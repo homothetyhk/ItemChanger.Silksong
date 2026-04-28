@@ -15,7 +15,7 @@ public abstract class MossDruidLocation : AutoLocation
     {
         Using(new FsmEditGroup()
         {
-            {new(SceneName!, "Moss Creep NPC", "Conversation Control"), HookDruidWithRefreshedItems},
+            {new(UnsafeSceneName, "Moss Creep NPC", "Conversation Control"), HookDruidWithRefreshedItems},
         });
         if (SupportsCost)
         {
@@ -30,9 +30,9 @@ public abstract class MossDruidLocation : AutoLocation
     private void HookDruidWithRefreshedItems(PlayMakerFSM fsm)
     {
         FsmState choiceState = fsm.MustGetState("Choice");
-        choiceState.InsertMethod(0, () =>
+        choiceState.InsertLambdaMethod(0, (finish) =>
         {
-            Placement!.GiveSome(Placement!.Items.Where(it => !it.IsObtained() && it.WasEverObtained()), GetGiveInfo());
+            Placement!.GiveSome(Placement!.Items.Where(it => !it.IsObtained() && it.WasEverObtained()), GetGiveInfo(), finish);
         });
 
         HookDruid(fsm);

@@ -30,10 +30,9 @@ public class MossDruidMix2Location : MossDruidLocation
 
         FsmState giveRewardFState = fsm.MustGetState("Give Reward F");
         giveRewardFState.RemoveFirstActionOfType<SetToolLocked>();
-        giveRewardFState.ReplaceFirstActionOfType<SetToolUnlocked>(new LambdaAction
-        {
-            Method = GiveAll,
-        });
+        i = giveRewardFState.IndexFirstActionOfType<SetToolUnlocked>();
+        giveRewardFState.RemoveAction(i);
+        giveRewardFState.InsertLambdaMethod(i, GiveAll);
 
         FsmState tradeCheckState = fsm.MustGetState("Trade Check");
         tradeCheckState.ReplaceFirstActionOfType<CheckIfToolUnlocked>(new LambdaAction
