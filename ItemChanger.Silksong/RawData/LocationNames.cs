@@ -578,7 +578,6 @@ public static class LocationNames
     public const string Lore_Tablet__Cradle_Cage_3 = "Lore_Tablet-Cradle_Cage_3";
     public const string Lore_Tablet__Greymoor_Orders_Above_Home = "Lore_Tablet-Greymoor_Orders_Above_Home";
     public const string Lore_Tablet__Greymoor_Bottom = "Lore_Tablet-Greymoor_Bottom";
-    public const string Lore_Tablet__Nuu_Scroll = "Lore_Tablet-Nuu_Scroll";
     public const string Lore_Tablet__Trobbio_Sign = "Lore_Tablet-Trobbio_Sign";
     public const string Lore_Tablet__Trobbio_Notes = "Lore_Tablet-Trobbio_Notes";
     public const string Lore_Tablet__Tormented_Trobbio_Notes = "Lore_Tablet-Tormented_Trobbio_Notes";

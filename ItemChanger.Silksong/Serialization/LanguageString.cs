@@ -13,4 +13,6 @@ public record LanguageString(string Sheet, string Key) : IValueProvider<string>
     {
         get => Language.Get(Key, Sheet);
     }
+
+    public LocalisedString ToLocalisedString() => new(Sheet, Key);
 }
