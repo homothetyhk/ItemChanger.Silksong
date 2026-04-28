@@ -47,4 +47,10 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Weave_10,
         Name = LocationNames.Eva,
     };
+
+    public static Location Pale_Nails => new PaleNailsLocation
+    {
+        SceneName = SceneNames.Cradle_03_Destroyed,
+        Name = LocationNames.Pale_Nails
+    };
 }
