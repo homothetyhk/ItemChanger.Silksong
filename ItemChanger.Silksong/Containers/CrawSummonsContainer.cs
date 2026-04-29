@@ -1,6 +1,7 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Containers;
+using ItemChanger.Enums;
 using Silksong.FsmUtil;
 using UnityEngine;
 
@@ -47,6 +48,8 @@ public class CrawSummonsContainer : Container
         SavedContainerItem icItem = ScriptableObject.CreateInstance<SavedContainerItem>();
         icItem.ContainerInfo = info;
         icItem.ContainerTransform = obj.transform;
+        icItem.SupportedMessageTypes = MessageType.Any;
+        icItem.RetainControl = true;
         setPickupState.GetFirstActionOfType<SetCollectablePickupItem>()!.Item = icItem;
     }
 }
