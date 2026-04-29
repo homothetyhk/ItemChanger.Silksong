@@ -47,4 +47,10 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Weave_10,
         Name = LocationNames.Eva,
     };
+
+    public static Location Needle_Strike => new NeedleStrikeLocation
+    {
+        SceneName = SceneNames.Room_Pinstress,
+        Name = LocationNames.Needle_Strike,
+    };
 }

@@ -27,6 +27,10 @@
   "INV_NAME_TAUNT": "Taunt",
   "INV_DESC_TAUNT": "Learn the power to skip Sister Splinter",
   "GET_TAUNT_1": "Goad enemies into attacking",
+
+  "PINSTRESS_INTERIOR_GROUND_MEET_PREVIEW": "So rude! To raise a Pinstress from their deep meditation!<page>You carry on with that kind of brash behaviour and you’re likely to be stuck quick through!<hpage>I’m surprised to find a bug of sound mind alive in such an inhospitable place. You are a warrior learned in the blades of this land?<page>Aye! A Pinstress! Your needle there might fit you fair, strange as it is’n all, but it’s the pin that’s the glorious weapon of Pharloom.<page>Given I’m now awake, maybe you’d fancy a little {PREVIEW_TEXT}? Care to test the power of a Pinstress? Might be even this old master could show you a thing or two.",
+  "PINSTRESS_INTERIOR_GROUND_MEET_ACT_3_PREVIEW": "So rude! To raise a Pinstress from their deep meditation!<page>You carry on with that kind of brash behaviour and you’re likely to be stuck quick through!<hpage>I’m surprised to find any bug still alive in such an inhospitable place. You are a warrior learned in the blades of this land?<page>Aye! A Pinstress! Your needle there might fit you fair, but it’s the pin that’s the glorious weapon of Pharloom, least it was... It’s sure starting to feel like Pharloom doesn’t have long left.<page>Well, given I’m now awake, and time’s suddenly short, maybe you’d fancy a little {PREVIEW_TEXT}? Might be even this old master could show you a thing or two?",
+  "PINSTRESS_INTERIOR_GROUND_REOFFER_PREVIEW": "Planning to hang about are you, needle bug?<page>Fancy a little {PREVIEW_TEXT}? Care to test the power of a Pinstress? Might be even this old master could show you a thing or two?",
   "SHOP_DESC_ROSARIES": "We're having a firesale today, go ahead and collect your rebate.",
 
   "CREST_HUNTER_NAME": "Crest of Hunter",
