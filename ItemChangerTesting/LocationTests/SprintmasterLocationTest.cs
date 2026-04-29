@@ -4,13 +4,13 @@ using ItemChanger.Silksong.StartDefs;
 
 namespace ItemChangerTesting.LocationTests;
 
-internal class SprintmasterMementoLocationTest : Test
+internal class SprintmasterLocationTest : Test
 {
     public override TestMetadata GetMetadata() => new()
     {
         Folder = TestFolder.LocationTests,
-        MenuName = "Sprintmaster - Bonus Memento",
-        MenuDescription = "All three IC placements active. Choose YES to skip races or NO to play normally — all three IC items should be received either way.",
+        MenuName = "Sprintmaster - All Races Plus Memento",
+        MenuDescription = "All IC placements active. Choose YES to skip races or NO to play normally — all IC items should be received either way.",
         Revision = 2026042200,
     };
 
