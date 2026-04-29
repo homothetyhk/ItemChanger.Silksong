@@ -115,7 +115,8 @@ internal static partial class BaseLocationList
         {
             SceneName =  SceneNames.Abyss_08,
             Event = "SHRINE SEQUENCE END",
-            ObjectPath = "weaver_spire_base control"
+            ObjectPath = "weaver_spire_base control",
+            OnlyIfContainerReplaced = true
         }
     );
 }

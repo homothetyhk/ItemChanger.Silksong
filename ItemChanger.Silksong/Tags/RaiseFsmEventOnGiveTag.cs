@@ -13,14 +13,29 @@ namespace ItemChanger.Silksong.Tags;
 /// Tag which raises a FSM event when a location's item is given.
 /// </summary>
 [LocationTag]
-public class RaiseFsmEventOnGiveTag : Tag
+public class RaiseFsmEventOnGiveTag : Tag, IActionOnContainerReplaceTag
 {
     public required string SceneName { get; init; }
     public required string ObjectPath { get; init; }
+    
+    /// <summary>
+    /// Name of the PlayMakerFSM component on the tagged GameObject to execute the event on. If null, selects the
+    /// first available such component.
+    /// </summary>
     public string? FsmName { get; init; } = null;
+    
+    /// <summary>
+    /// Name of the FSM event to invoke.
+    /// </summary>
     public required string Event { get; init; }
+    
+    /// <summary>
+    /// Only raise the FSM event if the location was replaced with a container.
+    /// </summary>
+    public bool OnlyIfContainerReplaced { get; init; } = false;
 
     private PlayMakerFSM? _fsm;
+    private bool _wasReplaced = false;
 
     protected override void DoLoad(TaggableObject parent)
     {
@@ -49,6 +64,11 @@ public class RaiseFsmEventOnGiveTag : Tag
         _fsm = null;
     }
 
+    public void OnReplace(Scene scene, GameObject newContainer)
+    {
+        _wasReplaced = true;
+    }
+    
     private void FindFsm(Scene scene)
     {
         GameObject? fsmGameObject = scene.FindGameObject(ObjectPath);
@@ -68,6 +88,8 @@ public class RaiseFsmEventOnGiveTag : Tag
 
     private void OnVisited(PlacementVisitedEventArgs args)
     {
+        if (OnlyIfContainerReplaced && !_wasReplaced)
+            return;
         if ((args.ProposedNewFlags & VisitState.ObtainedAnyItem) == 0)
             return;
         if (_fsm == null)
