@@ -63,5 +63,8 @@ namespace ItemChangerTesting
         }
 
         protected virtual void OnEnterGame() { }
+
+        // Arbitrary named hooks associated with the test, to simulate quest completion, etc.
+        public virtual IEnumerable<(string, Action)> TestMethods() => [];
     }
 }
