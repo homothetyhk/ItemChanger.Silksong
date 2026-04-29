@@ -47,4 +47,10 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Weave_10,
         Name = LocationNames.Eva,
     };
+
+    public static Location Needolin => new WidowLocation()
+    {
+        SceneName = SceneNames.Belltown_Shrine,
+        Name = LocationNames.Needolin,
+    };
 }
