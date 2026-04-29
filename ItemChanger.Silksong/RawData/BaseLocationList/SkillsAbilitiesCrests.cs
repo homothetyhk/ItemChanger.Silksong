@@ -89,7 +89,7 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Weave_10,
         Name = LocationNames.Eva,
     };
-    
+
     public static Location Silkspear => CreateWeaverCorpseLocation(
         LocationNames.Silkspear,
         SceneNames.Mosstown_02
@@ -111,7 +111,7 @@ internal static partial class BaseLocationList
         SceneNames.Bone_East_05,
         spriteObjectPath: "Ability Scene (1)/Burst Deactivate"
     );
-    
+
     public static Location Cling_Grip => CreateWeaverCorpseLocation(
         LocationNames.Cling_Grip,
         SceneNames.Shellwood_10,
@@ -135,4 +135,10 @@ internal static partial class BaseLocationList
             ObjectName = "weaver_spire_base control"
         }
     );
+
+    public static Location Pin_Badge => new PinstressLocation
+    {
+        SceneName = SceneNames.Peak_07,
+        Name = LocationNames.Pin_Badge,
+    };
 }
