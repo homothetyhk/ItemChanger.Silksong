@@ -25,9 +25,9 @@ internal class BenjinAndCrullLocationTest : Test
             .Add(Finder.GetItem(ItemNames.Crest_of_Architect)!.WithTag(new PersistentItemTag()
                 { Persistence = Persistence.Persistent })));
 
-        // Profile.AddPlacement(Finder.GetLocation(LocationNames.Steel_Spines)!.Wrap()
-        //     .Add(Finder.GetItem(ItemNames.Silkspear)!.WithTag(new PersistentItemTag()
-        //         { Persistence = Persistence.Persistent })));
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Steel_Spines)!.Wrap()
+            .Add(Finder.GetItem(ItemNames.Silkspear)!.WithTag(new PersistentItemTag()
+                { Persistence = Persistence.Persistent })));
     }
 
     protected override void OnEnterGame()
