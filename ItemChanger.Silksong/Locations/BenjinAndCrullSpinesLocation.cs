@@ -37,11 +37,10 @@ public class BenjinAndCrullSpinesLocation : AutoLocation
         dialogTreeCheckState.InsertLambdaMethod(1, _ =>
         {
             FullQuestBase quest = QuestManager.GetQuest(Quests.Doctor_Curse_Cure);
+            if (!quest.IsAccepted)
+                return;
 
-            if (quest.IsAccepted && !Placement!.CheckVisitedAny(VisitState.ObtainedAnyItem))
-            {
-                fsm.SendEvent("PINS");
-            }
+            fsm.SendEvent(quest.IsCompleted ? "FINISHED" : "PINS");
         });
 
         // Overwrite "has pins?" check
@@ -52,11 +51,11 @@ public class BenjinAndCrullSpinesLocation : AutoLocation
             if (Placement!.AllObtained())
                 fsm.SendEvent("CANCEL");
         });
-        
+
         // Override yes/no box
         FsmState buyPinsState = fsm.MustGetState("Buy Pins?");
         buyPinsState.Actions = [];
-        
+
         // Note: a `DefaultCostTag` on this location doesn't affect the placement's cost if it's part of a MultiLocation
         // Therefore, we add the cost manually
         Cost? spinesCost = (Placement as ISingleCostPlacement)!.Cost;
@@ -64,9 +63,10 @@ public class BenjinAndCrullSpinesLocation : AutoLocation
         {
             spinesCost = defaultCostTag.Cost;
         }
+
         if (spinesCost == null)
             spinesCost = new RosaryCost(0);
-        
+
         buyPinsState.AddLambdaMethod(_ =>
         {
             Placement!.AddVisitFlag(VisitState.Previewed);

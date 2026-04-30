@@ -17,7 +17,9 @@ public class BenjinAndCrullTacksLocation : AutoLocation
         });
     }
 
-    protected override void DoUnload() {}
+    protected override void DoUnload()
+    {
+    }
 
     private void HookDustTraders(PlayMakerFSM fsm)
     {
@@ -36,7 +38,7 @@ public class BenjinAndCrullTacksLocation : AutoLocation
                 return;
             }
         });
-        
+
         // Replace granting tacks with obtaining the placement
         FsmState rewardState = fsm.MustGetState("Reward");
         rewardState.RemoveActionsOfType<GetQuestReward>();
