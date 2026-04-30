@@ -421,6 +421,7 @@ public static class ItemNames
     public const string Upslash = "Upslash";
     public const string Downslash = "Downslash";
     public const string Taunt = "Taunt";
+    public const string Grounded_Sprint = "Grounded_Sprint";
     public const string Double_Mask_Shard = "Double_Mask_Shard";
     public const string Full_Mask = "Full_Mask";
     public const string Full_Spool = "Full_Spool";

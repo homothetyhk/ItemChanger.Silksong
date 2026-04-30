@@ -238,6 +238,19 @@ internal partial class BaseItemList
         },
     };
 
+    public static Item Grounded_Sprint => new CustomSkillItem
+    {
+        Name = ItemNames.Grounded_Sprint,
+        BoolName = nameof(GroundedSprintModule.hasGroundedSprint),
+        ModuleTypeName = typeof(GroundedSprintModule).FullName,
+        UIDef = new MsgUIDef
+        {
+            Name = ItemChangerLanguageStrings.INV_NAME_GROUNDED_SPRINT,
+            ShopDesc = ItemChangerLanguageStrings.INV_DESC_GROUNDED_SPRINT,
+            Sprite = null!,
+        },
+    };
+
     // combined shards and fragments
     //TODO: find fitting sprites
     public static Item Double_Mask_Shard => new MaskShardItem
