@@ -27,6 +27,8 @@
   "INV_NAME_TAUNT": "Taunt",
   "INV_DESC_TAUNT": "Learn the power to skip Sister Splinter",
   "GET_TAUNT_1": "Goad enemies into attacking",
+  "INV_NAME_GROUNDED_SPRINT": "Grounded Sprint",
+  "INV_DESC_GROUNDED_SPRINT": "Hold dash to sprint at Swift Step's pace while grounded. Loses footing in the air, where speed falls back to a walk.",
   "SHOP_DESC_ROSARIES": "We're having a firesale today, go ahead and collect your rebate.",
 
   "CREST_HUNTER_NAME": "Crest of Hunter",
