@@ -35,11 +35,6 @@ public class BenjinAndCrullTacksLocation : AutoLocation
                 fsm.SendEvent("CAN END");
                 return;
             }
-
-            if (quest.IsCompleted && !Placement!.AllObtained())
-            {
-                fsm.SendEvent("CAN END");
-            }
         });
         
         // Replace granting tacks with obtaining the placement
