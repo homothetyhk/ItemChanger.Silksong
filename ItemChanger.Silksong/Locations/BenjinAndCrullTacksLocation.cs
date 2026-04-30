@@ -43,6 +43,15 @@ public class BenjinAndCrullTacksLocation : AutoLocation
         FsmState rewardState = fsm.MustGetState("Reward");
         rewardState.RemoveActionsOfType<GetQuestReward>();
         rewardState.RemoveActionsOfType<SavedItemGet>();
+        
+        // End dialogue early, otherwise dialogue shows over the top of big UI def
+        rewardState.AddAction(new EndDialogue()
+        {
+            ReturnControl = false,
+            ReturnHUD = false,
+            Target = new FsmOwnerDefault() { OwnerOption = OwnerDefaultOption.UseOwner },
+            UseChildren = false
+        });
         rewardState.AddLambdaMethod(GiveAll);
     }
 }

@@ -81,8 +81,17 @@ public class BenjinAndCrullSpinesLocation : AutoLocation
                 no: () => { fsm.SendEvent("FALSE"); });
         });
 
-        // Replace granting spines with obtaining the placement
+        // End dialogue early, otherwise dialogue shows over the top of big UI def
         FsmState givePinsState = fsm.MustGetState("Give Pins");
+        givePinsState.AddAction(new EndDialogue()
+        {
+            ReturnControl = false,
+            ReturnHUD = false,
+            Target = new FsmOwnerDefault() { OwnerOption = OwnerDefaultOption.UseOwner },
+            UseChildren = false
+        });
+        
+        // Replace granting spines with obtaining the placement
         givePinsState.RemoveFirstActionOfType<SavedItemGet>();
         givePinsState.AddLambdaMethod(GiveAll);
     }
