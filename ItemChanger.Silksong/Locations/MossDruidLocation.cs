@@ -3,6 +3,7 @@ using ItemChanger.Locations;
 using ItemChanger.Enums;
 using ItemChanger.Placements;
 using ItemChanger.Silksong.Modules;
+using ItemChanger.Silksong.Modules.YNBox;
 using ItemChanger.Silksong.Util;
 using HutongGames.PlayMaker;
 using Silksong.FsmUtil;
@@ -49,11 +50,11 @@ public abstract class MossDruidLocation : AutoLocation
             fsm.SendEvent(acceptEvent);
             return;
         }
-        CostDialogue.Prompt(
-            cost,
-            Placement!.GetUIName(),
+        CustomYNEnableModule.Open(
             () => fsm.SendEvent(acceptEvent),
-            () => fsm.SendEvent(declineEvent));
+            () => fsm.SendEvent(declineEvent),
+            cost,
+            Placement!.GetUIName());
     }
 
     protected abstract void HookDruid(PlayMakerFSM fsm);

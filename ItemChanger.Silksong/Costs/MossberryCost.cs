@@ -1,10 +1,11 @@
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.Util;
 using Newtonsoft.Json;
+using UnityEngine;
 
 namespace ItemChanger.Silksong.Costs;
 
-public class MossberryCost : CumulativeCost
+public class MossberryCost : CumulativeCost, IDisplayCost
 {
     private MossberryCostModule? _module;
 
@@ -32,4 +33,10 @@ public class MossberryCost : CumulativeCost
 
     protected override string GetCostText(int amount) =>
         string.Format("FMT_PAY_MOSSBERRIES".GetLanguageString(), amount);
+
+    [JsonIgnore]
+    public int Amount => Math.Max(0, Value - Module.TotalSpent);
+
+    [JsonIgnore]
+    public Sprite DisplaySprite { get => field ??= CollectableItemManager.GetItemByName("Mossberry").GetPopupIcon(); }
 }
