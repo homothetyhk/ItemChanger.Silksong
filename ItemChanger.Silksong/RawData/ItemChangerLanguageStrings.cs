@@ -37,6 +37,9 @@ internal static class ItemChangerLanguageStrings
 
     public static LanguageString SHOP_DESC_ROSARIES => LanguageString.FromItemChanger(nameof(SHOP_DESC_ROSARIES));
 
+    public static LanguageString SPRINTMASTER_SKIP_PROMPT => LanguageString.FromItemChanger(nameof(SPRINTMASTER_SKIP_PROMPT));
+    public static LanguageString SPRINTMASTER_SKIP_MEMENTO_PROMPT => LanguageString.FromItemChanger(nameof(SPRINTMASTER_SKIP_MEMENTO_PROMPT));
+
     public static CompositeString CreatePayRosariesString(IValueProvider<int> rosaryCount)
     {
         return CompositeString.Create(FMT_PAY_ROSARIES, new Dictionary<string, IValueProvider<object>>()
