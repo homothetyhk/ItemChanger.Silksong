@@ -47,4 +47,10 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Weave_10,
         Name = LocationNames.Eva,
     };
+
+    public static Location Faydown_Cloak => new FayfornLocation
+    {
+        SceneName = SceneNames.Peak_08b,
+        Name = LocationNames.Faydown_Cloak,
+    };
 }
