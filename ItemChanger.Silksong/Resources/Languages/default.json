@@ -43,5 +43,9 @@
 
   "FREE": "Free",
   "OBTAINED": "Obtained",
-  "PAID": "Paid"
+  "PAID": "Paid",
+
+  "QUEST_BROLLY_GET_DESC_PREVIEW": "Hunt Hokers in the Far Fields and collect Spine Cores for {PREVIEW_TEXT}.",
+  "SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW": "If you’re planning to ascend from these low fields, you’ll be needing {PREVIEW_TEXT}, and I’m just the bug to help.<page>Head for the caves beyond my home. The bugs within produce a spine with a marvellous core, flexible yet strong.<page>Cut their spines and collect the cores. Return to me, and I’ll soon have your old cloak transformed into {PREVIEW_TEXT}.",
+  "SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW": "Ready to reconsider my offer? Good for you! You won’t be going far without {PREVIEW_TEXT}, dear."
 }
