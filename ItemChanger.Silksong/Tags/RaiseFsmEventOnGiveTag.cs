@@ -50,6 +50,9 @@ public class RaiseFsmEventOnGiveTag : Tag, IActionOnContainerReplaceTag
         }
 
         ItemChangerHost.Singleton.GameEvents.AddSceneEdit(SceneName, FindFsm);
+        ItemChangerHost.Singleton.GameEvents.BeforeNextSceneLoaded += ResetState;
+
+
     }
 
     protected override void DoUnload(TaggableObject parent)
@@ -61,7 +64,13 @@ public class RaiseFsmEventOnGiveTag : Tag, IActionOnContainerReplaceTag
         }
 
         ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneName, FindFsm);
+        ItemChangerHost.Singleton.GameEvents.BeforeNextSceneLoaded -= ResetState;
         _fsm = null;
+    }
+    
+    private void ResetState(Events.Args.BeforeSceneLoadedEventArgs obj)
+    {
+        _wasReplaced = false;
     }
 
     public void OnReplace(Scene scene, GameObject newContainer)
