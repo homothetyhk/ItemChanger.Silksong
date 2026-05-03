@@ -26,13 +26,16 @@ public class WeaverCorpseContainer : Container
     public override bool SupportsModifyInPlace => true;
 
     protected override void DoLoad() { }
+
     protected override void DoUnload() { }
 
-    public override void ModifyContainerInPlace(GameObject shrineWeaverAbility, ContainerInfo info)
+    public override void ModifyContainerInPlace(GameObject corpse, ContainerInfo info)
     {
-        PlayMakerFSM fsm = shrineWeaverAbility.GetComponent<PlayMakerFSM>();
-        Placement placement = info.GiveInfo.Placement;
+        info.ApplyTo(corpse);
         
+        PlayMakerFSM fsm = corpse.GetComponent<PlayMakerFSM>();
+        Placement placement = info.GiveInfo.Placement;
+
         // Make shrine available depending on whether placement has any items
         FsmState collectedCheckState = fsm.MustGetState("Collected Check");
         collectedCheckState.RemoveActionsOfType<PlayerDataBoolTest>();
@@ -43,28 +46,41 @@ public class WeaverCorpseContainer : Container
                 fsm.SendEvent("COLLECTED");
             }
         });
-        
-        // Skip long fade-to-black, auto-equip logic, ability-get text
+
+        // Skip long fade-to-black, auto-equip logic, ability-get text, full heal
         FsmState fadeToBlackState = fsm.MustGetState("Fade To Black");
-        fadeToBlackState.AddTransition("SKIP_MSG", "Heal");
+        fadeToBlackState.AddTransition("SKIP_MSG", "Force Face Right?");
         fadeToBlackState.RemoveActionsOfType<Wait>();
-        fadeToBlackState.AddLambdaMethod(_ =>
-        {
-            fsm.SendEvent("SKIP_MSG");
-        });
-        
+        fadeToBlackState.AddLambdaMethod(_ => { fsm.SendEvent("SKIP_MSG"); });
+
         // Give ability slightly early - so the pickup shows during the stand-up animation
         FsmState getUpState = fsm.MustGetState("Get Up Pause");
         getUpState.GetFirstActionOfType<Wait>()!.finishEvent = null;
-        getUpState.AddLambdaMethod(cb => placement.GiveAll(new GiveInfo{
+        getUpState.AddLambdaMethod(cb => placement.GiveAll(new GiveInfo
+        {
             Container = info.ContainerType,
             FlingType = info.GiveInfo.FlingType,
             MessageType = MessageType.Any
         }, cb));
-        
+
         // Remove original ability gain
         FsmState animationFinishedState = fsm.MustGetState("End");
-        animationFinishedState.RemoveActionsOfType<HutongGames.PlayMaker.Actions.SetPlayerDataBool>();
+        animationFinishedState.RemoveFirstActionOfType<HutongGames.PlayMaker.Actions.SetPlayerDataBool>();
         animationFinishedState.RemoveActionsOfType<CallStaticMethod>();
+
+        // Remove additional side effects:
+        // - set hasSilkSpecial
+        animationFinishedState.RemoveFirstActionMatching(act =>
+            act is HutongGames.PlayMaker.Actions.SetPlayerDataBool setPD
+            && setPD.boolName.Value == "hasSilkSpecial");
+        // - set bench respawn
+        animationFinishedState.RemoveFirstActionMatching(act =>
+            act is CallMethodProper callMethod
+            && callMethod.methodName.Value == "SetBenchRespawn");
+        // - add silk
+        FsmState setFinishedState = fsm.MustGetState("Set Finished");
+        setFinishedState.RemoveFirstActionOfType<CallMethodProper>();
+        // - save the game
+        setFinishedState.RemoveFirstActionOfType<SaveGameV2>();
     }
 }
