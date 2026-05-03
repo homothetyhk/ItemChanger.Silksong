@@ -2,6 +2,7 @@
 using ItemChanger.Modules;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.StartDefs;
+using PrepatcherPlugin;
 using System.Collections.ObjectModel;
 
 namespace ItemChangerTesting
@@ -18,6 +19,14 @@ namespace ItemChangerTesting
         protected Finder Finder => ItemChangerHost.Singleton.Finder;
         protected ModuleCollection Modules => ItemChangerHost.Singleton.ActiveProfile!.Modules;
         protected ItemChangerProfile Profile => ItemChangerHost.Singleton.ActiveProfile!;
+
+        protected void StartAct3()
+        {
+            PlayerDataAccess.act3_enclaveWakeSceneCompleted = true;
+            PlayerDataAccess.act3MapUpdated = true;
+            PlayerDataAccess.act3_wokeUp = true;
+            PlayerDataAccess.blackThreadWorld = true;
+        }
 
         /// <summary>
         /// The entry point of the test. Responsible for setting up any modules or placements to be tested, as well as start location.
