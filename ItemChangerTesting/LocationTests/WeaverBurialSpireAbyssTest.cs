@@ -4,7 +4,7 @@ using ItemChanger.Silksong.StartDefs;
 
 namespace ItemChangerTesting.LocationTests;
 
-internal class WeaverBurialSpireAbyss : Test
+internal class WeaverBurialSpireAbyssTest : Test
 {
     public override TestMetadata GetMetadata() => new()
     {
