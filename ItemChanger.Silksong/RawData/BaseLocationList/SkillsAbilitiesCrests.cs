@@ -129,12 +129,10 @@ internal static partial class BaseLocationList
         SceneNames.Abyss_08,
         spriteObjectPath: "weaver_spire_base control/Burst Deactivate"
     ).WithTag(
-        new RaiseFsmEventOnGiveTag()
+        new RemoveComponentTag<PlayMakerFSM>()
         {
             SceneName =  SceneNames.Abyss_08,
-            Event = "SHRINE SEQUENCE END",
-            ObjectPath = "weaver_spire_base control",
-            OnlyIfContainerReplaced = true
+            ObjectName = "weaver_spire_base control"
         }
     );
 }

@@ -10,7 +10,7 @@ internal class WeaverBurialSpireAbyss : Test
     {
         Folder = TestFolder.LocationTests,
         MenuName = "Weaver Burial Spire Abyss",
-        MenuDescription = "Tests Void Tendrils event occuring on item get from Abyss Weaver Corpse",
+        MenuDescription = "Tests Void Tendrils event removed from Abyss Weaver Corpse",
         Revision = 2026040700
     };
     
@@ -25,7 +25,6 @@ internal class WeaverBurialSpireAbyss : Test
         });
 
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Silk_Soar)!.Wrap()
-            .Add(Finder.GetItem(ItemNames.Rosary_String)!)
-            .Add(Finder.GetItem(ItemNames.Flea)!));
+            .Add(Finder.GetItem(ItemNames.Rosary_String)!));
     }
 }
