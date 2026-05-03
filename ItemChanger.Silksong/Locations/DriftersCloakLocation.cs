@@ -2,13 +2,16 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Locations;
-using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.RawData;
 using Silksong.FsmUtil;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ItemChanger.Silksong.Locations;
 
+/// <summary>
+/// An AutoLocation to give items from the Seamstress's quest completion dialogue.
+/// Does not support respawning items on its own. Expected use is in a DualLocation pair with a fallback handling post-quest completion.
+/// </summary>
 public class DriftersCloakLocation : AutoLocation
 {
     [SetsRequiredMembers]
@@ -33,8 +36,6 @@ public class DriftersCloakLocation : AutoLocation
         fsm.MustGetState("Offer Quest").InsertMethod(0, _ => Placement?.AddVisitFlag(Enums.VisitState.Previewed));
         fsm.MustGetState("Reoffer Quest").InsertMethod(0, _ => Placement?.AddVisitFlag(Enums.VisitState.Previewed));
 
-        // Note: It's possible for the player to brick their save if they somehow trigger a save after completing the quest but before receiving the reward.
-        // This should not generally be possible without debug tools.
         var giveState = fsm.MustGetState("Msg");
         giveState.GetFirstActionOfType<CreateUIMsgGetItem>()!.enabled = false;
         giveState.GetFirstActionOfType<SetFsmString>()!.enabled = false;
@@ -45,7 +46,7 @@ public class DriftersCloakLocation : AutoLocation
             Placement?.GiveAll(new()
             {
                 FlingType = Enums.FlingType.Everywhere,
-                MessageType = Enums.MessageType.SmallPopup | Enums.MessageType.LargePopup,
+                MessageType = Enums.MessageType.Any,
                 Transform = obj != null ? obj.transform : null,
             },
             callback: () => fsm.SendEvent("GET ITEM MSG END"));

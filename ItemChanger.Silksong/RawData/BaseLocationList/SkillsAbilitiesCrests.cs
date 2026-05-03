@@ -1,6 +1,6 @@
+using Benchwarp.Data;
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Locations;
-using Benchwarp.Data;
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
