@@ -2,6 +2,7 @@ using Benchwarp.Data;
 using ItemChanger;
 using ItemChanger.Enums;
 using ItemChanger.Silksong.Extensions;
+using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Tags;
 
@@ -20,6 +21,9 @@ internal class BenjinAndCrullLocationTest : Test
     public override void Setup(TestArgs args)
     {
         StartNear(SceneNames.Dust_Shack, PrimitiveGateNames.left1);
+        
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Start)!.Wrap()
+            .Add(RosariesItem.MakeRosariesItem(1000)));
 
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Tacks)!.Wrap()
             .Add(Finder.GetItem(ItemNames.Crest_of_Architect)!.WithTag(new PersistentItemTag()

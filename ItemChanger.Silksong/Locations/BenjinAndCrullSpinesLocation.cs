@@ -44,12 +44,16 @@ public class BenjinAndCrullSpinesLocation : AutoLocation
         });
 
         // Overwrite "has pins?" check
+        // - Skip paying the cost if it has been paid previously but items are still available
         FsmState checkPinsState = fsm.MustGetState("Pins State?");
         checkPinsState.RemoveFirstActionOfType<CollectableItemGetDataV3>();
+        checkPinsState.AddTransition("SKIP COST", "Give Pins");
         checkPinsState.InsertLambdaMethod(0, _ =>
         {
             if (Placement!.AllObtained())
                 fsm.SendEvent("CANCEL");
+            else if (Placement!.CheckVisitedAny(VisitState.ObtainedAnyItem)) // Has obtained some item previously
+                fsm.SendEvent("SKIP COST");
         });
 
         // Override yes/no box
