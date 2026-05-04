@@ -6,10 +6,12 @@ using TeamCherry.Localization;
 
 namespace ItemChanger.Silksong.RawData;
 
+// TODO: These static properties should be generated from default.json.
 internal static class ItemChangerLanguageStrings
 {
     public static LanguageString FMT_PAY_ROSARIES => LanguageString.FromItemChanger(nameof(FMT_PAY_ROSARIES));
     public static LanguageString FMT_PAY_SHELL_SHARDS => LanguageString.FromItemChanger(nameof(FMT_PAY_SHELL_SHARDS));
+    public static LanguageString FMT_PAY_TOOLS => LanguageString.FromItemChanger(nameof(FMT_PAY_TOOLS));
     public static LanguageString FMT_FAST_TRAVEL_PATTERN => LanguageString.FromItemChanger(nameof(FMT_FAST_TRAVEL_PATTERN));
     public static LanguageString FMT_MATERIUM_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_MATERIUM_ENTRY_NAME));
     public static LanguageString FMT_JOURNAL_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_JOURNAL_ENTRY_NAME));
@@ -37,6 +39,7 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString INV_DESC_TAUNT => LanguageString.FromItemChanger(nameof(INV_DESC_TAUNT));
     public static LanguageString GET_TAUNT_1 => LanguageString.FromItemChanger(nameof(GET_TAUNT_1));
 
+    public static LanguageString CITADEL_MAP_PROMPT_PREVIEW => LanguageString.FromItemChanger(nameof(CITADEL_MAP_PROMPT_PREVIEW));
     public static LanguageString QUEST_BROLLY_GET_DESC_PREVIEW => LanguageString.FromItemChanger(nameof(QUEST_BROLLY_GET_DESC_PREVIEW));
     public static LanguageString SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW));
     public static LanguageString SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW));
