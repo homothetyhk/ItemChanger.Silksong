@@ -23,6 +23,8 @@ public class CrawSummonsContainer : Container
 
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
+        info.ApplyTo(obj);
+        
         PlayMakerFSM fsm = obj.LocateMyFSM("FSM");
 
         // Remove the summons cloth from the pin iff the placement is obtained
