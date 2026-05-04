@@ -45,7 +45,7 @@ public class DeterministicCrawSummonsModule : Module
     public IValueProvider<bool> SpawnConditions { get; init; } = new Conjunction(
         new PDBool(nameof(PlayerData.blackThreadWorld)),
         new PDBool(nameof(PlayerData.hitCrowCourtSwitch)),
-        new QuestCompletionBool(Quests.Black_Thread_Pt1_Shamans, QuestCompletion.IsCompleted)
+        new QuestCompletionBool(Quests.Black_Thread_Pt1_Shamans)
     );
 
     /// <summary>

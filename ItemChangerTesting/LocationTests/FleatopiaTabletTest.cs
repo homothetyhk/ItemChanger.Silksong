@@ -51,7 +51,7 @@ internal class FleatopiaTabletTest : Test
             {
                 Name = $"Fleatopia state {i}",
                 Num = i,
-                UIDef = new MsgUIDef() { Name = new BoxedString($"Fleatopia state {i}"), Sprite = new EmptySprite() }
+                UIDef = new MsgUIDef() { Name = new BoxedString{ Value = $"Fleatopia state {i}" }, Sprite = new EmptySprite() }
             }.WithTag(new PersistentItemTag() { Persistence = ItemChanger.Enums.Persistence.Persistent })));
         }
     }
