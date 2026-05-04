@@ -135,7 +135,7 @@ internal class FlippedSpriteTest : Test
                 Name = $"Debug Item: {name}",
                 UIDef = new MsgUIDef()
                 {
-                    Name = new BoxedString(name),
+                    Name = new BoxedString { Value = name },
                     Sprite = sprite
                 }
             });
@@ -145,7 +145,7 @@ internal class FlippedSpriteTest : Test
                 Name = $"Debug Item: {name}",
                 UIDef = new MsgUIDef()
                 {
-                    Name = new BoxedString("F " + name),
+                    Name = new BoxedString { Value = "F " + name },
                     Sprite = flippedSprite
                 }
             });
@@ -155,7 +155,7 @@ internal class FlippedSpriteTest : Test
                 Name = $"Debug Item: {name}",
                 UIDef = new MsgUIDef()
                 {
-                    Name = new BoxedString("Y " + name),
+                    Name = new BoxedString { Value = "Y " + name },
                     Sprite = doubleFlippedSprite
                 }
             });
@@ -165,7 +165,7 @@ internal class FlippedSpriteTest : Test
                 Name = $"Debug Item: {name}",
                 UIDef = new MsgUIDef()
                 {
-                    Name = new BoxedString("P " + name),
+                    Name = new BoxedString { Value = "P " + name },
                     Sprite = sprite.Project($"Projected: {name}")
                 }
             });
@@ -175,7 +175,7 @@ internal class FlippedSpriteTest : Test
                 Name = $"Debug Item: {name}",
                 UIDef = new MsgUIDef()
                 {
-                    Name = new BoxedString("U " + name),
+                    Name = new BoxedString { Value = "U " + name },
                     Sprite = upsideDownSprite,
                 }
             });

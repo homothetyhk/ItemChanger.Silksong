@@ -38,6 +38,8 @@ namespace ItemChangerTesting
             });
         }
 
+        protected static void StartAt(Benchwarp.Benches.BenchData benchData) => StartAt(new BenchwarpStartDef(benchData));
+
         protected internal static void StartAt(StartDef start)
         {
             ModuleCollection mods = ItemChangerHost.Singleton.ActiveProfile!.Modules;
