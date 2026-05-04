@@ -8,6 +8,12 @@ namespace ItemChanger.Silksong.RawData;
 
 internal static partial class BaseLocationList
 {
+    public static Location Crafting_Kit__Creige => new CreigeLocation()
+    {
+        SceneName = SceneNames.Halfway_01,
+        Name = LocationNames.Crafting_Kit__Creige,
+    };
+
     public static Location Hermit_s_Soul => new DualLocation()
     {
         Name = LocationNames.Hermit_s_Soul,
