@@ -26,7 +26,7 @@ namespace ItemChanger.Silksong.RawData
             ObjectName = "ant_item_string/Item Holder/Collectable Item Pickup",
             FlingType = Enums.FlingType.Everywhere,
             Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]//note: a flea cage spawns when breaking the original shiny, items are still given
         };
         public static Location Twisted_Bud => new ObjectLocation
         {

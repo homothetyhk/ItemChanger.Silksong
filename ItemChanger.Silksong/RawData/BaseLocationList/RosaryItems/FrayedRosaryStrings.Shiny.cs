@@ -85,9 +85,9 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Frayed_Rosary__Moss_Grotto_Silkspear => new ObjectLocation
+        public static Location Frayed_Rosary__Mosshome => new ObjectLocation
         {
-            Name = LocationNames.Frayed_Rosary__Moss_Grotto_Silkspear,
+            Name = LocationNames.Frayed_Rosary__Mosshome,
             SceneName = SceneNames.Mosstown_02,
             ObjectName = "Collectable Item Pickup",
             FlingType = Enums.FlingType.Everywhere,
@@ -137,7 +137,7 @@ namespace ItemChanger.Silksong.RawData
             ObjectName = "Slab Chain cage_small_break (2)/lamp/Broken/Collectable Item Pickup",
             FlingType = Enums.FlingType.Everywhere,
             Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true }]
         };
         public static Location Frayed_Rosary__The_Slab_East => new ObjectLocation
         {

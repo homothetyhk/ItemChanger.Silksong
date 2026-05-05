@@ -47,9 +47,9 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Memory_Locket__Coral_Chambers => new ObjectLocation
+        public static Location Memory_Locket__Choral_Chambers => new ObjectLocation
         {
-            Name = LocationNames.Memory_Locket__Coral_Chambers,
+            Name = LocationNames.Memory_Locket__Choral_Chambers,
             SceneName = SceneNames.Bellway_City,
             ObjectName = "Collectable Item Pickup",
             FlingType = Enums.FlingType.Everywhere,

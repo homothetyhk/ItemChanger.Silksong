@@ -1,5 +1,6 @@
 ﻿using Benchwarp.Data;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.StartDefs;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -15,7 +16,13 @@ internal class VoltvesselsTest : Test
 
     public override void Setup(TestArgs args)
     {
-        StartNear(SceneNames.Arborium_07, PrimitiveGateNames.top1);
+        StartAt(new CoordinateStartDef()
+        {
+            SceneName = SceneNames.Arborium_07,
+            X = 98.00f,
+            Y = 9.57f,
+            MapZone = GlobalEnums.MapZone.NONE
+        });
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Voltvessels)!.Wrap()
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
             .Add(Finder.GetItem(ItemNames.Flea)!));

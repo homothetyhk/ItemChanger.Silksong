@@ -1,8 +1,10 @@
 ﻿using Benchwarp.Data;
+using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.StartDefs;
 
 namespace ItemChangerTesting.LocationTests;
-/* may require finding a way to set a wish to be active for testing [Pain, Anguish and Misery]
+
 internal class ClawMirrorsTest : Test
 {
     public override TestMetadata GetMetadata() => new()
@@ -15,7 +17,13 @@ internal class ClawMirrorsTest : Test
 
     public override void Setup(TestArgs args)
     {
-        StartNear(SceneNames.Library_13, PrimitiveGateNames.right1);
+        StartAt(new CoordinateStartDef()
+        {
+            SceneName = SceneNames.Library_13,
+            X = 54.30f,
+            Y = 14.57f,
+            MapZone = GlobalEnums.MapZone.NONE
+        });
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Claw_Mirrors)!.Wrap()
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
             .Add(Finder.GetItem(ItemNames.Flea)!));
@@ -27,8 +35,17 @@ internal class ClawMirrorsTest : Test
         PlayerData.instance.blackThreadWorld = true;
         PlayerData.instance.act3_wokeUp = true;
         PlayerData.instance.act3_enclaveWakeSceneCompleted = true;
-        PlayerData.instance.encounteredTormentedTrobbio = true;
+
         PlayerData.instance.defeatedTormentedTrobbio = false;
+
+        if (QuestManager.TryGetFullQuestBase("Tormented Trobbio", out FullQuestBase quest))//Quests.Anguish_and_Misery refers to "Anguish and Misery" instead of "Tormented Trobbio"
+        {
+            quest.SetSeen();
+            quest.SetAccepted();
+        }
+        else
+        {
+            ItemChangerTestingPlugin.Instance.Logger.LogWarning($"Unable to locate quest {Quests.Anguish_and_Misery}.");
+        }
     }
 }
-*/

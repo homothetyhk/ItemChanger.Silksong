@@ -1,5 +1,6 @@
 ﻿using Benchwarp.Data;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.StartDefs;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -15,7 +16,13 @@ internal class BilewaterCocoonMemoryLocketTest : Test
 
     public override void Setup(TestArgs args)
     {
-        StartNear(SceneNames.Shadow_27, PrimitiveGateNames.right1);
+        StartAt(new CoordinateStartDef()
+        {
+            SceneName = SceneNames.Shadow_27,
+            X = 192.63f,
+            Y = 9.58f,
+            MapZone = GlobalEnums.MapZone.NONE
+        });
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Memory_Locket__Bilewater_Cocoon_Corpse)!.Wrap()
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
             .Add(Finder.GetItem(ItemNames.Flea)!));

@@ -1,5 +1,7 @@
 ﻿using Benchwarp.Data;
+using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.StartDefs;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -15,7 +17,13 @@ internal class ClawMirrorTest : Test
 
     public override void Setup(TestArgs args)
     {
-        StartNear(SceneNames.Library_13, PrimitiveGateNames.right1);
+        StartAt(new CoordinateStartDef()
+        {
+            SceneName = SceneNames.Library_13,
+            X = 54.30f,
+            Y = 14.57f,
+            MapZone = GlobalEnums.MapZone.NONE
+        });
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Claw_Mirror)!.Wrap()
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
             .Add(Finder.GetItem(ItemNames.Flea)!));

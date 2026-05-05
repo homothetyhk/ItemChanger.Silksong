@@ -14,29 +14,20 @@ namespace ItemChanger.Silksong.RawData
         /*
             
         //tools
-        public static Location Curveclaw__Mottled_Skarr_Dead => new ObjectLocation //shared with mottled skarr shop location [https://github.com/homothetyhk/ItemChanger.Silksong/issues/85]
+        public static Location Curveclaw => new ObjectLocation //shared with mottled skarr shop location [https://github.com/homothetyhk/ItemChanger.Silksong/issues/85]
         {
-            Name = LocationNames.Curveclaw__Mottled_Skarr_Dead,
+            Name = LocationNames.Curveclaw,
             SceneName = SceneNames.Ant_21,
             ObjectName = "ant_item_string/Item Holder/Collectable Item Pickup",
             FlingType = Enums.FlingType.Everywhere,
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Fractured_Mask__Mottled_Skarr_Dead => new ObjectLocation //shared with mottled skarr shop location [https://github.com/homothetyhk/ItemChanger.Silksong/issues/85]
+        public static Location Fractured_Mask => new ObjectLocation //shared with mottled skarr shop location [https://github.com/homothetyhk/ItemChanger.Silksong/issues/85]
         {
-            Name = LocationNames.Fractured_Mask__Mottled_Skarr_Dead,
+            Name = LocationNames.Fractured_Mask,
             SceneName = SceneNames.Ant_Merchant,
             ObjectName = "_NPCs/Ant Merchant States/Ant Merchant Dead/Collectable Item Pickup",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
-        };
-        public static Location Magnetite_Dice => new ObjectLocation //act 2 shiny, shared with lumble reward location [https://github.com/homothetyhk/ItemChanger.Silksong/issues/143]
-        {
-            Name = LocationNames.Magnetite_Dice,
-            SceneName = SceneNames.Coral_33,
-            ObjectName = "Black Thread States/Normal World/Dice Game Control/Dice Game Corpse/Collectable Item Pickup",
             FlingType = Enums.FlingType.Everywhere,
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
@@ -50,9 +41,9 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Weighted_Belt__Mort_Dead => new ObjectLocation //act 3 shiny, shared with mort shop location [https://github.com/homothetyhk/ItemChanger.Silksong/issues/85]
+        public static Location Weighted_Belt => new ObjectLocation //act 3 shiny, shared with mort shop location [https://github.com/homothetyhk/ItemChanger.Silksong/issues/85]
         {
-            Name = LocationNames.Weighted_Belt__Mort_Dead,
+            Name = LocationNames.Weighted_Belt,
             SceneName = SceneNames.Bone_East_07,
             ObjectName = "Mort Death Scene/Collectable Item Pickup",
             FlingType = Enums.FlingType.Everywhere,

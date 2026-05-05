@@ -1,5 +1,6 @@
 ﻿using Benchwarp.Data;
 using ItemChanger.Locations;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
@@ -130,7 +131,7 @@ namespace ItemChanger.Silksong.RawData
                 ObjectName = "Grand Stage Scene/Re-Entry Pickup Upgrade",//version that is a shiny placed on the floor
                 FlingType = Enums.FlingType.Everywhere,
                 Correction = default,
-                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true }] //note: flea appears invisible in this location
             },
             FalseLocation = new ObjectLocation //has not defeated tormented trobbio
             {
@@ -223,14 +224,27 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Dead_Bug_s_Purse => new ObjectLocation
+        public static Location Dead_Bug_s_Purse => new DualLocation()
         {
             Name = LocationNames.Dead_Bug_s_Purse,
-            SceneName = SceneNames.Crawl_01,
-            ObjectName = "Tool Conditions/Collectable Item Pickup - Purse",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+            Test = new IntComparisonBool { ToCompare = new PDInt(nameof(PlayerData.permadeathMode)), Amount = 1 },//test if steel soul mode
+            TrueLocation = new CoordinateLocation()//steel soul location, place next to original location
+            {
+                Name = LocationNames.Dead_Bug_s_Purse,
+                SceneName = SceneNames.Crawl_01,
+                X = 52.50f,
+                Y = 85.20f,
+                Managed = false,
+            },
+            FalseLocation = new ObjectLocation()//not steel soul location
+            {
+                Name = LocationNames.Dead_Bug_s_Purse,
+                SceneName = SceneNames.Crawl_01,
+                ObjectName = "Tool Conditions/Collectable Item Pickup - Purse",
+                FlingType = Enums.FlingType.Everywhere,
+                Correction = default,
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true }]//note: flea does not appear in this location
+            }
         };
         public static Location Shard_Pendant => new ObjectLocation
         {
@@ -241,14 +255,27 @@ namespace ItemChanger.Silksong.RawData
             Correction = default,
             Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
         };
-        public static Location Shell_Satchel => new ObjectLocation
+        public static Location Shell_Satchel => new DualLocation()
         {
             Name = LocationNames.Shell_Satchel,
-            SceneName = SceneNames.Crawl_01,
-            ObjectName = "Tool Conditions/Collectable Item Pickup - Satchel",
-            FlingType = Enums.FlingType.Everywhere,
-            Correction = default,
-            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+            Test = new IntComparisonBool { ToCompare = new PDInt(nameof(PlayerData.permadeathMode)), Amount = 1 },//test if steel soul mode
+            TrueLocation = new ObjectLocation()//steel soul location 
+            {
+                Name = LocationNames.Shell_Satchel,
+                SceneName = SceneNames.Crawl_01,
+                ObjectName = "Tool Conditions/Collectable Item Pickup - Satchel",
+                FlingType = Enums.FlingType.Everywhere,
+                Correction = default,
+                Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true }]//note: flea does not appear in this location
+            },
+            FalseLocation = new CoordinateLocation()//not steel soul location, place next to original location
+            {
+                Name = LocationNames.Shell_Satchel,
+                SceneName = SceneNames.Crawl_01,
+                X = 52.50f,
+                Y = 85.2f,
+                Managed = false,
+            }
         };
 
         //misc

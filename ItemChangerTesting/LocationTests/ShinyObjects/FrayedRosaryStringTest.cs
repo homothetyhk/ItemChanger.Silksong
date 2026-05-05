@@ -1,5 +1,6 @@
 ﻿using Benchwarp.Data;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.StartDefs;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -15,7 +16,13 @@ internal class FrayedRosaryStringTest : Test
 
     public override void Setup(TestArgs args)
     {
-        StartNear(SceneNames.Slab_02, PrimitiveGateNames.right1);
+        StartAt(new CoordinateStartDef()
+        {
+            SceneName = SceneNames.Slab_02,
+            X = 61.77f,
+            Y = 17.17f,
+            MapZone = GlobalEnums.MapZone.NONE
+        });
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Frayed_Rosary__The_Slab_Choral_Entrance)!.Wrap()
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
             .Add(Finder.GetItem(ItemNames.Flea)!));
