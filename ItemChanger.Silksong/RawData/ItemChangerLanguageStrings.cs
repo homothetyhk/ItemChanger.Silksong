@@ -37,6 +37,7 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString INV_DESC_TAUNT => LanguageString.FromItemChanger(nameof(INV_DESC_TAUNT));
     public static LanguageString GET_TAUNT_1 => LanguageString.FromItemChanger(nameof(GET_TAUNT_1));
 
+    public static LanguageString CITADEL_MAP_PROMPT_PREVIEW => LanguageString.FromItemChanger(nameof(CITADEL_MAP_PROMPT_PREVIEW));
     public static LanguageString QUEST_BROLLY_GET_DESC_PREVIEW => LanguageString.FromItemChanger(nameof(QUEST_BROLLY_GET_DESC_PREVIEW));
     public static LanguageString SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW));
     public static LanguageString SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW));
