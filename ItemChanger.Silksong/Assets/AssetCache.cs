@@ -58,6 +58,10 @@ public static class AssetCache
         return GetObjectCache<T>().GetAsset(key);
     }
     /// <summary>
+    /// Get the source prefab for a game object asset, without instantiating it. Should not generally be used, only when you are certain instantiation isn't necessary.
+    /// </summary>
+    public static GameObject GetPrefabAsset(this string key) => GetObjectCache<GameObject>().GetAsset(key);
+    /// <summary>
     /// Retrieves a GameObject asset by key, and instantiates it in the provided scene.
     /// </summary>
     public static GameObject InstantiateAsset(this string key, UnityEngine.SceneManagement.Scene scene)
