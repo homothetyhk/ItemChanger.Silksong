@@ -89,7 +89,7 @@ public static class LocationNames
     public const string Cogfly = "Cogfly";
       //public const string Cogwork_Wheel = "Cogwork_Wheel";
     public const string Conchcutter = "Conchcutter";
-    public const string Curveclaw__Mottled_Skarr_Dead = "Curveclaw-Mottled_Skarr_Dead";
+    public const string Curveclaw = "Curveclaw";
     public const string Curvesickle = "Curvesickle";
     public const string Delver_s_Drill = "Delver's_Drill";
     public const string Flea_Brew = "Flea_Brew";
@@ -121,7 +121,7 @@ public static class LocationNames
     public const string Druid_s_Eye = "Druid's_Eye";
     public const string Druid_s_Eyes = "Druid's_Eyes";
     public const string Egg_of_Flealia = "Egg_of_Flealia";
-      //public const string Fractured_Mask = "Fractured_Mask";
+    public const string Fractured_Mask = "Fractured_Mask";
     public const string Injector_Band = "Injector_Band";
     public const string Longclaw = "Longclaw";
       //public const string Magma_Bell = "Magma_Bell";
@@ -153,7 +153,7 @@ public static class LocationNames
     public const string Silkspeed_Anklets = "Silkspeed_Anklets";
       //public const string Spider_Strings = "Spider_Strings";
       //public const string Thief_s_Mark = "Thief's_Mark";
-    public const string Weighted_Belt__Mort_Dead = "Weighted_Belt-Mort_Dead";
+    public const string Weighted_Belt = "Weighted_Belt";
 
     // silk hearts
     public const string Silk_Heart__Bell_Beast = "Silk_Heart-Bell_Beast";
@@ -434,7 +434,7 @@ public static class LocationNames
     public const string Frayed_Rosary__Greymoor_West_Craw_Lake = "Frayed_Rosary-Greymoor_West_Craw_Lake";
     public const string Frayed_Rosary__High_Halls = "Frayed_Rosary-High_Halls";
     public const string Frayed_Rosary__Moss_Grotto_Above_Start = "Frayed_Rosary-Moss_Grotto_Above_Start";
-    public const string Frayed_Rosary__Moss_Grotto_Silkspear = "Frayed_Rosary-Moss_Grotto_Silkspear";
+    public const string Frayed_Rosary__Mosshome = "Frayed_Rosary-Mosshome";
     public const string Frayed_Rosary__Putrified_Ducts = "Frayed_Rosary-Putrified_Ducts";
     public const string Frayed_Rosary__Shellwood = "Frayed_Rosary-Shellwood";
     public const string Frayed_Rosary__Sinners_Road = "Frayed_Rosary-Sinners_Road";
@@ -647,7 +647,7 @@ public static class LocationNames
     public const string Memory_Locket__Bilewater_Cocoon_Corpse = "Memory_Locket-Bilewater_Cocoon_Corpse";
     public const string Memory_Locket__Bilewater_Hidden_Room_West_Bench = "Memory_Locket-Bilewater_Hidden_Room_West_Bench";
     public const string Memory_Locket__Blasted_Steps = "Memory_Locket-Blasted_Steps";
-    public const string Memory_Locket__Coral_Chambers = "Memory_Locket-Coral_Chambers";
+    public const string Memory_Locket__Choral_Chambers = "Memory_Locket-Choral_Chambers";
     public const string Memory_Locket__Deep_Docks = "Memory_Locket-Deep_Docks";
     public const string Memory_Locket__Far_Fields_Secret = "Memory_Locket-Far_Fields_Secret";
     public const string Memory_Locket__Greymoor_HH = "Memory_Locket-Greymoor_HH";
