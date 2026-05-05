@@ -1,5 +1,6 @@
 ﻿using GenericVariableExtension;
 using ItemChanger;
+using ItemChanger.Costs;
 using ItemChanger.Enums;
 using ItemChanger.Items;
 using ItemChanger.Placements;
@@ -28,6 +29,33 @@ internal static class Extensions
             Sprite = sprite ?? new EmptySprite(),
         }
     }.WithTag(new PersistentItemTag() { Persistence = persistence }));
+
+    public static Item WithCost(this Item self, Cost cost)
+    {
+        self.AddTag(new CostTag() { Cost = cost });
+        return self;
+    }
+
+    public static Item WithCosts(this Item self, params Cost[] costs) => self.WithCost(new MultiCost(costs));
+
+    public static void SetAvailable(this FullQuestBase quest)
+    {
+        foreach (var q in quest.requiredCompleteQuests) q?.SetCompleted();
+        foreach (var t in quest.requiredUnlockedTools)
+        {
+            if (t == null) continue;
+            if (t.alternateUnlockedTest.IsDefined) t.alternateUnlockedTest.Fulfill();
+            else
+            {
+                var d = t.SavedData;
+                d.IsUnlocked = true;
+                t.SavedData = d;
+            }
+        }
+        foreach (var g in quest.requiredCompleteTotalGroups) g?.Fulfill();
+        foreach (var b in quest.persistentBoolTests ?? []) b?.Fulfill();
+        if (quest.playerDataTest.IsDefined) quest.playerDataTest.Fulfill();
+    }
 
     public static void SetReadyToComplete(this FullQuestBase quest)
     {
@@ -65,6 +93,28 @@ internal static class Extensions
     {
         quest.SetReadyToComplete();
         quest.ModifyCompletion((ref c) => c.SetCompleted());
+    }
+
+    public static void Fulfill(this PersistentBoolTest test)
+    {
+        if (!SceneData.instance.PersistentBools.TryGetValue(test.SceneName, test.ID, out PersistentItemData<bool> value))
+        {
+            value = new()
+            {
+                ID = test.ID,
+                SceneName = test.SceneName,
+                IsSemiPersistent = false,
+            };
+        }
+
+        value.Value = test.ExpectedValue;
+        SceneData.instance.PersistentBools.SetValue(value);
+    }
+
+    public static void Fulfill(this QuestCompleteTotalGroup group)
+    {
+        if (group.additionalTest.IsDefined) group.additionalTest.Fulfill();
+        foreach (var quest in group.Quests) quest.Quest?.SetCompleted();
     }
 
     public static void Fulfill(this PlayerDataTest test)
