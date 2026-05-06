@@ -11,7 +11,7 @@ internal static class QuestUtil
         else
             ItemChangerTestingPlugin.Instance.Logger.LogError($"Unable to locate quest '{quest}'.");
     }
-    
+
     public static void SetReadyToComplete(string questName)
     {
         if (QuestManager.TryGetFullQuestBase(questName, out var quest))

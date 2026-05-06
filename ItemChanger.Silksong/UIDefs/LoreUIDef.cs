@@ -1,6 +1,7 @@
 ﻿using ItemChanger.Enums;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Components;
-using ItemChanger.Silksong.Serialization;
+using TeamCherry.Localization;
 using UnityEngine;
 
 namespace ItemChanger.Silksong.UIDefs;
@@ -18,8 +19,7 @@ public class LoreUIDef : ControlRelinquishedUIDef
 
     public sealed override MessageType RequiredMessageType => MessageType.Dialog;
 
-    // Language string is mandatory because it needs to go through the LocalisedString.ToString(false) conversion
-    public required LanguageString Text { get; init; }
+    public required IValueProvider<string> Text { get; init; }
 
     public DialogueBox.DisplayOptions DisplayOptions { get; init; } = DialogueBox.DisplayOptions.Default;
 
@@ -28,7 +28,7 @@ public class LoreUIDef : ControlRelinquishedUIDef
         void endConversation() => DialogueBox.EndConversation(true, callback);
 
         DialogueBox.StartConversation(
-            Text.ToLocalisedString().ToString(false), NPCControlProxy.Instance, false, DisplayOptions, endConversation);
+            LocalisedString.ReplaceTags(Text.Value), NPCControlProxy.Instance, false, DisplayOptions, endConversation);
     }
 
     /*

@@ -1,14 +1,17 @@
 ﻿using BepInEx;
 using BepInEx.Configuration;
+using HutongGames.PlayMaker.Actions;
+using ItemChanger;
 using ItemChanger.Events;
 using ItemChanger.Silksong;
 using Silksong.ModMenu.Elements;
+using Silksong.ModMenu.Models;
 using Silksong.ModMenu.Plugin;
 using Silksong.ModMenu.Screens;
 
 namespace ItemChangerTesting
 {
-    [BepInDependency(ItemChanger.Silksong.ItemChangerPlugin.Id)]
+    [BepInDependency(ItemChangerPlugin.Id)]
     [BepInAutoPlugin(id: "io.github.testing.silksong.itemchanger")]
     public partial class ItemChangerTestingPlugin : BaseUnityPlugin, IModMenuCustomMenu
     {
@@ -30,7 +33,22 @@ namespace ItemChangerTesting
                 configDescription: new ConfigDescription("The index of the test to launch, within its folder."));
 
             LogLifecycleEvents();
+
+
+            ItemChangerHost.Singleton.LifecycleEvents.OnEnterGame += () =>
+            {
+                inGame = true;
+                testMethods?.VisibleSelf = true;
+            };
+            ItemChangerHost.Singleton.LifecycleEvents.OnLeaveGame += () =>
+            {
+                inGame = false;
+                testMethods?.VisibleSelf = false;
+            };
         }
+
+        private bool inGame = false;
+        private TextButton? testMethods;
 
         public AbstractMenuScreen BuildCustomMenu()
         {
@@ -38,18 +56,30 @@ namespace ItemChangerTesting
             MenuElementGenerators.CreateIntSliderGenerator()(cfgSaveSlot, out MenuElement? saveSlotSelector);
             ConfigEntryFactory.GenerateEnumChoiceElement(cfgTestFolder, out MenuElement? testFolderSelector);
 
-            DynamicChoiceModel model = new();
-            cfgTestFolder.SettingChanged += model.UpdateFolder;
+            ListChoiceModel<Test> model = new([.. Test.TestGroups[cfgTestFolder.Value]])
+            {
+                DisplayFn = (_, t) => t.GetMetadata().MenuName
+            };
+            if (cfgTestIndex.Value is int savedIndex && savedIndex >= 0 && savedIndex < model.Values.Count) model.Index = savedIndex;
+            model.OnValueChanged += _ => cfgTestIndex.Value = model.Index;
             DynamicDescriptionChoiceElement<Test> testSelector = new("Test", model, "The test to launch.", t => t.GetMetadata().MenuDescription);
 
             TextButton run = new("Erase save slot and launch test.");
             run.OnSubmit += Run;
+
+            testMethods = new("Test Methods");
+            testMethods.OnSubmit += ShowTestMethods;
+            testMethods.VisibleSelf = inGame;
+
             screen.Add(saveSlotSelector!);
             screen.Add(testFolderSelector!);
             screen.Add(testSelector!);
             screen.Add(run);
+            screen.Add(testMethods);
 
-            screen.OnDispose += () => cfgTestFolder.SettingChanged -= model.UpdateFolder;
+            void UpdateFolder(object sender, EventArgs args) => model.UpdateValues([.. Test.TestGroups[cfgTestFolder.Value]], 0);
+            cfgTestFolder.SettingChanged += UpdateFolder;
+            screen.OnDispose += () => cfgTestFolder.SettingChanged -= UpdateFolder;
 
             return screen;
 
@@ -67,6 +97,51 @@ namespace ItemChangerTesting
             }
         }
 
+        private Test? lastLoadedTest;
+        private AbstractMenuScreen? testMethodsScreen;
+
+        void ShowTestMethods()
+        {
+            var activeTest = ItemChangerHost.Singleton.ActiveProfile?.Modules.Get<Test>();
+            if (activeTest == null)
+            {
+                Logger.LogError("No active Test module.");
+                return;
+            }
+
+            if (lastLoadedTest == activeTest)
+            {
+                MenuScreenNavigation.Show(testMethodsScreen!);
+                return;
+            }
+
+            List<(string, Action)> hooks = [.. activeTest.TestMethods()];
+            if (hooks.Count == 0)
+            {
+                Logger.LogError($"Test '{activeTest.GetMetadata().MenuName}' has no test methods.");
+                return;
+            }
+
+            PaginatedMenuScreenBuilder builder = new($"{activeTest.GetMetadata().MenuName} Test Methods");
+            foreach (var (name, hook) in hooks)
+            {
+                TextButton button = new(name);
+                button.OnSubmit += hook;
+                builder.Add(button);
+            }
+
+            testMethodsScreen?.Dispose();
+            testMethodsScreen = builder.Build();
+            testMethodsScreen.OnDispose += () =>
+            {
+                testMethodsScreen = null;
+                lastLoadedTest = null;
+            };
+
+            lastLoadedTest = activeTest;
+            MenuScreenNavigation.Show(testMethodsScreen);
+        }
+
         // TODO - this probably ought to be in ItemChanger.Core
         private void LogLifecycleEvents()
         {
@@ -81,6 +156,6 @@ namespace ItemChangerTesting
             SilksongHost.Instance.LifecycleEvents.AfterContinueGame += () => Logger.LogInfo("Invoked " + nameof(LifecycleEvents.AfterContinueGame));
         }
 
-        public string ModMenuName() => "ItemChangerTesting";
+        public LocalizedText ModMenuName() => "ItemChangerTesting";
     }
 }
