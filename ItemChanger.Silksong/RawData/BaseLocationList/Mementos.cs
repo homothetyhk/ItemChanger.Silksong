@@ -12,11 +12,11 @@ internal static partial class BaseLocationList
     {
         SceneName = SceneNames.Halfway_01,
         Name = LocationNames.Hunter_s_Memento,
-        Test = new PlacementVisitStateBool(
-            placementName: LocationNames.Hunter_s_Memento,
-            requiredFlags: VisitState.ObtainedAnyItem,
-            missingPlacementTest: null
-        ),
+        Test = new PlacementVisitStateBool()
+        {
+            PlacementName = LocationNames.Hunter_s_Memento,
+            RequiredFlags = VisitState.ObtainedAnyItem
+        },
         TrueLocation = new CoordinateLocation()
         {
             SceneName = SceneNames.Halfway_01,
