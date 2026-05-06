@@ -38,6 +38,8 @@ namespace ItemChangerTesting
             });
         }
 
+        protected static void StartAt(Benchwarp.Benches.BenchData benchData) => StartAt(new BenchwarpStartDef(benchData));
+
         protected internal static void StartAt(StartDef start)
         {
             ModuleCollection mods = ItemChangerHost.Singleton.ActiveProfile!.Modules;
@@ -63,5 +65,8 @@ namespace ItemChangerTesting
         }
 
         protected virtual void OnEnterGame() { }
+
+        // Arbitrary named hooks associated with the test, to simulate quest completion, etc.
+        public virtual IEnumerable<(string, Action)> TestMethods() => [];
     }
 }
