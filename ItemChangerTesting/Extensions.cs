@@ -24,7 +24,7 @@ internal static class Extensions
         Name = $"Debug Item @ {self.Name}",
         UIDef = new MsgUIDef()
         {
-            Name = new BoxedString(text ?? $"Checked {self.Name}"),
+            Name = new BoxedString { Value = text ?? $"Checked {self.Name}" },
             Sprite = sprite ?? new EmptySprite(),
         }
     }.WithTag(new PersistentItemTag() { Persistence = persistence }));

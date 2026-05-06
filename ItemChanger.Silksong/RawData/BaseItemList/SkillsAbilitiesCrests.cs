@@ -262,11 +262,12 @@ internal static partial class BaseItemList
             {
                 Name = BaseLanguageStrings.Faydown_Cloak_Name,
                 ShopDesc = BaseLanguageStrings.Faydown_Cloak_Desc,
-                Sprite = new DualSprite(
-                    trueSprite: BaseAtlasSprites.Drifter_s_Faydown_Cloak,
-                    falseSprite: BaseAtlasSprites.Faydown_Cloak,
-                    test: new PDBool(nameof(PlayerData.hasBrolly))
-                )
+                Sprite = new DualSprite
+                {
+                    Test = new PDBool(nameof(PlayerData.hasBrolly)),
+                    FalseSprite = BaseAtlasSprites.Faydown_Cloak,
+                    TrueSprite = BaseAtlasSprites.Drifter_s_Faydown_Cloak
+                },
             }
         }
 

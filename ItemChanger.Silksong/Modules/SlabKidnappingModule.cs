@@ -24,13 +24,13 @@ public class SlabKidnappingModule : Module
     /// An <see cref="IValueProvider{T}"/> describing whether Slab Wardens should be available throughout Pharloom.
     /// Defaults to constant true.
     /// </summary>
-    public IValueProvider<bool> SlabCaptureIsAvailable { get; set; } = new BoxedBool(true);
+    public IValueProvider<bool> SlabCaptureIsAvailable { get; set; } = new BoxedBool { Value = true };
 
     /// <summary>
     /// An <see cref="IValueProvider{T}"/> describing whether Slab Wardens are able to capture Hornet while she is
     /// cursed. Defaults to constant false.
     /// </summary>
-    public IValueProvider<bool> SlabCaptureWhileCursed { get; set; } = new BoxedBool(false);
+    public IValueProvider<bool> SlabCaptureWhileCursed { get; set; } = new BoxedBool { Value = false };
 
     protected override void DoLoad()
     {
@@ -129,7 +129,7 @@ public class SlabKidnappingModule : Module
         initState.AddTransition("NOT HERE", "Not Here");
 
         string isWardenDeadVariableName = fsm.GetStringVariable("Cursed Death Bool").Value;
-        
+
         initState.AddLambdaMethod(_ =>
         {
             if (SlabCaptureIsAvailable.Value)
@@ -139,7 +139,7 @@ public class SlabKidnappingModule : Module
             else
                 fsm.SendEvent("NOT HERE");
         });
-        
+
         // Ignore cursed state
         FsmState curseCheckState = fsm.MustGetState("Is Cursed?");
         curseCheckState.GetFirstActionOfType<BoolTest>()!.isTrue = null;
