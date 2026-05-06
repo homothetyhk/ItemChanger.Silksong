@@ -5,6 +5,7 @@ using ItemChanger.Extensions;
 using ItemChanger.Silksong.Modules.FastTravel;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Tags;
+using PrepatcherPlugin;
 using UnityEngine.SceneManagement;
 
 namespace ItemChangerTesting.LocationTests;
@@ -50,9 +51,12 @@ internal class BeastlingCallLocationTest : Test
         base.OnEnterGame();
         
         // Act 3
-        PlayerData.instance.blackThreadWorld = true;
-        PlayerData.instance.act3_enclaveWakeSceneCompleted = true;
-        PlayerData.instance.act3_wokeUp = true;
+        PlayerDataAccess.blackThreadWorld = true;
+        PlayerDataAccess.act3_enclaveWakeSceneCompleted = true;
+        PlayerDataAccess.act3_wokeUp = true;
+        
+        // Location preconditions
+        PlayerDataAccess.hasNeedolin = true;
     }
     
     private void WeakenBoss(Scene scene)

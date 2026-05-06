@@ -1,12 +1,6 @@
-using Benchwarp.Data;
-using HarmonyLib;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
-using ItemChanger.Enums;
 using ItemChanger.Locations;
-using ItemChanger.Silksong.Modules.FastTravel;
-using MonoMod.RuntimeDetour;
-using PrepatcherPlugin;
 using Silksong.FsmUtil;
 
 namespace ItemChanger.Silksong.Locations;

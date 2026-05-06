@@ -3,34 +3,46 @@ using GlobalEnums;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Modules;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.FsmStateActions;
+using ItemChanger.Silksong.Serialization;
 using Silksong.FsmUtil;
 using UnityEngine.SceneManagement;
 
 namespace ItemChanger.Silksong.Modules.FastTravel;
 
 /// <summary>
-/// Module that, in Act 3, automatically unlocks all entrances to the Bell Eater arena
+/// Module that, automatically unlocks all entrances to the Bell Eater arena
 /// and enables fast travel without defeating them.
 /// </summary>
 [SingletonModule]
 public class BellEaterBypassModule : Module
 {
-    public static readonly Dictionary<string, FastTravelLocations> FastTravelScenes = new()
-    {
-        { SceneNames.Bellway_01, FastTravelLocations.Bonetown }, // Bone Bottom
-        { SceneNames.Bone_05, FastTravelLocations.Bone }, // The Marrow
-        { SceneNames.Bellway_02, FastTravelLocations.Docks }, // Deep Docks
-        { SceneNames.Bellway_03, FastTravelLocations.BoneforestEast }, // Far Fields
-        { SceneNames.Bellway_04, FastTravelLocations.Greymoor }, // Greymoor
-        { SceneNames.Belltown_basement, FastTravelLocations.Belltown }, // Bellhart
-        { SceneNames.Shellwood_19, FastTravelLocations.Shellwood }, // Shellwood
-        { SceneNames.Bellway_08, FastTravelLocations.CoralTower }, // Blasted Steps
-        { SceneNames.Bellway_Shadow, FastTravelLocations.Shadow }, // Bilewater
-        { SceneNames.Bellway_City, FastTravelLocations.City }, // Grand Bellway
-        { SceneNames.Slab_06, FastTravelLocations.Peak }, // The Slab
-        { SceneNames.Bellway_Aqueduct, FastTravelLocations.Aqueduct }, // Putrified Ducts
-    };
+    /// <summary>
+    /// A value provider controlling whether the Bell Eater arena is accessible (from all bellway stations).
+    /// Defaults to the world being in Act 3 and Needolin being obtained.
+    /// </summary>
+    public IValueProvider<bool> BellEaterAvailable { get; init; } = new Conjunction(
+        new PDBool(nameof(PlayerData.blackThreadWorld)),
+        new PDBool(nameof(PlayerData.hasNeedolin))
+    );
+
+    public static readonly IReadOnlyDictionary<string, FastTravelLocations> FastTravelScenes =
+        new Dictionary<string, FastTravelLocations>()
+        {
+            { SceneNames.Bellway_01, FastTravelLocations.Bonetown }, // Bone Bottom
+            { SceneNames.Bone_05, FastTravelLocations.Bone }, // The Marrow
+            { SceneNames.Bellway_02, FastTravelLocations.Docks }, // Deep Docks
+            { SceneNames.Bellway_03, FastTravelLocations.BoneforestEast }, // Far Fields
+            { SceneNames.Bellway_04, FastTravelLocations.Greymoor }, // Greymoor
+            { SceneNames.Belltown_basement, FastTravelLocations.Belltown }, // Bellhart
+            { SceneNames.Shellwood_19, FastTravelLocations.Shellwood }, // Shellwood
+            { SceneNames.Bellway_08, FastTravelLocations.CoralTower }, // Blasted Steps
+            { SceneNames.Bellway_Shadow, FastTravelLocations.Shadow }, // Bilewater
+            { SceneNames.Bellway_City, FastTravelLocations.City }, // Grand Bellway
+            { SceneNames.Slab_06, FastTravelLocations.Peak }, // The Slab
+            { SceneNames.Bellway_Aqueduct, FastTravelLocations.Aqueduct }, // Putrified Ducts
+        };
 
     private FastTravelLocations _arenaReturnLocation = FastTravelLocations.None;
 
@@ -67,10 +79,10 @@ public class BellEaterBypassModule : Module
 
     private void HookBellwayEntrypoint(PlayMakerFSM fsm)
     {
-        // Ensure Bell Eater fight entry is always available
+        // Ensure Bell Eater fight entry is available
         var state = fsm.MustGetState("State");
         state.Actions = [];
-        state.AddLambdaMethod(_ => { fsm.SendEvent("APPEARED"); });
+        state.AddLambdaMethod(_ => { fsm.SendEvent(BellEaterAvailable.Value ? "APPEARED" : "FINISHED"); });
         var thisScene = fsm.MustGetState("This Scene?");
         thisScene.Actions = [];
         thisScene.AddLambdaMethod(_ => { fsm.SendEvent("TRUE"); });
@@ -94,7 +106,7 @@ public class BellEaterBypassModule : Module
         FsmState setTarget = fsm.MustGetState("Set Target");
         setTarget.GetFirstActionOfType<GetFastTravelScene>()!.Location = _arenaReturnLocation;
     }
-    
+
     private void HookReturnFromSuccessfulFight(PlayMakerFSM fsm)
     {
         FsmState setTarget = fsm.MustGetState("Time Passes");
