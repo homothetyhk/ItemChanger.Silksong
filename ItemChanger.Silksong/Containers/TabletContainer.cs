@@ -22,17 +22,12 @@ public class TabletContainer : Container
 
     public override bool SupportsModifyInPlace => true;
 
-    private class ContainerInfoComponent : MonoBehaviour
-    {
-        public ContainerInfo? info;
-    }
-
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
+        info.ApplyTo(obj);
+
         BasicNPC npc = obj.GetComponent<BasicNPC>();
         npc.GiveOnFirstTalk.Clear(); // This is not strictly necessary
-
-        obj.AddComponent<ContainerInfoComponent>().info = info;
 
         if (info.GiveInfo.Items.All(x => x.IsObtained()))
         {
@@ -55,13 +50,9 @@ public class TabletContainer : Container
     {
         // TODO - use ContainerInfo in IC.Core
         // ContainerInfo? info = ContainerInfo.FindContainerInfo(self.gameObject);
-        ContainerInfo? info = null;
-        ContainerInfoComponent? infoCpt = self.gameObject.GetComponent<ContainerInfoComponent>();
-        if (infoCpt != null)
-        {
-            info = infoCpt.info;
-        }
 
+        ContainerInfo? info = ContainerInfo.FindContainerInfo(self.gameObject);
+        
         if (info == null)
         {
             return ReturnFlow.None;
