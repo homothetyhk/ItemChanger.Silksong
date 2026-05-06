@@ -5,6 +5,8 @@ using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
+using ItemChanger.Enums;
+using ItemChanger.Serialization;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -135,4 +137,27 @@ internal static partial class BaseLocationList
             ObjectName = "weaver_spire_base control"
         }
     );
+
+    public static Location Elegy_of_the_Deep => new DualLocation()
+    {
+        SceneName = SceneNames.Tut_04,
+        Name = LocationNames.Elegy_of_the_Deep,
+        Test = new PlacementVisitStateBool {
+            PlacementName = LocationNames.Elegy_of_the_Deep,
+            RequiredFlags = VisitState.ObtainedAnyItem,
+        },
+        TrueLocation = new CoordinateLocation()
+        {
+            SceneName = SceneNames.Tut_04,
+            Name = LocationNames.Elegy_of_the_Deep,
+            X = 37.90f,
+            Y = 6.57f,
+            Managed = false
+        },
+        FalseLocation = new ElegyOfTheDeepLocation()
+        {
+            SceneName = SceneNames.Tut_04,
+            Name = LocationNames.Elegy_of_the_Deep,
+        }
+    };
 }
