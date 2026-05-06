@@ -4,6 +4,7 @@ using ItemChanger.Enums;
 using ItemChanger.Items;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Tags;
+using PrepatcherPlugin;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -30,12 +31,13 @@ internal class SnailShamansLocationTest : Test
         base.OnEnterGame();
 
         // Act 3
-        PlayerData.instance.blackThreadWorld = true;
-        PlayerData.instance.act3_enclaveWakeSceneCompleted = true;
-        PlayerData.instance.act3_wokeUp = true;
+        PlayerDataAccess.blackThreadWorld = true;
+        PlayerDataAccess.act3_enclaveWakeSceneCompleted = true;
+        PlayerDataAccess.act3_wokeUp = true;
 
         // Preconditions for placement obtainable
-        PlayerData.instance.visitedAbyss = true;
+        PlayerDataAccess.visitedAbyss = true;
+        PlayerDataAccess.hasNeedolin = true;
         QuestUtil.SetAccepted(Quests.Black_Thread_Pt4_Return);
 
         // Convenience for test - skips initial meet dialogue
