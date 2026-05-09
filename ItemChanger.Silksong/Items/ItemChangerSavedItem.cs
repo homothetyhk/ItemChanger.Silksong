@@ -4,6 +4,7 @@ using ItemChanger.Silksong.Assets;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.UIDefs;
 using ItemChanger.Silksong.UIDefs.BigUIDefs;
+using ItemChanger.Tags;
 using UnityEngine.UI;
 
 namespace ItemChanger.Silksong.Items;
