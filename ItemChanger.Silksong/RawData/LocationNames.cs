@@ -22,6 +22,7 @@ public static class LocationNames
     public const string Pebb = "Pebb";
     // Sells: Magnetite_Brooch, Mask_Shard, Craftmetal, Simple_Key
     public const string Shakra = "Shakra";
+    public const string Skynx = "Skynx";
     public const string Twelfth_Architect = "Twelfth_Architect";
     public const string Twelfth_Architect__Requires_Tools = "Twelfth_Architect_(Requires_Tools)";
     // Sells: Cogwork_Wheel, Scuttlebrace, Silkshot, Crafting_Kit, Architect's_Key
@@ -295,13 +296,15 @@ public static class LocationNames
     public const string Pristine_Core__Cogwork_Clappers = "Pristine_Core-Cogwork_Clappers";  // Cogwork Core, dropped after defeating both Clappers (Act 3)
     public const string Pristine_Core__Twelfth_Architect = "Pristine_Core-Twelfth_Architect";  // Corpse of Twelfth Architect after quest sequence
 
-    // silkeaters - 8 total
+    // silkeaters - 10 total
     public const string Silkeater__Bilewater = "Silkeater-Bilewater";  // Inside Exhaust Organ
     public const string Silkeater__Blasted_Steps = "Silkeater-Blasted_Steps";  // East of Shakra (replaced by Steel Seer Zi in Steel Soul Mode)
     public const string Silkeater__Choral_Chambers_East = "Silkeater-Choral_Chambers_East";  // East of Great Gourmand's dining room
     public const string Silkeater__Choral_Chambers_West = "Silkeater-Choral_Chambers_West";  // West of Grand Bellway
     public const string Silkeater__Deep_Docks = "Silkeater-Deep_Docks";  // Southeast of sauna bench
     public const string Silkeater__Greymoor = "Silkeater-Greymoor";  // Top of tower west of Halfway Home
+    public const string Silkeater__Queen_s_Egg = "Silkeater-Queen's_Egg";  // First Silkeater grown after delivering the Queen's Egg.
+    public const string Silkeater__Styx = "Silkeater-Styx";  // First Silkeater grown by Styx.
     public const string Silkeater__Whiteward = "Silkeater-Whiteward";  // In the centre
     public const string Silkeater__Whispering_Vaults = "Silkeater-Whispering_Vaults";  // North of Vaultkeeper Cardinius's lair
 

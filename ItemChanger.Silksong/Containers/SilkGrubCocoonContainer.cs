@@ -81,19 +81,25 @@ public class SilkGrubCocoonContainer : Container
         var parent = cocoon.dropItemSpawnPoint != null ? cocoon.dropItemSpawnPoint : cocoon.transform;
 
         // The cocoon disables itself on break, so make a new object.
-        GameObject unparented = new($"{obj.name}-ShinyParent");
-        unparented.transform.position = parent.position;
+        // Delay instantiation until the point of breakage, in case our position is altered later.
+        Transform UnparentedTransform()
+        {
+            GameObject unparented = new($"{obj.name}-ShinyParent");
+            unparented.transform.position = parent.position;
+            return unparented.transform;
+        }
 
         if ((placement.Visited & Enums.VisitState.Opened) == Enums.VisitState.Opened && !controlInfo.IgnoreOpenState)
         {
             cocoon.SetBroken();
 
             bool fling = info.GiveInfo.FlingType == Enums.FlingType.Everywhere;
+            var transform = UnparentedTransform();
             foreach (var item in placement.Items)
                 if (!item.IsObtained())
-                    ShinyContainer.Spawn(info, item, unparented.transform, fling);
+                    ShinyContainer.Spawn(info, item, transform, fling);
         }
-        else OnBreak(obj, () => info.OpenAndFlingItems(unparented.transform, ContainerNames.SilkGrubCocoon));
+        else OnBreak(obj, () => info.OpenAndFlingItems(UnparentedTransform(), ContainerNames.SilkGrubCocoon));
     }
 
     /// <summary>
