@@ -5,6 +5,7 @@
         public const string Shiny = nameof(Shiny);
         public const string Chest = nameof(Chest);
         public const string Flea = nameof(Flea);
+        public const string SilkGrubCocoon = nameof(SilkGrubCocoon);
         public const string Tablet = nameof(Tablet);
         public const string WeaverCorpse = nameof(WeaverCorpse);
     }
