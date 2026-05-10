@@ -185,6 +185,17 @@ internal static class BaseShopList
         return false;
     }
 
+    private static readonly Dictionary<string, BaseShop> injectedShops = [];
+
+    public static void AddBaseShop(BaseShop baseShop)
+    {
+        if (injectedShops.ContainsKey(baseShop.Name)) throw new ArgumentException($"BaseShop '{baseShop.Name}' already added.");
+        if (GetEmbeddedBaseShops().Any(s => s.Name == baseShop.Name)) throw new ArgumentException($"BaseShop '{baseShop.Name}' is vanilla and cannot be overridden.");
+        injectedShops.Add(baseShop.Name, baseShop);
+    }
+
+    public static void RemoveBaseShop(string name) => injectedShops.Remove(name);
+
     public static bool TryGetBaseShop(ShopOwnerBase shopOwner, [MaybeNullWhen(false)] out BaseShop baseShop)
     {
         foreach (var shop in GetBaseShops())
@@ -200,7 +211,9 @@ internal static class BaseShopList
         return false;
     }
 
-    private static IEnumerable<BaseShop> GetBaseShops() => typeof(BaseShopList).GetProperties().Select(p => (BaseShop)p.GetValue(null));
+    private static IEnumerable<BaseShop> GetEmbeddedBaseShops() => typeof(BaseShopList).GetProperties().Select(p => (BaseShop)p.GetValue(null));
+
+    private static IEnumerable<BaseShop> GetBaseShops() => GetEmbeddedBaseShops().Concat(injectedShops.Values);
 
     private static Func<ShopOwnerBase, bool> ShopOwnerMatcher(string ownerName) => arg => arg.gameObject.name == ownerName;
 

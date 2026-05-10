@@ -43,6 +43,10 @@
     "SceneName": "Bone_04",
     "ObjPath": "RestBench/Particle Rest"
   },
+  "SHOP": {
+    "SceneName": "Bonetown",
+    "ObjPath": "Black Thread States/Normal World/Bonechurch_Shop"
+  },
   "VOG_SHOP": {
     "SceneName": "Bone_10",
     "ObjPath": "Black Thread States Thread Only Variant/Normal World/Caravan/Caravan State Regular/Caravan Troupe Hunter"
