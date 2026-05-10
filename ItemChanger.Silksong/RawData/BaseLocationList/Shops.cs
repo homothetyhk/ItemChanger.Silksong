@@ -74,6 +74,13 @@ internal static partial class BaseLocationList
         BaseShopName = nameof(BaseShopList.Shakra),
     };
 
+    // Skynx shop is a novelty setting.
+    public static SkynxShopLocation Skynx => new()
+    {
+        Name = LocationNames.Skynx,
+        SceneName = SceneNames.Dust_11,
+    };
+
     private static ShopLocation Twelfth_Architect_Base(string name) => new()
     {
         SceneName = SceneNames.Under_17,
