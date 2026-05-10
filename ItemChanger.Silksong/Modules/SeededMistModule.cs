@@ -93,8 +93,10 @@ public sealed class SeededMistModule : Module
 
     private int ChooseSeed(string key)
     {
+        // CRM.Choose computes (max - min + 1) which overflows to 0 at the full int range.
+        // Cap to non-negative; UnityEngine.Random.InitState takes any int, so half range is fine.
         return ItemChangerHost.Singleton.ActiveProfile!
             .Modules.GetOrAdd<ConsistentRandomnessModule>()
-            .Choose($"Mist // {KeySalt} // {key}", int.MinValue, int.MaxValue);
+            .Choose($"Mist // {KeySalt} // {key}", 0, int.MaxValue);
     }
 }
