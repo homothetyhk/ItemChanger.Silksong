@@ -1,9 +1,12 @@
-﻿using ItemChanger.Containers;
+﻿using HutongGames.PlayMaker;
+using ItemChanger.Containers;
 using ItemChanger.Costs;
+using ItemChanger.Enums;
 using ItemChanger.Items;
 using ItemChanger.Locations;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.RawData;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -73,6 +76,30 @@ internal static class ICExtensions
         GiveInfo info = loc.GetGiveInfo();
         info.Transform = fsm.transform;
         return () => loc.Placement!.GiveAll(info, () => fsm.SendEvent(sendEventOnFinish));
+    }
+
+    public static void OpenAndFlingItems(this ContainerInfo info, Transform transform, string containerName)
+    {
+        GiveInfo gi = new()
+        {
+            Container = containerName,
+            FlingType = info.GiveInfo.FlingType,
+            Transform = transform,
+            MessageType = MessageType.SmallPopup,
+        };
+
+        info.GiveInfo.Placement.AddVisitFlag(VisitState.Opened);
+        foreach (Item item in info.GiveInfo.Items)
+        {
+            if (!item.IsObtained())
+            {
+                if (item.GiveEarly(containerName))
+                {
+                    item.Give(info.GiveInfo.Placement, gi);
+                }
+                else ShinyContainer.Spawn(info, item, transform, fling: info.GiveInfo.FlingType == FlingType.Everywhere);
+            }
+        }
     }
 
     public static string GetUIName(this Placement pmt, IEnumerable<Item> items, int maxLength = 120)
