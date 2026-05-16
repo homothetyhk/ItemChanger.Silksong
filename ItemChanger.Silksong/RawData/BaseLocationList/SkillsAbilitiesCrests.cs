@@ -1,15 +1,10 @@
 using Benchwarp.Data;
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Locations;
-<<<<<<< HEAD
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
-=======
-using ItemChanger.Silksong.Serialization;
-using Benchwarp.Data;
->>>>>>> 45d2f6f (Allow the Cursed Crest location to appear as a shiny after the item is obtained the first time)
 
 namespace ItemChanger.Silksong.RawData;
 
