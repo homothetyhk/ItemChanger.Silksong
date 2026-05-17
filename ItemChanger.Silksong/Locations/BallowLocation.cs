@@ -15,11 +15,13 @@ public class BallowLocation : AutoLocation
 
         Using(new FsmEditGroup()
         {
-            { new (SceneName!, "Ballow Diving Bell NPC", "Dialogue"), HookBallow }
+            { new(UnsafeSceneName, "Ballow Diving Bell NPC", "Dialogue"), HookBallow }
         });
     }
 
-    protected override void DoUnload() { }
+    protected override void DoUnload()
+    {
+    }
 
     private void HookBallow(PlayMakerFSM fsm)
     {
@@ -32,20 +34,10 @@ public class BallowLocation : AutoLocation
                 fsm.SendEvent("FALSE");
             }
         });
-        
+
         FsmState givenKeyState = fsm.MustGetState("Given Key?");
         givenKeyState.RemoveActionsOfType<PlayerDataVariableTest>();
-        givenKeyState.InsertMethod(0, () =>
-        {
-            if (Placement!.AllObtained())
-            {
-                fsm.SendEvent("TRUE");
-            }
-            else
-            {
-                fsm.SendEvent("FALSE");
-            }
-        });
+        givenKeyState.InsertMethod(0, () => { fsm.SendEvent(Placement!.AllObtained() ? "TRUE" : "FALSE"); });
 
         // Replace granting the key with obtaining the placement
         FsmState giveKeyState = fsm.MustGetState("Give Key");
