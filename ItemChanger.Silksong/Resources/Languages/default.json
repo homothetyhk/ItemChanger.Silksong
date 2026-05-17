@@ -29,8 +29,7 @@
   "INV_NAME_TAUNT": "Taunt",
   "INV_DESC_TAUNT": "Learn the power to skip Sister Splinter",
   "GET_TAUNT_1": "Goad enemies into attacking",
- 
-  "CITADEL_MAP_PROMPT_PREVIEW":  "A machine displaying a model of {PREVIEW_TEXT}.",
+
   "SHOP_DESC_ROSARIES": "We're having a firesale today, go ahead and collect your rebate.",
 
   "CREST_HUNTER_NAME": "Crest of Hunter",
@@ -50,7 +49,9 @@
   "PAID": "Paid",
   "COST_FOR": "for",
 
+  "CITADEL_MAP_PROMPT_PREVIEW": "A machine displaying a model of {PREVIEW_TEXT}.",
   "QUEST_BROLLY_GET_DESC_PREVIEW": "Hunt Hokers in the Far Fields and collect Spine Cores for {PREVIEW_TEXT}.",
   "SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW": "If you’re planning to ascend from these low fields, you’ll be needing {PREVIEW_TEXT}, and I’m just the bug to help.<page>Head for the caves beyond my home. The bugs within produce a spine with a marvellous core, flexible yet strong.<page>Cut their spines and collect the cores. Return to me, and I’ll soon have your old cloak transformed into {PREVIEW_TEXT}.",
-  "SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW": "Ready to reconsider my offer? Good for you! You won’t be going far without {PREVIEW_TEXT}, dear."
+  "SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW": "Ready to reconsider my offer? Good for you! You won’t be going far without {PREVIEW_TEXT}, dear.",
+  "TAKE_ITEM_PREVIEW": "Take the {PREVIEW_TEXT}?"
 }

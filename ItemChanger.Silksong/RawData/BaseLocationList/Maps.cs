@@ -5,16 +5,27 @@ using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Costs;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
 
 namespace ItemChanger.Silksong.RawData;
  
-// TODO: When https://github.com/homothetyhk/ItemChanger.Silksong/pull/159 is merged, add definitions for maps given by InteractEvents.
 internal static partial class BaseLocationList
 {
-    // Given by "/weaver_harp_sign_map/Get Map Inspect" in Abyss_12.  Controlled by `InteractEvents` component.
-    // public static Location Map__Abyss => TODO();
- 
+    public static Location Map__Abyss => new ObjectLocation()
+    {
+        SceneName = SceneNames.Abyss_12,
+        Name = LocationNames.Map__Abyss,
+        ObjectName = "weaver_harp_sign_map/Get Map Inspect",
+        FlingType = Enums.FlingType.Everywhere,
+        Correction = default,
+        Tags = [
+            new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true },
+            new ShinyControlTag() { Info = new() { ShinyFling = ShinyContainer.ShinyFling.FloatInPlace } },
+            new WeavenestMapTag() { ObjectName = "weaver_harp_sign_map" }
+        ]
+    };
+
     // The Bellhart map becomes available at any Shakra location after visiting Bellhart, in any state.
     public static Location Map__Bellhart => CreateShakraMapLocation(
         SceneNames.Belltown,
@@ -41,9 +52,19 @@ internal static partial class BaseLocationList
         Name = LocationNames.Map__Choral_Chambers,
         ObjectName = "Map Machine (2)",
     };
- 
-    // Given by "/Group/Collectable Item Pickup Child" in Cog_Bench.  Controlled by `InteractEvents` component.
-    // public static Location Map__Cogwork_Core => TODO();
+
+    public static Location Map__Cogwork_Core => new ObjectLocation()
+    {
+        SceneName = SceneNames.Cog_Bench,
+        Name = LocationNames.Map__Cogwork_Core,
+        ObjectName = "Group/Collectable Item Pickup Child",
+        FlingType = Enums.FlingType.Everywhere,
+        Correction = default,
+        Tags = [
+            new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true },
+            new ShinyControlTag() { Info = new() { ShinyFling = ShinyContainer.ShinyFling.FloatInPlace } }
+        ]
+    };
  
     public static Location Map__Cradle => new DualLocation()
     {
@@ -137,8 +158,14 @@ internal static partial class BaseLocationList
         nameof(PlayerData.MapperLeftPeak),
         rosaries: 40);
 
-     // Given by "/Aqueduct Map Inspect" in Aqueduct_07.  Controlled by `InteractEvents` component.
-     // public static Location Map__Putrefied_Ducts => TODO();
+    public static Location Map__Putrefied_Ducts => new ObjectLocation()
+    {
+        SceneName = SceneNames.Aqueduct_07,
+        Name = LocationNames.Map__Putrified_Ducts,
+        ObjectName = "Aqueduct Map Inspect",
+        FlingType = Enums.FlingType.Everywhere,
+        Correction = default
+    };
  
     public static Location Map__Sands_of_Karak => CreateShakraMapLocation(
         SceneNames.Coral_40,
@@ -158,14 +185,37 @@ internal static partial class BaseLocationList
         nameof(PlayerData.MapperLeftDustpens),
         rosaries: 90);
 
-    // Given by "Slab Map Inspect" in Slab_20.  Controlled by `InteractEvents` component.
-    // public static Location Map__Slab => TODO();
+    public static Location Map__Slab => new ObjectLocation()
+    {
+        SceneName = SceneNames.Slab_20,
+        Name = LocationNames.Map__Slab,
+        ObjectName = "Slab Map Inspect",
+        FlingType = Enums.FlingType.Everywhere,
+        Correction = default
+    };
 
-    // Given by "/map_collectable/Understore Map Inspect" in Under_16.  Controlled by `InteractEvents` component.
-    // public static Location Map__Underworks => TODO();
+    public static Location Map__Underworks => new ObjectLocation()
+    {
+        SceneName = SceneNames.Under_16,
+        Name = LocationNames.Map__Underworks,
+        ObjectName = "map_collectable/Understore Map Inspect",
+        FlingType = Enums.FlingType.Everywhere,
+        Correction = default,
+    };
 
-    // Given by "/weaver_harp_sign_map/Get Map Inspect" in Weave_12.  Controlled by `InteractEvents` component.
-    // public static Location Map__Weavenest_Atla => TODO();
+    public static Location Map__Weavenest_Atla => new ObjectLocation()
+    {
+        SceneName = SceneNames.Weave_12,
+        Name = LocationNames.Map__Weavenest_Atla,
+        ObjectName = "weaver_harp_sign_map/Get Map Inspect",
+        FlingType = Enums.FlingType.Everywhere,
+        Correction = default,
+        Tags = [
+            new OriginalContainerTag() { ContainerType = ContainerNames.Shiny, Force = true },
+            new ShinyControlTag() { Info = new() { ShinyFling = ShinyContainer.ShinyFling.FloatInPlace } },
+            new WeavenestMapTag() { ObjectName = "weaver_harp_sign_map" }
+        ]
+    };
  
     public static Location Map__Whispering_Vaults => new MapMachineLocation()
     {
