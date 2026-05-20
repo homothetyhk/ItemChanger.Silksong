@@ -5,6 +5,7 @@ using ItemChanger.Items;
 using ItemChanger.Locations;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.RawData;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -93,6 +94,30 @@ internal static class ICExtensions
             Enums.PlacementConflictResolution.MergeKeepingOld);
     }
 
+    public static void OpenAndFlingItems(this ContainerInfo info, Transform transform, string containerName)
+    {
+        GiveInfo gi = new()
+        {
+            Container = containerName,
+            FlingType = info.GiveInfo.FlingType,
+            Transform = transform,
+            MessageType = MessageType.SmallPopup,
+        };
+
+        info.GiveInfo.Placement.AddVisitFlag(VisitState.Opened);
+        foreach (Item item in info.GiveInfo.Items)
+        {
+            if (!item.IsObtained())
+            {
+                if (item.GiveEarly(containerName))
+                {
+                    item.Give(info.GiveInfo.Placement, gi);
+                }
+                else ShinyContainer.Spawn(info, item, transform, fling: info.GiveInfo.FlingType == FlingType.Everywhere);
+            }
+        }
+    }
+
     public static string GetUIName(this Placement pmt, IEnumerable<Item> items, int maxLength = 120)
     {
         IEnumerable<string> itemNames = items
@@ -136,7 +161,7 @@ internal static class ICExtensions
 
     /// <summary>
     /// Returns all sub-costs that match the specified type, traversing nested Multicosts.
-    /// </summary>
+   /// </summary>
     public static IEnumerable<T> GetCostsOfType<T>(this Cost cost) => cost.Flatten().OfType<T>();
 
     /// <summary>
