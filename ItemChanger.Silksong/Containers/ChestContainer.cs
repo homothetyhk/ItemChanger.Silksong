@@ -168,56 +168,15 @@ public class ChestContainer : Container
         init.InsertMethod(0, f => fsm.GetBoolVariable("Activated").Value = info.GiveInfo.Placement.Visited.HasFlag(VisitState.Opened));
         createPool.Actions = [];
         spawnItems.RemoveActionsOfType<FlingObjectsFromGlobalPoolV3>();
-        spawnItems.InsertMethod(0, _ => OnSpawnItems());
+        spawnItems.InsertMethod(0, _ => info.OpenAndFlingItems(fsm.gameObject.transform, ContainerNames.Chest));
         activated.InsertMethod(0, _ => OnActivateChest());
-
-        void OnSpawnItems()
-        {
-            GiveInfo gi = new()
-            {
-                Container = ContainerNames.Chest,
-                FlingType = info.GiveInfo.FlingType,
-                Transform = fsm.gameObject.transform,
-                MessageType = MessageType.SmallPopup,
-            };
-
-            info.GiveInfo.Placement.AddVisitFlag(VisitState.Opened);
-            foreach (Item item in info.GiveInfo.Items)
-            {
-                if (!item.IsObtained())
-                {
-                    if (item.GiveEarly(ContainerNames.Chest))
-                    {
-                        item.Give(info.GiveInfo.Placement, gi);
-                    }
-                    else SpawnShiny(item, fling: info.GiveInfo.FlingType == FlingType.Everywhere);
-                }
-            }
-        }
 
         void OnActivateChest()
         {
             foreach (Item item in info.GiveInfo.Items)
             {
-                if (!item.IsObtained()) SpawnShiny(item, fling: false);
+                if (!item.IsObtained()) ShinyContainer.Spawn(info, item, itemParent, fling: false);
             }
-        }
-
-        void SpawnShiny(Item item, bool fling)
-        {
-            ContainerInfo shinyInfo = new ShinyContainer.ShinyContainerInfo(
-                containerInfo: ContainerInfo.FromPlacementAndItems(
-                    info.GiveInfo.Placement,
-                    [item],
-                    fsm.gameObject.scene,
-                    ShinyContainer.Instance.Name,
-                    info.GiveInfo.FlingType
-                ),
-                shinyInfo: new() { ShinyFling = fling ? ShinyContainer.ShinyFling.Random : ShinyContainer.ShinyFling.Drop });
-            GameObject shiny = ShinyContainer.Instance.GetNewContainer(shinyInfo);
-            shiny.SetActive(false);
-            shiny.transform.SetParent(itemParent);
-            shiny.transform.position = itemParent.transform.position;
         }
     }
 }
