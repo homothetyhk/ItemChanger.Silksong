@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ItemChanger.Costs;
+using ItemChanger.Silksong.Extensions;
 
 namespace ItemChanger.Silksong.Costs;
 
@@ -10,4 +9,5 @@ public interface ICurrencyCost
 
     int Amount { get; }
 
+    public static int Get(Cost cost, CurrencyType type) => cost.GetCostsOfType<ICurrencyCost>().Where(c => c.CurrencyType == type).Select(c => c.Amount).Sum();
 }
