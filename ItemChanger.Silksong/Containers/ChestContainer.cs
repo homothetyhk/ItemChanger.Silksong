@@ -43,14 +43,14 @@ public class ChestContainer : Container
         Pilgrim,
     }
 
-    private static readonly Dictionary<ChestType, string> _prefabKeys = new()
+    private static readonly Dictionary<ChestType, AssetCache.GameObjectKey> _prefabKeys = new()
     {
-        [ChestType.Citadel] = GameObjectKeys.CHEST_CITADEL,
-        [ChestType.Bone] = GameObjectKeys.CHEST_BONE,
-        [ChestType.MossyBone] = GameObjectKeys.CHEST_MOSSY_BONE,
-        [ChestType.Ant] = GameObjectKeys.CHEST_ANT,
-        [ChestType.Docks] = GameObjectKeys.CHEST_DOCKS,
-        [ChestType.Pilgrim] = GameObjectKeys.CHEST_PILGRIM,
+        [ChestType.Citadel] = GameObjectKeys.CHEST_CITADEL(),
+        [ChestType.Bone] = GameObjectKeys.CHEST_BONE(),
+        [ChestType.MossyBone] = GameObjectKeys.CHEST_MOSSY_BONE(),
+        [ChestType.Ant] = GameObjectKeys.CHEST_ANT(),
+        [ChestType.Docks] = GameObjectKeys.CHEST_DOCKS(),
+        [ChestType.Pilgrim] = GameObjectKeys.CHEST_PILGRIM(),
     };
 
 
@@ -129,9 +129,9 @@ public class ChestContainer : Container
     private static GameObject CreateChest(ContainerInfo info)
     {
         ChestType type = GetChestType(info);
-        if (!_prefabKeys.TryGetValue(type, out string key)) 
+        if (!_prefabKeys.TryGetValue(type, out AssetCache.GameObjectKey key)) 
         {
-            KeyValuePair<ChestType, string> kvp = _prefabKeys.First();
+            KeyValuePair<ChestType, AssetCache.GameObjectKey> kvp = _prefabKeys.First();
             key = kvp.Value;
             LogWarn($"Requested chest type {type} for placement {info.GiveInfo.Placement.Name} is not available! Falling back to type {kvp.Key}.");
         }

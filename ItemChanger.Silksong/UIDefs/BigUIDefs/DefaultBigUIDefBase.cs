@@ -30,7 +30,7 @@ public abstract class DefaultBigUIDefBase : ControlRelinquishedUIDef
 
     public override void DoSendMessage(Action? callback)
     {
-        GameObject spawnedMessage = GameObjectKeys.ITEM_GET_PROMPT.InstantiateInCurrentScene();
+        GameObject spawnedMessage = GameObjectKeys.ITEM_GET_PROMPT().InstantiateInCurrentScene();
         spawnedMessage.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         if (Sprite is not null)

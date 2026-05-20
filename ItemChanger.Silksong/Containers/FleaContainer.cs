@@ -69,25 +69,25 @@ public enum FleaContainerType
 /// </summary>
 public class FleaContainer : Container
 {
-    private record FleaPrefabData(string PrefabKey, float Offset);
+    private record FleaPrefabData(AssetCache.GameObjectKey PrefabKey, float Offset);
 
     private static readonly Dictionary<FleaContainerType, FleaPrefabData> _prefabs = new()
     {
         [FleaContainerType.Sleeping] = new(
-            GameObjectKeys.FLEA_SLEEPING,
+            GameObjectKeys.FLEA_SLEEPING(),
             // asset y - hornet y
             -0.29f
         ),
         [FleaContainerType.Barrel] = new(
-            GameObjectKeys.FLEA_BARREL,
+            GameObjectKeys.FLEA_BARREL(),
             0f
         ),
         [FleaContainerType.AntCage] = new(
-            GameObjectKeys.FLEA_ANT_CAGE,
+            GameObjectKeys.FLEA_ANT_CAGE(),
             0.67f
         ),
         [FleaContainerType.CitadelCage] = new(
-            GameObjectKeys.FLEA_CITADEL_CAGE,
+            GameObjectKeys.FLEA_CITADEL_CAGE(),
             3.42f
         ),
     };
