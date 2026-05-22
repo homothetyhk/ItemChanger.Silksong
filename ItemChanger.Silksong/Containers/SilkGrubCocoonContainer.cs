@@ -6,6 +6,7 @@ using ItemChanger.Silksong.Tags;
 using Silksong.UnityHelper.Extensions;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ItemChanger.Silksong.Containers;
 
@@ -86,6 +87,7 @@ public class SilkGrubCocoonContainer : Container
         {
             GameObject unparented = new($"{obj.name}-ShinyParent");
             unparented.transform.position = parent.position;
+            SceneManager.MoveGameObjectToScene(unparented, obj.scene);
             return unparented.transform;
         }
 
