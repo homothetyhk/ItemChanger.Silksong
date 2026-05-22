@@ -1,5 +1,4 @@
-﻿using HarmonyLib;
-using ItemChanger.Modules;
+﻿using ItemChanger.Modules;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -17,40 +16,38 @@ public sealed class ClockModule : Module
     [JsonIgnore]
     public long Millis => ElapsedMinutes * 60_000 + Mathf.FloorToInt(ElapsedSeconds * 1000);
 
-    private readonly Harmony harmony = new(typeof(ClockPatches).FullName);
+    private ClockBehaviour? behaviour;
 
     protected override void DoLoad()
     {
-        harmony.PatchAll(typeof(ClockPatches));
-        ClockPatches.OnUpdate += Update;
+        GameObject obj = new("ClockModule");
+        UObject.DontDestroyOnLoad(obj);
+        behaviour = obj.AddComponent<ClockBehaviour>();
+        behaviour.Module = this;
     }
 
     protected override void DoUnload()
     {
-        ClockPatches.OnUpdate -= Update;
-        harmony.UnpatchSelf();
+        if (behaviour != null && behaviour.gameObject != null)
+            UObject.Destroy(behaviour.gameObject);
     }
 
-    private void Update()
+    private class ClockBehaviour : MonoBehaviour
     {
-        ElapsedSeconds += Time.deltaTime;
+        public required ClockModule? Module;
 
-        int minutes = Mathf.FloorToInt(ElapsedSeconds / 60);
-        if (minutes > 0)
+        private void Update()
         {
-            ElapsedMinutes += minutes;
-            ElapsedSeconds -= minutes * 60;
+            if (Module == null) return;
+
+            Module.ElapsedSeconds += Time.deltaTime;
+
+            int minutes = Mathf.FloorToInt(Module.ElapsedSeconds / 60);
+            if (minutes > 0)
+            {
+                Module.ElapsedMinutes += minutes;
+                Module.ElapsedSeconds -= minutes * 60;
+            }
         }
     }
-}
-
-[HarmonyPatch]
-file static class ClockPatches
-{
-    internal static Action? OnUpdate;
-
-    [HarmonyPatch(typeof(GameManager), nameof(GameManager.Update))]
-#pragma warning disable IDE0060 // Remove unused parameter
-    private static void Postfix(GameManager __instance) => OnUpdate?.Invoke();
-#pragma warning restore IDE0060 // Remove unused parameter
 }
