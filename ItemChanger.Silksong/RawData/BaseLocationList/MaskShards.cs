@@ -1,5 +1,5 @@
 using ItemChanger.Locations;
-using ItemChanger.Silksong.Containers;
+using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Tags;
 
 namespace ItemChanger.Silksong.RawData;
@@ -90,11 +90,14 @@ internal static partial class BaseLocationList
         Correction = default, // can fall
     };
 
-    public static Location Mask_Shard__The_Slab => new BreakableContainerLocation
+    public static Location Mask_Shard__The_Slab => new BreakableWithDummyLocation // TODO: broken
     {
         Name = LocationNames.Mask_Shard__The_Slab,
         SceneName = "Slab_17",
+        BreakablePath = "Slab Chain cage_small_break/lamp/Active",
         ObjectName = "Heart Piece",
+        DummyPath = "Slab Chain cage_small_break/lamp/Active/Heart Piece Dummy",
+        ReplaceWholePart = true,
     };
 
     // Behind a breakable wall in Weavenest Atla
@@ -106,11 +109,14 @@ internal static partial class BaseLocationList
         Correction = default, // can fall
     };
 
-    public static Location Mask_Shard__Whispering_Vaults => new BreakableContainerLocation
+    public static Location Mask_Shard__Whispering_Vaults => new BreakableWithDummyLocation
     {
         Name = LocationNames.Mask_Shard__Whispering_Vaults,
         SceneName = "Library_05",
+        BreakablePath = "library_glass_heart_piece/Active/End/Lamp_Full",
         ObjectName = "Heart Piece",
+        DummyPath = "library_glass_heart_piece/Active/End/Lamp_Full/mask sprite",
+        ReplaceWholePart = false,
     };
 
     public static Location Mask_Shard__Wisp_Thicket => new ObjectLocation
