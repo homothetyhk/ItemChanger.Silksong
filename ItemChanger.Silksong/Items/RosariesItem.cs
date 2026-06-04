@@ -38,11 +38,7 @@ public class RosariesItem : CurrencyItem
         remaining -= 5 * medium;
         yield return (medium, Gameplay.MediumGeoPrefab);
 
-        // Make large rosaries (value 15), approx 1/3 of them smooth.
-        int large = remaining / 15;
-        int smooth = 0;
-        for (int i = 0; i < large; i++) if (UnityEngine.Random.Range(0, 3) == 1) ++smooth;
-        yield return (smooth, Gameplay.LargeSmoothGeoPrefab);
-        yield return (large - smooth, Gameplay.LargeGeoPrefab);
+        // Make large rosaries (value 15).
+        yield return (remaining / 15, Gameplay.LargeGeoPrefab);
     }
 }
