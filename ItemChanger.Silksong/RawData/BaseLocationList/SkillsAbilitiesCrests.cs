@@ -30,7 +30,7 @@ internal static partial class BaseLocationList
             ]
         };
     }
-    
+
     public static Location Crest_of_Wanderer => new CrestCorpseLocation
     {
         SceneName = SceneNames.Chapel_Wanderer,
@@ -89,7 +89,13 @@ internal static partial class BaseLocationList
         SceneName = SceneNames.Weave_10,
         Name = LocationNames.Eva,
     };
-    
+
+    public static Location Pale_Nails => new PaleNailsLocation
+    {
+        SceneName = SceneNames.Cradle_03_Destroyed,
+        Name = LocationNames.Pale_Nails
+    };
+
     public static Location Silkspear => CreateWeaverCorpseLocation(
         LocationNames.Silkspear,
         SceneNames.Mosstown_02
@@ -111,7 +117,7 @@ internal static partial class BaseLocationList
         SceneNames.Bone_East_05,
         spriteObjectPath: "Ability Scene (1)/Burst Deactivate"
     );
-    
+
     public static Location Cling_Grip => CreateWeaverCorpseLocation(
         LocationNames.Cling_Grip,
         SceneNames.Shellwood_10,
@@ -131,8 +137,32 @@ internal static partial class BaseLocationList
     ).WithTag(
         new RemoveComponentTag<PlayMakerFSM>()
         {
-            SceneName =  SceneNames.Abyss_08,
+            SceneName = SceneNames.Abyss_08,
             ObjectName = "weaver_spire_base control"
         }
     );
+
+    public static Location Needolin => new DualLocation
+    {
+        Name = LocationNames.Needolin,
+        Test = new PDBool(nameof(PlayerData.spinnerDefeated)),
+        SceneName = SceneNames.Belltown_Shrine,
+        FlingType = Enums.FlingType.Everywhere,
+        FalseLocation = new WidowLocation 
+        {
+            Name = LocationNames.Needolin,
+            SceneName = SceneNames.Belltown_Shrine,
+            FlingType = Enums.FlingType.DirectDeposit,
+        },
+        TrueLocation = new CoordinateLocation
+        {
+            Name = LocationNames.Needolin,
+            SceneName = SceneNames.Belltown_Shrine,
+            FlingType = Enums.FlingType.Everywhere,
+            X = 55.2f,
+            Y = 8.6f,
+            ForceDefaultContainer = true,
+            Managed = false,
+        },
+    };
 }
