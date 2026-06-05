@@ -1,4 +1,6 @@
-﻿namespace ItemChangerTesting;
+﻿using ItemChanger.Silksong.Extensions;
+
+namespace ItemChangerTesting;
 
 internal static class QuestUtil
 {
@@ -8,6 +10,19 @@ internal static class QuestUtil
             quest.SetReadyToComplete();
         else
             ItemChangerTestingPlugin.Instance.Logger.LogError($"Unable to locate quest '{quest}'.");
+    }
+
+    public static void SetAccepted(string questName)
+    {
+        if (QuestManager.TryGetFullQuestBase(questName, out var quest))
+        {
+            quest.SetSeen();
+            quest.SetAccepted();
+        }
+        else
+        {
+            ItemChangerTestingPlugin.Instance.Logger.LogError($"Unable to locate quest '{quest}'.");
+        }
     }
 
     public static void SetCompleted(string questName)
