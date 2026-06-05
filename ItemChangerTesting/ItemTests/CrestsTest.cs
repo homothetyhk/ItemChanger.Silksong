@@ -53,7 +53,7 @@ internal class CrestsTest : Test
         mpmt.Add(Finder.GetItem(ItemNames.Crest_of_Beast)!);
         mpmt.Add(Finder.GetItem(ItemNames.Taunt)!);
         mpmt.Add(Finder.GetItem(ItemNames.Crest_of_Hunter)!);
-        mpmt.AddTag(new FixedTextHintBoxTag() { Text = new BoxedString("MultiBigUIDefs") });
+        mpmt.AddTag(new FixedTextHintBoxTag() { Text = new BoxedString { Value = "MultiBigUIDefs" } });
         Profile.AddPlacement(mpmt);
 
         Placement damage = CommonLocations.GetDamageLocation().Wrap();

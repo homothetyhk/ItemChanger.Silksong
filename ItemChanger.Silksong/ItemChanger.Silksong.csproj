@@ -82,19 +82,19 @@
     <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.26.0" PrivateAssets="all" />
     <PackageReference Include="MonoDetour" Version="0.7.13" />
     <PackageReference Include="MonoDetour.HookGen" Version="0.7.13" PrivateAssets="all" />
-    <PackageReference Include="PolySharp" Version="1.15.0">
+    <PackageReference Include="PolySharp" Version="1.16.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Silksong.DataManager" Version="1.2.2" />
     <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
     <PackageReference Include="Silksong.GameLibs" Version="*-*" PrivateAssets="all" />
-    <PackageReference Include="ItemChanger.Core" Version="0.9.2" GeneratePathProperty="true" />
+    <PackageReference Include="ItemChanger.Core" Version="0.10.0" GeneratePathProperty="true" />
     <!--Plugin dependencies-->
     <PackageReference Include="Silksong.PrepatcherPlugin" Version="1.4.0" />
     <PackageReference Include="Silksong.AssetHelper" Version="1.3.2" />
     <PackageReference Include="Silksong.FsmUtil" Version="0.3.16" />
-    <PackageReference Include="Silksong.Benchwarp" Version="1.1.3" />
+    <PackageReference Include="Silksong.Benchwarp" Version="1.1.5" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(CI)' == 'true'">

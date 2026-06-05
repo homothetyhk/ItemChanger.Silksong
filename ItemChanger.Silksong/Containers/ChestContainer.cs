@@ -102,11 +102,7 @@ public class ChestContainer : Container
 
     public override void ModifyContainerInPlace(GameObject chest, ContainerInfo info)
     {
-        try
-        {
-            info.ApplyTo(chest);
-        }
-        catch { }
+        info.ApplyTo(chest);
         
         RemoveExistingItems(chest);
         RemovePersistentData(chest);
