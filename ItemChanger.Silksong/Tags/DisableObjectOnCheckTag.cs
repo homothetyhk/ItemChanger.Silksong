@@ -5,6 +5,7 @@ using ItemChanger.Serialization;
 using ItemChanger.Tags;
 using ItemChanger.Tags.Constraints;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 namespace ItemChanger.Silksong.Tags;
 
@@ -23,21 +24,7 @@ public class DisableObjectOnCheckTag : Tag
     protected override void DoLoad(TaggableObject parent)
     {
         _location = (parent as Location)!;
-        Using(new DisposableSceneEdit(_location.UnsafeSceneName, scene =>
-        {
-            if (ShouldExecute?.Value == false) return;
-
-            GameObject? go = scene.FindGameObject(ObjectPath);
-            if (go == null)
-            {
-                return;
-            }
-
-            if (_location.Placement!.AllObtained())
-            {
-                go.SetActive(false);
-            }
-        }));
+        Using(new SceneEditGroup() { { _location.UnsafeSceneName, DisableObjectOnSceneLoad } });
         _location.Placement!.OnVisited += DisableObjectOnCheckLocation;
     }
 
@@ -45,6 +32,22 @@ public class DisableObjectOnCheckTag : Tag
     {
         _location!.Placement!.OnVisited -= DisableObjectOnCheckLocation;
         _location = null;
+    }
+
+    private void DisableObjectOnSceneLoad(Scene scene)
+    {
+        if (ShouldExecute?.Value == false) return;
+
+        GameObject? go = scene.FindGameObject(ObjectPath);
+        if (go == null)
+        {
+            return;
+        }
+
+        if (_location!.Placement!.AllObtained())
+        {
+            go.SetActive(false);
+        }
     }
 
     private void DisableObjectOnCheckLocation(PlacementVisitedEventArgs args)
