@@ -1,7 +1,9 @@
 ﻿using GlobalSettings;
 using ItemChanger.Containers;
 using ItemChanger.Extensions;
+using ItemChanger.Silksong.Components;
 using ItemChanger.Silksong.Extensions;
+using ItemChanger.Silksong.Modules.YNBox;
 using ItemChanger.Silksong.Tags;
 using Silksong.UnityHelper.Extensions;
 using System.Diagnostics.CodeAnalysis;
@@ -128,10 +130,23 @@ public class ShinyContainer : Container
 
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
+        info.ApplyTo(obj);
+
         CollectableItemPickup shiny = obj.GetComponent<CollectableItemPickup>();
         SavedContainerItem item = ScriptableObject.CreateInstance<SavedContainerItem>();
         item.ContainerInfo = info;
         item.ContainerTransform = shiny.transform;
+
+        if (obj.GetComponent<CollectableItemPickup>().pickupTrigger != null)
+        {
+            // Only support small message type for instant shiny
+            item.SupportedMessageTypes = Enums.MessageType.SmallPopup;
+        }
+        else
+        {
+            item.SupportedMessageTypes = Enums.MessageType.Any;
+            item.RetainControl = true;
+        }
         shiny.SetItem(item);
 
         ShinyControlInfo shinyInfo = GetShinyControlInfo(info);
@@ -158,6 +173,11 @@ public class ShinyContainer : Container
             shiny.fling = false;
             rb.bodyType = RigidbodyType2D.Kinematic;
             shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Stand;
+            // FloatInPlace shinies are already static — the prefab's waitForStoppedMoving
+            // behavior would deactivate interactEvents until the rigidbody settles, but a
+            // kinematic body never moves so we force-activate interactEvents immediately.
+            shiny.gameObject.GetComponent<InteractEvents>()?.Activate();
+
         }
         else
         {
@@ -172,6 +192,19 @@ public class ShinyContainer : Container
                 ShinyFling.AwayFromHero => CollectableItemPickup.FlingDirection.AwayFromHero,
                 ShinyFling.Drop or _ => CollectableItemPickup.FlingDirection.Drop,
             };
+        }
+
+        if (info.GiveInfo.Placement.GetPlacementAndLocationTags().OfType<IHintBoxTag>().FirstOrDefault() is IHintBoxTag tag)
+        {
+            HintBox box = obj.AddComponent<HintBox>();
+            box.Apply(tag);
+        }
+
+        if (info.CostInfo is not null)
+        {
+            CustomYNBoxInfo boxInfo = obj.AddComponent<CustomYNBoxInfo>();
+            boxInfo.Cost = info.CostInfo.Cost;
+            boxInfo.TextGetter = () => info.CostInfo.GetUIName();
         }
     }
 
@@ -235,4 +268,5 @@ public class ShinyContainer : Container
     protected override void DoUnload()
     {
     }
+
 }

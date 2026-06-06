@@ -147,6 +147,8 @@ public class FleaContainer : Container
     // TODO - modifying non-replaceable fleas should have a cosmetic effect where possible
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
+        info.ApplyTo(obj);
+
         if (info.GiveInfo.Placement is not IPrimaryLocationPlacement pmt)
         {
             throw new ArgumentException($"Expected an {nameof(IPrimaryLocationPlacement)} for {info.GiveInfo.Placement.Name}");
@@ -250,6 +252,7 @@ public class FleaContainer : Container
         SavedContainerItem item = ScriptableObject.CreateInstance<SavedContainerItem>();
         item.ContainerInfo = info;
         item.ContainerTransform = fsm.transform;
+        item.SupportedMessageTypes = Enums.MessageType.SmallPopup;
         get.Item.Value = item;
 
         // TODO - give some items by flinging shinies

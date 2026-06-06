@@ -1,16 +1,15 @@
-﻿using ItemChanger.Serialization;
+﻿using ItemChanger.Locations;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Serialization;
-using ItemChanger.Silksong.Util;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using TeamCherry.Localization;
 
 namespace ItemChanger.Silksong.RawData;
 
 internal static class ItemChangerLanguageStrings
 {
     public static LanguageString FMT_PAY_ROSARIES => LanguageString.FromItemChanger(nameof(FMT_PAY_ROSARIES));
+    public static LanguageString FMT_PAY_SHELL_SHARDS => LanguageString.FromItemChanger(nameof(FMT_PAY_SHELL_SHARDS));
     public static LanguageString FMT_FAST_TRAVEL_PATTERN => LanguageString.FromItemChanger(nameof(FMT_FAST_TRAVEL_PATTERN));
     public static LanguageString FMT_MATERIUM_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_MATERIUM_ENTRY_NAME));
     public static LanguageString FMT_JOURNAL_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_JOURNAL_ENTRY_NAME));
@@ -32,6 +31,16 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString INV_NAME_UPSLASH => LanguageString.FromItemChanger(nameof(INV_NAME_UPSLASH));
     public static LanguageString INV_NAME_DOWNSLASH => LanguageString.FromItemChanger(nameof(INV_NAME_DOWNSLASH));
     public static LanguageString INV_DESC_ANYSLASH => LanguageString.FromItemChanger(nameof(INV_DESC_ANYSLASH));
+    public static LanguageString INV_NAME_LORE => LanguageString.FromItemChanger(nameof(INV_NAME_LORE));
+
+    public static LanguageString INV_NAME_TAUNT => LanguageString.FromItemChanger(nameof(INV_NAME_TAUNT));
+    public static LanguageString INV_DESC_TAUNT => LanguageString.FromItemChanger(nameof(INV_DESC_TAUNT));
+    public static LanguageString GET_TAUNT_1 => LanguageString.FromItemChanger(nameof(GET_TAUNT_1));
+
+    public static LanguageString QUEST_BROLLY_GET_DESC_PREVIEW => LanguageString.FromItemChanger(nameof(QUEST_BROLLY_GET_DESC_PREVIEW));
+    public static LanguageString SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW));
+    public static LanguageString SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW));
+    public static LanguageString SHOP_DESC_ROSARIES => LanguageString.FromItemChanger(nameof(SHOP_DESC_ROSARIES));
 
     public static CompositeString CreatePayRosariesString(IValueProvider<int> rosaryCount)
     {
@@ -40,5 +49,25 @@ internal static class ItemChangerLanguageStrings
             { "ROSARY_COUNT", rosaryCount.Embox() },
             { "ROSARY_NAME", BaseLanguageStrings.Rosaries }
         });
+    }
+
+    public static CompositeString CreatePayShellShardsString(IValueProvider<int> shellShardsCount)
+    {
+        return CompositeString.Create(FMT_PAY_SHELL_SHARDS, new Dictionary<string, IValueProvider<object>>()
+        {
+            { "SHELL_SHARDS_COUNT", shellShardsCount.Embox() },
+            { "SHELL_SHARDS_NAME", BaseLanguageStrings.Shell_Shards }
+        });
+    }
+
+    public static void InjectPreviewText(this Location self, LocalisedString id, LanguageString itemChangerTemplate)
+    {
+        LanguageEditGroup group = [];
+        var replacement = CompositeString.Create(itemChangerTemplate, new Dictionary<string, IValueProvider<object>>()
+        {
+            { "PREVIEW_TEXT", self.UINameProvider() },
+        });
+        group.Add(new(Sheet: id.Sheet, Key: id.Key), orig => replacement.Value);
+        self.Using(group);
     }
 }

@@ -1,7 +1,10 @@
 ﻿using ItemChanger.Items;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong.Assets;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.UIDefs;
+using ItemChanger.Silksong.UIDefs.BigUIDefs;
+using UnityEngine.UI;
 
 namespace ItemChanger.Silksong.Items;
 
@@ -44,29 +47,49 @@ public class ItemChangerSavedItem : Item
     /// <param name="id">The UObject name of the SavedItem.</param>
     /// <param name="type">The type of SavedItem.</param>
     /// <param name="playerDataBoolName">A supplementary PlayerData bool, used by some items.</param>
-    public static ItemChangerSavedItem Create(string name, string id, BaseGameSavedItem.ItemType type, string? playerDataBoolName = null)
+    /// <param name="customUIDef">Function used to generate the UIDef. The default UIDef will
+    /// be passed as the argument.</param>
+    public static ItemChangerSavedItem Create(
+        string name,
+        string id,
+        BaseGameSavedItem.ItemType type,
+        string? playerDataBoolName = null,
+        Func<UIDef, UIDef>? customUIDef = null)
     {
         BaseGameSavedItem item = new() { Id = id, Type = type };
-        return new() { Name = name, Item = item, PlayerDataBoolName = playerDataBoolName, UIDef = new SavedItemUIDef { Item = item } };
+        UIDef orig = new SavedItemUIDef { Item = item };
+        UIDef uiDef = customUIDef?.Invoke(orig) ?? orig;
+        return new() { Name = name, Item = item, PlayerDataBoolName = playerDataBoolName, UIDef = uiDef };
     }
 
-    public static ItemChangerSavedItem CreateWithMsgUIDef(string name, string id, BaseGameSavedItem.ItemType type, string nameSheet, string nameKey, float spriteScale)
+    public static ItemChangerSavedItem CreateCrest(string name, string id, string nameKey, string? prefabKey = GameObjectKeys.CREST_GET_PROMPT)
     {
-        BaseGameSavedItem item = new() { Id = id, Type = type };
-        return new() {
+        BaseGameSavedItem item = new() { Id = id, Type = BaseGameSavedItem.ItemType.ToolCrest };
+        UIDef msgFallback = new MsgUIDef
+        {
+            Name = LanguageString.FromItemChanger(nameKey),
+            Sprite = new SavedItemSprite { Item = item },
+            SpriteScale = 1f / 3f,
+        };
+
+        UIDef actualUIDef;
+
+        if (string.IsNullOrEmpty(prefabKey))
+        {
+            actualUIDef = msgFallback;
+        }
+        else
+        {
+            actualUIDef = CrestUIDef.Create(id, msgFallback, prefabKey);
+        }
+
+        return new()
+        {
             Name = name,
             Item = item,
-            UIDef = new MsgUIDef
-            {
-                Name = new LanguageString(nameSheet, nameKey),
-                Sprite = new SavedItemSprite { Item = item },
-                SpriteScale = spriteScale,
-            },
+            UIDef = actualUIDef
         };
     }
-
-    public static ItemChangerSavedItem CreateCrest(string name, string id, string nameKey) =>
-        CreateWithMsgUIDef(name, id, BaseGameSavedItem.ItemType.ToolCrest, $"Mods.{ItemChangerPlugin.Id}", nameKey, 1f / 3);
 
     /* reference implementation for CollectableItem - not fully tested
     

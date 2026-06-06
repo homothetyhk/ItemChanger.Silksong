@@ -1,9 +1,12 @@
 ﻿using GenericVariableExtension;
+using ItemChanger;
+using ItemChanger.Enums;
 using ItemChanger.Items;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.UIDefs;
+using ItemChanger.Tags;
 using System.Reflection;
 using UnityEngine;
 
@@ -11,16 +14,20 @@ namespace ItemChangerTesting;
 
 internal static class Extensions
 {
-    public static Placement WithDebugItem(this Placement self, IValueProvider<Sprite>? sprite = null, string? text = null)
+    public static Placement WithDebugItem(
+        this Placement self, 
+        IValueProvider<Sprite>? sprite = null,
+        string? text = null,
+        Persistence persistence = Persistence.NonPersistent)
     => self.Add(new DebugItem()
     {
         Name = $"Debug Item @ {self.Name}",
         UIDef = new MsgUIDef()
         {
-            Name = new BoxedString(text ?? $"Checked {self.Name}"),
+            Name = new BoxedString { Value = text ?? $"Checked {self.Name}" },
             Sprite = sprite ?? new EmptySprite(),
         }
-    });
+    }.WithTag(new PersistentItemTag() { Persistence = persistence }));
 
     public static void SetReadyToComplete(this FullQuestBase quest)
     {

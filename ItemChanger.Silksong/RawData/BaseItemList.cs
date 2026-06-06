@@ -19,7 +19,7 @@ internal static partial class BaseItemList
             // TODO - improve the shopdesc
             Name = new CountedString() { Prefix = new LanguageString("UI", "KEY_FLEA"), Amount = new FleaCount() },
             Sprite = new FleaSprite(),
-            ShopDesc = new BoxedString("Flea flea flea flea flea"),
+            ShopDesc = new BoxedString { Value = "Flea flea flea flea flea" },
             PreviewName = new LanguageString("UI", "KEY_FLEA")
         },
     };

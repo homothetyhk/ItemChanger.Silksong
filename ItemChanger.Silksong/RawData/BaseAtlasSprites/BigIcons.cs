@@ -47,12 +47,6 @@ internal static partial class BaseAtlasSprites
         BundleName = "atlases_assets_assets/sprites/_atlases/ancestral_art_prompts.spriteatlas",
         SpriteName = "Art_Rune_Ancestor_Eva"
     };
-    public static AtlasSprite Sylphsong_Big_ALT => new()
-    {
-        BundleName = "prompts_assets_all",
-        SpriteName = "Eva_heal_prompt"
-    };
-
 
     //silk skills
     //alt big sprites are based on the sprites in prompts instead of ancestral_art_prompts

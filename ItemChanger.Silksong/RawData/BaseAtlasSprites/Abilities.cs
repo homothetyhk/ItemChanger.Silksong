@@ -45,7 +45,7 @@ internal static partial class BaseAtlasSprites
     public static AtlasSprite Sylphsong => new()
     {
         BundleName = "atlases_assets_assets/sprites/_atlases/inventory.spriteatlas",
-        SpriteName = "Inv_0029_spell_core_outer_icons_0000_1_eva_heal"
+        SpriteName = "Inv_0029_spell_core_outer_icons_eva_heal"
     };
 
     //other abilities for MsgUI implementation

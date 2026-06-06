@@ -32,6 +32,13 @@ public class CustomCheckFsmStateAction : FSMUtility.CheckFsmStateAction
         storeValue = orig.fsm.GetBoolVariable("ITEMCHANGER DUMMY BOOL");
     }
 
+    public CustomCheckFsmStateAction(BoolTest orig)
+    {
+        trueEvent = orig.isTrue;
+        falseEvent = orig.isFalse;
+        storeValue = orig.fsm.GetBoolVariable("ITEMCHANGER DUMMY BOOL");
+    }
+
     public CustomCheckFsmStateAction(PlayerDataVariableTest orig)
     {
         trueEvent = orig.IsExpectedEvent;

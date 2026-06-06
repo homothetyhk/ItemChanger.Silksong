@@ -3,7 +3,7 @@ using ItemChanger.Serialization;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace ItemChanger.Silksong.Serialization;
+namespace ItemChanger.Silksong.Serialization.SpecialSprites;
 
 /*
  * The bilewater map sprite can't be loaded without accessing the ShopItem,

@@ -16,7 +16,7 @@ public class CoordinateStartDef : StartDef
     public required string SceneName { get; init; }
     public required float X { get; init; }
     public required float Y { get; init; }
-    public required MapZone MapZone { get; init; }
+    public MapZone MapZone { get; init; } = MapZone.NONE;
     public bool RespawnFacingRight { get; init; } = false;
     
     public RespawnInfo RespawnInfo { get => field ??= new(SceneName, RESPAWN_MARKER_NAME, 0, MapZone); }

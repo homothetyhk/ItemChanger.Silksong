@@ -1,6 +1,7 @@
 ﻿using ItemChanger.Items;
 using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Silksong.Serialization.SpecialSprites;
 using ItemChanger.Silksong.UIDefs;
 
 namespace ItemChanger.Silksong.RawData;

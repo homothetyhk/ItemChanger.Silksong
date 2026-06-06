@@ -4,6 +4,8 @@ using MonoMod.Cil;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using System.Reflection;
+using ItemChanger.Silksong.Items;
+using ItemChanger.Silksong.Extensions;
 
 namespace ItemChanger.Silksong.Modules;
 
@@ -13,8 +15,7 @@ namespace ItemChanger.Silksong.Modules;
 /// to equip the alternative starting crest.
 /// 
 /// It does not by itself give or equip the alternative crest at the start of the game;
-/// that should be done using StartLocation and PlayerDataEditModule
-/// (editing the CurrentCrestID field) respectively.
+/// the <see cref="StartCrestExtensions.ApplyStartCrest"/> method should be used instead.
 /// </summary>
 [SingletonModule]
 public class StartCrestReplacementModule : ItemChanger.Modules.Module
@@ -63,4 +64,32 @@ public class StartCrestReplacementModule : ItemChanger.Modules.Module
     }
 
     private ToolCrest GetStartingCrest() => ToolItemManager.GetCrestByName(ReplacementCrestID);
+}
+
+public static class StartCrestExtensions
+{
+    /// <summary>
+    /// Set the given crest to be the starting crest, by adding an instance of this module as
+    /// well as using StartLocation and PlayerDataEditModule (editing the CurrentCrestID field).
+    /// </summary>
+    /// <param name="profile">The active profile.</param>
+    /// <param name="crestName">The name of the crest. This should be the item name, not the crest ID.</param>
+    public static void ApplyStartCrest(this ItemChangerProfile profile, string crestName)
+    {
+        if (SilksongHost.Instance.Finder.GetItem(crestName) is not ItemChangerSavedItem crestItem)
+        {
+            throw new ArgumentException($"Crest name {crestName} couldn't be resolved to an item!");
+        }
+        if (crestItem.Item.Type != Serialization.BaseGameSavedItem.ItemType.ToolCrest)
+        {
+            throw new ArgumentException($"Crest name {crestName} couldn't be resolved to a crest item!");
+        }
+        string crestId = crestItem.Item.Id;
+
+        profile.Modules.Add(new StartCrestReplacementModule() { ReplacementCrestID = crestId });
+        profile.Modules.GetOrAdd<PlayerDataEditModule>().PDEdits.Enqueue(
+            new(nameof(PlayerData.CurrentCrestID), crestId)
+            );
+        profile.AddToStart(crestItem);
+    }
 }

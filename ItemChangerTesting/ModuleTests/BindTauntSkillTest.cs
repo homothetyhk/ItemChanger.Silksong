@@ -5,14 +5,14 @@ using ItemChanger.Silksong.RawData;
 
 namespace ItemChangerTesting.ModuleTests;
 
-internal class BindSkillTest : Test
+internal class BindTauntSkillTest : Test
 {
     public override TestMetadata GetMetadata() => new()
     {
         Folder = TestFolder.ModuleTests,
-        MenuName = "Bind Skill",
-        MenuDescription = "Tests module which removes bind skill.",
-        Revision = 2026030800
+        MenuName = "Bind/Taunt Skills",
+        MenuDescription = "Tests modules which remove bind and taunt skills.",
+        Revision = 2026032700
     };
 
     public override void Setup(TestArgs args)
@@ -28,5 +28,15 @@ internal class BindSkillTest : Test
             FlingType = ItemChanger.Enums.FlingType.Everywhere,
             Managed = false,
         }.Wrap().Add(Finder.GetItem(ItemNames.Bind)!));
+        Profile.AddPlacement(new CoordinateLocation
+        {
+            Name = "Left",
+            SceneName = SceneNames.Tut_02,
+            X = 127.6f,
+            Y = 31.57f,
+            FlingType = ItemChanger.Enums.FlingType.Everywhere,
+            Managed = false,
+        }.Wrap().Add(Finder.GetItem(ItemNames.Taunt)!));
+
     }
 }
