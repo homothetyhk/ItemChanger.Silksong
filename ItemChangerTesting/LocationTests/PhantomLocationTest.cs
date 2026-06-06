@@ -1,6 +1,10 @@
 using Benchwarp.Data;
+using ItemChanger;
+using ItemChanger.Extensions;
+using ItemChanger.Silksong;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
+using UnityEngine.SceneManagement;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -17,9 +21,37 @@ internal class PhantomLocationTest : Test
     public override void Setup(TestArgs args)
     {
         StartAt(new CoordinateStartDef() { SceneName = SceneNames.Organ_01, X = 106.22f, Y = 104.57f, MapZone = GlobalEnums.MapZone.NONE });
-        Profile.AddPlacement(Finder.GetLocation(LocationNames.Cross_Stitch)!.Wrap()
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Cross_Stitch)!.Wrap().WithDebugItem(persistence: ItemChanger.Enums.Persistence.Persistent)
+            .Add(Finder.GetItem(ItemNames.Lore_Tablet__Abyss_Bottom_Left)!)
+            .Add(Finder.GetItem(ItemNames.Cling_Grip)!)
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
     }
+
+    private void WeakenBoss(Scene scene)
+    {
+        GameObject? go = scene.FindGameObjectByName("Phantom");
+        if (go == null)
+        {
+            GlobalRefs.LogWarn("Failed to find Phantom");
+            return;
+        }
+        GlobalRefs.LogInfo(go.GetComponent<HealthManager>().hp);
+        go.GetComponent<HealthManager>().hp = 1;
+    }
+
+    protected override void DoLoad()
+    {
+        base.DoLoad();
+        ItemChangerHost.Singleton.GameEvents.AddSceneEdit(SceneNames.Organ_01, WeakenBoss);
+    }
+
+    protected override void DoUnload()
+    {
+        base.DoUnload();
+        ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneNames.Organ_01, WeakenBoss);
+    }
+
+
     protected override void OnEnterGame()
     {
         base.OnEnterGame();
@@ -34,35 +66,5 @@ internal class PhantomLocationTest : Test
         PlayerData.instance.hasQuill = true;
         PlayerData.instance.hasSuperJump = true;
         PlayerData.instance.hasChargeSlash = true;
-
-        // All maps
-        PlayerData.instance.HasMossGrottoMap = true;
-        PlayerData.instance.HasWildsMap = true;
-        PlayerData.instance.HasBoneforestMap = true;
-        PlayerData.instance.HasDocksMap = true;
-        PlayerData.instance.HasGreymoorMap = true;
-        PlayerData.instance.HasBellhartMap = true;
-        PlayerData.instance.HasShellwoodMap = true;
-        PlayerData.instance.HasCrawlMap = true;
-        PlayerData.instance.HasHuntersNestMap = true;
-        PlayerData.instance.HasJudgeStepsMap = true;
-        PlayerData.instance.HasDustpensMap = true;
-        PlayerData.instance.HasSlabMap = true;
-        PlayerData.instance.HasPeakMap = true;
-        PlayerData.instance.HasCitadelUnderstoreMap = true;
-        PlayerData.instance.HasCoralMap = true;
-        PlayerData.instance.HasSwampMap = true;
-        PlayerData.instance.HasCloverMap = true;
-        PlayerData.instance.HasAbyssMap = true;
-        PlayerData.instance.HasHangMap = true;
-        PlayerData.instance.HasSongGateMap = true;
-        PlayerData.instance.HasHallsMap = true;
-        PlayerData.instance.HasWardMap = true;
-        PlayerData.instance.HasCogMap = true;
-        PlayerData.instance.HasLibraryMap = true;
-        PlayerData.instance.HasCradleMap = true;
-        PlayerData.instance.HasArboriumMap = true;
-        PlayerData.instance.HasAqueductMap = true;
-        PlayerData.instance.HasWeavehomeMap = true;
     }
 }

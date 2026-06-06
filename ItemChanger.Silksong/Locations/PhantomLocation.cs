@@ -1,5 +1,6 @@
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
+using ItemChanger.Items;
 using ItemChanger.Locations;
 using PrepatcherPlugin;
 using Silksong.FsmUtil;
@@ -19,6 +20,13 @@ public class PhantomLocation : AutoLocation
 
     protected override void DoUnload() { }
 
+    public override GiveInfo GetGiveInfo()
+    {
+        GiveInfo gi = base.GetGiveInfo();
+        gi.MessageType = Enums.MessageType.Any;
+        return gi;
+    }
+
     private void HookPhantomControl(PlayMakerFSM fsm)
     {
         // Replace all vanilla actions in "UI Msg" (SpawnSkillGetMsg, SetPlayerDataBool, etc.) with
@@ -26,11 +34,8 @@ public class PhantomLocation : AutoLocation
         // vanilla transition fires on a skill-screen event that we've suppressed.
         FsmState uiMsgState = fsm.MustGetState("UI Msg");
         uiMsgState.Actions = [];
-        uiMsgState.InsertMethod(0, () => GiveAll(() =>
-        {
-            PlayerDataAccess.defeatedPhantom = true;
-            fsm.SendEvent("FINISHED");
-        }));
+        uiMsgState.AddMethod(DefeatPhantom);
+        uiMsgState.AddLambdaMethod(GiveAll);
         fsm.AddTransition("UI Msg", "FINISHED", "Get Control");
 
         // Remove the ScreenFader from Get Control — it fades to black for the vanilla skill-get screen,
@@ -47,6 +52,8 @@ public class PhantomLocation : AutoLocation
         fsm.RemoveTransitionsTo("Death Explode", "Fade To Black");
         fsm.AddTransition("Death Explode", "FINISHED", "UI Msg");
     }
+
+    private static void DefeatPhantom() => PlayerDataAccess.defeatedPhantom = true;
 
     private static void HookSetCrossStitchConnected(PlayMakerFSM fsm)
     {

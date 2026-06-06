@@ -90,10 +90,27 @@ internal static partial class BaseLocationList
         Name = LocationNames.Eva,
     };
 
-    public static Location Cross_Stitch => new PhantomLocation
+    public static Location Cross_Stitch => new DualLocation
     {
         SceneName = SceneNames.Organ_01,
         Name = LocationNames.Cross_Stitch,
+        FlingType = Enums.FlingType.Everywhere,
+        Test = new PDBool(nameof(PlayerData.defeatedPhantom)),
+        FalseLocation = new PhantomLocation
+        {
+            SceneName = SceneNames.Organ_01,
+            Name = LocationNames.Cross_Stitch,
+            FlingType = Enums.FlingType.Everywhere,
+        },
+        TrueLocation = new CoordinateLocation
+        {
+            SceneName = SceneNames.Organ_01,
+            Name = LocationNames.Cross_Stitch,
+            X = 84.3f,
+            Y = 104.6f,
+            Managed = false,
+            FlingType = Enums.FlingType.Everywhere,
+        },
     };
 
     public static Location Pale_Nails => new PaleNailsLocation
