@@ -32,6 +32,12 @@ internal static partial class BaseLocationList
         ),
     };
 
+    public static Location Diving_Bell_Key => new BallowLocation()
+    {
+        SceneName = SceneNames.Dock_12,
+        Name = LocationNames.Diving_Bell_Key,
+    };
+    
     public static Location Steel_Spines => new DualLocation()
     {
         Name = LocationNames.Steel_Spines,
