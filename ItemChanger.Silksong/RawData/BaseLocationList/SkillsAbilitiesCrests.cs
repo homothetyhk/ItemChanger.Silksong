@@ -194,4 +194,10 @@ internal static partial class BaseLocationList
             Managed = false,
         },
     };
+    
+    public static Location Beastling_Call => new BeastlingCallLocation()
+    {
+        SceneName = SceneNames.Bellway_Centipede_Arena,
+        Name = LocationNames.Beastling_Call,
+    };
 }
