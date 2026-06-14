@@ -122,11 +122,11 @@ public class SplitClawline : CustomSkillModule
     {
         if (hasHarpoonDashLeft && !hasHarpoonDashRight)
         {
-            return ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_LEFT.Value;
+            return ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_LEFT().Value;
         }
         if (hasHarpoonDashRight && !hasHarpoonDashLeft)
         {
-            return ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_RIGHT.Value;
+            return ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_RIGHT().Value;
         }
         return _;
     }
@@ -135,11 +135,11 @@ public class SplitClawline : CustomSkillModule
     {
         if (hasHarpoonDashLeft && !hasHarpoonDashRight)
         {
-            return ItemChangerLanguageStrings.INV_DESC_SKILL_HARPOON_LEFT.Value;
+            return ItemChangerLanguageStrings.INV_DESC_SKILL_HARPOON_LEFT().Value;
         }
         if (hasHarpoonDashRight && !hasHarpoonDashLeft)
         {
-            return ItemChangerLanguageStrings.INV_DESC_SKILL_HARPOON_RIGHT.Value;
+            return ItemChangerLanguageStrings.INV_DESC_SKILL_HARPOON_RIGHT().Value;
         }
         return _;
     }
