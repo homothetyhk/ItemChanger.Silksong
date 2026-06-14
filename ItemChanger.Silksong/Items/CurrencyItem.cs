@@ -2,6 +2,7 @@
 using ItemChanger.Events.Args;
 using ItemChanger.Items;
 using ItemChanger.Silksong.Containers;
+using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.Tags;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -20,6 +21,7 @@ public abstract class CurrencyItem : Item
     protected override void DoLoad()
     {
         base.DoLoad();
+        ActiveProfile!.Modules.GetOrAdd<RemoveCurrencyCapModule>();
         OnGive += CheckMegaFling;
     }
 
