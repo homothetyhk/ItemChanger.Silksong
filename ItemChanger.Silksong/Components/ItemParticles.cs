@@ -14,7 +14,7 @@ public class ItemParticles : MonoBehaviour
 
     public void Awake()
     {
-        benchParticles = GameObjectKeys.BENCH_PARTICLE.InstantiateAsset(gameObject.scene);
+        benchParticles = GameObjectKeys.BENCH_PARTICLE().InstantiateAsset(gameObject.scene);
         benchParticles.transform.SetParent(transform);
         ps = benchParticles.GetComponent<ParticleSystem>();
     }

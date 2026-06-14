@@ -297,7 +297,7 @@ internal static partial class BaseItemList
         name: ItemNames.Crest_of_Architect,
         id: "Toolmaster",
         nameKey: "CREST_ARCHITECT_NAME",
-        prefabKey: GameObjectKeys.ARCHITECT_CREST_GET_PROMPT);
+        prefabKey: GameObjectKeys.ARCHITECT_CREST_GET_PROMPT());
     public static Item Crest_of_Beast => ItemChangerSavedItem.CreateCrest(
         name: ItemNames.Crest_of_Beast,
         id: "Warrior",

@@ -10,14 +10,13 @@ namespace ItemChanger.Silksong.Assets;
 /// </summary>
 internal class GameObjectCache : IObjectCache<GameObject>
 {
-    private List<ManagedAsset<GameObject>> _assets = [];
-    private List<ManagedAssetList<GameObject>> _assetLists = [];
+    private readonly List<IManagedAsset> _assets = [];
 
-    private Dictionary<string, Func<GameObject, bool>> _listedAssetSelectors = new()
+    private readonly Dictionary<string, Func<GameObject, bool>> _listedAssetSelectors = new()
     {
-        {GameObjectKeys.LORE_TABLET_WEAVER, go => go.FindChild("Inspect Region (1)") != null}
+        {GameObjectKeys.LORE_TABLET_WEAVER().Key, go => go.FindChild("Inspect Region (1)") != null}
     };
-    private Dictionary<string, Func<GameObject>> _assetGetters = [];
+    private readonly Dictionary<string, Func<GameObject>> _assetGetters = [];
 
     public GameObject GetAsset(string key)
     {
@@ -60,7 +59,7 @@ internal class GameObjectCache : IObjectCache<GameObject>
         foreach (SceneAssetListInfo assetList in sceneAssetListData)
         {
             ManagedAssetList<GameObject> list = ManagedAssetList<GameObject>.FromSceneAsset(sceneName: assetList.SceneName, objPath: assetList.ObjPath);
-            _assetLists.Add(list);
+            _assets.Add(list);
             foreach (string key in assetList.Keys)
             {
                 Func<GameObject, bool> selector = _listedAssetSelectors[key];
@@ -95,11 +94,7 @@ internal class GameObjectCache : IObjectCache<GameObject>
 
     public void Load()
     {
-        foreach (ManagedAsset<GameObject> asset in _assets)
-        {
-            asset.Load();
-        }
-        foreach (ManagedAssetList<GameObject> asset in _assetLists)
+        foreach (IManagedAsset asset in _assets)
         {
             asset.Load();
         }
@@ -107,11 +102,7 @@ internal class GameObjectCache : IObjectCache<GameObject>
 
     public void Unload()
     {
-        foreach (ManagedAsset<GameObject> asset in _assets)
-        {
-            asset.Unload();
-        }
-        foreach (ManagedAssetList<GameObject> asset in _assetLists)
+        foreach (IManagedAsset asset in _assets)
         {
             asset.Unload();
         }
