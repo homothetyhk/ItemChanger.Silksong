@@ -25,7 +25,7 @@ internal static partial class BaseLocationList
         FlingType = Enums.FlingType.DirectDeposit,
         PreviewIndex = 4,
     }.WithTag(new DefaultCostTag { Cost = new MossberryCost { Value = 7 } });
-    public static Location Pollip_Pouch => new GreyrootPollipLocation
+    
     public static Location Pollip_Pouch => new DualLocation
     {
         SceneName = SceneNames.Room_Witch,
