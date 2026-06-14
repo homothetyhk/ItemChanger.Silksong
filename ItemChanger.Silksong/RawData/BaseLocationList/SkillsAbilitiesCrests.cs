@@ -83,6 +83,26 @@ internal static partial class BaseLocationList
             Managed = false,
         },
     };
+    
+    public static Location Crest_of_Cursed_Witch => new DualLocation
+    {
+        SceneName = SceneNames.Room_Witch,
+        Name = LocationNames.Crest_of_Cursed_Witch,
+        Test = new QuestCompletedBool { QuestName = Quests.Wood_Witch_Curse },
+        FalseLocation = new GreyrootCrestLocation
+        {
+            SceneName = SceneNames.Room_Witch,
+            Name = LocationNames.Crest_of_Cursed_Witch,
+        },
+        TrueLocation = new CoordinateLocation
+        {
+            SceneName = SceneNames.Room_Witch,
+            Name = LocationNames.Crest_of_Cursed_Witch,
+            X = 19.0f,
+            Y = 6.57f,
+            Managed = false,
+        },
+    };
 
     public static Location Eva => new EvaLocation
     {
