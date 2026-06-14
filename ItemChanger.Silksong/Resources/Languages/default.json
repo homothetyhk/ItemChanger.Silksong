@@ -1,6 +1,7 @@
 {
   "FMT_PAY_ROSARIES": "{ROSARY_COUNT} {ROSARY_NAME}",
   "FMT_PAY_SHELL_SHARDS": "{SHELL_SHARDS_COUNT} {SHELL_SHARDS_NAME}",
+  "FMT_PAY_MOSSBERRIES": "{0} Mossberries",
   "FMT_PAY_TOOL_SLOTS": "{0} Tool Slots",
   "FMT_FAST_TRAVEL_PATTERN": "{TRAVEL_TYPE} - {STATION_NAME}",
   "FMT_MATERIUM_ENTRY_NAME": "{0} Entry",
@@ -44,6 +45,7 @@
   "FREE": "Free",
   "OBTAINED": "Obtained",
   "PAID": "Paid",
+  "COST_FOR": "for",
 
   "QUEST_BROLLY_GET_DESC_PREVIEW": "Hunt Hokers in the Far Fields and collect Spine Cores for {PREVIEW_TEXT}.",
   "SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW": "If you’re planning to ascend from these low fields, you’ll be needing {PREVIEW_TEXT}, and I’m just the bug to help.<page>Head for the caves beyond my home. The bugs within produce a spine with a marvellous core, flexible yet strong.<page>Cut their spines and collect the cores. Return to me, and I’ll soon have your old cloak transformed into {PREVIEW_TEXT}.",
