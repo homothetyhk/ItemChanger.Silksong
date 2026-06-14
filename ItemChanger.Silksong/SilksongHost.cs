@@ -42,6 +42,7 @@ public partial class SilksongHost : ItemChangerHost
             new ConsistentRandomnessModule(),
             new ObstacleHandlerModule(),
             new ChapelDoorObstacleModule(),
+            new RemoveCurrencyCapModule(),
             ];
     }
 
