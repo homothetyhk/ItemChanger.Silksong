@@ -42,5 +42,13 @@
   "BENCH_PARTICLE": {
     "SceneName": "Bone_04",
     "ObjPath": "RestBench/Particle Rest"
+  },
+  "SILK_GRUB_COCCOON": {
+    "SceneName": "Dust_11",
+    "ObjPath": "Steel Soul States/Regular/NPC Control/Large Cocoon 1"
+  },
+  "VOG_SHOP": {
+    "SceneName": "Bone_10",
+    "ObjPath": "Black Thread States Thread Only Variant/Normal World/Caravan/Caravan State Regular/Caravan Troupe Hunter"
   }
 }

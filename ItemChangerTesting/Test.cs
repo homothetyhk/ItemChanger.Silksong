@@ -19,7 +19,7 @@ namespace ItemChangerTesting
         protected Finder Finder => ItemChangerHost.Singleton.Finder;
         protected ModuleCollection Modules => ItemChangerHost.Singleton.ActiveProfile!.Modules;
         protected ItemChangerProfile Profile => ItemChangerHost.Singleton.ActiveProfile!;
- 
+
         protected void StartAct3()
         {
             PlayerDataAccess.act3_enclaveWakeSceneCompleted = true;
