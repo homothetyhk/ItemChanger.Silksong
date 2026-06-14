@@ -126,11 +126,11 @@ public class SplitClingGrip : CustomSkillModule
     {
         if (hasWalljumpLeft && !hasWalljumpRight)
         {
-            return ItemChangerLanguageStrings.INV_NAME_WALLJUMP_LEFT.Value;
+            return ItemChangerLanguageStrings.INV_NAME_WALLJUMP_LEFT().Value;
         }
         if (hasWalljumpRight && !hasWalljumpLeft)
         {
-            return ItemChangerLanguageStrings.INV_NAME_WALLJUMP_RIGHT.Value;
+            return ItemChangerLanguageStrings.INV_NAME_WALLJUMP_RIGHT().Value;
         }
         return _;
     }
@@ -139,11 +139,11 @@ public class SplitClingGrip : CustomSkillModule
     {
         if (hasWalljumpLeft && !hasWalljumpRight)
         {
-            return ItemChangerLanguageStrings.INV_DESC_WALLJUMP_LEFT.Value;
+            return ItemChangerLanguageStrings.INV_DESC_WALLJUMP_LEFT().Value;
         }
         if (hasWalljumpRight && !hasWalljumpLeft)
         {
-            return ItemChangerLanguageStrings.INV_DESC_WALLJUMP_RIGHT.Value;
+            return ItemChangerLanguageStrings.INV_DESC_WALLJUMP_RIGHT().Value;
         }
         return _;
     }
