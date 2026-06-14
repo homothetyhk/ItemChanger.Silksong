@@ -8,10 +8,12 @@ public static class LocationNames
     public const string Forge_Daughter = "Forge_Daughter";
     // Sells: Sting_Shard, Magma_Bell, Crafting_Kit, Silkshot
     public const string Frey = "Frey";
+    public const string Frey__Requires_Bellhome = "Frey_(Requires_Bellhome)";
     // Sells: Memory_Locket, Spool_Fragment, Multibinder
     public const string Grindle = "Grindle";
     // Sells: Thief's_Mark, Spool_Fragment, Crafting_Kit, Snitch_Pick, Magnetite_Dice
     public const string Jubilana = "Jubilana";
+    public const string Jubilana__Requires_Rescue = "Jubilana_(Requires_Rescue)";
     // Sells: Ascendant's_Grip, Simple_Key, Spool_Extender, Spider_Strings, Spool_Fragment, Mask_Shard
     public const string Mort = "Mort";
     // Sells: Weighted_Belt, Tool_Pouch, Memory_Locket
@@ -19,8 +21,10 @@ public static class LocationNames
     // Sells: Curveclaw, Fractured_Mask
     public const string Pebb = "Pebb";
     // Sells: Magnetite_Brooch, Mask_Shard, Craftmetal, Simple_Key
-    public const string Shakra__Global = "Shakra-Global";
+    public const string Shakra = "Shakra";
+    public const string Skynx = "Skynx";
     public const string Twelfth_Architect = "Twelfth_Architect";
+    public const string Twelfth_Architect__Requires_Tools = "Twelfth_Architect_(Requires_Tools)";
     // Sells: Cogwork_Wheel, Scuttlebrace, Silkshot, Crafting_Kit, Architect's_Key
     public const string Eva = "Eva";
     // Sells: Crest_of_Hunter__Upgrade_1, Vesticrest_Yellow, Vesticrest_Blue, Crest_of_Hunter__Upgrade_2, Sylphsong
@@ -292,13 +296,16 @@ public static class LocationNames
     public const string Pristine_Core__Cogwork_Clappers = "Pristine_Core-Cogwork_Clappers";  // Cogwork Core, dropped after defeating both Clappers (Act 3)
     public const string Pristine_Core__Twelfth_Architect = "Pristine_Core-Twelfth_Architect";  // Corpse of Twelfth Architect after quest sequence
 
-    // silkeaters - 8 total
+    // silkeaters - 11 total
     public const string Silkeater__Bilewater = "Silkeater-Bilewater";  // Inside Exhaust Organ
     public const string Silkeater__Blasted_Steps = "Silkeater-Blasted_Steps";  // East of Shakra (replaced by Steel Seer Zi in Steel Soul Mode)
     public const string Silkeater__Choral_Chambers_East = "Silkeater-Choral_Chambers_East";  // East of Great Gourmand's dining room
     public const string Silkeater__Choral_Chambers_West = "Silkeater-Choral_Chambers_West";  // West of Grand Bellway
     public const string Silkeater__Deep_Docks = "Silkeater-Deep_Docks";  // Southeast of sauna bench
     public const string Silkeater__Greymoor = "Silkeater-Greymoor";  // Top of tower west of Halfway Home
+    public const string Silkeater__Queen_s_Egg = "Silkeater-Queen's_Egg";  // First Silkeater grown after delivering the Queen's Egg.
+    public const string Silkeater__Styx = "Silkeater-Styx";  // First Silkeater grown by Styx.
+    public const string Silkeater__Terminus = "Silkeater-Terminus";  // Underneath Ventrica hub.
     public const string Silkeater__Whiteward = "Silkeater-Whiteward";  // In the centre
     public const string Silkeater__Whispering_Vaults = "Silkeater-Whispering_Vaults";  // North of Vaultkeeper Cardinius's lair
 
@@ -527,20 +534,20 @@ public static class LocationNames
     public const string Ventrica__Underworks = "Ventrica-Underworks";
 
     // Maps - Purchased from Shakra (shop items, no per-item constants)
-    // - Mosslands Map (40)
-    // - The Marrow Map (50)
-    // - Deep Docks Map (50)
-    // - Far Fields Map (50)
-    // - Wormways Map (70)
-    // - Hunter's March Map (70)
-    // - Greymoor Map (70)
-    // - Bellhart Map (40)
-    // - Shellwood Map (70)
-    // - Blasted Steps Map (70)
-    // - Sinner's Road Map (90)
-    // - Mount Fay Map (40)
-    // - Sands of Karak Map (90)
-    // - Bilewater Map (90)
+    public const string Map__Bellhart = "Map-Bellhart";  // 40 rosary
+    public const string Map__Bilewater = "Map-Bilewater";  // 90 rosary
+    public const string Map__Blasted_Steps = "Map-Blasted_Steps";  // 70 rosary
+    public const string Map__Deep_Docks = "Map-Deep_Docks";  // 50 rosary
+    public const string Map__Far_Fields = "Map-Far_Fields";  // 50 rosary
+    public const string Map__Greymoor = "Map-Greymoor";  // 70 rosary
+    public const string Map__Hunter_s_March = "Map-Hunter's_March";  // 70 rosary
+    public const string Map__Marrow = "Map-Marrow";  // 50 rosary
+    public const string Map__Mosslands = "Map-Mosslands";  // 40 rosary
+    public const string Map__Mount_Fay = "Map-Mount_Fay";  // 40 rosary
+    public const string Map__Sands_of_Karak = "Map-Sands_of_Karak";  // 90 rosary
+    public const string Map__Shellwood = "Map-Shellwood";  // 70 rosary
+    public const string Map__Sinner_s_Road = "Map-Sinner's_Road";  // 90 rosary
+    public const string Map__Wormways = "Map-Wormways";  // 70 rosary
 
     // Maps - From map machines
     public const string Map__Grand_Gate = "Map-Grand_Gate";  // 40 rosary

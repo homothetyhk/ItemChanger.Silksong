@@ -13,7 +13,7 @@ public class RosariesItem : CurrencyItem
         UIDef = new UIDefs.MsgUIDef()
         {
             Name = ItemChangerLanguageStrings.CreatePayRosariesString(amount.ToValueProvider()),
-            ShopDesc = ItemChangerLanguageStrings.SHOP_DESC_ROSARIES,
+            ShopDesc = ItemChangerLanguageStrings.SHOP_DESC_ROSARIES(),
             Sprite = BaseAtlasSprites.Rosaries,
         },
     };

@@ -27,14 +27,14 @@ internal partial class BaseItemList
         {
             Fallback = new MsgUIDef
             {
-                Name = ItemChangerLanguageStrings.INV_NAME_WALLJUMP_LEFT,
-                ShopDesc = ItemChangerLanguageStrings.INV_DESC_WALLJUMP_LEFT,
+                Name = ItemChangerLanguageStrings.INV_NAME_WALLJUMP_LEFT(),
+                ShopDesc = ItemChangerLanguageStrings.INV_DESC_WALLJUMP_LEFT(),
                 Sprite = BaseAtlasSprites.Cling_Grip,
             },
             BaseStateName = "Set Walljump",
             Sprite = BaseAtlasSprites.Cling_Grip_Big.Project(),
             Replacements = [
-                (new LanguageString("UI", "INV_NAME_WALLJUMP"), ItemChangerLanguageStrings.INV_NAME_WALLJUMP_LEFT)
+                (new LanguageString("UI", "INV_NAME_WALLJUMP"), ItemChangerLanguageStrings.INV_NAME_WALLJUMP_LEFT())
                 ],
             // Not sure why this is needed...
             SpriteOffset = new Vector2(-1, 0)
@@ -49,14 +49,14 @@ internal partial class BaseItemList
         {
             Fallback = new MsgUIDef
             {
-                Name = ItemChangerLanguageStrings.INV_NAME_WALLJUMP_RIGHT,
-                ShopDesc = ItemChangerLanguageStrings.INV_DESC_WALLJUMP_RIGHT,
+                Name = ItemChangerLanguageStrings.INV_NAME_WALLJUMP_RIGHT(),
+                ShopDesc = ItemChangerLanguageStrings.INV_DESC_WALLJUMP_RIGHT(),
                 Sprite = BaseAtlasSprites.Cling_Grip,
             },
             BaseStateName = "Set Walljump",
             Sprite = BaseAtlasSprites.Cling_Grip_Big.FlipX(),
             Replacements = [
-                (new LanguageString("UI", "INV_NAME_WALLJUMP"), ItemChangerLanguageStrings.INV_NAME_WALLJUMP_RIGHT)
+                (new LanguageString("UI", "INV_NAME_WALLJUMP"), ItemChangerLanguageStrings.INV_NAME_WALLJUMP_RIGHT())
                 ]
         }
     };
@@ -69,14 +69,14 @@ internal partial class BaseItemList
         {
             Fallback = new MsgUIDef
             {
-                Name = ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_LEFT,
-                ShopDesc = ItemChangerLanguageStrings.INV_DESC_SKILL_SPRINT_LEFT,
+                Name = ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_LEFT(),
+                ShopDesc = ItemChangerLanguageStrings.INV_DESC_SKILL_SPRINT_LEFT(),
                 Sprite = BaseAtlasSprites.Swift_Step.Project(),
             },
             BaseStateName = "Set Sprint",
             Sprite = BaseAtlasSprites.Swift_Step_Big.Project(),
             Replacements = [
-                (new LanguageString("UI", "INV_NAME_SKILL_SPRINT"), ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_LEFT)
+                (new LanguageString("UI", "INV_NAME_SKILL_SPRINT"), ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_LEFT())
                 ]
         }
     };
@@ -89,14 +89,14 @@ internal partial class BaseItemList
         {
             Fallback = new MsgUIDef
             {
-                Name = ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_RIGHT,
-                ShopDesc = ItemChangerLanguageStrings.INV_DESC_SKILL_SPRINT_RIGHT,
+                Name = ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_RIGHT(),
+                ShopDesc = ItemChangerLanguageStrings.INV_DESC_SKILL_SPRINT_RIGHT(),
                 Sprite = BaseAtlasSprites.Swift_Step.FlipX(),
             },
             BaseStateName = "Set Sprint",
             Sprite = BaseAtlasSprites.Swift_Step_Big.FlipX(),
             Replacements = [
-                (new LanguageString("UI", "INV_NAME_SKILL_SPRINT"), ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_RIGHT)
+                (new LanguageString("UI", "INV_NAME_SKILL_SPRINT"), ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_RIGHT())
                 ]
         }
 ,
@@ -110,14 +110,14 @@ internal partial class BaseItemList
         {
             Fallback = new MsgUIDef
             {
-                Name = ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_LEFT,
-                ShopDesc = ItemChangerLanguageStrings.INV_DESC_SKILL_HARPOON_LEFT,
+                Name = ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_LEFT(),
+                ShopDesc = ItemChangerLanguageStrings.INV_DESC_SKILL_HARPOON_LEFT(),
                 Sprite = BaseAtlasSprites.Clawline.Project(),
             },
             BaseStateName = "Set Harpoon Dash",
             Sprite = BaseAtlasSprites.Clawline_Big.FlipX(),
             Replacements = [
-                (new LanguageString("UI", "INV_NAME_SKILL_HARPOON"), ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_LEFT)
+                (new LanguageString("UI", "INV_NAME_SKILL_HARPOON"), ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_LEFT())
                 ]
         }
 
@@ -131,14 +131,14 @@ internal partial class BaseItemList
         {
             Fallback = new MsgUIDef
             {
-                Name = ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_RIGHT,
-                ShopDesc = ItemChangerLanguageStrings.INV_DESC_SKILL_HARPOON_RIGHT,
+                Name = ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_RIGHT(),
+                ShopDesc = ItemChangerLanguageStrings.INV_DESC_SKILL_HARPOON_RIGHT(),
                 Sprite = BaseAtlasSprites.Clawline.FlipX(),
             },
             BaseStateName = "Set Harpoon Dash",
             Sprite = BaseAtlasSprites.Clawline_Big.Project(),
             Replacements = [
-                (new LanguageString("UI", "INV_NAME_SKILL_HARPOON"), ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_RIGHT)
+                (new LanguageString("UI", "INV_NAME_SKILL_HARPOON"), ItemChangerLanguageStrings.INV_NAME_SKILL_HARPOON_RIGHT())
                 ]
         }
     };
@@ -149,8 +149,8 @@ internal partial class BaseItemList
         ModuleTypeName = typeof(SplitNeedle).FullName,
         UIDef = new MsgUIDef
         {
-            Name = ItemChangerLanguageStrings.INV_NAME_LEFTSLASH,
-            ShopDesc = ItemChangerLanguageStrings.INV_DESC_ANYSLASH,
+            Name = ItemChangerLanguageStrings.INV_NAME_LEFTSLASH(),
+            ShopDesc = ItemChangerLanguageStrings.INV_DESC_ANYSLASH(),
             Sprite = null!,
         },
     };
@@ -161,8 +161,8 @@ internal partial class BaseItemList
         ModuleTypeName = typeof(SplitNeedle).FullName,
         UIDef = new MsgUIDef
         {
-            Name = ItemChangerLanguageStrings.INV_NAME_RIGHTSLASH,
-            ShopDesc = ItemChangerLanguageStrings.INV_DESC_ANYSLASH,
+            Name = ItemChangerLanguageStrings.INV_NAME_RIGHTSLASH(),
+            ShopDesc = ItemChangerLanguageStrings.INV_DESC_ANYSLASH(),
             Sprite = null!,
         },
     };
@@ -173,8 +173,8 @@ internal partial class BaseItemList
         ModuleTypeName = typeof(SplitNeedle).FullName,
         UIDef = new MsgUIDef
         {
-            Name = ItemChangerLanguageStrings.INV_NAME_UPSLASH,
-            ShopDesc = ItemChangerLanguageStrings.INV_DESC_ANYSLASH,
+            Name = ItemChangerLanguageStrings.INV_NAME_UPSLASH(),
+            ShopDesc = ItemChangerLanguageStrings.INV_DESC_ANYSLASH(),
             Sprite = null!,
         },
     };
@@ -185,8 +185,8 @@ internal partial class BaseItemList
         ModuleTypeName = typeof(SplitNeedle).FullName,
         UIDef = new MsgUIDef
         {
-            Name = ItemChangerLanguageStrings.INV_NAME_DOWNSLASH,
-            ShopDesc = ItemChangerLanguageStrings.INV_DESC_ANYSLASH,
+            Name = ItemChangerLanguageStrings.INV_NAME_DOWNSLASH(),
+            ShopDesc = ItemChangerLanguageStrings.INV_DESC_ANYSLASH(),
             Sprite = null!,
         },
     };
@@ -200,8 +200,8 @@ internal partial class BaseItemList
         { 
             Fallback = new MsgUIDef()
             {
-                Name = ItemChangerLanguageStrings.INV_NAME_TAUNT,
-                ShopDesc = ItemChangerLanguageStrings.INV_DESC_TAUNT,
+                Name = ItemChangerLanguageStrings.INV_NAME_TAUNT(),
+                ShopDesc = ItemChangerLanguageStrings.INV_DESC_TAUNT(),
                 Sprite = new ICSilksongSprite("Images.taunt_prompt"),
                 SpriteScale = 0.4f
             },
@@ -211,10 +211,10 @@ internal partial class BaseItemList
                 ActionString = GlobalEnums.HeroActionButton.TAUNT.ToString(),
                 TextSetters = new()
                 {
-                    ["Item Name"] = ItemChangerLanguageStrings.INV_NAME_TAUNT,
+                    ["Item Name"] = ItemChangerLanguageStrings.INV_NAME_TAUNT(),
                     ["Item Name Prefix"] = new LanguageString("Prompts", "GET_ITEM_INTRO1"),
                     ["Single Prompt/Press"] = new LanguageString("Prompts", "BUTTON_DESC_PRESS"),
-                    ["Msg 1"] = ItemChangerLanguageStrings.GET_TAUNT_1,
+                    ["Msg 1"] = ItemChangerLanguageStrings.GET_TAUNT_1(),
                     ["Msg 2"] = new BoxedString { Value = string.Empty },
                 },
                 PositionOverrides = new()

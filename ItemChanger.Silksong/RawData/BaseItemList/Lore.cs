@@ -23,7 +23,7 @@ internal static partial class BaseItemList
             {
                 Fallback = new MsgUIDef()
                 {
-                    Name = ItemChangerLanguageStrings.INV_NAME_LORE,
+                    Name = ItemChangerLanguageStrings.INV_NAME_LORE(),
                     Sprite = new EmptySprite(),
                 },
                 Text = new LanguageString(sheet, key),

@@ -2,6 +2,8 @@
   "FMT_PAY_ROSARIES": "{ROSARY_COUNT} {ROSARY_NAME}",
   "FMT_PAY_SHELL_SHARDS": "{SHELL_SHARDS_COUNT} {SHELL_SHARDS_NAME}",
   "FMT_PAY_MOSSBERRIES": "{0} Mossberries",
+  "FMT_PAY_SILKEATERS": "{0} morsels",
+  "FMT_PAY_TOOLS": "Acquire {0} more tools to prove aptitude.",
   "FMT_PAY_TOOL_SLOTS": "{0} Tool Slots",
   "FMT_FAST_TRAVEL_PATTERN": "{TRAVEL_TYPE} - {STATION_NAME}",
   "FMT_MATERIUM_ENTRY_NAME": "{0} Entry",
@@ -28,7 +30,10 @@
   "INV_NAME_TAUNT": "Taunt",
   "INV_DESC_TAUNT": "Learn the power to skip Sister Splinter",
   "GET_TAUNT_1": "Goad enemies into attacking",
+ 
+  "CITADEL_MAP_PROMPT_PREVIEW":  "A machine displaying a model of {PREVIEW_TEXT}.",
   "SHOP_DESC_ROSARIES": "We're having a firesale today, go ahead and collect your rebate.",
+  "SKYNX_CHARITY": "Receive items?",
 
   "CREST_HUNTER_NAME": "Crest of Hunter",
   "CREST_HUNTER_V2_NAME": "Crest of Hunter Level 2",

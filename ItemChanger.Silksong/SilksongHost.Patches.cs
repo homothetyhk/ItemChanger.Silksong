@@ -78,7 +78,7 @@ public partial class SilksongHost
 
 
     [HarmonyPatch]
-    private static class Patches
+    internal static class Patches
     {
         [HarmonyPatch(typeof(GameManager), nameof(GameManager.StartNewGame))]
         [HarmonyPrefix]
@@ -124,15 +124,15 @@ public partial class SilksongHost
             Host.lifecycleInvoker?.NotifyAfterContinueGame();
         }
 
-        [HarmonyPrefix]
         [HarmonyPatch(typeof(GameManager), nameof(GameManager.ResetSemiPersistentItems))]
+        [HarmonyPrefix]
         private static void BeforeResetSemiPersistentItems()
         {
             Host.gameInvoker?.NotifySemiPersistentUpdate();
         }
 
-        [HarmonyPrefix]
         [HarmonyPatch(typeof(GameManager), nameof(GameManager.BeginSceneTransition))]
+        [HarmonyPrefix]
         private static void BeforeBeginSceneTransition(GameManager __instance, GameManager.SceneLoadInfo info)
         {
             try
@@ -178,8 +178,8 @@ public partial class SilksongHost
         }
 
         // Run this as a prefix to avoid logging messages when the sheet does not exist
-        [HarmonyPrefix]
         [HarmonyPatch(typeof(Language), nameof(Language.Get), [typeof(string), typeof(string)])]
+        [HarmonyPrefix]
         private static bool LanguageGetPrefix(string key, string sheetTitle, ref string __result)
         {
             if (sheetTitle == ITEMCHANGER_EXACT_SHEET)
@@ -191,8 +191,20 @@ public partial class SilksongHost
             return true;
         }
 
+        // Allow calls to Get() to go through when the key is not present in the base language dicts.
+        [HarmonyPatch(typeof(Language), nameof(Language.Has), [typeof(string), typeof(string)])]
+        [HarmonyPostfix]
+        private static void LanguageGetPostfix(string key, string sheetTitle, ref bool __result)
+        {
+            if (__result) return;
+
+            LanguageString id = new(Sheet: sheetTitle, Key: key);
+            __result = Host.languageEdits.ContainsKey(id);
+        }
+
         [HarmonyPatch(typeof(Language), nameof(Language.Get), [typeof(string), typeof(string)])]
-        private static void Postfix(string key, string sheetTitle, ref string __result)
+        [HarmonyPostfix]
+        private static void LanguageGetPostfix(string key, string sheetTitle, ref string __result)
         {
             LanguageString id = new(sheetTitle, key);
             if (Host.languageEdits.TryGetValue(id, out List<Func<string, string>> list))
@@ -211,9 +223,9 @@ public partial class SilksongHost
             }
         }
 
-        [HarmonyPrefix]
         [HarmonyPatch(typeof(Language), nameof(Language.Has), [typeof(string), typeof(string)])]
-        private static bool LanguageHas(string key, string sheetTitle, ref bool __result)
+        [HarmonyPrefix]
+        private static bool LanguageHasPrefix(string key, string sheetTitle, ref bool __result)
         {
             if (sheetTitle == ITEMCHANGER_EXACT_SHEET)
             {
@@ -230,6 +242,5 @@ public partial class SilksongHost
 
             return true;
         }
-
     }
 }
