@@ -80,7 +80,7 @@
     <PackageReference Include="Harmonize" Version="1.0.6" PrivateAssets="all" />
     <PackageReference Include="Hamunii.BepInEx.AutoPlugin" Version="2.1.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.26.0" PrivateAssets="all" />
-    <PackageReference Include="MonoDetour" Version="0.7.13" />
+    <PackageReference Include="MonoDetour" Version="0.7.15" />
     <PackageReference Include="MonoDetour.HookGen" Version="0.7.13" PrivateAssets="all" />
     <PackageReference Include="PolySharp" Version="1.16.0">
       <PrivateAssets>all</PrivateAssets>

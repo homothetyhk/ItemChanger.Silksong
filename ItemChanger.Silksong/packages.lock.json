@@ -63,9 +63,9 @@
       },
       "MonoDetour": {
         "type": "Direct",
-        "requested": "[0.7.13, )",
-        "resolved": "0.7.13",
-        "contentHash": "A1v0WMKfTbRv3O1l6Myel56AGWfC1SRaXvkXqhLgHL31sttxwMww/ncJS9jpsclqs4hPx8zqcM29AkrqM8WDAg==",
+        "requested": "[0.7.15, )",
+        "resolved": "0.7.15",
+        "contentHash": "7Ges3MvU0KbFb6kiV/v4EQTGEDcENlYAJlxzaUWCrenJwIBFy65Ebr4yj4AdbASQfMt6zailCAbBSdeXphmmaA==",
         "dependencies": {
           "MonoMod.RuntimeDetour": "21.12.13.1"
         }
