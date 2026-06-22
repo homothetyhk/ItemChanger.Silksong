@@ -101,9 +101,9 @@
       },
       "Silksong.Benchwarp": {
         "type": "Direct",
-        "requested": "[1.1.5, )",
-        "resolved": "1.1.5",
-        "contentHash": "w37730EMRjzc2VnY8o1io3khw9OfELHIidZXfrKvuzPK9vtSTnizDMHeBBY7HVhALV3JUphSDEOJ19aufDoJgA==",
+        "requested": "[1.2.0, )",
+        "resolved": "1.2.0",
+        "contentHash": "2+/LYkRi1BLJMRMzX5HqxbgiVmLgRdP4wWC9KB1wrYf9uKdwgHOCkY0tZolefrokPSYYBRR2Eds/2gH7ySfMrA==",
         "dependencies": {
           "BepInEx.Core": "5.4.21",
           "HarmonyX": "2.9.0",
