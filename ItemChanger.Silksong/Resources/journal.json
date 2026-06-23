@@ -1,0 +1,950 @@
+[
+    {
+        "InternalName": "MossBone Crawler",
+        "DisplayName": "Mossgrub"
+    },
+    {
+        "InternalName": "MossBone Crawler Fat",
+        "DisplayName": "Massive Mossgrub"
+    },
+    {
+        "InternalName": "MossBone Fly",
+        "DisplayName": "Mossmir"
+    },
+    {
+        "InternalName": "Mossbone Mother",
+        "DisplayName": "Moss Mother"
+    },
+    {
+        "InternalName": "Aspid Collector",
+        "DisplayName": "Aknid"
+    },
+    {
+        "InternalName": "Bone Goomba",
+        "DisplayName": "Skull Scuttler"
+    },
+    {
+        "InternalName": "Bone Goomba Bounce Fly",
+        "DisplayName": "Skullwing"
+    },
+    {
+        "InternalName": "Bone Goomba Large",
+        "DisplayName": "Skull Brute"
+    },
+    {
+        "InternalName": "Skull King",
+        "DisplayName": "Skull Tyrant"
+    },
+    {
+        "InternalName": "Bone Crawler",
+        "DisplayName": "Kilik"
+    },
+    {
+        "InternalName": "Bone Flyer",
+        "DisplayName": "Beastfly"
+    },
+    {
+        "InternalName": "Bone Flyer Giant",
+        "DisplayName": "Savage Beastfly"
+    },
+    {
+        "InternalName": "Bone Circler",
+        "DisplayName": "Caranid"
+    },
+    {
+        "InternalName": "Bone Circler Vicious",
+        "DisplayName": "Vicious Caranid"
+    },
+    {
+        "InternalName": "Bone Hopper",
+        "DisplayName": "Hardbone Hopper"
+    },
+    {
+        "InternalName": "Bone Hopper Giant",
+        "DisplayName": "Hardbone Elder"
+    },
+    {
+        "InternalName": "Bone Spitter",
+        "DisplayName": "Tarmite"
+    },
+    {
+        "InternalName": "Bone Roller",
+        "DisplayName": "Mawling"
+    },
+    {
+        "InternalName": "Bone Thumper",
+        "DisplayName": "Marrowmaw"
+    },
+    {
+        "InternalName": "Spine Floater",
+        "DisplayName": "Hoker"
+    },
+    {
+        "InternalName": "Rock Roller",
+        "DisplayName": "Flintbeetle"
+    },
+    {
+        "InternalName": "Rhino",
+        "DisplayName": "Rhinogrund"
+    },
+    {
+        "InternalName": "Crypt Worm",
+        "DisplayName": "Gromling"
+    },
+    {
+        "InternalName": "Bone Worm",
+        "DisplayName": "Grom"
+    },
+    {
+        "InternalName": "Bone Beast",
+        "DisplayName": "Bell Beast"
+    },
+    {
+        "InternalName": "Pilgrim 03",
+        "DisplayName": "Pilgrim Groveller"
+    },
+    {
+        "InternalName": "Pilgrim 01",
+        "DisplayName": "Pilgrim Pouncer"
+    },
+    {
+        "InternalName": "Pilgrim 04",
+        "DisplayName": "Pilgrim Hornfly"
+    },
+    {
+        "InternalName": "Pilgrim 02",
+        "DisplayName": "Pilgrim Hulk"
+    },
+    {
+        "InternalName": "Pilgrim Bell Thrower",
+        "DisplayName": "Pilgrim Bellbearer"
+    },
+    {
+        "InternalName": "Pilgrim Fly",
+        "DisplayName": "Winged Pilgrim"
+    },
+    {
+        "InternalName": "Pilgrim 05",
+        "DisplayName": "Elder Pilgrim"
+    },
+    {
+        "InternalName": "Pilgrim Bellthrower Fly",
+        "DisplayName": "Winged Pilgrim Bellbearer"
+    },
+    {
+        "InternalName": "Pilgrim Hiker",
+        "DisplayName": "Pilgrim Hiker"
+    },
+    {
+        "InternalName": "Pilgrim StaffWielder",
+        "DisplayName": "Pilgrim Guide"
+    },
+    {
+        "InternalName": "Pilgrim Moss Spitter",
+        "DisplayName": "Overgrown Pilgrim"
+    },
+    {
+        "InternalName": "Rosary Pilgrim",
+        "DisplayName": "Covetous Pilgrim"
+    },
+    {
+        "InternalName": "Rosary Thief",
+        "DisplayName": "Snitchfly"
+    },
+    {
+        "InternalName": "Tar Slug",
+        "DisplayName": "Lavalug"
+    },
+    {
+        "InternalName": "Tar Slug Huge",
+        "DisplayName": "Lavalarga"
+    },
+    {
+        "InternalName": "Dock Worker",
+        "DisplayName": "Smelt Shoveller"
+    },
+    {
+        "InternalName": "Dock Flyer",
+        "DisplayName": "Flintstone Flyer"
+    },
+    {
+        "InternalName": "Dock Bomber",
+        "DisplayName": "Flintflame Flyer"
+    },
+    {
+        "InternalName": "Shield Dock Worker",
+        "DisplayName": "Smokerock Sifter"
+    },
+    {
+        "InternalName": "Dock Charger",
+        "DisplayName": "Deep Diver"
+    },
+    {
+        "InternalName": "Dock Guard Thrower",
+        "DisplayName": "Forebrothers Signis & Gron"
+    },
+    {
+        "InternalName": "Small Crab",
+        "DisplayName": "Cragglite"
+    },
+    {
+        "InternalName": "Roof Crab",
+        "DisplayName": "Craggler"
+    },
+    {
+        "InternalName": "Fields Flock Flyers",
+        "DisplayName": "Brushflit"
+    },
+    {
+        "InternalName": "Fields Goomba",
+        "DisplayName": "Fertid"
+    },
+    {
+        "InternalName": "Fields Flyer",
+        "DisplayName": "Flapping Fertid"
+    },
+    {
+        "InternalName": "Song Golem",
+        "DisplayName": "Fourth Chorus"
+    },
+    {
+        "InternalName": "Bone Hunter Tiny",
+        "DisplayName": "Skarrlid"
+    },
+    {
+        "InternalName": "Bone Hunter Buzzer",
+        "DisplayName": "Skarrwing"
+    },
+    {
+        "InternalName": "Bone Hunter Child",
+        "DisplayName": "Skarr Scout"
+    },
+    {
+        "InternalName": "Bone Hunter",
+        "DisplayName": "Skarr Stalker"
+    },
+    {
+        "InternalName": "Bone Hunter Fly",
+        "DisplayName": "Spear Skarr"
+    },
+    {
+        "InternalName": "Bone Hunter Throw",
+        "DisplayName": "Skarrgard"
+    },
+    {
+        "InternalName": "Bone Hunter Trapper",
+        "DisplayName": "Gurr the Outcast"
+    },
+    {
+        "InternalName": "Bone Hunter Chief",
+        "DisplayName": "Last Claw"
+    },
+    {
+        "InternalName": "Hunter Queen",
+        "DisplayName": "Skarrsinger Karmelita"
+    },
+    {
+        "InternalName": "Mite",
+        "DisplayName": "Mite"
+    },
+    {
+        "InternalName": "Mitefly",
+        "DisplayName": "Fluttermite"
+    },
+    {
+        "InternalName": "Gnat Giant",
+        "DisplayName": "Mitemother"
+    },
+    {
+        "InternalName": "Farmer Catcher",
+        "DisplayName": "Dreg Catcher"
+    },
+    {
+        "InternalName": "Farmer Scissors",
+        "DisplayName": "Silk Snipper"
+    },
+    {
+        "InternalName": "Farmer Centipede",
+        "DisplayName": "Thread Raker"
+    },
+    {
+        "InternalName": "Vampire Gnat",
+        "DisplayName": "Moorwing"
+    },
+    {
+        "InternalName": "Wisp",
+        "DisplayName": "Wisp"
+    },
+    {
+        "InternalName": "Farmer Wisp",
+        "DisplayName": "Burning Bug"
+    },
+    {
+        "InternalName": "Wisp Pyre Effigy",
+        "DisplayName": "Father of the Flame"
+    },
+    {
+        "InternalName": "Crow",
+        "DisplayName": "Craw"
+    },
+    {
+        "InternalName": "Crowman",
+        "DisplayName": "Tallcraw"
+    },
+    {
+        "InternalName": "Crowman Dagger",
+        "DisplayName": "Squatcraw"
+    },
+    {
+        "InternalName": "Crowman Juror Tiny",
+        "DisplayName": "Craw Juror"
+    },
+    {
+        "InternalName": "Crowman Juror",
+        "DisplayName": "Tallcraw Juror"
+    },
+    {
+        "InternalName": "Crowman Dagger Juror",
+        "DisplayName": "Squatcraw Juror"
+    },
+    {
+        "InternalName": "Crawfather",
+        "DisplayName": "Crawfather"
+    },
+    {
+        "InternalName": "Maggots",
+        "DisplayName": "Muckmaggot"
+    },
+    {
+        "InternalName": "Dustroach Pollywog",
+        "DisplayName": "Slubberlug"
+    },
+    {
+        "InternalName": "Dustroach",
+        "DisplayName": "Muckroach"
+    },
+    {
+        "InternalName": "Bloat Roach",
+        "DisplayName": "Bloatroach"
+    },
+    {
+        "InternalName": "Roachfeeder Short",
+        "DisplayName": "Roachcatcher"
+    },
+    {
+        "InternalName": "Roachfeeder Tall",
+        "DisplayName": "Roachfeeder"
+    },
+    {
+        "InternalName": "Roachkeeper",
+        "DisplayName": "Roachkeeper"
+    },
+    {
+        "InternalName": "Roachkeeper Chef Tiny",
+        "DisplayName": "Roachserver"
+    },
+    {
+        "InternalName": "Roachkeeper Chef",
+        "DisplayName": "Disgraced Chef Lugoli"
+    },
+    {
+        "InternalName": "Wraith",
+        "DisplayName": "Wraith"
+    },
+    {
+        "InternalName": "Swamp Drifter",
+        "DisplayName": "Mothleaf Lagnia"
+    },
+    {
+        "InternalName": "Swamp Goomba",
+        "DisplayName": "Miremite"
+    },
+    {
+        "InternalName": "Swamp Mosquito",
+        "DisplayName": "Swamp Squit"
+    },
+    {
+        "InternalName": "Swamp Mosquito Skinny",
+        "DisplayName": "Spit Squit"
+    },
+    {
+        "InternalName": "Swamp Muckman",
+        "DisplayName": "Stilkin"
+    },
+    {
+        "InternalName": "Swamp Muckman Tall",
+        "DisplayName": "Stilkin Trapper"
+    },
+    {
+        "InternalName": "Swamp Shaman",
+        "DisplayName": "Groal the Great"
+    },
+    {
+        "InternalName": "Swamp Barnacle",
+        "DisplayName": "Barnak"
+    },
+    {
+        "InternalName": "Swamp Ductsucker",
+        "DisplayName": "Ductsucker"
+    },
+    {
+        "InternalName": "Pond Skater",
+        "DisplayName": "Pond Skipper"
+    },
+    {
+        "InternalName": "Pilgrim Fisher",
+        "DisplayName": "Pondcatcher"
+    },
+    {
+        "InternalName": "Shellwood Gnat",
+        "DisplayName": "Shellwood Gnat"
+    },
+    {
+        "InternalName": "Shellwood Wasp",
+        "DisplayName": "Wood Wasp"
+    },
+    {
+        "InternalName": "Stick Insect",
+        "DisplayName": "Splinter"
+    },
+    {
+        "InternalName": "Stick Insect Charger",
+        "DisplayName": "Splinterhorn"
+    },
+    {
+        "InternalName": "Stick Insect Flyer",
+        "DisplayName": "Splinterbark"
+    },
+    {
+        "InternalName": "Splinter Queen",
+        "DisplayName": "Sister Splinter"
+    },
+    {
+        "InternalName": "Flower Drifter",
+        "DisplayName": "Phacia"
+    },
+    {
+        "InternalName": "Bloom Shooter",
+        "DisplayName": "Pollenica"
+    },
+    {
+        "InternalName": "Bloom Puncher",
+        "DisplayName": "Gahlia"
+    },
+    {
+        "InternalName": "Seth",
+        "DisplayName": "Shrine Guardian Seth"
+    },
+    {
+        "InternalName": "Flower Queen",
+        "DisplayName": "Nyleth"
+    },
+    {
+        "InternalName": "Bell Goomba",
+        "DisplayName": "Furm"
+    },
+    {
+        "InternalName": "Bell Fly",
+        "DisplayName": "Winged Furm"
+    },
+    {
+        "InternalName": "Blade Spider",
+        "DisplayName": "Pharlid"
+    },
+    {
+        "InternalName": "Blade Spider Hang",
+        "DisplayName": "Pharlid Diver"
+    },
+    {
+        "InternalName": "Shell Fossil Mimic",
+        "DisplayName": "Shardillard"
+    },
+    {
+        "InternalName": "Sand Centipede",
+        "DisplayName": "Sandcarver"
+    },
+    {
+        "InternalName": "Coral Judge Child",
+        "DisplayName": "Squirrm"
+    },
+    {
+        "InternalName": "Coral Judge",
+        "DisplayName": "Judge"
+    },
+    {
+        "InternalName": "Last Judge",
+        "DisplayName": "Last Judge"
+    },
+    {
+        "InternalName": "Coral Spike Goomba",
+        "DisplayName": "Coral Furm"
+    },
+    {
+        "InternalName": "Coral Conch Shooter",
+        "DisplayName": "Driznit"
+    },
+    {
+        "InternalName": "Coral Conch Shooter Heavy",
+        "DisplayName": "Driznarga"
+    },
+    {
+        "InternalName": "Coral Conch Stabber",
+        "DisplayName": "Pokenabbin"
+    },
+    {
+        "InternalName": "Coral Conch Driller",
+        "DisplayName": "Conchfly"
+    },
+    {
+        "InternalName": "Coral Conch Driller Giant",
+        "DisplayName": "Great Conchfly"
+    },
+    {
+        "InternalName": "Coral Goombas",
+        "DisplayName": "Crustcrawler"
+    },
+    {
+        "InternalName": "Coral Goomba Large",
+        "DisplayName": "Crustcrag"
+    },
+    {
+        "InternalName": "Coral Swimmer Fat",
+        "DisplayName": "Kai"
+    },
+    {
+        "InternalName": "Poke Swimmer",
+        "DisplayName": "Spinebeak Kai"
+    },
+    {
+        "InternalName": "Spike Swimmer",
+        "DisplayName": "Steelspine Kai"
+    },
+    {
+        "InternalName": "Coral Swimmer Small",
+        "DisplayName": "Yuma"
+    },
+    {
+        "InternalName": "Coral Big Jellyfish",
+        "DisplayName": "Yumama"
+    },
+    {
+        "InternalName": "Coral Warrior",
+        "DisplayName": "Karaka"
+    },
+    {
+        "InternalName": "Coral Flyer",
+        "DisplayName": "Kakri"
+    },
+    {
+        "InternalName": "Coral Flyer Throw",
+        "DisplayName": "Yago"
+    },
+    {
+        "InternalName": "Coral Brawler",
+        "DisplayName": "Karak Gor"
+    },
+    {
+        "InternalName": "Coral Hunter",
+        "DisplayName": "Alita"
+    },
+    {
+        "InternalName": "Coral Bubble Brute",
+        "DisplayName": "Corrcrust Karaka"
+    },
+    {
+        "InternalName": "Coral King",
+        "DisplayName": "Crust King Khann"
+    },
+    {
+        "InternalName": "Coral Warrior Grey",
+        "DisplayName": "Watcher at the Edge"
+    },
+    {
+        "InternalName": "Zap Core Enemy",
+        "DisplayName": "Voltvyrm"
+    },
+    {
+        "InternalName": "Citadel Bat",
+        "DisplayName": "Drapefly"
+    },
+    {
+        "InternalName": "Citadel Bat Large",
+        "DisplayName": "Drapelord"
+    },
+    {
+        "InternalName": "Mite Heavy",
+        "DisplayName": "Drapemite"
+    },
+    {
+        "InternalName": "Understore Mite Giant",
+        "DisplayName": "Giant Drapemite"
+    },
+    {
+        "InternalName": "Understore Small",
+        "DisplayName": "Underworker"
+    },
+    {
+        "InternalName": "Pilgrim 03 Understore",
+        "DisplayName": "Underscrub"
+    },
+    {
+        "InternalName": "Pilgrim Staff Understore",
+        "DisplayName": "Undersweep"
+    },
+    {
+        "InternalName": "Understore Poker",
+        "DisplayName": "Underpoke"
+    },
+    {
+        "InternalName": "Understore Thrower",
+        "DisplayName": "Underloft"
+    },
+    {
+        "InternalName": "Understore Heavy",
+        "DisplayName": "Undercrank"
+    },
+    {
+        "InternalName": "Song Pilgrim 01",
+        "DisplayName": "Envoy"
+    },
+    {
+        "InternalName": "Pilgrim 01 Song",
+        "DisplayName": "Choir Pouncer"
+    },
+    {
+        "InternalName": "Pilgrim 02 Song",
+        "DisplayName": "Choir Hornhead"
+    },
+    {
+        "InternalName": "Pilgrim 03 Song",
+        "DisplayName": "Choir Bellbearer"
+    },
+    {
+        "InternalName": "Pilgrim 04 Song",
+        "DisplayName": "Choir Flyer"
+    },
+    {
+        "InternalName": "Pilgrim Stomper Song",
+        "DisplayName": "Choir Elder"
+    },
+    {
+        "InternalName": "Song Pilgrim 03",
+        "DisplayName": "Choristor"
+    },
+    {
+        "InternalName": "Song Reed",
+        "DisplayName": "Reed"
+    },
+    {
+        "InternalName": "Song Reed Grand",
+        "DisplayName": "Grand Reed"
+    },
+    {
+        "InternalName": "Song Heavy Sentry",
+        "DisplayName": "Choir Clapper"
+    },
+    {
+        "InternalName": "Song Handmaiden",
+        "DisplayName": "Clawmaiden"
+    },
+    {
+        "InternalName": "Arborium Keeper",
+        "DisplayName": "Memoria"
+    },
+    {
+        "InternalName": "Song Administrator",
+        "DisplayName": "Minister"
+    },
+    {
+        "InternalName": "Song Pilgrim Maestro",
+        "DisplayName": "Maestro"
+    },
+    {
+        "InternalName": "Song Knight",
+        "DisplayName": "Second Sentinel"
+    },
+    {
+        "InternalName": "Song Threaded Husk",
+        "DisplayName": "Dreg Husk"
+    },
+    {
+        "InternalName": "Song Threaded Husk Spin",
+        "DisplayName": "Dregwheel"
+    },
+    {
+        "InternalName": "Song Pilgrim 02",
+        "DisplayName": "Surgeon"
+    },
+    {
+        "InternalName": "Song Creeper",
+        "DisplayName": "Mortician"
+    },
+    {
+        "InternalName": "Conductor Boss",
+        "DisplayName": "The Unravelled"
+    },
+    {
+        "InternalName": "Understore Automaton",
+        "DisplayName": "Cogwork Underfly"
+    },
+    {
+        "InternalName": "Understore Automaton EX",
+        "DisplayName": "Cogwork Hauler"
+    },
+    {
+        "InternalName": "Song Automaton Goomba",
+        "DisplayName": "Cogwork Crawler"
+    },
+    {
+        "InternalName": "Song Automaton Fly",
+        "DisplayName": "Cogworker"
+    },
+    {
+        "InternalName": "Song Automaton Fly Spike",
+        "DisplayName": "Cogwork Spine"
+    },
+    {
+        "InternalName": "Song Automaton 01",
+        "DisplayName": "Cogwork Choirbug"
+    },
+    {
+        "InternalName": "Song Automaton 02",
+        "DisplayName": "Cogwork Cleanser"
+    },
+    {
+        "InternalName": "Song Automaton Shield",
+        "DisplayName": "Cogwork Defender"
+    },
+    {
+        "InternalName": "Song Automaton Ball",
+        "DisplayName": "Cogwork Clapper"
+    },
+    {
+        "InternalName": "Clockwork Dancer",
+        "DisplayName": "Cogwork Dancers"
+    },
+    {
+        "InternalName": "Song Scholar Acolyte",
+        "DisplayName": "Vaultborn"
+    },
+    {
+        "InternalName": "Lightbearer",
+        "DisplayName": "Lampbearer"
+    },
+    {
+        "InternalName": "Scrollkeeper",
+        "DisplayName": "Scrollreader"
+    },
+    {
+        "InternalName": "Scholar",
+        "DisplayName": "Vaultkeeper"
+    },
+    {
+        "InternalName": "Trobbio",
+        "DisplayName": "Trobbio"
+    },
+    {
+        "InternalName": "Tormented Trobbio",
+        "DisplayName": "Tormented Trobbio"
+    },
+    {
+        "InternalName": "Slab Prisoner Leaper New",
+        "DisplayName": "Penitent"
+    },
+    {
+        "InternalName": "Slab Prisoner Fly New",
+        "DisplayName": "Puny Penitent"
+    },
+    {
+        "InternalName": "Slab Fly Small Fresh",
+        "DisplayName": "Freshfly"
+    },
+    {
+        "InternalName": "Slab Fly Small",
+        "DisplayName": "Scabfly"
+    },
+    {
+        "InternalName": "Slab Fly Mid",
+        "DisplayName": "Guardfly"
+    },
+    {
+        "InternalName": "Slab Fly Large",
+        "DisplayName": "Wardenfly"
+    },
+    {
+        "InternalName": "Slab Fly Broodmother",
+        "DisplayName": "Broodmother"
+    },
+    {
+        "InternalName": "Peaks Drifter",
+        "DisplayName": "Driftlin"
+    },
+    {
+        "InternalName": "Crystal Drifter",
+        "DisplayName": "Mnemonid"
+    },
+    {
+        "InternalName": "Crystal Drifter Giant",
+        "DisplayName": "Mnemonord"
+    },
+    {
+        "InternalName": "Weaver Servitor",
+        "DisplayName": "Servitor Ignim"
+    },
+    {
+        "InternalName": "Weaver Servitor Large",
+        "DisplayName": "Servitor Boran"
+    },
+    {
+        "InternalName": "Lifeblood Fly",
+        "DisplayName": "Winged Lifeseed"
+    },
+    {
+        "InternalName": "Bone Worm BlueBlood",
+        "DisplayName": "Plasmid"
+    },
+    {
+        "InternalName": "Bone Worm BlueTurret",
+        "DisplayName": "Plasmidas"
+    },
+    {
+        "InternalName": "Blue Assistant",
+        "DisplayName": "Plasmified Zango"
+    },
+    {
+        "InternalName": "Lilypad Fly",
+        "DisplayName": "Leaf Glider"
+    },
+    {
+        "InternalName": "Grass Goomba",
+        "DisplayName": "Leaf Roller"
+    },
+    {
+        "InternalName": "Hornet Dragonfly",
+        "DisplayName": "Pendra"
+    },
+    {
+        "InternalName": "Dragonfly Large",
+        "DisplayName": "Pendragor"
+    },
+    {
+        "InternalName": "Lilypad Trap",
+        "DisplayName": "Nuphar"
+    },
+    {
+        "InternalName": "Cloverstag",
+        "DisplayName": "Cloverstag"
+    },
+    {
+        "InternalName": "Cloverstag White",
+        "DisplayName": "Palestag"
+    },
+    {
+        "InternalName": "Grasshopper Child",
+        "DisplayName": "Kindanir"
+    },
+    {
+        "InternalName": "Grasshopper Slasher",
+        "DisplayName": "Verdanir"
+    },
+    {
+        "InternalName": "Grasshopper Fly",
+        "DisplayName": "Escalion"
+    },
+    {
+        "InternalName": "Clover Dancer",
+        "DisplayName": "Clover Dancers"
+    },
+    {
+        "InternalName": "Abyss Crawler",
+        "DisplayName": "Shadow Creeper"
+    },
+    {
+        "InternalName": "Abyss Crawler Large",
+        "DisplayName": "Shadow Charger"
+    },
+    {
+        "InternalName": "Gloomfly",
+        "DisplayName": "Gloomsac"
+    },
+    {
+        "InternalName": "Gloom Beast",
+        "DisplayName": "Gargant Gloom"
+    },
+    {
+        "InternalName": "Void Tendrils",
+        "DisplayName": "Void Tendrils"
+    },
+    {
+        "InternalName": "Black Thread Core",
+        "DisplayName": "Void Mass"
+    },
+    {
+        "InternalName": "Abyss Mass",
+        "DisplayName": "Summoned Saviour"
+    },
+    {
+        "InternalName": "White Palace Fly",
+        "DisplayName": "Wingmould"
+    },
+    {
+        "InternalName": "Centipede Trap",
+        "DisplayName": "Garpid"
+    },
+    {
+        "InternalName": "Spike Lazy Flyer",
+        "DisplayName": "Imoba"
+    },
+    {
+        "InternalName": "Surface Scuttler",
+        "DisplayName": "Skrill"
+    },
+    {
+        "InternalName": "Giant Centipede",
+        "DisplayName": "Bell Eater"
+    },
+    {
+        "InternalName": "Giant Flea",
+        "DisplayName": "Huge Flea"
+    },
+    {
+        "InternalName": "Shakra",
+        "DisplayName": "Shakra"
+    },
+    {
+        "InternalName": "Garmond_Zaza",
+        "DisplayName": "Garmond & Zaza"
+    },
+    {
+        "InternalName": "Garmond",
+        "DisplayName": "Lost Garmond"
+    },
+    {
+        "InternalName": "Pinstress Boss",
+        "DisplayName": "Pinstress"
+    },
+    {
+        "InternalName": "Spinner Boss",
+        "DisplayName": "Widow"
+    },
+    {
+        "InternalName": "First Weaver",
+        "DisplayName": "First Sinner"
+    },
+    {
+        "InternalName": "Phantom",
+        "DisplayName": "Phantom"
+    },
+    {
+        "InternalName": "Lace",
+        "DisplayName": "Lace"
+    },
+    {
+        "InternalName": "Silk Boss",
+        "DisplayName": "Grand Mother Silk"
+    },
+    {
+        "InternalName": "Lost Lace",
+        "DisplayName": "Lost Lace"
+    }
+]
