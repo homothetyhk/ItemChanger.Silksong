@@ -36,18 +36,23 @@ public class ElegyOfTheDeepLocation : AutoLocation
         // Overwrite dialog tree conditions. Location is obtainable as long as
         // the Abyss has been visited.
         FsmState dialogTreeState = fsm.MustGetState("Talk?");
-        int getMelodyIndex = dialogTreeState.IndexFirstActionMatching(action =>
-            action is BoolTestMulti boolTestAction
-            && boolTestAction.trueEvent.Name == "GET MELODY");
-        dialogTreeState.Actions[getMelodyIndex] = new LambdaAction()
+
+        for (int i = 0; i < dialogTreeState.Actions.Length; i++)
         {
-            Method = () =>
+            FsmStateAction action = dialogTreeState.Actions[i];
+            if (action is not BoolTestMulti { trueEvent.Name: "GET MELODY" }) continue;
+
+            LambdaAction newAction = new()
             {
-                if (LocationPreconditions.Value && !Placement!.AllObtained())
-                    fsm.SendEvent("GET MELODY");
-            }
-        };
-        dialogTreeState.AddLambdaMethod(_ => fsm.SendEvent("FINISHED"));
+                Method = () =>
+                {
+                    if (LocationPreconditions.Value && !Placement!.AllObtained())
+                        fsm.SendEvent("GET MELODY");
+                }
+            };
+
+            dialogTreeState.ReplaceAction(newAction, i);
+        }        
 
         // Skip the Elegy popup, grant the placement whilst the screen is black.
         FsmState popupState = fsm.MustGetState("Get Item Msg");
