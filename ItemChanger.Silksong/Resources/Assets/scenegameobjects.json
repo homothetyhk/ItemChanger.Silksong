@@ -42,5 +42,9 @@
   "BENCH_PARTICLE": {
     "SceneName": "Bone_04",
     "ObjPath": "RestBench/Particle Rest"
+  },
+  "TWISTED_BUD_AUDIO": {
+    "SceneName": "Shadow_20",
+    "ObjPath": "Collectable Mandrake Scene/Crying Audio Control"
   }
 }
