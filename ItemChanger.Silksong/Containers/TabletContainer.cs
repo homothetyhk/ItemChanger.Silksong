@@ -92,7 +92,7 @@ public class TabletContainer : Container
     /// </returns>
     public static GameObject InstantiateWeaverTablet(Scene scene, Func<string> messageProvider)
     {
-        GameObject tablet = GameObjectKeys.LORE_TABLET_WEAVER.InstantiateAsset(scene);
+        GameObject tablet = GameObjectKeys.LORE_TABLET_WEAVER().InstantiateAsset(scene);
 
         string modKey = "IC_WEAVER_TABLET";
         LocalisedString s = new(Localization.Sheet, modKey);

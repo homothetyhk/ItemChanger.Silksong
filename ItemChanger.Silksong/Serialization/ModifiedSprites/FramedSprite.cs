@@ -40,13 +40,13 @@ public class FramedSprite : ModifiedSprite
 
         Sprite frame = frameStyle switch
         {
-            FrameStyle.Normal => SpriteKeys.JOURNAL_BORDER_NORMAL.GetAsset<Sprite>(),  // 97x108
+            FrameStyle.Normal => SpriteKeys.JOURNAL_BORDER_NORMAL().GetAsset(),  // 97x108
             FrameStyle.Completed => BaseAtlasSprites.JournalBorderCompleted.Value,  // 122x130
             _ => throw new InvalidOperationException(),
         };
         
         // 34x34
-        Sprite background = SpriteKeys.JOURNAL_BACKGROUND.GetAsset<Sprite>();
+        Sprite background = SpriteKeys.JOURNAL_BACKGROUND().GetAsset();
 
         Sprite mainSprite = BaseSprite.Value;
 
