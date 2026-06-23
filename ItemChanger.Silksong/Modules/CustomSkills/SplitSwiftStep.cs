@@ -123,11 +123,11 @@ public class SplitSwiftStep : CustomSkillModule
     {
         if (hasDashLeft && !hasDashRight)
         {
-            return ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_LEFT.Value;
+            return ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_LEFT().Value;
         }
         if (hasDashRight && !hasDashLeft)
         {
-            return ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_RIGHT.Value;
+            return ItemChangerLanguageStrings.INV_NAME_SKILL_SPRINT_RIGHT().Value;
         }
         return _;
     }
@@ -136,11 +136,11 @@ public class SplitSwiftStep : CustomSkillModule
     {
         if (hasDashLeft && !hasDashRight)
         {
-            return ItemChangerLanguageStrings.INV_DESC_SKILL_SPRINT_LEFT.Value;
+            return ItemChangerLanguageStrings.INV_DESC_SKILL_SPRINT_LEFT().Value;
         }
         if (hasDashRight && !hasDashLeft)
         {
-            return ItemChangerLanguageStrings.INV_DESC_SKILL_SPRINT_RIGHT.Value;
+            return ItemChangerLanguageStrings.INV_DESC_SKILL_SPRINT_RIGHT().Value;
         }
         return _;
     }

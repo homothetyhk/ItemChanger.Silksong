@@ -1,11 +1,15 @@
 ﻿using ItemChanger.Containers;
 using ItemChanger.Costs;
+using ItemChanger.Enums;
 using ItemChanger.Items;
 using ItemChanger.Locations;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.RawData;
 using Newtonsoft.Json;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ItemChanger.Silksong.Extensions;
 
@@ -23,6 +27,44 @@ internal static class ICExtensions
     /// Returns a string provider for the items placed at this location.
     /// </summary>
     public static IValueProvider<string> UINameProvider(this Location l) => new UIName(l);
+    /// <summary>
+    /// Traverse all GameObjects in a scene.
+    /// </summary>
+    public static IEnumerable<GameObject> AllGameObjects(this Scene scene)
+    {
+        Queue<GameObject> queue = new();
+        foreach (var obj in scene.GetRootGameObjects()) queue.Enqueue(obj);
+
+        while (queue.Count > 0)
+        {
+            var obj = queue.Dequeue();
+            yield return obj;
+
+            foreach (Transform child in obj.transform) queue.Enqueue(child.gameObject);
+        }
+    }
+    /// <summary>
+    /// Spawn all unobtained items for this location at the specified coordinate.
+    /// Generally intended as a convenient alternative to codifying DualLocations, particularly when the coordinates can be inferred from existing objects.
+    /// </summary>
+    public static void SpawnItemsAtCoordinate(this Location loc, Vector3 pos, FlingType flingType = FlingType.Everywhere)
+    {
+        CoordinateLocation newLoc = new()
+        {
+            SceneName = loc.SceneName,
+            Name = loc.Name,
+            X = pos.x,
+            Y = pos.y,
+            Z = pos.z,
+            FlingType = flingType,
+            Managed = false,
+        };
+        newLoc.Placement = newLoc.Wrap();
+        newLoc.Placement.Items.AddRange(loc.Placement!.Items);
+
+        newLoc.GetContainer(SceneManager.GetActiveScene(), out var container, out var info);
+        newLoc.PlaceContainer(container, info);
+    }
     /// <summary>
     /// Returns a name incorporating the name of the placement and the indices of the items associated with the container.
     /// </summary>
@@ -50,6 +92,30 @@ internal static class ICExtensions
         profile.AddPlacement(
             ItemChangerHost.Singleton.Finder.GetLocation(LocationNames.Start)!.Wrap().Add(item),
             Enums.PlacementConflictResolution.MergeKeepingOld);
+    }
+
+    public static void OpenAndFlingItems(this ContainerInfo info, Transform transform, string containerName)
+    {
+        GiveInfo gi = new()
+        {
+            Container = containerName,
+            FlingType = info.GiveInfo.FlingType,
+            Transform = transform,
+            MessageType = MessageType.SmallPopup,
+        };
+
+        info.GiveInfo.Placement.AddVisitFlag(VisitState.Opened);
+        foreach (Item item in info.GiveInfo.Items)
+        {
+            if (!item.IsObtained())
+            {
+                if (item.GiveEarly(containerName))
+                {
+                    item.Give(info.GiveInfo.Placement, gi);
+                }
+                else ShinyContainer.Spawn(info, item, transform, fling: info.GiveInfo.FlingType == FlingType.Everywhere);
+            }
+        }
     }
 
     public static string GetUIName(this Placement pmt, IEnumerable<Item> items, int maxLength = 120)
@@ -87,6 +153,16 @@ internal static class ICExtensions
         c.Pay();
         return true;
     }
+
+    /// <summary>
+    /// Returns all sub-costs of this possible Multicost.
+    /// </summary>
+    public static IEnumerable<Cost> Flatten(this Cost cost) => cost is MultiCost multi ? [.. multi] : [cost];
+
+    /// <summary>
+    /// Returns all sub-costs that match the specified type, traversing nested Multicosts.
+   /// </summary>
+    public static IEnumerable<T> GetCostsOfType<T>(this Cost cost) => cost.Flatten().OfType<T>();
 
     /// <summary>
     /// Return a value provider that returns the same object as self but strongly typed as a subclass.

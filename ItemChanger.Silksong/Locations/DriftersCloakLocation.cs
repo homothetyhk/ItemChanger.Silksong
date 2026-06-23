@@ -23,9 +23,9 @@ public class DriftersCloakLocation : AutoLocation
 
     protected override void DoLoad()
     {
-        this.InjectPreviewText(new("Quests", "QUEST_BROLLY_GET_DESC"), ItemChangerLanguageStrings.QUEST_BROLLY_GET_DESC_PREVIEW);
-        this.InjectPreviewText(new("Wilds", "SEAMSTRESS_BROLLY_QUEST_OFFER"), ItemChangerLanguageStrings.SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW);
-        this.InjectPreviewText(new("Wilds", "SEAMSTRESS_BROLLY_QUEST_REOFFER"), ItemChangerLanguageStrings.SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW);
+        this.InjectPreviewText(new("Quests", "QUEST_BROLLY_GET_DESC"), ItemChangerLanguageStrings.QUEST_BROLLY_GET_DESC_PREVIEW());
+        this.InjectPreviewText(new("Wilds", "SEAMSTRESS_BROLLY_QUEST_OFFER"), ItemChangerLanguageStrings.SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW());
+        this.InjectPreviewText(new("Wilds", "SEAMSTRESS_BROLLY_QUEST_REOFFER"), ItemChangerLanguageStrings.SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW());
         Using(new FsmEditGroup() {{ new(SceneName!, "Seamstress", "Dialogue"), ModifyFsm }});
     }
 
