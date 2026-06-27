@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 namespace ItemChanger.Silksong.Modules.FastTravel;
 
 /// <summary>
-/// Module that, automatically unlocks all entrances to the Bell Eater arena
+/// Module that automatically unlocks all entrances to the Bell Eater arena
 /// and enables fast travel without defeating them.
 /// </summary>
 [SingletonModule]
@@ -22,12 +22,9 @@ public class BellEaterBypassModule : Module
 {
     /// <summary>
     /// A value provider controlling whether the Bell Eater arena is accessible (from all bellway stations).
-    /// Defaults to the world being in Act 3 and Needolin being obtained.
+    /// Defaults to the world being in Act 3.
     /// </summary>
-    public IValueProvider<bool> BellEaterAvailable { get; init; } = new Conjunction(
-        new PDBool(nameof(PlayerData.blackThreadWorld)),
-        new PDBool(nameof(PlayerData.hasNeedolin))
-    );
+    public IValueProvider<bool> BellEaterAvailable { get; init; } = new PDBool(nameof(PlayerData.blackThreadWorld));
 
     public static readonly IReadOnlyDictionary<string, FastTravelLocations> FastTravelScenes =
         new Dictionary<string, FastTravelLocations>()
