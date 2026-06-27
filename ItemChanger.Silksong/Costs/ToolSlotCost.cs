@@ -22,11 +22,11 @@ public class ToolSlotCost : Cost
         {
             if (crest.IsUnlocked && !crest.IsHidden && !crest.IsUpgradedVersionUnlocked)
             {
-                foreach (ToolCrest.SlotInfo slot in crest.Slots)
+                // Counting logic is based on the CountCrestUnlockPoints FSM action.
+                List<ToolCrestsData.SlotData> slotData = crest.SaveData.Slots;
+                for (int i = 0; i < crest.Slots.Length; i++)
                 {
-                    // CountCrestUnlockPoints also checks crest.SaveData.Slots;
-                    // not sure why.
-                    if (!slot.IsLocked)
+                    if (!crest.Slots[i].IsLocked || (slotData != null && i < slotData.Count && slotData[i].IsUnlocked))
                     {
                         n++;
                     }
