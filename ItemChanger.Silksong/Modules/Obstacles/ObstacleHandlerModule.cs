@@ -13,12 +13,12 @@ namespace ItemChanger.Silksong.Modules.Obstacles;
 /// Module which controls obstacle handling (transition fixes) using data provided by Benchwarp and by other modules.
 /// </summary>
 [SingletonModule]
-public sealed class ObstacleHandlerModule : Module, IObstacleHandler
+public sealed class ObstacleHandlerModule : Module, IObstacleProvider
 {
     /// <summary>
-    /// ObstacleHandler used on obstacles that are not ignored by <see cref="LocalIgnores"/> or <see cref="GlobalIgnores"/>.
+    /// <see cref="Benchwarp.Doors.Obstacles.ObstacleHandler"/> used on obstacles that are not ignored by <see cref="LocalIgnores"/> or <see cref="GlobalIgnores"/>.
     /// </summary>
-    public ObstacleHandler BaseObstacleHandler { get; set; } = new PermanentObstacleHandler();
+    public ObstacleHandler ObstacleHandler { get; set; } = new PermanentObstacleHandler();
     /// <summary>
     /// Rules that determine which obstacles to ignore on a per-transition basis.
     /// </summary>
@@ -41,7 +41,7 @@ public sealed class ObstacleHandlerModule : Module, IObstacleHandler
     /// RoomData and DoorData must be defined for any obstacles to be handled.
     /// </summary>
     [JsonIgnore] public List<ObstacleInjectorModule> ObstacleInjectors { get; } = [];
-    
+
     protected override void DoLoad()
     {
         GameEvents.BeforeNextSceneLoaded += BeforeNextScene;
@@ -68,7 +68,7 @@ public sealed class ObstacleHandlerModule : Module, IObstacleHandler
             return;
         }
 
-        ((IObstacleHandler)this).BeforeTransition(room, door);
+        ObstacleHandler.BeforeTransition(room, door, this);
         AttachToLoad(args.Info, room, door);
     }
 
@@ -90,39 +90,16 @@ public sealed class ObstacleHandlerModule : Module, IObstacleHandler
         {
             GameManager.instance.sceneLoad.ActivationComplete -= OnActivationComplete;
             Scene newScene = SceneManager.GetActiveScene();
-            ((IObstacleHandler)this).OnSceneChange(newScene, room, door);
+            ObstacleHandler.OnSceneChange(newScene, room, door, this);
         }
     }
 
-    void IObstacleHandler.BeforeTransition(RoomData room, DoorData gate)
+    public IEnumerable<ObstacleInfo> GetGateObstacles(RoomData room, DoorData door)
     {
-        LocalIgnores.TryGetValue(gate.Self, out List<IgnoreObstacleRule>? rules);
+        LocalIgnores.TryGetValue(door.Self, out List<IgnoreObstacleRule>? rules);
 
-        foreach (ObstacleInfo o in GetGateObstacles(room, gate))
-        {
-            if (!ShouldIgnore(rules, room, gate, o))
-            {
-                BaseObstacleHandler.HandleObstacleBeforeTransition(room, gate, o);
-            }
-        }
-    }
-
-    void IObstacleHandler.OnSceneChange(Scene scene, RoomData room, DoorData gate)
-    {
-        LocalIgnores.TryGetValue(gate.Self, out List<IgnoreObstacleRule>? rules);
-
-        foreach (ObstacleInfo o in GetGateObstacles(room, gate))
-        {
-            if (!ShouldIgnore(rules, room, gate, o))
-            {
-                BaseObstacleHandler.HandleObstacleOnActiveSceneChange(scene, room, gate, o);
-            }
-        }
-    }
-
-    private IEnumerable<ObstacleInfo> GetGateObstacles(RoomData room, DoorData door)
-    {
-        return door.Obstacles.Concat(ObstacleInjectors.SelectMany(m => m.GetObstacles(room, door)));
+        return door.Obstacles.Concat(ObstacleInjectors.SelectMany(m => m.GetObstacles(room, door)))
+            .Where(o => !ShouldIgnore(rules, room, door, o));
     }
 
     private bool ShouldIgnore(List<IgnoreObstacleRule>? localRules, RoomData room, DoorData door, ObstacleInfo info)

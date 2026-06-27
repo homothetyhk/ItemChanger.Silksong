@@ -40,8 +40,10 @@ public partial class SilksongHost : ItemChangerHost
             new SkipEndDialogueAnimModule(),
             new CrestUIMsgRepairModule(),
             new ConsistentRandomnessModule(),
+            new MainQuestReflowModule(),
             new ObstacleHandlerModule(),
             new ChapelDoorObstacleModule(),
+            new ReusableAbyssEscapeModule(),
             new RemoveCurrencyCapModule(),
             ];
     }

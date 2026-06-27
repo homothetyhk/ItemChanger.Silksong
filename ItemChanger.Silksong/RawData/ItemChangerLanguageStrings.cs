@@ -40,6 +40,7 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString QUEST_BROLLY_GET_DESC_PREVIEW => LanguageString.FromItemChanger(nameof(QUEST_BROLLY_GET_DESC_PREVIEW));
     public static LanguageString SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW));
     public static LanguageString SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW));
+    public static LanguageString SNAILS_ACT3_DESCEND_HINT => LanguageString.FromItemChanger(nameof(SNAILS_ACT3_DESCEND_HINT));
     public static LanguageString SHOP_DESC_ROSARIES => LanguageString.FromItemChanger(nameof(SHOP_DESC_ROSARIES));
 
     public static CompositeString CreatePayRosariesString(IValueProvider<int> rosaryCount)

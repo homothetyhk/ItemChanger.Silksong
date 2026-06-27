@@ -16,7 +16,7 @@ internal static partial class BaseLocationList
         Name = LocationNames.Hermit_s_Soul,
         TrueLocation = new CoordinateLocation()
         {
-            Name = "Bell Hermit act 3 shiny",
+            Name = LocationNames.Hermit_s_Soul,
             SceneName = SceneNames.Belltown_basement_03,
             X = 97.38f,
             Y = 102.57f,
@@ -32,6 +32,28 @@ internal static partial class BaseLocationList
         ),
     };
 
+    public static Location Maiden_s_Soul => new DualLocation()
+    {
+        Name = LocationNames.Maiden_s_Soul,
+        SceneName = SceneNames.Bonetown,
+        Test = new Disjunction(
+            new PDBool(nameof(PlayerData.blackThreadWorld)), new PDBool(nameof(PlayerData.soulSnareReady))
+        ),
+        TrueLocation = new CoordinateLocation()
+        {
+            Name = LocationNames.Maiden_s_Soul,
+            SceneName = SceneNames.Bonetown,
+            X = 72.07f,
+            Y = 7.56f,
+            Managed = false,
+        },
+        FalseLocation = new ChapelMaidLocation()
+        {
+            SceneName = SceneNames.Bonetown,
+            Name = LocationNames.Maiden_s_Soul,
+        },
+    };
+  
     public static Location Diving_Bell_Key => new BallowLocation()
     {
         SceneName = SceneNames.Dock_12,
