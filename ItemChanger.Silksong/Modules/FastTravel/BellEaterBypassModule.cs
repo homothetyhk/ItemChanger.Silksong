@@ -2,6 +2,7 @@ using Benchwarp.Data;
 using GlobalEnums;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
+using ItemChanger.Extensions;
 using ItemChanger.Modules;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.FsmStateActions;
@@ -48,12 +49,15 @@ public class BellEaterBypassModule : Module
 
     protected override void DoLoad()
     {
+        var sceneEditGroup = new SceneEditGroup();
         foreach (var kvp in FastTravelScenes)
         {
-            ItemChangerHost.Singleton.GameEvents.AddSceneEdit(kvp.Key, SetArenaReturnScene);
+            sceneEditGroup.Add(kvp.Key, SetArenaReturnScene);
         }
+        sceneEditGroup.Add(SceneNames.Bellway_Centipede_Arena, RemoveBellCollapse);
+        Using(sceneEditGroup);
 
-        Using(new FsmEditGroup()
+        Using(new FsmEditGroup
         {
             {
                 new(SceneNames.Bellway_Centipede_additive, "Bell Centipede Bellway Scene", "Control"),
@@ -70,10 +74,6 @@ public class BellEaterBypassModule : Module
 
     protected override void DoUnload()
     {
-        foreach (var kvp in FastTravelScenes)
-        {
-            ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(kvp.Key, SetArenaReturnScene);
-        }
     }
 
 
@@ -122,5 +122,13 @@ public class BellEaterBypassModule : Module
         }
 
         _arenaReturnLocation = fastTravelLocation;
+    }
+    
+    // Remove the bell collapse that prevents exiting the arena after Bell Eater is defeated
+    private void RemoveBellCollapse(Scene scene)
+    {
+        EventResponder responder = scene.FindGameObject("Collapse Blocker Control")?.GetComponent<EventResponder>()!;
+        responder.requireActive = true;
+        responder.enabled = false;
     }
 }
