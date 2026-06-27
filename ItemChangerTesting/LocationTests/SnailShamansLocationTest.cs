@@ -38,7 +38,6 @@ internal class SnailShamansLocationTest : Test
         // Preconditions for placement obtainable
         PlayerDataAccess.visitedAbyss = true;
         PlayerDataAccess.hasNeedolin = true;
-        QuestUtil.SetAccepted(Quests.Black_Thread_Pt4_Return);
 
         // Convenience for test - skips initial meet dialogue
         QuestUtil.SetCompleted(Quests.Diving_Bell_Pt1_Inspect);

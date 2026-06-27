@@ -177,10 +177,7 @@ internal static partial class BaseLocationList
     {
         SceneName = SceneNames.Tut_04,
         Name = LocationNames.Elegy_of_the_Deep,
-        Test = new PlacementVisitStateBool {
-            PlacementName = LocationNames.Elegy_of_the_Deep,
-            RequiredFlags = VisitState.ObtainedAnyItem,
-        },
+        Test = new QuestCompletionBool(Quests.Black_Thread_Pt4_Return),
         TrueLocation = new CoordinateLocation()
         {
             SceneName = SceneNames.Tut_04,

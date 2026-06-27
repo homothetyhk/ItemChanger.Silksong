@@ -15,7 +15,7 @@ public class ElegyOfTheDeepLocation : AutoLocation
     /// obtained the Needolin.
     /// </summary>
     public IValueProvider<bool> LocationPreconditions { get; init; } = new Conjunction(
-        new PDBool(nameof(PlayerData.visitedAbyss)),
+        new QuestAcceptedBool(Quests.Black_Thread_Pt4_Return),
         new PDBool(nameof(PlayerData.hasNeedolin))
     );
 
