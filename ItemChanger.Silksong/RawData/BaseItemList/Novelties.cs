@@ -215,7 +215,7 @@ internal partial class BaseItemList
                     ["Item Name Prefix"] = new LanguageString("Prompts", "GET_ITEM_INTRO1"),
                     ["Single Prompt/Press"] = new LanguageString("Prompts", "BUTTON_DESC_PRESS"),
                     ["Msg 1"] = ItemChangerLanguageStrings.GET_TAUNT_1,
-                    ["Msg 2"] = new BoxedString(string.Empty),
+                    ["Msg 2"] = new BoxedString { Value = string.Empty },
                 },
                 PositionOverrides = new()
                 {

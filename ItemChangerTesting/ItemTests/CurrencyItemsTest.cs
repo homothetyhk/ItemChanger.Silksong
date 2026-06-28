@@ -47,5 +47,7 @@ internal class CurrencyItemsTest : Test
         PlaceCurrency(index++, rosaries: 21, shellShards: 0);
         PlaceCurrency(index++, rosaries: 0, shellShards: 21);
         PlaceCurrency(index++, rosaries: 77, shellShards: 22);
+        PlaceCurrency(index++, rosaries: 666, shellShards: 0);
+        PlaceCurrency(index++, rosaries: 0, shellShards: 104);
     }
 }

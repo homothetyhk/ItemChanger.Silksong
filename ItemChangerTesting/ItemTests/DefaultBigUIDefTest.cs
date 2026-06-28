@@ -199,11 +199,11 @@ internal class DefaultBigUIDefTest : Test
                 ActionString = HeroActionButton.JUMP.ToString(),
                 TextSetters = new()
                 {
-                    ["Item Name"] = new BoxedString("NAME"),
-                    ["Item Name Prefix"] = new BoxedString("Prefix"),
-                    ["Single Prompt/Press"] = new BoxedString("Pushy"),
-                    ["Msg 1"] = new BoxedString("emm ess gee one"),
-                    ["Msg 2"] = new BoxedString("emm ess gee two"),
+                    ["Item Name"] = new BoxedString { Value = "NAME" },
+                    ["Item Name Prefix"] = new BoxedString { Value = "Prefix" },
+                    ["Single Prompt/Press"] = new BoxedString { Value = "Pushy" },
+                    ["Msg 1"] = new BoxedString { Value = "emm ess gee one" },
+                    ["Msg 2"] = new BoxedString { Value = "emm ess gee two" },
                 },
                 PositionOverrides = new()
                 {
@@ -227,11 +227,11 @@ internal class DefaultBigUIDefTest : Test
                 ActionString = HeroActionButton.SUPER_DASH.ToString(),
                 TextSetters = new()
                 {
-                    ["Item Name"] = new BoxedString("NAME2"),
-                    ["Item Name Prefix"] = new BoxedString("2Prefix"),
-                    ["Single Prompt/Press"] = new BoxedString("2Pushy"),
-                    ["Msg 1"] = new BoxedString("emm ess gee one"),
-                    ["Msg 2"] = new BoxedString("emm ess gee two"),
+                    ["Item Name"] = new BoxedString { Value = "NAME2" },
+                    ["Item Name Prefix"] = new BoxedString { Value = "2Prefix" },
+                    ["Single Prompt/Press"] = new BoxedString { Value = "2Pushy" },
+                    ["Msg 1"] = new BoxedString { Value = "emm ess gee one" },
+                    ["Msg 2"] = new BoxedString { Value = "emm ess gee two" },
                 },
             }
         };
@@ -251,7 +251,7 @@ internal class DefaultBigUIDefTest : Test
         };
 
         IValueProvider<string> PrefixString(string prefix, IValueProvider<string> orig) => CompositeString.Create(
-            pattern: new BoxedString($"{prefix}{{orig}}"),
+            pattern: new BoxedString { Value = $"{prefix}{{orig}}" },
             argLookup: new()
             {
                 ["orig"] = orig

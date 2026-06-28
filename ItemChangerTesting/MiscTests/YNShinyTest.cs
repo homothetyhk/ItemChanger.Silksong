@@ -43,7 +43,7 @@ internal class YNShinyTest : Test
             .GetLocation(LocationNames.Lore_Tablet__Shellwood_Harp)!
             .WithTag(new DefaultCostTag()
             {
-                Cost = new DisplayablePDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString("Have Needolin"), BaseAtlasSprites.Needolin)
+                Cost = new DisplayablePDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString{ Value = "Have Needolin" }, BaseAtlasSprites.Needolin)
             })
             .Wrap()
             .WithDebugItem(persistence: ItemChanger.Enums.Persistence.Persistent)
@@ -76,10 +76,10 @@ internal class YNShinyTest : Test
         TestCost(new RosaryCost(1000));
         TestCost(new RosaryCost(10000));
 
-        TestCost(new PDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString("Have Needolin")));
-        TestCost(new DisplayablePDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString("Have Needolin"), BaseAtlasSprites.Needolin));
+        TestCost(new PDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString{ Value = "Have Needolin" }));
+        TestCost(new DisplayablePDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString{ Value = "Have Needolin" }, BaseAtlasSprites.Needolin));
 
-        TestCost(new RosaryCost(100) + new PDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString("Have Needolin")));
-        TestCost(new RosaryCost(100) + new DisplayablePDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString("Have Needolin"), BaseAtlasSprites.Needolin));
+        TestCost(new RosaryCost(100) + new PDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString{ Value = "Have Needolin" }));
+        TestCost(new RosaryCost(100) + new DisplayablePDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString{ Value = "Have Needolin" }, BaseAtlasSprites.Needolin));
     }
 }

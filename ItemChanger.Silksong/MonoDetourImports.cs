@@ -14,3 +14,4 @@ using TeamCherry.Localization;
 [assembly: MonoDetourTargets(typeof(UIMsgProxy), GenerateControlFlowVariants = true)]
 [assembly: MonoDetourTargets(typeof(ToolCrestUIMsg))]
 [assembly: MonoDetourTargets(typeof(NPCControlBase), GenerateControlFlowVariants = true)]
+[assembly: MonoDetourTargets(typeof(SceneAdditiveLoadConditional), GenerateControlFlowVariants = true)]

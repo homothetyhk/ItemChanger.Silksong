@@ -130,11 +130,7 @@ public class ShinyContainer : Container
 
     public override void ModifyContainerInPlace(GameObject obj, ContainerInfo info)
     {
-        try
-        {
-            info.ApplyTo(obj);
-        }
-        catch { }
+        info.ApplyTo(obj);
 
         CollectableItemPickup shiny = obj.GetComponent<CollectableItemPickup>();
         SavedContainerItem item = ScriptableObject.CreateInstance<SavedContainerItem>();
@@ -177,6 +173,11 @@ public class ShinyContainer : Container
             shiny.fling = false;
             rb.bodyType = RigidbodyType2D.Kinematic;
             shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Stand;
+            // FloatInPlace shinies are already static — the prefab's waitForStoppedMoving
+            // behavior would deactivate interactEvents until the rigidbody settles, but a
+            // kinematic body never moves so we force-activate interactEvents immediately.
+            shiny.gameObject.GetComponent<InteractEvents>()?.Activate();
+
         }
         else
         {
@@ -267,4 +268,5 @@ public class ShinyContainer : Container
     protected override void DoUnload()
     {
     }
+
 }

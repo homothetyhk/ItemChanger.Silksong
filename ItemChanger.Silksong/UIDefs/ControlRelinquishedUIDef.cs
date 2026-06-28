@@ -17,7 +17,7 @@ public abstract class ControlRelinquishedUIDef : UIDef
     
     protected bool ControlRelinquished()
     {
-        return InteractManager.BlockingInteractable != null;
+        return InteractManager.BlockingInteractable != null || HeroController.instance.controlReqlinquished;
     }
 
     public sealed override void SendMessage(MessageType type, Action? callback = null)
