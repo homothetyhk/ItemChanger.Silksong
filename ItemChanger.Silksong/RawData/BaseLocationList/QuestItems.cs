@@ -1,8 +1,11 @@
 using Benchwarp.Data;
 using ItemChanger.Locations;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong.Containers;
+using ItemChanger.Silksong.Costs;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Tags;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -55,5 +58,27 @@ internal static partial class BaseLocationList
     {
         SceneName = SceneNames.Dock_12,
         Name = LocationNames.Diving_Bell_Key,
+    };
+    
+    public static Location Steel_Spines => new DualLocation()
+    {
+        Name = LocationNames.Steel_Spines,
+        SceneName = SceneNames.Dust_Shack,
+        Test = new PDBool(nameof(PlayerData.blackThreadWorld)),
+        FalseLocation = new BenjinAndCrullSpinesLocation()
+        {
+            Name = LocationNames.Steel_Spines,
+            SceneName = SceneNames.Dust_Shack,
+            Tags = [new DefaultCostTag() { Cost = new RosaryCost(160), Inherent = false }]
+        },
+        TrueLocation = new ObjectLocation()
+        {
+            Name = LocationNames.Steel_Spines,
+            SceneName = SceneNames.Dust_Shack,
+            ObjectName = "Collectable Item Extractor Pins",
+            FlingType = Enums.FlingType.Everywhere,
+            Correction = default,
+            Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.Shiny }]
+        }
     };
 }
