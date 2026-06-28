@@ -11,6 +11,10 @@ namespace ItemChanger.Silksong.RawData
 
     internal static partial class BaseLocationList
     {
+        // Convenience tag: configures a shiny to float in place rather than fall.
+        // Used by locations whose objects are not CollectableItemPickup and need FloatInPlace fling.
+        private static ShinyControlTag FloatShiny => new() { Info = new() { ShinyFling = ShinyContainer.ShinyFling.FloatInPlace } };
+
         public static Location Start => new StartLocation
         {
             Name = LocationNames.Start,
