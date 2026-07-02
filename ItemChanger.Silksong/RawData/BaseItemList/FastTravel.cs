@@ -12,17 +12,17 @@ internal static partial class BaseItemList
 {
     // TODO - add shop descs
 
-    private static UIDef GetBellwayUIDef(LanguageString station)
+    private static UIDef GetBellwayUIDef(LanguageString station, bool format = true)
     {
         return new MsgUIDef()
         {
-            Name = CompositeString.Create(
+            Name = format ? CompositeString.Create(
                 LanguageString.FromItemChanger("FMT_FAST_TRAVEL_PATTERN"),
                 new Dictionary<string, IValueProvider<object>>
                 {
                     { "TRAVEL_TYPE", BaseLanguageStrings.Bellway },
                     { "STATION_NAME", station }
-                }),
+                }) : station,
             ShopDesc = null!,
             Sprite = BaseAtlasSprites.Bellway, 
         };
@@ -37,7 +37,7 @@ internal static partial class BaseItemList
                 new Dictionary<string, IValueProvider<object>>
                 {
                     { "TRAVEL_TYPE", BaseLanguageStrings.Ventrica },
-                    { "STATION_TYPE", station } 
+                    { "STATION_NAME", station } 
                 }),
             ShopDesc = null!,
             Sprite = BaseAtlasSprites.Ventrica,
@@ -91,7 +91,7 @@ internal static partial class BaseItemList
     {
         Name = ItemNames.Bellway__Grand_Bellway,
         BoolName = nameof(PlayerData.UnlockedCityStation),
-        UIDef = GetBellwayUIDef(BaseLanguageStrings.Fast_Travel__STATION_NAME_CITADEL),
+        UIDef = GetBellwayUIDef(BaseLanguageStrings.Fast_Travel__STATION_NAME_CITADEL, format: false),
     };
     public static Item Bellway__The_Slab => new PDBoolItem
     {
