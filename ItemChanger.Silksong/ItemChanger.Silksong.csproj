@@ -86,6 +86,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Silksong.ModMenu" Version="0.7.6" />
     <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
     <PackageReference Include="Silksong.GameLibs" Version="*-*" PrivateAssets="all" />
     <PackageReference Include="ItemChanger.Core" Version="0.10.0" GeneratePathProperty="true" />
