@@ -41,7 +41,7 @@ internal static partial class BaseLocationList
         X = 86.75f,
         Y = 17.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(40) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(40) });
 
     // 40 rosaries
     public static Location Bellway__Far_Fields => new CoordinateLocation
@@ -51,7 +51,7 @@ internal static partial class BaseLocationList
         X = 67.14f,
         Y = 9.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(40) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(40) });
 
     // 60 rosaries
     public static Location Bellway__Greymoor => new CoordinateLocation
@@ -61,7 +61,7 @@ internal static partial class BaseLocationList
         X = 66.83f,
         Y = 9.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(60) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(60) });
 
     // 60 rosaries
     public static Location Bellway__Bellhart => new CoordinateLocation
@@ -71,7 +71,7 @@ internal static partial class BaseLocationList
         X = 31.74f,
         Y = 96.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(60) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(60) });
 
     // 40 rosaries
     public static Location Bellway__Shellwood => new CoordinateLocation
@@ -81,7 +81,7 @@ internal static partial class BaseLocationList
         X = 54.91f,
         Y = 6.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(40) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(40) });
 
     // 60 rosaries
     public static Location Bellway__Blasted_Steps => new CoordinateLocation
@@ -91,7 +91,7 @@ internal static partial class BaseLocationList
         X = 97.81f,
         Y = 13.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(60) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(60) });
 
     // 40 rosaries
     public static Location Bellway__The_Slab => new CoordinateLocation
@@ -101,7 +101,7 @@ internal static partial class BaseLocationList
         X = 47.95f,
         Y = 6.72f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(40) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(40) });
 
     // 80 rosaries
     public static Location Bellway__Grand_Bellway => new CoordinateLocation
@@ -111,7 +111,7 @@ internal static partial class BaseLocationList
         X = 36.49f,
         Y = 11.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 
     // 80 rosaries
     public static Location Bellway__Bilewater => new CoordinateLocation
@@ -121,7 +121,7 @@ internal static partial class BaseLocationList
         X = 47.90f,
         Y = 22.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 
     // 80 rosaries
     public static Location Bellway__Putrified_Ducts => new CoordinateLocation
@@ -131,7 +131,7 @@ internal static partial class BaseLocationList
         X = 48.56f,
         Y = 22.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 
     // === Ventrica locations ===
 
@@ -153,7 +153,7 @@ internal static partial class BaseLocationList
         X = 20.10f,
         Y = 6.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 
     // 80 rosaries
     public static Location Ventrica__High_Halls => new CoordinateLocation
@@ -163,7 +163,7 @@ internal static partial class BaseLocationList
         X = 28.43f,
         Y = 4.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 
     // 80 rosaries
     public static Location Ventrica__First_Shrine => new CoordinateLocation
@@ -173,7 +173,7 @@ internal static partial class BaseLocationList
         X = 19.27f,
         Y = 6.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 
     // 80 rosaries
     public static Location Ventrica__Choral_Chambers => new CoordinateLocation
@@ -183,7 +183,7 @@ internal static partial class BaseLocationList
         X = 44.28f,
         Y = 4.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 
     // 80 rosaries
     public static Location Ventrica__Grand_Bellway => new CoordinateLocation
@@ -193,7 +193,7 @@ internal static partial class BaseLocationList
         X = 76.61f,
         Y = 11.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 
     // 80 rosaries
     public static Location Ventrica__Underworks => new CoordinateLocation
@@ -203,5 +203,5 @@ internal static partial class BaseLocationList
         X = 69.74f,
         Y = 4.57f,
         Managed = false,
-    }.WithTag(new CostTag { Cost = new RosaryCost(80) });
+    }.WithTag(new DefaultCostTag { Cost = new RosaryCost(80) });
 }
