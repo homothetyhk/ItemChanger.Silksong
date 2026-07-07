@@ -13,6 +13,7 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString FMT_FAST_TRAVEL_PATTERN => LanguageString.FromItemChanger(nameof(FMT_FAST_TRAVEL_PATTERN));
     public static LanguageString FMT_MATERIUM_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_MATERIUM_ENTRY_NAME));
     public static LanguageString FMT_JOURNAL_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_JOURNAL_ENTRY_NAME));
+    public static LanguageString FMT_LOCKED_CREST_PREVIEW => LanguageString.FromItemChanger(nameof(FMT_LOCKED_CREST_PREVIEW));
 
     public static LanguageString INV_NAME_SKILL_HARPOON_LEFT => LanguageString.FromItemChanger(nameof(INV_NAME_SKILL_HARPOON_LEFT));
     public static LanguageString INV_NAME_SKILL_HARPOON_RIGHT => LanguageString.FromItemChanger(nameof(INV_NAME_SKILL_HARPOON_RIGHT));
