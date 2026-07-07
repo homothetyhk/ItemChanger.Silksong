@@ -13,7 +13,7 @@ namespace ItemChanger.Silksong.Modules;
 public class LockedCrestPreviewModule : Module
 {
     private const float LOCKED_CREST_OPACITY = 0.3f;
-    private const float LOCKED_SLOT_OPACITY = 0.5f;
+    private const float LOCKED_SLOT_OPACITY = 0.8f;
 
     public bool AlwaysDisplayAllCrests { get; set; }
 
@@ -41,8 +41,7 @@ public class LockedCrestPreviewModule : Module
 
     private static bool ShouldDisplayAsLocked(InventoryToolCrest crest)
     {
-        return crest && crest.manager && crest.manager.EquipState == InventoryItemToolManager.EquipStates.SwitchCrest
-            && crest.CrestData && !crest.CrestData.IsUnlocked;
+        return crest && crest.CrestData && !crest.CrestData.IsUnlocked;
     }
 
     private ReturnFlow OverrideCrestIsUnlocked(InventoryToolCrest self, ref bool returnValue)
