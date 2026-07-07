@@ -25,6 +25,7 @@ public class LockedCrestPreviewModule : Module
         Using(Md.InventoryToolCrest.TransitionDisplayState.Prefix(OverrideCrestOpacity));
         Using(Md.InventoryToolCrestSlot.SetSlotColour.Prefix(OverrideCrestSlotOpacity));
         Using(Md.InventoryToolCrest.get_DisplayName.Postfix(OverrideCrestDisplayName));
+        Using(Md.InventoryItemToolManager.IsAvailable.ControlFlowPrefix(ForceShowToolsPane));
     }
 
     protected override void DoUnload() { }
@@ -77,5 +78,19 @@ public class LockedCrestPreviewModule : Module
         {
             returnValue = string.Format(ItemChangerLanguageStrings.FMT_LOCKED_CREST_PREVIEW.Value, returnValue);
         }
+    }
+
+    private ReturnFlow ForceShowToolsPane(InventoryItemToolManager self, ref bool returnValue)
+    {
+        // If there are crests to preview, show the tools pane in the inventory
+
+        if (!CollectableItemManager.IsInHiddenMode() && ToolItemManager.GetAllCrests()
+            .Count(crest => crest.IsVisible || VisibleCrestIDs.Contains(crest.name)) > 1)
+        {
+            returnValue = true;
+            return ReturnFlow.SkipOriginal;
+        }
+
+        return ReturnFlow.None;
     }
 }

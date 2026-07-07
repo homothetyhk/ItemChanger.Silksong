@@ -17,3 +17,4 @@ using TeamCherry.Localization;
 [assembly: MonoDetourTargets(typeof(SceneAdditiveLoadConditional), GenerateControlFlowVariants = true)]
 [assembly: MonoDetourTargets(typeof(InventoryToolCrest), GenerateControlFlowVariants = true)]
 [assembly: MonoDetourTargets(typeof(InventoryToolCrestSlot))]
+[assembly: MonoDetourTargets(typeof(InventoryItemToolManager), GenerateControlFlowVariants = true)]
