@@ -21,11 +21,15 @@ public class LockedCrestPreviewModule : Module
 
     protected override void DoLoad()
     {
+        // Functionality
         Using(Md.InventoryToolCrest.get_IsUnlocked.ControlFlowPrefix(OverrideCrestIsUnlocked));
-        Using(Md.InventoryToolCrest.TransitionDisplayState.Prefix(OverrideCrestOpacity));
-        Using(Md.InventoryToolCrestSlot.SetSlotColour.Prefix(OverrideCrestSlotOpacity));
-        Using(Md.InventoryToolCrest.get_DisplayName.Postfix(OverrideCrestDisplayName));
+        Using(Md.InventoryToolCrestList.CanApplyCrest.ControlFlowPrefix(DontEquipLockedCrests));
         Using(Md.InventoryItemToolManager.IsAvailable.ControlFlowPrefix(ForceShowToolsPane));
+
+        // Visuals
+        Using(Md.InventoryToolCrest.TransitionDisplayState.Prefix(OverrideCrestOpacity));
+        Using(Md.InventoryToolCrest.get_DisplayName.Postfix(OverrideCrestDisplayName));
+        Using(Md.InventoryToolCrestSlot.SetSlotColour.Prefix(OverrideCrestSlotOpacity));
     }
 
     protected override void DoUnload() { }
@@ -55,20 +59,38 @@ public class LockedCrestPreviewModule : Module
         return ReturnFlow.None;
     }
 
+    private ReturnFlow DontEquipLockedCrests(InventoryToolCrestList self, ref bool returnValue)
+    {
+        if (self.CurrentCrest && !self.CurrentCrest.CrestData.IsUnlocked)
+        {
+            // Don't display a prompt, since the UI should already make it clear that the crest is locked
+            returnValue = false;
+            return ReturnFlow.SkipOriginal;
+        }
+
+        return ReturnFlow.None;
+    }
+
+    private ReturnFlow ForceShowToolsPane(InventoryItemToolManager self, ref bool returnValue)
+    {
+        // If there are crests to preview, show the tools pane in the inventory
+
+        if (!CollectableItemManager.IsInHiddenMode() && ToolItemManager.GetAllCrests()
+                .Count(crest => crest.IsVisible || VisibleCrestIDs.Contains(crest.name)) > 1)
+        {
+            returnValue = true;
+            return ReturnFlow.SkipOriginal;
+        }
+
+        return ReturnFlow.None;
+    }
+
     private void OverrideCrestOpacity(InventoryToolCrest self, ref Color newColor, ref Vector3 newScale, ref bool isCurrentCrest, ref bool isInstant)
     {
         if (ShouldDisplayAsLocked(self))
         {
             newColor *= LOCKED_CREST_OPACITY;
             self.crestSilhouette.BaseColor = newColor;
-        }
-    }
-
-    private void OverrideCrestSlotOpacity(InventoryToolCrestSlot self, ref Color color, ref float groupAlpha, ref bool fadeAlpha)
-    {
-        if (ShouldDisplayAsLocked(self.Crest))
-        {
-            color *= LOCKED_SLOT_OPACITY;
         }
     }
 
@@ -80,17 +102,11 @@ public class LockedCrestPreviewModule : Module
         }
     }
 
-    private ReturnFlow ForceShowToolsPane(InventoryItemToolManager self, ref bool returnValue)
+    private void OverrideCrestSlotOpacity(InventoryToolCrestSlot self, ref Color color, ref float groupAlpha, ref bool fadeAlpha)
     {
-        // If there are crests to preview, show the tools pane in the inventory
-
-        if (!CollectableItemManager.IsInHiddenMode() && ToolItemManager.GetAllCrests()
-            .Count(crest => crest.IsVisible || VisibleCrestIDs.Contains(crest.name)) > 1)
+        if (ShouldDisplayAsLocked(self.Crest))
         {
-            returnValue = true;
-            return ReturnFlow.SkipOriginal;
+            color *= LOCKED_SLOT_OPACITY;
         }
-
-        return ReturnFlow.None;
     }
 }
