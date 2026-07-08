@@ -1,15 +1,15 @@
 ﻿using ItemChanger.Silksong.Modules;
 
-namespace ItemChangerTesting.ModuleTests;
+namespace ItemChangerTesting.ItemTests;
 
-internal class LockedCrestPreviewTest : Test
+internal class CrestSlotUnlockItemTest : Test
 {
     public override TestMetadata GetMetadata() => new()
     {
-        Folder = TestFolder.ModuleTests,
-        MenuName = "Locked Crests Preview",
-        MenuDescription = "Tests previewing locked crests.",
-        Revision = 2026070600
+        Folder = TestFolder.ItemTests,
+        MenuName = "Crest Slot Unlock Items",
+        MenuDescription = "Tests various crest slot unlock items and previewing locked crests.",
+        Revision = 2026070800
     };
 
     public override void Setup(TestArgs args)
