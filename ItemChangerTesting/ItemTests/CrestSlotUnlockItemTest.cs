@@ -21,7 +21,6 @@ internal class CrestSlotUnlockItemTest : Test
         [
             BaseItemList.Silkspear, // To make the tools pane visible
             BaseItemList.Crest_Slot__Hunter__Red_Tool,
-            BaseItemList.Crest_Slot__Hunter__Red_Tool,
             BaseItemList.Crest_Slot__Hunter__Blue_Tool,
             BaseItemList.Crest_Slot__Hunter__Blue_Tool,
             BaseItemList.Crest_Slot__Reaper__Yellow_Tool,

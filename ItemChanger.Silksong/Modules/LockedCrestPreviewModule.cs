@@ -89,8 +89,9 @@ public class LockedCrestPreviewModule : Module
         if (ShouldDisplayAsLocked(self))
         {
             newColor *= LOCKED_CREST_OPACITY;
-            self.crestSilhouette.BaseColor = newColor;
         }
+
+        self.crestSilhouette.BaseColor = newColor;
     }
 
     private void OverrideCrestDisplayName(InventoryToolCrest self, ref string returnValue)

@@ -94,6 +94,12 @@ public class CrestSlotUnlockItem : Item
 
             PlayerData.instance.ToolEquips.SetData(CrestID, crestData);
 
+            // This isn't saved to the file, but it needs to be kept in sync in case the crest is collected later
+            ToolCrest crest = ToolItemManager.GetCrestByName(CrestID);
+            ToolCrest.SlotInfo slotInfo = crest.Slots[slotIndex.Value];
+            slotInfo.IsLocked = false;
+            crest.Slots[slotIndex.Value] = slotInfo;
+
             LockedCrestPreviewModule module = ActiveProfile!.Modules.GetOrAdd<LockedCrestPreviewModule>();
             module.SetCrestVisible(CrestID);
         }
