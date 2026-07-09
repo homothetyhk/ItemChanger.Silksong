@@ -95,7 +95,7 @@ public class CrestSlotUnlockItem : Item
             PlayerData.instance.ToolEquips.SetData(CrestID, crestData);
 
             // This isn't saved to the file, but it needs to be kept in sync in case the crest is collected later
-            ToolCrest crest = ToolItemManager.GetCrestByName(CrestID);
+            ToolCrest crest = GetCrest();
             ToolCrest.SlotInfo slotInfo = crest.Slots[slotIndex.Value];
             slotInfo.IsLocked = false;
             crest.Slots[slotIndex.Value] = slotInfo;
@@ -105,9 +105,21 @@ public class CrestSlotUnlockItem : Item
         }
     }
 
-    private int? FindNextLockedSlotIndex()
+    private ToolCrest GetCrest()
     {
         ToolCrest crest = ToolItemManager.GetCrestByName(CrestID);
+
+        while (crest.IsUpgradedVersionUnlocked && crest.upgradedVersion)
+        {
+            crest = crest.upgradedVersion;
+        }
+
+        return crest;
+    }
+
+    private int? FindNextLockedSlotIndex()
+    {
+        ToolCrest crest = GetCrest();
 
         for (int i = 0; i < crest.Slots.Length; i++)
         {
