@@ -425,6 +425,31 @@ public static class ItemNames
     public const string Full_Mask = "Full_Mask";
     public const string Full_Spool = "Full_Spool";
 
+    // Crest slots
+    public const string Crest_Slot__Hunter__Red_Tool = "Crest_Slot__Hunter__Red_Tool";
+    public const string Crest_Slot__Hunter__Blue_Tool = "Crest_Slot__Hunter__Blue_Tool";
+    public const string Crest_Slot__Hunter__Yellow_Tool = "Crest_Slot__Hunter__Yellow_Tool";
+    public const string Crest_Slot__Hunter__Silk_Skill = "Crest_Slot__Hunter__Silk_Skill";
+    public const string Crest_Slot__Reaper__Red_Tool = "Crest_Slot__Reaper__Red_Tool";
+    public const string Crest_Slot__Reaper__Blue_Tool = "Crest_Slot__Reaper__Blue_Tool";
+    public const string Crest_Slot__Reaper__Yellow_Tool = "Crest_Slot__Reaper__Yellow_Tool";
+    public const string Crest_Slot__Reaper__Silk_Skill = "Crest_Slot__Reaper__Silk_Skill";
+    public const string Crest_Slot__Wanderer__Red_Tool = "Crest_Slot__Wanderer__Red_Tool";
+    public const string Crest_Slot__Wanderer__Blue_Tool = "Crest_Slot__Wanderer__Blue_Tool";
+    public const string Crest_Slot__Wanderer__Yellow_Tool = "Crest_Slot__Wanderer__Yellow_Tool";
+    public const string Crest_Slot__Wanderer__Silk_Skill = "Crest_Slot__Wanderer__Silk_Skill";
+    public const string Crest_Slot__Beast__Red_Tool = "Crest_Slot__Beast__Red_Tool";
+    public const string Crest_Slot__Beast__Yellow_Tool = "Crest_Slot__Beast__Yellow_Tool";
+    public const string Crest_Slot__Beast__Silk_Skill = "Crest_Slot__Beast__Silk_Skill";
+    public const string Crest_Slot__Witch__Red_Tool = "Crest_Slot__Witch__Red_Tool";
+    public const string Crest_Slot__Witch__Blue_Tool = "Crest_Slot__Witch__Blue_Tool";
+    public const string Crest_Slot__Witch__Silk_Skill = "Crest_Slot__Witch__Silk_Skill";
+    public const string Crest_Slot__Architect__Red_Tool = "Crest_Slot__Architect__Red_Tool";
+    public const string Crest_Slot__Architect__Blue_Tool = "Crest_Slot__Architect__Blue_Tool";
+    public const string Crest_Slot__Architect__Yellow_Tool = "Crest_Slot__Architect__Yellow_Tool";
+    public const string Crest_Slot__Shaman__Blue_Tool = "Crest_Slot__Shaman__Blue_Tool";
+    public const string Crest_Slot__Shaman__Silk_Skill = "Crest_Slot__Shaman__Silk_Skill";
+
     // Flea
     public const string Flea = "Flea";
 

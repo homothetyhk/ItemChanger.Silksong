@@ -1,5 +1,9 @@
 ﻿using ItemChanger.Items;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Modules;
+using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.Serialization;
+using ItemChanger.Silksong.UIDefs;
 
 namespace ItemChanger.Silksong.Items;
 
@@ -10,6 +14,53 @@ namespace ItemChanger.Silksong.Items;
 /// </summary>
 public class CrestSlotUnlockItem : Item
 {
+    public static CrestSlotUnlockItem Create(string name, string crestID, ToolItemType toolType)
+    {
+        BoxedString crestName = new BoxedString
+        {
+            Value = ToolItemManager.GetCrestByName(crestID).DisplayName
+        };
+
+        LanguageString slotType = toolType switch
+        {
+            ToolItemType.Red => ItemChangerLanguageStrings.SLOT_TYPE_RED,
+            ToolItemType.Blue => ItemChangerLanguageStrings.SLOT_TYPE_BLUE,
+            ToolItemType.Yellow => ItemChangerLanguageStrings.SLOT_TYPE_YELLOW,
+            ToolItemType.Skill => ItemChangerLanguageStrings.SLOT_TYPE_SKILL,
+            _ => throw new NotSupportedException()
+        };
+
+        // These sprites exist in the base game files, but they are grayscale.
+        // The colors are stored separately in a global settings bundle.
+        // For convenience, we use our own sprites with the colors pre-applied.
+        ICSilksongSprite sprite = toolType switch
+        {
+            ToolItemType.Red => new ICSilksongSprite("Images.tool_slot_red"),
+            ToolItemType.Blue => new ICSilksongSprite("Images.tool_slot_blue"),
+            ToolItemType.Yellow => new ICSilksongSprite("Images.tool_slot_yellow"),
+            ToolItemType.Skill => new ICSilksongSprite("Images.tool_slot_skill"),
+            _ => throw new NotSupportedException()
+        };
+
+        return new()
+        {
+            Name = name,
+            CrestID = crestID,
+            ToolType = toolType,
+            UIDef = new MsgUIDef
+            {
+                Name = CompositeString.Create(
+                    ItemChangerLanguageStrings.FMT_CREST_SLOT_UNLOCK_ITEM,
+                    new Dictionary<string, IValueProvider<object>>
+                    {
+                        { "CREST_NAME", crestName },
+                        { "SLOT_TYPE", slotType }
+                    }),
+                Sprite = sprite
+            },
+        };
+    }
+
     public required string CrestID { get; set; }
     public required ToolItemType ToolType { get; set; }
 
