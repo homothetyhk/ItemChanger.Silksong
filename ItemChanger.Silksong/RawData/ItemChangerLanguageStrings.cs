@@ -13,6 +13,8 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString FMT_FAST_TRAVEL_PATTERN => LanguageString.FromItemChanger(nameof(FMT_FAST_TRAVEL_PATTERN));
     public static LanguageString FMT_MATERIUM_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_MATERIUM_ENTRY_NAME));
     public static LanguageString FMT_JOURNAL_ENTRY_NAME => LanguageString.FromItemChanger(nameof(FMT_JOURNAL_ENTRY_NAME));
+    public static LanguageString FMT_LOCKED_CREST_PREVIEW => LanguageString.FromItemChanger(nameof(FMT_LOCKED_CREST_PREVIEW));
+    public static LanguageString FMT_CREST_SLOT_UNLOCK_ITEM => LanguageString.FromItemChanger(nameof(FMT_CREST_SLOT_UNLOCK_ITEM));
 
     public static LanguageString INV_NAME_SKILL_HARPOON_LEFT => LanguageString.FromItemChanger(nameof(INV_NAME_SKILL_HARPOON_LEFT));
     public static LanguageString INV_NAME_SKILL_HARPOON_RIGHT => LanguageString.FromItemChanger(nameof(INV_NAME_SKILL_HARPOON_RIGHT));
@@ -36,6 +38,11 @@ internal static class ItemChangerLanguageStrings
     public static LanguageString INV_NAME_TAUNT => LanguageString.FromItemChanger(nameof(INV_NAME_TAUNT));
     public static LanguageString INV_DESC_TAUNT => LanguageString.FromItemChanger(nameof(INV_DESC_TAUNT));
     public static LanguageString GET_TAUNT_1 => LanguageString.FromItemChanger(nameof(GET_TAUNT_1));
+
+    public static LanguageString SLOT_TYPE_RED => LanguageString.FromItemChanger(nameof(SLOT_TYPE_RED));
+    public static LanguageString SLOT_TYPE_BLUE => LanguageString.FromItemChanger(nameof(SLOT_TYPE_BLUE));
+    public static LanguageString SLOT_TYPE_YELLOW => LanguageString.FromItemChanger(nameof(SLOT_TYPE_YELLOW));
+    public static LanguageString SLOT_TYPE_SKILL => LanguageString.FromItemChanger(nameof(SLOT_TYPE_SKILL));
 
     public static LanguageString QUEST_BROLLY_GET_DESC_PREVIEW => LanguageString.FromItemChanger(nameof(QUEST_BROLLY_GET_DESC_PREVIEW));
     public static LanguageString SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW => LanguageString.FromItemChanger(nameof(SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW));
