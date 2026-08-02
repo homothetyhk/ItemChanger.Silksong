@@ -1,12 +1,11 @@
 using Benchwarp.Data;
 using ItemChanger.Locations;
-using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Containers;
+using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
 using ItemChanger.Tags;
 using ItemChanger.Enums;
-using ItemChanger.Serialization;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -154,6 +153,14 @@ internal static partial class BaseLocationList
     {
         SceneName = SceneNames.Cradle_03_Destroyed,
         Name = LocationNames.Pale_Nails
+    };
+
+    public static Location Rune_Rage => new RuneRageLocation
+    {
+        SceneName = SceneNames.Slab_10b,
+        Name = LocationNames.Rune_Rage,
+        FlingType = FlingType.DirectDeposit,
+        SpawnPos = new(39, 10)
     };
 
     public static Location Silkspear => CreateWeaverCorpseLocation(
