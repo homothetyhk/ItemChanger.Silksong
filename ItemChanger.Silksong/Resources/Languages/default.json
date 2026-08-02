@@ -2,6 +2,7 @@
   "FMT_PAY_ROSARIES": "{ROSARY_COUNT} {ROSARY_NAME}",
   "FMT_PAY_SHELL_SHARDS": "{SHELL_SHARDS_COUNT} {SHELL_SHARDS_NAME}",
   "FMT_PAY_MOSSBERRIES": "{0} Mossberries",
+  "FMT_PAY_TOOLS": "Acquire {0} more tools to prove aptitude.",
   "FMT_PAY_TOOL_SLOTS": "{0} Tool Slots",
   "FMT_FAST_TRAVEL_PATTERN": "{TRAVEL_TYPE} - {STATION_NAME}",
   "FMT_MATERIUM_ENTRY_NAME": "{0} Entry",
@@ -28,7 +29,7 @@
   "INV_NAME_TAUNT": "Taunt",
   "INV_DESC_TAUNT": "Learn the power to skip Sister Splinter",
   "GET_TAUNT_1": "Goad enemies into attacking",
-
+  "CITADEL_MAP_PROMPT_PREVIEW": "A machine displaying a model of {PREVIEW_TEXT}.",
   "PINSTRESS_INTERIOR_GROUND_MEET_PREVIEW": "So rude! To raise a Pinstress from their deep meditation!<page>You carry on with that kind of brash behaviour and you’re likely to be stuck quick through!<hpage>I’m surprised to find a bug of sound mind alive in such an inhospitable place. You are a warrior learned in the blades of this land?<page>Aye! A Pinstress! Your needle there might fit you fair, strange as it is’n all, but it’s the pin that’s the glorious weapon of Pharloom.<page>Given I’m now awake, maybe you’d fancy a little {PREVIEW_TEXT}? Care to test the power of a Pinstress? Might be even this old master could show you a thing or two.",
   "PINSTRESS_INTERIOR_GROUND_MEET_ACT_3_PREVIEW": "So rude! To raise a Pinstress from their deep meditation!<page>You carry on with that kind of brash behaviour and you’re likely to be stuck quick through!<hpage>I’m surprised to find any bug still alive in such an inhospitable place. You are a warrior learned in the blades of this land?<page>Aye! A Pinstress! Your needle there might fit you fair, but it’s the pin that’s the glorious weapon of Pharloom, least it was... It’s sure starting to feel like Pharloom doesn’t have long left.<page>Well, given I’m now awake, and time’s suddenly short, maybe you’d fancy a little {PREVIEW_TEXT}? Might be even this old master could show you a thing or two?",
   "PINSTRESS_INTERIOR_GROUND_REOFFER_PREVIEW": "Planning to hang about are you, needle bug?<page>Fancy a little {PREVIEW_TEXT}? Care to test the power of a Pinstress? Might be even this old master could show you a thing or two?",
@@ -51,9 +52,11 @@
   "PAID": "Paid",
   "COST_FOR": "for",
 
+  "CITADEL_MAP_PROMPT_PREVIEW": "A machine displaying a model of {PREVIEW_TEXT}.",
+  "FMT_HUNTER_FAN_COMPLETION_RESULT": "Oooh, but the scroll is so heavy with {COUNTER} beautiful beasts! Miss grown-up, you must prey on {TARGET} beasts for your reward. No time for rest!",
   "QUEST_BROLLY_GET_DESC_PREVIEW": "Hunt Hokers in the Far Fields and collect Spine Cores for {PREVIEW_TEXT}.",
   "SEAMSTRESS_BROLLY_QUEST_OFFER_PREVIEW": "If you’re planning to ascend from these low fields, you’ll be needing {PREVIEW_TEXT}, and I’m just the bug to help.<page>Head for the caves beyond my home. The bugs within produce a spine with a marvellous core, flexible yet strong.<page>Cut their spines and collect the cores. Return to me, and I’ll soon have your old cloak transformed into {PREVIEW_TEXT}.",
   "SEAMSTRESS_BROLLY_QUEST_REOFFER_PREVIEW": "Ready to reconsider my offer? Good for you! You won’t be going far without {PREVIEW_TEXT}, dear.",
   "SNAILS_ACT3_DESCEND_HINT": "Enough chatting, Old One. Return with the Needolin, and after visiting the lake of liquid nothing.",
-  "FMT_HUNTER_FAN_COMPLETION_RESULT": "Oooh, but the scroll is so heavy with {COUNTER} beautiful beasts! Miss grown-up, you must prey on {TARGET} beasts for your reward. No time for rest!"
+  "TAKE_ITEM_PREVIEW": "Take the {PREVIEW_TEXT}?"
 }
