@@ -1,6 +1,7 @@
 ﻿using GlobalSettings;
 using ItemChanger.Containers;
 using ItemChanger.Extensions;
+using ItemChanger.Items;
 using ItemChanger.Silksong.Components;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.Modules.YNBox;
@@ -229,6 +230,24 @@ public class ShinyContainer : Container
                 LogError($"Missing or ambiguous change scene tag on shiny {shiny.name} in {shiny.gameObject.scene.name}:\n{e}");
             }
         }
+    }
+
+    public static void Spawn(ContainerInfo info, Item item, Transform itemParent, bool fling)
+    {
+        ShinyContainerInfo shinyInfo = new(
+            containerInfo: ContainerInfo.FromPlacementAndItems(
+                info.GiveInfo.Placement,
+                [item],
+                info.ContainingScene,
+                ContainerNames.Shiny,
+                info.GiveInfo.FlingType
+            ),
+            shinyInfo: new() { ShinyFling = fling ? ShinyFling.Random : ShinyFling.Drop });
+
+        GameObject shiny = Instance.GetNewContainer(shinyInfo);
+        shiny.transform.SetParent(itemParent);
+        shiny.transform.position = itemParent.position;
+        shiny.SetActive(true);
     }
 
     /// <summary>
