@@ -89,7 +89,7 @@
     <PackageReference Include="Silksong.ModMenu" Version="0.7.6" />
     <PackageReference Include="UnityEngine.Modules" Version="6000.0.50" IncludeAssets="compile" />
     <PackageReference Include="Silksong.GameLibs" Version="*-*" PrivateAssets="all" />
-    <PackageReference Include="ItemChanger.Core" Version="0.10.0" GeneratePathProperty="true" />
+    <PackageReference Include="ItemChanger.Core" Version="0.11.0" GeneratePathProperty="true" />
     <!--Plugin dependencies-->
     <PackageReference Include="Silksong.AssetHelper" Version="1.3.2" />
     <PackageReference Include="Silksong.Benchwarp" Version="1.2.0" />
