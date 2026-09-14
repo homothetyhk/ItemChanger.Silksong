@@ -78,6 +78,7 @@ namespace ItemChanger.Silksong
         private void DefineContainers()
         {
             ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new FleaContainer());
+            ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(SilkGrubCocoonContainer.Instance);
             ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new TabletContainer());
             ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new WeaverCorpseContainer());
             ItemChangerHost.Singleton.ContainerRegistry.DefineContainer(new CrawSummonsContainer());
