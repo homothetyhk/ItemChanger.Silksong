@@ -1,4 +1,6 @@
-﻿namespace ItemChanger.Silksong.Extensions;
+﻿using static PlayerDataTest;
+
+namespace ItemChanger.Silksong.Extensions;
 
 internal static class PlayerDataTestExtensions
 {
@@ -26,4 +28,18 @@ internal static class PlayerDataTestExtensions
             }
         }
     }
+    
+    public static void ForceResult(this PlayerDataTest pdt, bool result)
+    {
+        pdt.TestGroups = [new TestGroup()
+        {
+            Tests = [new Test() {
+                Type = TestType.Bool,
+                FieldName = ALWAYS_FALSE,
+                BoolValue = !result
+            }]
+        }];
+    }
+
+    private const string ALWAYS_FALSE = "ITEMCHANGER_ALWAYS_FALSE";
 }
