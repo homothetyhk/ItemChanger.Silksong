@@ -1,6 +1,7 @@
 ﻿using ItemChanger.Items;
 using ItemChanger.Silksong.Items;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Silksong.Tags.SpecialItemTags;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -62,7 +63,7 @@ internal static partial class BaseItemList
     public static Item Twisted_Bud => ItemChangerSavedItem.Create(
         name: ItemNames.Twisted_Bud,
         id: "Wood Witch Item",
-        type: BaseGameSavedItem.ItemType.CollectableItem);
+        type: BaseGameSavedItem.ItemType.CollectableItem).WithTag(new TwistedBudCryTag());
     public static Item Vintage_Nectar => ItemChangerSavedItem.Create(
         name: ItemNames.Vintage_Nectar,
         id: "Vintage Nectar",

@@ -194,11 +194,16 @@ public class ShinyContainer : Container
             };
         }
 
-        if (info.GiveInfo.Placement.GetPlacementAndLocationTags().OfType<IHintBoxTag>().FirstOrDefault() is IHintBoxTag tag)
+        var placement = info.GiveInfo.Placement;
+        if (placement.GetPlacementAndLocationTags().OfType<IHintBoxTag>().FirstOrDefault() is IHintBoxTag hintTag)
         {
             HintBox box = obj.AddComponent<HintBox>();
-            box.Apply(tag);
+            box.Apply(hintTag);
         }
+
+        foreach (var icItem in placement.Items)
+            foreach (var tag in icItem.GetTags<ShinyModifierTag>())
+                tag.ModifyShinyContainer(placement, icItem, obj);
 
         if (info.CostInfo is not null)
         {
