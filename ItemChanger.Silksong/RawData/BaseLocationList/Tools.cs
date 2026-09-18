@@ -73,4 +73,25 @@ internal static partial class BaseLocationList
             SceneName = SceneNames.Room_Witch,
         },
     };
+
+    public static Location Reserve_Bind => new DualLocation
+    {
+        SceneName = SceneNames.Hang_17b,
+        Name = LocationNames.Reserve_Bind,
+        Test = new PDBool(nameof(PlayerData.defeatedSongChevalierBoss)),
+        TrueLocation = new CoordinateLocation
+        {
+            SceneName = SceneNames.Hang_17b,
+            Name = LocationNames.Reserve_Bind,
+            X = 44.4f,
+            Y = 4.57f,
+            Managed = false,
+            ForceDefaultContainer = true,
+        },
+        FalseLocation = new SecondSentinelLocation
+        {
+            Name = LocationNames.Reserve_Bind,
+            SceneName = SceneNames.Hang_17b,
+        },
+    };
 }
