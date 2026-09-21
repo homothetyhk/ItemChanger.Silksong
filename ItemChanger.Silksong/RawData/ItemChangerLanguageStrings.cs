@@ -1,4 +1,4 @@
-﻿using DataDrivenConstants.Marker;
+using DataDrivenConstants.Marker;
 using ItemChanger.Locations;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Extensions;
@@ -11,7 +11,7 @@ namespace ItemChanger.Silksong.RawData;
 internal static partial class ItemChangerLanguageStrings
 {
     private static LanguageString MakeLanguageString([DataInject(Prefix = "")] string name) => LanguageString.FromItemChanger(name);
-
+ 
     public static CompositeString CreatePayRosariesString(IValueProvider<int> rosaryCount)
     {
         return CompositeString.Create(FMT_PAY_ROSARIES(), new Dictionary<string, IValueProvider<object>>()

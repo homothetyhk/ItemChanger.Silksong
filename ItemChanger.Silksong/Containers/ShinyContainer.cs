@@ -242,6 +242,24 @@ public class ShinyContainer : Container
         }
     }
 
+    public static void Spawn(ContainerInfo info, Item item, Transform itemParent, bool fling)
+    {
+        ShinyContainerInfo shinyInfo = new(
+            containerInfo: ContainerInfo.FromPlacementAndItems(
+                info.GiveInfo.Placement,
+                [item],
+                info.ContainingScene,
+                ContainerNames.Shiny,
+                info.GiveInfo.FlingType
+            ),
+            shinyInfo: new() { ShinyFling = fling ? ShinyFling.Random : ShinyFling.Drop });
+
+        GameObject shiny = Instance.GetNewContainer(shinyInfo);
+        shiny.transform.SetParent(itemParent);
+        shiny.transform.position = itemParent.position;
+        shiny.SetActive(true);
+    }
+
     /// <summary>
     /// Add the default feather effect as applied to the Crawbug feather shinies.
     /// </summary>
