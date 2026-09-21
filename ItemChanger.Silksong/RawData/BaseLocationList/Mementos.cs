@@ -1,5 +1,6 @@
 using Benchwarp.Data;
 using ItemChanger.Locations;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
 
@@ -27,5 +28,15 @@ internal static partial class BaseLocationList
             SceneName = SceneNames.Halfway_01,
             Name = LocationNames.Hunter_s_Memento
         }
+    };
+
+    public static Location Surface_Memento => new DelayedShinyLocation
+    {
+        Name = LocationNames.Surface_Memento,
+        SceneName = SceneNames.Abandoned_town,
+        ObjectName = "Memory Group/abandoned_town_memento_dropper/collectable item fall",
+        FlingType = Enums.FlingType.Everywhere,
+        Correction = default,
+        GiveEarly = new Negation { Bool = new SDBool(SceneNames.Abandoned_town, "Memory Group") }
     };
 }
