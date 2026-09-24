@@ -2,8 +2,6 @@ using System.Collections;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Extensions;
-using ItemChanger.Locations;
-using ItemChanger.Silksong.Extensions;
 using PrepatcherPlugin;
 using Silksong.FsmUtil;
 using Silksong.FsmUtil.Actions;
@@ -11,7 +9,7 @@ using UnityEngine;
 
 namespace ItemChanger.Silksong.Locations;
 
-public class ArchitectPuzzleLocation : AutoLocation
+public class ArchitectPuzzleLocation : ThreefoldMelodyLocation
 {
     private static WaitForSeconds _waitForSeconds5 = new(5f);
 
@@ -29,7 +27,7 @@ public class ArchitectPuzzleLocation : AutoLocation
     private void HookCylinders(PlayMakerFSM fsm)
     {
         // Replace the hasMelodyArchitect check with a placement-obtained check so
-        // the scene shows as "Completed" if the item has already been given.
+        // the scene shows as "Completed" if the placement has no items to give.
         fsm.MustGetState("Wait For Notify").ReplaceFirstActionOfType<PlayerDataVariableTest>(
             new LambdaAction { Method = () =>
                 {
@@ -80,15 +78,13 @@ public class ArchitectPuzzleLocation : AutoLocation
     }
 
     private void HookNeedolinPrompt(PlayMakerFSM fsm) {
-        Fsm melodyGetTemplateFsm = fsm.MustGetState("Get Melody").GetFirstActionOfType<RunFSM>()!.fsmTemplateControl.runFsm;
-        // Replace the melody with the placement's items
-        FsmState giveItemState = melodyGetTemplateFsm.MustGetState("Give Item");
-        // Remove event register that listens for BigUIs closing, replace with "FINISHED" transition
-        // Manually send "GET ITEM MSG COVERED" event to progress the Cylinder States FSM
-        giveItemState.actions = [ new SendEventToRegister{eventName = "GET ITEM MSG COVERED"} ];
-        giveItemState.AddTransition("FINISHED", "Return Control");
-        giveItemState.InsertLambdaMethod(0, this.CreateGiveAllDelegate(fsm.gameObject.FindChild("Hornet_pressure_plate")!.transform));
+        ReplaceMelody
+        (
+            fsm.MustGetState("Get Melody").GetFirstActionOfType<RunFSM>()!,
+            fsm.gameObject.FindChild("Hornet_pressure_plate")!.transform,
+            "GET ITEM MSG COVERED"
+        );
     }
 
-    protected static FsmEvent NoNeedolin = new("NO NEEDOLIN");
+    protected static readonly FsmEvent NoNeedolin = new("NO NEEDOLIN");
 }
