@@ -13,7 +13,7 @@ internal class ThreeFoldMelodyLocationsTest : Test
     {
         Folder = TestFolder.LocationTests,
         MenuName = "Threefold Melody locations",
-        MenuDescription = "Tests giving items from the Threefold Melody locations in Cog_09, Hang...",
+        MenuDescription = "Tests giving items from the Threefold Melody locations in Cog_09, Hang_12, &...",
         Revision = 2026092200,
     };
 
@@ -22,7 +22,7 @@ internal class ThreeFoldMelodyLocationsTest : Test
         StartAt(new CoordinateStartDef() { SceneName = "Cog_09", X = 31.11f, Y = 50.58f, MapZone = GlobalEnums.MapZone.COG_CORE });
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Architect_s_Melody)!.Wrap()
             .WithVariousItems().WithAllPersistent());
-        Placement needolin = new CoordinateLocation
+        Placement needolin1 = new CoordinateLocation
         {
             Name = "Needolin",
             SceneName = SceneNames.Cog_09,
@@ -31,8 +31,22 @@ internal class ThreeFoldMelodyLocationsTest : Test
             FlingType = ItemChanger.Enums.FlingType.Everywhere,
             Managed = false,
         }.Wrap().Add(Finder.GetItem(ItemNames.Needolin)!);
-        needolin.AddTag(new PlacementItemsHintBoxTag());
-        Profile.AddPlacement(needolin);
+        needolin1.AddTag(new PlacementItemsHintBoxTag());
+        Profile.AddPlacement(needolin1);
+
+        Profile.AddPlacement(Finder.GetLocation(LocationNames.Conductor_s_Melody)!.Wrap()
+            .WithVariousItems().WithAllPersistent());
+        Placement needolin2 = new CoordinateLocation
+        {
+            Name = "Needolin",
+            SceneName = SceneNames.Hang_12,
+            X = 28.11f,
+            Y = 4.58f,
+            FlingType = ItemChanger.Enums.FlingType.Everywhere,
+            Managed = false,
+        }.Wrap().Add(Finder.GetItem(ItemNames.Needolin)!);
+        needolin2.AddTag(new PlacementItemsHintBoxTag());
+        Profile.AddPlacement(needolin2);
     }
 
     protected override void OnEnterGame()
@@ -43,5 +57,9 @@ internal class ThreeFoldMelodyLocationsTest : Test
         PlayerData.instance.hasWalljump = true;
         PlayerData.instance.hasHarpoonDash = true;
         PlayerData.instance.silkRegenMax = 1;
+    }
+    public override IEnumerable<(string, Action)> TestMethods()
+    {
+        yield return ("Start Quest", () => QuestUtil.SetAccepted(Quests.Citadel_Ascent_Melodies));
     }
 }
