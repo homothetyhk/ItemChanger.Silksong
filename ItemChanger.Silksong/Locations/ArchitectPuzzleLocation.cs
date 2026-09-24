@@ -1,3 +1,4 @@
+using System.Collections;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Extensions;
@@ -6,11 +7,14 @@ using ItemChanger.Silksong.Extensions;
 using PrepatcherPlugin;
 using Silksong.FsmUtil;
 using Silksong.FsmUtil.Actions;
+using UnityEngine;
 
 namespace ItemChanger.Silksong.Locations;
 
 public class ArchitectPuzzleLocation : AutoLocation
 {
+    private static WaitForSeconds _waitForSeconds5 = new(5f);
+
     protected override void DoLoad()
     {
         Using(new FsmEditGroup()
@@ -46,44 +50,10 @@ public class ArchitectPuzzleLocation : AutoLocation
         // - Wait 5 seconds
         // - Hide prompt
         // - Return to "Pressure Plate Raise" state to wait for Hornet to stand on it again
-        fsm.AddState(new FsmState(fsm.Fsm)
+        FsmState hintState = fsm.AddState(new FsmState(fsm.Fsm)
         {
             name = "Needolin Hint",
-            actions =
-            [
-                new HutongGames.PlayMaker.Actions.SetPlayerDataBool()
-                {
-                    boolName = nameof(PlayerDataAccess.disableInventory),
-                    value = false,
-                },
-                new ActivateGameObject()
-                {
-                    // Deactivate the camera lock
-                    gameObject = fsm.MustGetState("Singing End").GetFirstActionOfType<ActivateGameObject>()!.gameObject,
-                    activate = false,
-                    recursive = false,
-                    resetOnExit = false,
-                },
-                new SendEventByNameV2()
-                {
-                    delay = 0,
-                    eventTarget = fsm.MustGetState("Start Lock").GetFirstActionOfType<SendEventByNameV2>()!.eventTarget,
-                    sendEvent = "IN",
-                },
-                new SendEventToRegister()
-                {
-                    eventName = "REMINDER NEEDOLIN",
-                },
-                // TODO?: Ideally, this should wait until the player steps off the button
-                new Wait()
-                {
-                    time = 5,
-                },
-                new SendEventToRegister()
-                {
-                    eventName = "REMINDER NEEDOLIN END",
-                },
-            ],
+            // functionality implemented as below as LambdaMethod
             transitions = 
             [
                 new()
@@ -93,9 +63,19 @@ public class ArchitectPuzzleLocation : AutoLocation
                     toState = "Pressure Plate Raise"
                 }
             ],
-            // Make the needolin hint go away at the end of the state and not instantly
-            isSequence = true,
         });
+        IEnumerator Run(Action finish)
+        {
+            PlayerDataAccess.disableInventory = false;
+            // Unlock the camera
+            fsm.MustGetState("Singing End").GetFirstActionOfType<ActivateGameObject>()!.gameObject.gameObject.value.SetActive(false);
+            fsm.fsm.Event(fsm.MustGetState("Start Lock").GetFirstActionOfType<SendEventByNameV2>()!.eventTarget, "IN");  // Something like this
+            EventRegister.SendEvent("REMINDER NEEDOLIN");
+            yield return _waitForSeconds5;
+            EventRegister.SendEvent("REMINDER NEEDOLIN END");
+            finish();
+        }
+        hintState.AddLambdaMethod(cb => fsm.StartCoroutine(Run(cb)));
         promptState.AddTransition("NO NEEDOLIN", "Needolin Hint");
     }
 
