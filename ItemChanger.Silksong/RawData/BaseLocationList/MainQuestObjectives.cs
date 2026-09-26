@@ -35,4 +35,9 @@ internal static partial class BaseLocationList
             Tags = [new DefaultCostTag() { Cost = new PDBoolCost(nameof(PlayerData.hasNeedolin), new BoxedString{ Value = "Have Needolin" })}],
         },
     };
+    public static Location Vaultkeeper_s_Melody => new VaultkeeperCardiniusLocation()
+    {
+        SceneName = SceneNames.Library_08,
+        Name = LocationNames.Vaultkeeper_s_Melody,
+    };
 }
