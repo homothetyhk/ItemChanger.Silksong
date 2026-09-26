@@ -81,8 +81,7 @@ public class ArchitectPuzzleLocation : ThreefoldMelodyLocation
         ReplaceMelody
         (
             fsm.MustGetState("Get Melody").GetFirstActionOfType<RunFSM>()!,
-            fsm.gameObject.FindChild("Hornet_pressure_plate")!.transform,
-            "GET ITEM MSG COVERED"
+            fsm.gameObject.FindChild("Hornet_pressure_plate")!.transform
         );
     }
 

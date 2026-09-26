@@ -10,17 +10,12 @@ namespace ItemChanger.Silksong.Locations;
 public abstract class ThreefoldMelodyLocation : AutoLocation
 {
 
-    protected void ReplaceMelody(RunFSM runFSMAction, Transform? transform = null, string? eventOnComplete = null) {
+    protected void ReplaceMelody(RunFSM runFSMAction, Transform? transform = null) {
         Fsm melodyGetTemplateFsm = runFSMAction.fsmTemplateControl.runFsm;
         FsmState giveItemState = melodyGetTemplateFsm.MustGetState("Give Item");
         // Replace SavedItemGetV2 call with a GiveAll delegate
         // For Architect, remove BigUI and event register that listens for BigUIs closing, replace with "FINISHED" transition
         giveItemState.actions = [];
-        // If provided, manually send eventOnComplete to progress the outer FSM
-        if (eventOnComplete != null)
-        {
-            giveItemState.AddAction(new SendEventToRegister{eventName = eventOnComplete});
-        }
         // Remove the BigUI popup for Conductor and Vaultkeeper
         FsmState? uiState = melodyGetTemplateFsm.GetState("UI Msg");
         if (uiState != null) {
@@ -37,7 +32,8 @@ public abstract class ThreefoldMelodyLocation : AutoLocation
             melodyGetTemplateFsm.MustGetState("Return Control").RemoveFirstActionOfType<SavedItemGet>();
         }
 
-        uiState.InsertLambdaMethod(0, this.CreateGiveAllDelegate(transform ? transform : melodyGetTemplateFsm.owner.transform));
+        uiState.InsertAction(new SendEventToRegister(){ eventName = "GET ITEM MSG COVERED" }, 0);
+        uiState.InsertLambdaMethod(1, this.CreateGiveAllDelegate(transform ? transform : melodyGetTemplateFsm.owner.transform));
         uiState.GetTransition(0).fsmEvent = FsmEvent.Finished;
     }
 }

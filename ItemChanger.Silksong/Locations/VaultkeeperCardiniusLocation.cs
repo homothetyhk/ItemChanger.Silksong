@@ -75,17 +75,11 @@ public class VaultkeeperCardiniusLocation : ThreefoldMelodyLocation
         needolinHint.AddRunDialogueAction(NoNeedolinHint!);
         needolinHint.AddAction(endMelodySequence);
         needolinHint.AddTransition("CONVO_END", "Dlg End");
-        
-        // FIXME: ReplaceMelody breaks the code that stops the Vaultkeepr's Gramaphone [sic], despite not touching that state
-        // (This is not related to the Gramaphone [sic] being passed as the transform)
+
         FsmState learnMelodyState = fsm.MustGetState("Needolin");
-        Dictionary<string, Transform> gramaphone = new(){
-            {
-                "sic",
-                learnMelodyState.GetFirstActionOfType<HeroTurnToFace>()!
-                    .Target.gameObject.value.FindChild("Hit Response")!.transform
-            }};
-        ReplaceMelody(learnMelodyState.GetFirstActionOfType<RunFSM>()!, gramaphone["sic"]);
+        Transform gramophone = learnMelodyState.GetFirstActionOfType<HeroTurnToFace>()!
+            .Target.gameObject.value.FindChild("Hit Response")!.transform;
+        ReplaceMelody(learnMelodyState.GetFirstActionOfType<RunFSM>()!, gramophone);
 
         // Remove quest update notification (unless it's a Dearest)
         if (Placement?.Items.Any(i => i.Name == ItemNames.Vaultkeeper_s_Melody) != true)
