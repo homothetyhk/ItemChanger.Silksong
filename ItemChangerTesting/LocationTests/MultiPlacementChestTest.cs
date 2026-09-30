@@ -42,7 +42,7 @@ internal class MultiPlacementChestTest : Test
 
         Profile.AddPlacement(new CoalescingCoordinateLocation
         {
-            Name = "Default Chest Persistent",
+            Name = "Default Chest Big Persistent",
             SceneName = SceneNames.Tut_02,
             X = 133.6f,
             Y = 31.57f,
@@ -51,6 +51,7 @@ internal class MultiPlacementChestTest : Test
             ForceDefaultContainer = false,
             ContainerType = "Chest",
         }.Wrap()
+        .WithTag(new ChestControlTag { ChestInfo = new() { ChestType = ChestType.Pilgrim } })
          .Add(RosariesItem.MakeRosariesItem(200))
          .WithAllPersistent());
 
