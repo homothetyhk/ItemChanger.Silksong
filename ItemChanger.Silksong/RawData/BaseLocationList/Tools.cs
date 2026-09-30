@@ -73,4 +73,25 @@ internal static partial class BaseLocationList
             SceneName = SceneNames.Room_Witch,
         },
     };
+
+    public static Location Throwing_Ring => new DualLocation
+    {
+        SceneName = SceneNames.Shadow_24,
+        Name = LocationNames.Throwing_Ring,
+        Test = new QuestCompletionBool(Quests.Shakra_Final_Quest),
+        TrueLocation = new CoordinateLocation
+        {
+            SceneName = SceneNames.Shadow_24,
+            Name = LocationNames.Throwing_Ring,
+            X = 270.89f,
+            Y = 8.57f,
+            Managed = false,
+            ForceDefaultContainer = true,
+        },
+        FalseLocation = new ShakraTrailsEndLocation
+        {
+            SceneName = SceneNames.Shadow_24,
+            Name = LocationNames.Throwing_Ring,
+        },
+    };
 }
