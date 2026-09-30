@@ -137,6 +137,7 @@ public class FleaContainer : Container
         FleaPrefabData data = _prefabs[fleaType];
 
         GameObject spawnedFlea = data.PrefabKey.InstantiateAsset(info.ContainingScene);
+        info.ApplyTo(spawnedFlea);
         ModifyFlea(spawnedFlea, info, fleaType);
 
         spawnedFlea.name = info.GetGameObjectName("IC Flea");
