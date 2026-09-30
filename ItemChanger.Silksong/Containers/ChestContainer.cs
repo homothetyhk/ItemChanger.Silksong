@@ -101,8 +101,8 @@ public class ChestContainer : Container
     }
 
     public override void ModifyContainerInPlace(GameObject chest, ContainerInfo info)
-    {
-        info.ApplyTo(chest);
+    {  
+        if (ContainerInfo.FindContainerInfo(chest) == null) info.ApplyTo(chest);
         
         RemoveExistingItems(chest);
         RemovePersistentData(chest);
@@ -165,7 +165,9 @@ public class ChestContainer : Container
         FsmState activated = fsm.MustGetState("Activated");
         Transform itemParent = fsm.transform.Find("Item");
 
-        init.InsertMethod(0, f => fsm.GetBoolVariable("Activated").Value = info.GiveInfo.Placement.Visited.HasFlag(VisitState.Opened));
+        // Default to opened and override with placement state so multiple placements can share one chest
+        fsm.SetFsmBoolIfExists("Activated", true);
+        init.InsertMethod(0, f => fsm.GetBoolVariable("Activated").Value &= info.GiveInfo.Placement.Visited.HasFlag(VisitState.Opened));
         createPool.Actions = [];
         spawnItems.RemoveActionsOfType<FlingObjectsFromGlobalPoolV3>();
         spawnItems.InsertMethod(0, _ => OnSpawnItems());
