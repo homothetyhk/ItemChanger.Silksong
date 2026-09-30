@@ -8,7 +8,7 @@ namespace ItemChanger.Silksong.Locations;
 /// <summary>
 /// Coordinate location that automatically stacks placements with the same coordinates into the same forced container.
 /// </summary>
-public sealed class CoalescingCoordinateLocation : CoordinateLocation, IDisposable
+public sealed class CoalescingCoordinateLocation : CoordinateLocation
 {
     required public string ContainerType { get; init; } = "Chest";
 
@@ -30,31 +30,32 @@ public sealed class CoalescingCoordinateLocation : CoordinateLocation, IDisposab
             });
     }
 
-    public void Dispose() => UnloadOnce();
-
-    public void PlaceContainer(UnityEngine.SceneManagement.Scene scene)
+    public override void PlaceContainer(Container container, ContainerInfo info)
     {
-        ContainerRegistry reg = ItemChangerHost.Singleton.ContainerRegistry;
-        Container container = reg.GetContainer(ContainerType) ?? reg.DefaultSingleItemContainer;
-        ContainerInfo info = ContainerInfo.FromPlacement(Placement!, scene, ContainerType, FlingType);
         string gameObjectPrefix = $"IC {ContainerType}";
-        GameObject[] rootGameObjects = scene.GetRootGameObjects();
-        foreach (GameObject go in rootGameObjects)
+        GameObject[] rootGameObjects = info.ContainingScene.GetRootGameObjects();
+        // Iterate in reverse order to find IC-placed containers sooner
+        for (int i = rootGameObjects.Length - 1; i >= 0; i--)
         {
-            if (go.name.StartsWith(gameObjectPrefix))
+            GameObject obj = rootGameObjects[i];
+            if (obj.name.StartsWith(gameObjectPrefix))
             {
                 // Check if the coordinates are equivalent; CoordinateLocations have no Correction,
                 // so this should always work for containers that can't move on their own
-                Vector3 absolutePosition = go.transform.position - go.transform.localPosition;
+                Vector3 absolutePosition = obj.transform.position;
+                if (obj.transform.localPosition != absolutePosition)
+                {
+                    absolutePosition = obj.transform.position - obj.transform.localPosition;
+                }
                 if (!Mathf.Approximately(absolutePosition.x, X)) continue;
                 if (!Mathf.Approximately(absolutePosition.y, Y)) continue;
                 // If the container is properly supported, this will add this location's Placement to the existing container
                 // without removing or conflicting with its existing placement(s)
-                container.ModifyContainerInPlace(go, info);
+                container.ModifyContainerInPlace(obj, info);
                 return;
             }
         }
 
-        PlaceContainer(container, info);
+        base.PlaceContainer(container, info);
     }
 }
