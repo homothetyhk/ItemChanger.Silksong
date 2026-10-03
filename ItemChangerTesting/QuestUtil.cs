@@ -4,6 +4,14 @@ namespace ItemChangerTesting;
 
 internal static class QuestUtil
 {
+    public static void SetAvailable(string questName)
+    {
+        if (QuestManager.TryGetFullQuestBase(questName, out var quest))
+           quest.SetAvailable();
+        else
+            ItemChangerTestingPlugin.Instance.Logger.LogError($"Unable to locate quest '{quest}'.");
+    }
+
     public static void SetAccepted(string questName)
     {
         if (QuestManager.TryGetFullQuestBase(questName, out var quest))
