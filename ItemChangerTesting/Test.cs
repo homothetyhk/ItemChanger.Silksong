@@ -13,10 +13,18 @@ namespace ItemChangerTesting
 {
     internal abstract class Test : Module
     {
-        public static ReadOnlyDictionary<TestFolder, ReadOnlyCollection<Test>> TestGroups { get; } = new(typeof(Test).Assembly.GetTypes()
+        private static readonly ReadOnlyDictionary<TestFolder, ReadOnlyCollection<Test>> testGroups = new(typeof(Test).Assembly.GetTypes()
             .Where(t => t.IsSubclassOf(typeof(Test)) && !t.IsAbstract).Select(t => (Test)Activator.CreateInstance(t))
             .OrderByDescending(t => t.GetMetadata().Revision)
             .GroupBy(t => t.GetMetadata().Folder).ToDictionary(g => g.Key, g => new ReadOnlyCollection<Test>([.. g])));
+
+        public static IEnumerable<Test> GetTests(TestFolder folder)
+        {
+            if (folder == TestFolder.AllTests)
+                return testGroups.Values.SelectMany(t => t).OrderByDescending(t => t.GetMetadata().Revision);
+            else
+                return testGroups[folder];
+        }
 
         public abstract TestMetadata GetMetadata();
 

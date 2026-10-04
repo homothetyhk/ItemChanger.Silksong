@@ -41,13 +41,22 @@ namespace ItemChangerTesting
         private bool inGame = false;
         private TextButton? testMethods;
 
+        private static bool FilterMatches(string filter, string doc)
+        {
+            var tokens = filter.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (tokens.Length == 0) return true;
+
+            doc = doc.ToLower();
+            return tokens.All(t => doc.Contains(t));
+        }
+
         public AbstractMenuScreen BuildCustomMenu()
         {
             SimpleMenuScreen screen = new("ItemChangerTesting");
             MenuElementGenerators.CreateIntSliderGenerator()(cfgSaveSlot, out MenuElement? saveSlotSelector);
             ConfigEntryFactory.GenerateEnumChoiceElement(cfgTestFolder, out MenuElement? testFolderSelector);
 
-            ListChoiceModel<Test> model = new([.. Test.TestGroups[cfgTestFolder.Value]])
+            ListChoiceModel<Test> model = new([.. Test.GetTests(cfgTestFolder.Value)])
             {
                 DisplayFn = (_, t) => t.GetMetadata().MenuName
             };
@@ -63,12 +72,27 @@ namespace ItemChangerTesting
             testMethods.VisibleSelf = inGame;
 
             screen.Add(saveSlotSelector!);
+            TextInput<string> filter = new("Search", TextModels.ForStrings());
+            screen.Add(filter);
             screen.Add(testFolderSelector!);
             screen.Add(testSelector!);
             screen.Add(run);
             screen.Add(testMethods);
 
-            void UpdateFolder(object sender, EventArgs args) => model.UpdateValues([.. Test.TestGroups[cfgTestFolder.Value]], 0);
+            void UpdateTests()
+            {
+                var prevSelection = model.Value;
+                var src = Test.GetTests(cfgTestFolder.Value);
+                List<Test> eligible = [.. src.Where(t => FilterMatches(filter.Value, t.GetMetadata().MenuName))];
+                filter.State = eligible.Count == 0 ? ElementState.INVALID : ElementState.DEFAULT;
+                if (eligible.Count == 0) eligible = [.. src];
+
+                int index = eligible.IndexOf(prevSelection);
+                model.UpdateValues(eligible, index == -1 ? 0 : index);
+            }
+            filter.OnValueChanged += _ => UpdateTests();
+
+            void UpdateFolder(object sender, EventArgs args) => UpdateTests();
             cfgTestFolder.SettingChanged += UpdateFolder;
             screen.OnDispose += () => cfgTestFolder.SettingChanged -= UpdateFolder;
 
