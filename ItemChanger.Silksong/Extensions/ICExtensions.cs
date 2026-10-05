@@ -1,5 +1,4 @@
-﻿using HutongGames.PlayMaker;
-using ItemChanger.Containers;
+﻿using ItemChanger.Containers;
 using ItemChanger.Costs;
 using ItemChanger.Enums;
 using ItemChanger.Items;
@@ -8,8 +7,10 @@ using ItemChanger.Placements;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.Tags;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace ItemChanger.Silksong.Extensions;
 
@@ -27,6 +28,22 @@ internal static class ICExtensions
     /// Returns a string provider for the items placed at this location.
     /// </summary>
     public static IValueProvider<string> UINameProvider(this Location l) => new UIName(l);
+    /// <summary>
+    /// Traverse all GameObjects in a scene.
+    /// </summary>
+    public static IEnumerable<GameObject> AllGameObjects(this Scene scene)
+    {
+        Queue<GameObject> queue = new();
+        foreach (var obj in scene.GetRootGameObjects()) queue.Enqueue(obj);
+
+        while (queue.Count > 0)
+        {
+            var obj = queue.Dequeue();
+            yield return obj;
+
+            foreach (Transform child in obj.transform) queue.Enqueue(child.gameObject);
+        }
+    }
     /// <summary>
     /// Returns a name incorporating the name of the placement and the indices of the items associated with the container.
     /// </summary>
@@ -47,6 +64,16 @@ internal static class ICExtensions
 
 
         return $"{prefix}-{placement.Name}-{itemSuffix}";
+    }
+
+    public static T GetExtendedContainerInfo<T>(this ContainerInfo info) where T : new()
+    {
+        if (info is ExtendedContainerInfo<T> extInfo)
+            return extInfo.ExtendedInfo;
+        else if (info.GiveInfo.Placement.GetPlacementAndLocationTags().OfType<ExtendedContainerInfoTag<T>>().FirstOrDefault() is ExtendedContainerInfoTag<T> tag)
+            return tag.Info;
+        else
+            return new();
     }
 
     public static void AddToStart(this ItemChangerProfile profile, Item item)
@@ -137,6 +164,16 @@ internal static class ICExtensions
         c.Pay();
         return true;
     }
+
+    /// <summary>
+    /// Returns all sub-costs of this possible Multicost.
+    /// </summary>
+    public static IEnumerable<Cost> Flatten(this Cost cost) => cost is MultiCost multi ? [.. multi] : [cost];
+
+    /// <summary>
+    /// Returns all sub-costs that match the specified type, traversing nested Multicosts.
+   /// </summary>
+    public static IEnumerable<T> GetCostsOfType<T>(this Cost cost) => cost.Flatten().OfType<T>();
 
     /// <summary>
     /// Return a value provider that returns the same object as self but strongly typed as a subclass.

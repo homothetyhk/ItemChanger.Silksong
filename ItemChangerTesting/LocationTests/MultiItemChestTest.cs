@@ -44,7 +44,7 @@ internal class MultiItemChestTest : Test
             Managed = false,
             ForceDefaultContainer = false,
         }.Wrap()
-        .WithTag(new ChestControlTag { ChestInfo = new() { ChestType = ChestType.Bone } })
+        .WithTag(new ChestControlTag { Info = new() { ChestType = ChestType.Bone } })
          .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
          .Add(Finder.GetItem(ItemNames.Everbloom)!)
          .Add(Finder.GetItem(ItemNames.Pale_Oil)!));
@@ -59,7 +59,7 @@ internal class MultiItemChestTest : Test
             Managed = false,
             ForceDefaultContainer = false,
         }.Wrap()
-        .WithTag(new ChestControlTag { ChestInfo = new() { ChestType = ChestType.MossyBone } })
+        .WithTag(new ChestControlTag { Info = new() { ChestType = ChestType.MossyBone } })
          .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
          .Add(Finder.GetItem(ItemNames.Everbloom)!)
          .Add(Finder.GetItem(ItemNames.Pale_Oil)!));
@@ -74,7 +74,7 @@ internal class MultiItemChestTest : Test
             Managed = false,
             ForceDefaultContainer = false,
         }.Wrap()
-        .WithTag(new ChestControlTag { ChestInfo = new() { ChestType = ChestType.Ant } })
+        .WithTag(new ChestControlTag { Info = new() { ChestType = ChestType.Ant } })
          .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
          .Add(Finder.GetItem(ItemNames.Everbloom)!)
          .Add(Finder.GetItem(ItemNames.Pale_Oil)!));
@@ -89,7 +89,7 @@ internal class MultiItemChestTest : Test
             Managed = false,
             ForceDefaultContainer = false,
         }.Wrap()
-        .WithTag(new ChestControlTag { ChestInfo = new() { ChestType = ChestType.Docks } })
+        .WithTag(new ChestControlTag { Info = new() { ChestType = ChestType.Docks } })
          .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
          .Add(Finder.GetItem(ItemNames.Everbloom)!)
          .Add(Finder.GetItem(ItemNames.Pale_Oil)!));
@@ -104,7 +104,7 @@ internal class MultiItemChestTest : Test
             Managed = false,
             ForceDefaultContainer = false,
         }.Wrap()
-        .WithTag(new ChestControlTag { ChestInfo = new() { ChestType = ChestType.Pilgrim } })
+        .WithTag(new ChestControlTag { Info = new() { ChestType = ChestType.Pilgrim } })
          .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!)
          .Add(Finder.GetItem(ItemNames.Everbloom)!)
          .Add(Finder.GetItem(ItemNames.Pale_Oil)!));
