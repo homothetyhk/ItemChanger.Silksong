@@ -25,6 +25,9 @@ public abstract class CumulativeCost : Cost
 
     public override bool IsFree => Module.TotalSpent >= Value;
 
+    [JsonIgnore]
+    public int CostRemaining => Math.Max(0, Value - Module.TotalSpent);
+
     public override bool CanPay() => Module.TotalSpent + Module.CurrentlyAvailable >= Value;
 
     /// <summary>
@@ -32,13 +35,13 @@ public abstract class CumulativeCost : Cost
     /// </summary>
     protected abstract string GetCostText(int toSpend);
 
-    public override string GetCostText() => GetCostText(Math.Max(0, Value - Module.TotalSpent));
+    public override string GetCostText() => GetCostText(CostRemaining);
 
-    public override bool HasPayEffects() => true;
+    public override bool HasPayEffects() => CostRemaining > 0;
 
     public override void OnPay()
     {
-        int toSpend = Value - Module.TotalSpent;
+        int toSpend = CostRemaining;
         if (toSpend > 0) Module.Spend(toSpend);
     }
 }

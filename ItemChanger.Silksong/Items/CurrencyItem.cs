@@ -35,8 +35,9 @@ public abstract class CurrencyItem : Item
 
     public override bool GiveEarly(string containerType) => containerType switch
     {
-        // TODO: Handle rosary bowls, string caches, other breakables, enemies, etc.
+        // TODO: Handle rosary bowls, string caches, enemies, etc.
         ContainerNames.Chest => true,
+        ContainerNames.SilkGrubCocoon => true,
         _ => false,
     };
 
