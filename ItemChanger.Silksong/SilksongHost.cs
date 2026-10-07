@@ -49,6 +49,7 @@ public partial class SilksongHost : ItemChangerHost
             new ReusableAbyssEscapeModule(),
             new RemoveCurrencyCapModule(),
             new RedundantItemReplacementModule(), // for testing Item.Redundant implementations. TODO: Consider removing before release.
+            new SecondSentinelRequireQuestModule(),
         ];
     }
 

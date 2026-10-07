@@ -1,7 +1,6 @@
 using ItemChanger.Locations;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
-using QuestPlaymakerActions;
 using Silksong.FsmUtil;
 using ItemChanger.Silksong.Extensions;
 
@@ -23,9 +22,6 @@ public class SecondSentinelLocation : AutoLocation
     {
         FsmState awardState = fsm.MustGetState("Award Item");
         awardState.RemoveActionsOfType<SavedItemGet>();
-        awardState.InsertLambdaMethod(3, finish =>
-        {
-            this.CreateGiveAllDelegate(fsm.transform).Invoke(finish);
-        });
+        awardState.InsertLambdaMethod(3, this.CreateGiveAllDelegate(fsm.transform));
     }
 }
