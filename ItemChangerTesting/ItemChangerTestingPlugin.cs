@@ -1,12 +1,18 @@
-﻿using BepInEx;
+﻿using Benchwarp.Data;
+using BepInEx;
 using BepInEx.Configuration;
+using InControl;
 using ItemChanger;
 using ItemChanger.Events;
 using ItemChanger.Silksong;
+using ItemChanger.Silksong.StartDefs;
 using Silksong.ModMenu.Elements;
 using Silksong.ModMenu.Models;
 using Silksong.ModMenu.Plugin;
 using Silksong.ModMenu.Screens;
+using System.Text;
+using UnityEngine;
+using UnityEngine.Scripting;
 
 namespace ItemChangerTesting
 {
@@ -17,6 +23,7 @@ namespace ItemChangerTesting
         public required ConfigEntry<int> cfgSaveSlot;
         public required ConfigEntry<TestFolder> cfgTestFolder;
         public required ConfigEntry<int> cfgTestIndex;
+        public required ConfigEntry<KeyboardShortcut> cfgCoordinateShortcut;
 
         public static ItemChangerTestingPlugin Instance 
         { 
@@ -34,20 +41,56 @@ namespace ItemChangerTesting
                 configDescription: new ConfigDescription("The test folder to search."));
             cfgTestIndex = Config.Bind(configDefinition: new ConfigDefinition(section: "Menu", key: "Test Index"), defaultValue: (int)default,
                 configDescription: new ConfigDescription("The index of the test to launch, within its folder."));
+            cfgCoordinateShortcut = Config.Bind(configDefinition: new ConfigDefinition(section: "Menu", key: "Coordinate Def Shortcut"), defaultValue: KeyboardShortcut.Empty,
+                configDescription: new ConfigDescription("Press this combination of keys to put a CoordinateStartDef into the clipboard"));
 
             ItemChangerPlugin.OnNewHost += HookLifecycleEvents;
         }
 
+        private void Update()
+        {
+            if (cfgCoordinateShortcut.Value.IsPressed())
+            {
+                StringBuilder sb = new($"new {nameof(CoordinateStartDef)} {{ ");
+                sb.Append($"{nameof(CoordinateStartDef.SceneName)} = {nameof(SceneNames)}.{GameManager.instance.sceneName}, ");
+                var pos = HeroController.instance.transform.position;
+                sb.Append($"{nameof(CoordinateStartDef.X)} = {PrintFloat(pos.x)}, ");
+                sb.Append($"{nameof(CoordinateStartDef.Y)} = {PrintFloat(pos.y + 0.4f)}, ");
+                sb.Append($"{nameof(CoordinateStartDef.RespawnFacingRight)} = {(HeroController.instance.cState.facingRight ? "true" : "false")} }}");
+                TextCopy.ClipboardService.SetText(sb.ToString());
+
+                static string PrintFloat(float f)
+                {
+                    float rounded = Mathf.RoundToMultipleOf(f, 0.5f);
+                    int intRound = Mathf.RoundToInt(f);
+                    if (Mathf.Abs(rounded - intRound) < 0.0001f)
+                        return $"{intRound}";
+                    else
+                        return $"{rounded:0.0}f";
+                }
+            }
+        }
+
         private bool inGame = false;
         private TextButton? testMethods;
+
+        private static bool FilterMatches(string filter, string doc)
+        {
+            var tokens = filter.ToLower().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (tokens.Length == 0) return true;
+
+            doc = doc.ToLower();
+            return tokens.All(t => doc.Contains(t));
+        }
 
         public AbstractMenuScreen BuildCustomMenu()
         {
             SimpleMenuScreen screen = new("ItemChangerTesting");
             MenuElementGenerators.CreateIntSliderGenerator()(cfgSaveSlot, out MenuElement? saveSlotSelector);
             ConfigEntryFactory.GenerateEnumChoiceElement(cfgTestFolder, out MenuElement? testFolderSelector);
+            ConfigEntryFactory.GenerateKeyboardShortcutElement(cfgCoordinateShortcut, out MenuElement? shortcutSelector);
 
-            ListChoiceModel<Test> model = new([.. Test.TestGroups[cfgTestFolder.Value]])
+            ListChoiceModel<Test> model = new([.. Test.GetTests(cfgTestFolder.Value)])
             {
                 DisplayFn = (_, t) => t.GetMetadata().MenuName
             };
@@ -63,12 +106,28 @@ namespace ItemChangerTesting
             testMethods.VisibleSelf = inGame;
 
             screen.Add(saveSlotSelector!);
+            TextInput<string> filter = new("Search", TextModels.ForStrings());
+            screen.Add(filter);
             screen.Add(testFolderSelector!);
             screen.Add(testSelector!);
             screen.Add(run);
             screen.Add(testMethods);
+            screen.Add(shortcutSelector!);
 
-            void UpdateFolder(object sender, EventArgs args) => model.UpdateValues([.. Test.TestGroups[cfgTestFolder.Value]], 0);
+            void UpdateTests()
+            {
+                var prevSelection = model.Value;
+                var src = Test.GetTests(cfgTestFolder.Value);
+                List<Test> eligible = [.. src.Where(t => FilterMatches(filter.Value, t.GetMetadata().MenuName))];
+                filter.State = eligible.Count == 0 ? ElementState.INVALID : ElementState.DEFAULT;
+                if (eligible.Count == 0) eligible = [.. src];
+
+                int index = eligible.IndexOf(prevSelection);
+                model.UpdateValues(eligible, index == -1 ? 0 : index);
+            }
+            filter.OnValueChanged += _ => UpdateTests();
+
+            void UpdateFolder(object sender, EventArgs args) => UpdateTests();
             cfgTestFolder.SettingChanged += UpdateFolder;
             screen.OnDispose += () => cfgTestFolder.SettingChanged -= UpdateFolder;
 

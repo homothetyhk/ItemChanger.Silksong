@@ -51,6 +51,15 @@ namespace ItemChanger.Silksong.RawData
             },
         };
 
+        // Shared tag for enclosed spaces which cannot fit large Flea containers, like the ant cage and Citadel cage.
+        internal static FleaControlTag SmallFleaPrefabs => new()
+        {
+            Info = new FleaContainer.FleaControlInfo
+            {
+                AllowedTypes = [FleaContainerType.Barrel, FleaContainerType.Scared, FleaContainerType.Sleeping]
+            }
+        };
+
 
         public static Dictionary<string, Location> GetBaseLocations()
         {

@@ -1,7 +1,5 @@
 using Benchwarp.Data;
-using ItemChanger.Enums;
 using ItemChanger.Locations;
-using ItemChanger.Serialization;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.Serialization;

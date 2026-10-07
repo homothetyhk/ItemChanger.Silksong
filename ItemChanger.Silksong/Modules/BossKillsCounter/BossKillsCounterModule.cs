@@ -1,6 +1,7 @@
 using Benchwarp.Data;
 using ItemChanger.Modules;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.Serialization;
 using System.Collections.ObjectModel;
@@ -75,7 +76,9 @@ public class BossKillsCounterModule : Module
             new PDBool(nameof(PlayerData.defeatedLaceTower))), // Lace-Cradle
         [JournalEntries.Mossbone_Mother] = new SpecialBossCounter(JournalEntries.Mossbone_Mother,
             new PDBool(nameof(PlayerData.defeatedMossMother)), // Moss Mother-Grotto
-            new CoalescingValueProvider<bool>(new ComponentFieldOption<BattleScene, bool>(SceneNames.Weave_03, "Boss Scene", nameof(BattleScene.completed)),
+            new CoalescingValueProvider<bool>(
+                // This is only evaluated when looking at inventory or talking to Nuu, not during scene load, so it's safe.
+                new ComponentStructFieldOption<BattleScene, bool>(SceneNames.Weave_03, "Boss Scene", nameof(BattleScene.completed)).ForCurrentSceneUnsafe(),
                 new SDBool(SceneNames.Weave_03, "Boss Scene"))), // Moss Mother Duo-Weavenest
         [JournalEntries.Cloverstag_White] = new SpecialBossCounter(JournalEntries.Cloverstag_White,
             new Disjunction(new IntComparisonBool

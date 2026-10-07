@@ -1,22 +1,32 @@
-﻿using HarmonyLib;
+﻿using Benchwarp.Benches;
+using Benchwarp.Events;
+using HarmonyLib;
+using HutongGames;
 using ItemChanger;
-using ItemChanger.Events.Args;
 using ItemChanger.Modules;
 using ItemChanger.Silksong;
 using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.StartDefs;
 using PrepatcherPlugin;
+using System.Collections;
 using System.Collections.ObjectModel;
-using UnityEngine.SceneManagement;
 
 namespace ItemChangerTesting
 {
     internal abstract class Test : Module
     {
-        public static ReadOnlyDictionary<TestFolder, ReadOnlyCollection<Test>> TestGroups { get; } = new(typeof(Test).Assembly.GetTypes()
+        private static readonly ReadOnlyDictionary<TestFolder, ReadOnlyCollection<Test>> testGroups = new(typeof(Test).Assembly.GetTypes()
             .Where(t => t.IsSubclassOf(typeof(Test)) && !t.IsAbstract).Select(t => (Test)Activator.CreateInstance(t))
             .OrderByDescending(t => t.GetMetadata().Revision)
             .GroupBy(t => t.GetMetadata().Folder).ToDictionary(g => g.Key, g => new ReadOnlyCollection<Test>([.. g])));
+
+        public static IEnumerable<Test> GetTests(TestFolder folder)
+        {
+            if (folder == TestFolder.AllTests)
+                return testGroups.Values.SelectMany(t => t).OrderByDescending(t => t.GetMetadata().Revision);
+            else
+                return testGroups[folder];
+        }
 
         public abstract TestMetadata GetMetadata();
 
@@ -36,6 +46,11 @@ namespace ItemChangerTesting
         /// For ease of testing, all enemies & bosses are reduced to 1 hp by default. Set this to false to suppress that behaviour.
         /// </summary>
         protected virtual bool WeakenEnemies => true;
+
+        /// <summary>
+        /// If true, run the test case in Steel Soul mode.
+        /// </summary>
+        public virtual bool PermadeathMode => false;
 
         /// <summary>
         /// The entry point of the test. Responsible for setting up any modules or placements to be tested, as well as start location.
@@ -70,6 +85,15 @@ namespace ItemChangerTesting
             {
                 StartDef = start,
             });
+        }
+
+        protected void WarpToStart()
+        {
+            if (ItemChangerHost.Singleton.ActiveProfile!.Modules.Get<StartDefModule>() is not StartDefModule mod)
+                return;
+
+            mod.StartDef.GetRespawnInfo().SetRespawn();
+            Benchwarp.ChangeScene.WarpToRespawn();
         }
 
         private static Test? ActiveTest;

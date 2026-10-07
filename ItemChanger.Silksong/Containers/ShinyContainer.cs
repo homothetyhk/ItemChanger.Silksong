@@ -53,6 +53,11 @@ public class ShinyContainer : Container
         /// </summary>
         KeepExisting,
         /// <summary>
+        /// The shiny has no Rigidbody and should not be given one.
+        /// Its physics are controlled through a parent object or some other mechanism.
+        /// </summary>
+        KeepExistingNoRigidbody,
+        /// <summary>
         /// Flings shiny with speed 0, leaving it to fall under its rigidbody's gravity.
         /// </summary>
         Drop,
@@ -80,32 +85,13 @@ public class ShinyContainer : Container
     
     public record ShinyControlInfo
     {
-        public static ShinyControlInfo Default { get; } = new();
         public ShinyType ShinyType { get; init; } = ShinyType.Normal;
         public ShinyControlFlags ShinyControlFlags { get; init; } = ShinyControlFlags.Default;
         public ShinyFling ShinyFling { get; init; } = ShinyFling.KeepExisting;
     }
 
-    /// <summary>
-    /// A ContainerInfo which contains additional shiny-specific configuration info. Takes precedence over configuration provided through <see cref="ShinyControlTag"/>.
-    /// </summary>
-    public class ShinyContainerInfo : ContainerInfo
-    {
-        public required ShinyControlInfo ShinyInfo { get; init; }
-
-        public ShinyContainerInfo() { }
-
-        [SetsRequiredMembers]
-        public ShinyContainerInfo(ContainerInfo containerInfo, ShinyControlInfo shinyInfo)
-        {
-            base.CostInfo = containerInfo.CostInfo;
-            base.ContainingScene = containerInfo.ContainingScene;
-            base.ContainerType = containerInfo.ContainerType;
-            base.GiveInfo = containerInfo.GiveInfo;
-            base.RequestedCapabilities = containerInfo.RequestedCapabilities;
-            this.ShinyInfo = shinyInfo;
-        }
-    }
+    [method: SetsRequiredMembers]
+    public class ShinyContainerInfo(ContainerInfo containerInfo, ShinyControlInfo shinyInfo) : ExtendedContainerInfo<ShinyControlInfo>(containerInfo, shinyInfo) { }
 
     public static ShinyContainer Instance { get; } = new();
 
@@ -119,7 +105,7 @@ public class ShinyContainer : Container
 
     public override GameObject GetNewContainer(ContainerInfo info)
     {
-        ShinyControlInfo shinyInfo = GetShinyControlInfo(info);
+        ShinyControlInfo shinyInfo = info.GetExtendedContainerInfo<ShinyControlInfo>();
  
         bool isInstant = shinyInfo?.ShinyType == ShinyType.Instant;
         CollectableItemPickup prefabComponent = isInstant ? Gameplay.CollectableItemPickupInstantPrefab : Gameplay.CollectableItemPickupPrefab;
@@ -151,7 +137,7 @@ public class ShinyContainer : Container
         }
         shiny.SetItem(item);
 
-        ShinyControlInfo shinyInfo = GetShinyControlInfo(info);
+        ShinyControlInfo shinyInfo = info.GetExtendedContainerInfo<ShinyControlInfo>();
         ShinyControlFlags controlFlags = shinyInfo.ShinyControlFlags;
 
         if (controlFlags.HasFlag(ShinyControlFlags.AddFeatherEffect))
@@ -164,36 +150,39 @@ public class ShinyContainer : Container
         }
 
         ShinyFling fling = shinyInfo.ShinyFling;
-        Rigidbody2D rb = shiny.gameObject.GetOrAddComponent<Rigidbody2D>();
+        if (fling != ShinyFling.KeepExistingNoRigidbody)
+        {
+            Rigidbody2D rb = shiny.gameObject.GetOrAddComponent<Rigidbody2D>();
 
-        if (fling == ShinyFling.KeepExisting)
-        {
-            // no-op
-        }
-        else if (fling == ShinyFling.FloatInPlace)
-        {
-            shiny.fling = false;
-            rb.bodyType = RigidbodyType2D.Kinematic;
-            shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Stand;
-            // FloatInPlace shinies are already static — the prefab's waitForStoppedMoving
-            // behavior would deactivate interactEvents until the rigidbody settles, but a
-            // kinematic body never moves so we force-activate interactEvents immediately.
-            shiny.gameObject.GetComponent<InteractEvents>()?.Activate();
-
-        }
-        else
-        {
-            shiny.fling = true;
-            rb.bodyType = RigidbodyType2D.Dynamic;
-            shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Normal;
-            shiny.flingDirection = fling switch
+            if (fling == ShinyFling.KeepExisting)
             {
-                ShinyFling.Random => CollectableItemPickup.FlingDirection.Either,
-                ShinyFling.Left => CollectableItemPickup.FlingDirection.Left,
-                ShinyFling.Right => CollectableItemPickup.FlingDirection.Right,
-                ShinyFling.AwayFromHero => CollectableItemPickup.FlingDirection.AwayFromHero,
-                ShinyFling.Drop or _ => CollectableItemPickup.FlingDirection.Drop,
-            };
+                // no-op
+            }
+            else if (fling == ShinyFling.FloatInPlace)
+            {
+                shiny.fling = false;
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Stand;
+                // FloatInPlace shinies are already static — the prefab's waitForStoppedMoving
+                // behavior would deactivate interactEvents until the rigidbody settles, but a
+                // kinematic body never moves so we force-activate interactEvents immediately.
+                shiny.gameObject.GetComponent<InteractEvents>()?.Activate();
+
+            }
+            else
+            {
+                shiny.fling = true;
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                shiny.pickupAnim = CollectableItemPickup.PickupAnimations.Normal;
+                shiny.flingDirection = fling switch
+                {
+                    ShinyFling.Random => CollectableItemPickup.FlingDirection.Either,
+                    ShinyFling.Left => CollectableItemPickup.FlingDirection.Left,
+                    ShinyFling.Right => CollectableItemPickup.FlingDirection.Right,
+                    ShinyFling.AwayFromHero => CollectableItemPickup.FlingDirection.AwayFromHero,
+                    ShinyFling.Drop or _ => CollectableItemPickup.FlingDirection.Drop,
+                };
+            }
         }
 
         Placement placement = info.GiveInfo.Placement;
@@ -304,13 +293,6 @@ public class ShinyContainer : Container
     public static void AllowHazardFloat(GameObject go)
     {
         UObject.Destroy(go.GetComponent<BreakOnHazard>());
-    }
-
-    private static ShinyControlInfo GetShinyControlInfo(ContainerInfo info)
-    {
-        return (info as ShinyContainerInfo)?.ShinyInfo
-            ?? info.GiveInfo.Placement.GetPlacementAndLocationTags().OfType<ShinyControlTag>().FirstOrDefault()?.Info
-            ?? ShinyControlInfo.Default;
     }
 
     protected override void DoLoad()

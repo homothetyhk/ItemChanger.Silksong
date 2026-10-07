@@ -9,6 +9,9 @@ public static class EnumValueProviders
     public static IValueProvider<FleatopiaState> FleatopiaStateProvider =>
         new FleatopiaStateProvider();
 
+    public static IValueProvider<SlabBattleState> SlabBattleStateProvider =>
+        new SlabBattleStateProvider();
+
     /// <summary>
     /// Returns a value provider wrapping a <see cref="PlacementVisitStateBool"/> with an additional state for being in Act 3.
     /// </summary>

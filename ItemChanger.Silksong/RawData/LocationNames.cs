@@ -8,10 +8,12 @@ public static class LocationNames
     public const string Forge_Daughter = "Forge_Daughter";
     // Sells: Sting_Shard, Magma_Bell, Crafting_Kit, Silkshot
     public const string Frey = "Frey";
+    public const string Frey__Requires_Bellhome = "Frey_(Requires_Bellhome)";
     // Sells: Memory_Locket, Spool_Fragment, Multibinder
     public const string Grindle = "Grindle";
     // Sells: Thief's_Mark, Spool_Fragment, Crafting_Kit, Snitch_Pick, Magnetite_Dice
     public const string Jubilana = "Jubilana";
+    public const string Jubilana__Requires_Rescue = "Jubilana_(Requires_Rescue)";
     // Sells: Ascendant's_Grip, Simple_Key, Spool_Extender, Spider_Strings, Spool_Fragment, Mask_Shard
     public const string Mort = "Mort";
     // Sells: Weighted_Belt, Tool_Pouch, Memory_Locket
@@ -19,8 +21,9 @@ public static class LocationNames
     // Sells: Curveclaw, Fractured_Mask
     public const string Pebb = "Pebb";
     // Sells: Magnetite_Brooch, Mask_Shard, Craftmetal, Simple_Key
-    public const string Shakra__Global = "Shakra-Global";
+    public const string Shakra = "Shakra";
     public const string Twelfth_Architect = "Twelfth_Architect";
+    public const string Twelfth_Architect__Requires_Tools = "Twelfth_Architect_(Requires_Tools)";
     // Sells: Cogwork_Wheel, Scuttlebrace, Silkshot, Crafting_Kit, Architect's_Key
     public const string Eva = "Eva";
     // Sells: Crest_of_Hunter__Upgrade_1, Vesticrest_Yellow, Vesticrest_Blue, Crest_of_Hunter__Upgrade_2, Sylphsong
@@ -89,7 +92,7 @@ public static class LocationNames
     public const string Cogfly = "Cogfly";
       //public const string Cogwork_Wheel = "Cogwork_Wheel";
     public const string Conchcutter = "Conchcutter";
-    public const string Curveclaw__Mottled_Skarr_Dead = "Curveclaw-Mottled_Skarr_Dead";
+    public const string Curveclaw = "Curveclaw";
     public const string Curvesickle = "Curvesickle";
     public const string Delver_s_Drill = "Delver's_Drill";
     public const string Flea_Brew = "Flea_Brew";
@@ -121,7 +124,6 @@ public static class LocationNames
     public const string Druid_s_Eye = "Druid's_Eye";
     public const string Druid_s_Eyes = "Druid's_Eyes";
     public const string Egg_of_Flealia = "Egg_of_Flealia";
-      //public const string Fractured_Mask = "Fractured_Mask";
     public const string Injector_Band = "Injector_Band";
     public const string Longclaw = "Longclaw";
       //public const string Magma_Bell = "Magma_Bell";
@@ -153,7 +155,7 @@ public static class LocationNames
     public const string Silkspeed_Anklets = "Silkspeed_Anklets";
       //public const string Spider_Strings = "Spider_Strings";
       //public const string Thief_s_Mark = "Thief's_Mark";
-    public const string Weighted_Belt__Mort_Dead = "Weighted_Belt-Mort_Dead";
+    public const string Weighted_Belt = "Weighted_Belt";
 
     // silk hearts
     public const string Silk_Heart__Bell_Beast = "Silk_Heart-Bell_Beast";
@@ -437,7 +439,7 @@ public static class LocationNames
     public const string Frayed_Rosary__Greymoor_West_Craw_Lake = "Frayed_Rosary-Greymoor_West_Craw_Lake";
     public const string Frayed_Rosary__High_Halls = "Frayed_Rosary-High_Halls";
     public const string Frayed_Rosary__Moss_Grotto_Above_Start = "Frayed_Rosary-Moss_Grotto_Above_Start";
-    public const string Frayed_Rosary__Moss_Grotto_Silkspear = "Frayed_Rosary-Moss_Grotto_Silkspear";
+    public const string Frayed_Rosary__Mosshome = "Frayed_Rosary-Mosshome";
     public const string Frayed_Rosary__Putrified_Ducts = "Frayed_Rosary-Putrified_Ducts";
     public const string Frayed_Rosary__Shellwood = "Frayed_Rosary-Shellwood";
     public const string Frayed_Rosary__Sinners_Road = "Frayed_Rosary-Sinners_Road";
@@ -530,20 +532,20 @@ public static class LocationNames
     public const string Ventrica__Underworks = "Ventrica-Underworks";
 
     // Maps - Purchased from Shakra (shop items, no per-item constants)
-    // - Mosslands Map (40)
-    // - The Marrow Map (50)
-    // - Deep Docks Map (50)
-    // - Far Fields Map (50)
-    // - Wormways Map (70)
-    // - Hunter's March Map (70)
-    // - Greymoor Map (70)
-    // - Bellhart Map (40)
-    // - Shellwood Map (70)
-    // - Blasted Steps Map (70)
-    // - Sinner's Road Map (90)
-    // - Mount Fay Map (40)
-    // - Sands of Karak Map (90)
-    // - Bilewater Map (90)
+    public const string Map__Bellhart = "Map-Bellhart";  // 40 rosary
+    public const string Map__Bilewater = "Map-Bilewater";  // 90 rosary
+    public const string Map__Blasted_Steps = "Map-Blasted_Steps";  // 70 rosary
+    public const string Map__Deep_Docks = "Map-Deep_Docks";  // 50 rosary
+    public const string Map__Far_Fields = "Map-Far_Fields";  // 50 rosary
+    public const string Map__Greymoor = "Map-Greymoor";  // 70 rosary
+    public const string Map__Hunter_s_March = "Map-Hunter's_March";  // 70 rosary
+    public const string Map__Marrow = "Map-Marrow";  // 50 rosary
+    public const string Map__Mosslands = "Map-Mosslands";  // 40 rosary
+    public const string Map__Mount_Fay = "Map-Mount_Fay";  // 40 rosary
+    public const string Map__Sands_of_Karak = "Map-Sands_of_Karak";  // 90 rosary
+    public const string Map__Shellwood = "Map-Shellwood";  // 70 rosary
+    public const string Map__Sinner_s_Road = "Map-Sinner's_Road";  // 90 rosary
+    public const string Map__Wormways = "Map-Wormways";  // 70 rosary
 
     // Maps - From map machines
     public const string Map__Grand_Gate = "Map-Grand_Gate";  // 40 rosary
@@ -656,7 +658,7 @@ public static class LocationNames
     public const string Memory_Locket__Bilewater_Cocoon_Corpse = "Memory_Locket-Bilewater_Cocoon_Corpse";
     public const string Memory_Locket__Bilewater_Hidden_Room_West_Bench = "Memory_Locket-Bilewater_Hidden_Room_West_Bench";
     public const string Memory_Locket__Blasted_Steps = "Memory_Locket-Blasted_Steps";
-    public const string Memory_Locket__Coral_Chambers = "Memory_Locket-Coral_Chambers";
+    public const string Memory_Locket__Choral_Chambers = "Memory_Locket-Choral_Chambers";
     public const string Memory_Locket__Deep_Docks = "Memory_Locket-Deep_Docks";
     public const string Memory_Locket__Far_Fields_Secret = "Memory_Locket-Far_Fields_Secret";
     public const string Memory_Locket__Greymoor_HH = "Memory_Locket-Greymoor_HH";

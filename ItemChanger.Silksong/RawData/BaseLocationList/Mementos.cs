@@ -28,4 +28,13 @@ internal static partial class BaseLocationList
             Name = LocationNames.Hunter_s_Memento
         }
     };
+
+    public static Location Surface_Memento => new SurfaceMementoLocation
+    {
+        Name = LocationNames.Surface_Memento,
+        SceneName = SceneNames.Abandoned_town,
+        ObjectName = "Memory Group/abandoned_town_memento_dropper/collectable item fall/Collectable Item Pickup",
+        FlingType = Enums.FlingType.Everywhere,
+        Correction = default
+    };
 }

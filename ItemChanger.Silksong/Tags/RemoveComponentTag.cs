@@ -1,8 +1,6 @@
 ﻿using ItemChanger.Extensions;
+using ItemChanger.Serialization;
 using ItemChanger.Tags;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +11,8 @@ internal class RemoveComponentTag<T> : Tag where T : Component
     public required string SceneName { get; init; }
 
     public required string ObjectName { get; init; }
+
+    public IValueProvider<bool> Test { get; init; } = new BoxedBool { Value = true };
 
     protected override void DoLoad(TaggableObject parent)
     {
@@ -26,6 +26,11 @@ internal class RemoveComponentTag<T> : Tag where T : Component
 
     private void DoRemoveComponent(Scene scene)
     {
+        if (!Test.Value)
+        {
+            return;
+        }
+
         GameObject? go = scene.FindGameObject(ObjectName);
         if (go == null)
         {

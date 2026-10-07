@@ -12,6 +12,7 @@ using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.Tags;
 using Silksong.FsmUtil;
 using UnityEngine;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ItemChanger.Silksong.Containers;
 
@@ -71,7 +72,7 @@ public class FleaContainer : Container
 {
     private record FleaPrefabData(AssetCache.GameObjectKey PrefabKey, float Offset);
 
-    private static readonly Dictionary<FleaContainerType, FleaPrefabData> _prefabs = new()
+    private static readonly SortedDictionary<FleaContainerType, FleaPrefabData> _prefabs = new()
     {
         [FleaContainerType.Sleeping] = new(
             GameObjectKeys.FLEA_SLEEPING(),
@@ -93,6 +94,7 @@ public class FleaContainer : Container
     };
 
     // TODO - add support for more prefabs
+    // TODO - Instantiated flea containers should drop to the nearest terrain collider.
     // Note. I think that the only one it is realistic to support is the
     // SlabCage, to support a "hanging" capability. This would still require work,
     // as the flea's chain is longer than many hanging checks.
@@ -106,29 +108,43 @@ public class FleaContainer : Container
 
     public override bool SupportsModifyInPlace => true;
 
+    public record FleaControlInfo
+    {
+        /// <summary>
+        /// If specified, limit allowed flea container types to this list.
+        /// </summary>
+        public List<FleaContainerType> AllowedTypes { get; init; } = [];
+
+        public bool Allow(FleaContainerType type) => AllowedTypes.Count == 0 || AllowedTypes.Contains(type);
+    }
+
+    [method: SetsRequiredMembers]
+    public class FleaContainerInfo(ContainerInfo containerInfo, FleaControlInfo fleaInfo) : ExtendedContainerInfo<FleaControlInfo>(containerInfo, fleaInfo) { }
+
     private FleaContainerType SelectContainerType(ContainerInfo info)
     {
-        FleaContainerType fleaType;
+        var fleaInfo = info.GetExtendedContainerInfo<FleaControlInfo>();
 
         // TODO - validate container based on capabilities
-
         foreach (Item item in info.GiveInfo.Items)
         {
             if (item.GetTag<ItemFleaTypeTag>() is ItemFleaTypeTag tag
-                && _prefabs.ContainsKey(tag.FleaContainerType))
+                && _prefabs.ContainsKey(tag.FleaContainerType)
+                && fleaInfo.Allow(tag.FleaContainerType))
             {
-                fleaType = tag.FleaContainerType;
-                return fleaType;
+                return tag.FleaContainerType;
             }
         }
+
+        List<FleaContainerType> allowed = [.. _prefabs.Keys.Where(fleaInfo.Allow)];
+        if (allowed.Count == 0)
+            return FleaContainerType.Sleeping;
 
         // Select random container seeded by the placement name
         int choice = ItemChangerHost.Singleton.ActiveProfile!
             .Modules.GetOrAdd<ConsistentRandomnessModule>()
-            .Choose($"Flea Container // {info.GiveInfo.Placement.Name}", 0, _prefabs.Count - 1);
-        fleaType = _prefabs.Keys.ElementAt(choice);
-
-        return fleaType;
+            .Choose($"Flea Container // {info.GiveInfo.Placement.Name}", 0, allowed.Count - 1);
+        return allowed[choice];
     }
 
     public override GameObject GetNewContainer(ContainerInfo info)

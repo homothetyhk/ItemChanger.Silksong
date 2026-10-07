@@ -4,9 +4,7 @@ using ItemChanger.Containers;
 using ItemChanger.Enums;
 using ItemChanger.Items;
 using ItemChanger.Silksong.Assets;
-using ItemChanger.Silksong.Components;
 using ItemChanger.Silksong.Extensions;
-using ItemChanger.Silksong.Tags;
 using Silksong.FsmUtil;
 using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
@@ -53,34 +51,13 @@ public class ChestContainer : Container
         [ChestType.Pilgrim] = GameObjectKeys.CHEST_PILGRIM(),
     };
 
-
     public record ChestControlInfo
     {
-        public static ChestControlInfo Default { get; } = new();
-
         public ChestType ChestType { get; init; } = ChestType.Citadel;
     }
 
-    /// <summary>
-    /// A ContainerInfo which contains additional chest-specific configuration info. Takes precedence over configuration provided through ChestControlTag (TODO).
-    /// </summary>
-    public class ChestContainerInfo : ContainerInfo
-    {
-        public required ChestControlInfo ChestInfo { get; init; }
-
-        public ChestContainerInfo() { }
-
-        [SetsRequiredMembers]
-        public ChestContainerInfo(ContainerInfo containerInfo, ChestControlInfo chestInfo)
-        {
-            base.CostInfo = containerInfo.CostInfo;
-            base.ContainingScene = containerInfo.ContainingScene;
-            base.ContainerType = containerInfo.ContainerType;
-            base.GiveInfo = containerInfo.GiveInfo;
-            base.RequestedCapabilities = containerInfo.RequestedCapabilities;
-            this.ChestInfo = chestInfo;
-        }
-    }
+    [method: SetsRequiredMembers]
+    public class ChestContainerInfo(ContainerInfo containerInfo, ChestControlInfo chestInfo) : ExtendedContainerInfo<ChestControlInfo>(containerInfo, chestInfo) { }
 
     public static ChestContainer Instance { get; } = new();
 
@@ -117,18 +94,9 @@ public class ChestContainer : Container
     {
     }
 
-    private static ChestControlInfo GetChestInfo(ContainerInfo info)
-    {
-        return (info as ChestContainerInfo)?.ChestInfo
-            ?? info.GiveInfo.Placement.GetPlacementAndLocationTags().OfType<ChestControlTag>().FirstOrDefault()?.ChestInfo
-            ?? ChestControlInfo.Default;
-    }
-
-    private static ChestType GetChestType(ContainerInfo info) => GetChestInfo(info).ChestType;
-
     private static GameObject CreateChest(ContainerInfo info)
     {
-        ChestType type = GetChestType(info);
+        ChestType type = info.GetExtendedContainerInfo<ChestControlInfo>().ChestType;
         if (!_prefabKeys.TryGetValue(type, out AssetCache.GameObjectKey key)) 
         {
             KeyValuePair<ChestType, AssetCache.GameObjectKey> kvp = _prefabKeys.First();

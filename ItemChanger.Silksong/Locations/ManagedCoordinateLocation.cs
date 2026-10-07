@@ -13,7 +13,7 @@ public sealed class ManagedCoordinateLocation : CoordinateLocation, IDisposable
     private readonly Location parent;
 
     [SetsRequiredMembers]
-    private ManagedCoordinateLocation(Location parent, Vector2 pos) : base()
+    private ManagedCoordinateLocation(Location parent, Vector2 pos, bool forceDefaultContainer) : base()
     {
         this.parent = parent;
 
@@ -22,12 +22,13 @@ public sealed class ManagedCoordinateLocation : CoordinateLocation, IDisposable
         X = pos.x;
         Y = pos.y;
         FlingType = Enums.FlingType.Everywhere;
+        ForceDefaultContainer = forceDefaultContainer;
         Managed = true;
     }
 
-    public static ManagedCoordinateLocation Load(Location parent, Vector2 pos)
+    public static ManagedCoordinateLocation Load(Location parent, Vector2 pos, bool forceDefaultContainer = false)
     {
-        ManagedCoordinateLocation loc = new(parent, pos);
+        ManagedCoordinateLocation loc = new(parent, pos, forceDefaultContainer);
         loc.LoadOnce();
         return loc;
     }
