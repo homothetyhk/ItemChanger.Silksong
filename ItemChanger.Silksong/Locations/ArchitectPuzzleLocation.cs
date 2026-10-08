@@ -85,5 +85,5 @@ public class ArchitectPuzzleLocation : ThreefoldMelodyLocation
         );
     }
 
-    protected static readonly FsmEvent NoNeedolin = new("NO NEEDOLIN");
+    protected static readonly FsmEvent NoNeedolin = FsmEvent.GetFsmEvent("NO NEEDOLIN");
 }

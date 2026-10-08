@@ -21,7 +21,7 @@ public abstract class ThreefoldMelodyLocation : AutoLocation
         if (uiState != null) {
             // The UI popup normally starts during the singing
             // Add a wait to prevent the state from moving on during the song
-            uiState.actions = [ new Wait() { time = 3.5f} ];
+            uiState.actions = [ new Wait() { time = 3.5f } ];
             melodyGetTemplateFsm.MustGetState("Stop Needolin").GetTransition(0).fsmEvent = FsmEvent.Finished;
         }
         else
