@@ -3,11 +3,10 @@ using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
 using Silksong.FsmUtil;
 using ItemChanger.Silksong.Extensions;
-using GenericVariableExtension;
 
 namespace ItemChanger.Silksong.Locations;
 
-public class ShermaLocation : AutoLocation
+public class ShermaSpoolFragmentLocation : AutoLocation
 {
     protected override void DoLoad()
     {

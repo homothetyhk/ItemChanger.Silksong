@@ -122,7 +122,7 @@ internal static partial class BaseLocationList
             ForceDefaultContainer = true,
             Tags = [InteractFloat], // Sits on the counter Sherma hides behind
         },
-        FalseLocation = new ShermaLocation
+        FalseLocation = new ShermaSpoolFragmentLocation
         {
             SceneName = SceneNames.Ward_09,
             Name = LocationNames.Spool_Fragment__Sherma,
