@@ -23,7 +23,7 @@ internal static partial class BaseLocationList
         Name = LocationNames.Diving_Bell_Key,
     };
 
-    public static Location Bellhome_Key => new PavoLocation()
+    public static Location Bellhome_Key => new BellhomeKeyLocation()
     {
         SceneName = SceneNames.Belltown,
         Name = LocationNames.Bellhome_Key,

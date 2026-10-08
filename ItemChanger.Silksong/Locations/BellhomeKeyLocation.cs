@@ -1,14 +1,15 @@
+using Benchwarp.Data;
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
+using ItemChanger.Extensions;
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Extensions;
-using ItemChanger.Silksong.Modules;
-using ItemChanger.Silksong.RawData;
 using Silksong.FsmUtil;
+using UnityEngine.SceneManagement;
 
 namespace ItemChanger.Silksong.Locations;
 
-public class PavoLocation : AutoLocation
+public class BellhomeKeyLocation : AutoLocation
 {
     private QuestCompleteTotalGroup? BellhomeKeyGroup;
     protected override void DoLoad()
@@ -19,7 +20,13 @@ public class PavoLocation : AutoLocation
             { new(UnsafeSceneName, "Belltown Greeter NPC", "Dialogue"), HookPavo },
             { new(UnsafeSceneName, "Belltown Greeter Act3", "Dialogue"), HookPavoAct3 }
         });
+
+        Using(new SceneEditGroup()
+        {
+            { SceneNames.Belltown, FindPavoQuestGroup },
+        });
     }
+
 
     protected override void DoUnload()
     {
@@ -34,7 +41,7 @@ public class PavoLocation : AutoLocation
             FsmState convoDecisionState = fsm.MustGetState("Convo");
             PlayerDataBoolMultiTest test = convoDecisionState.GetFirstActionOfType<PlayerDataBoolMultiTest>()!;
             test.boolTests = [.. test.boolTests, new(){
-                boolName="BelltownGreetCursedConvo",
+                boolName=nameof(PlayerData.BelltownGreetCursedConvo),
                 expectedValue=false,
                 inputBool=false,
                 storeValue=false,
@@ -44,8 +51,6 @@ public class PavoLocation : AutoLocation
         FsmState givenKeyState = fsm.MustGetState("House Full Talked?");
         givenKeyState.RemoveActionsOfType<PlayerDataVariableTest>();
         givenKeyState.InsertMethod(6, () => { fsm.SendEvent(Placement!.AllObtained() ? "TRUE" : "FALSE"); });
-        // Store this check now for Act 3 Pavo to use
-        BellhomeKeyGroup = givenKeyState.GetFirstActionOfType<CheckQuestCompleteTotalGroup>()!.TotalGroup.value as QuestCompleteTotalGroup;
 
         // Replace granting the key with obtaining the placement
         FsmState giveKeyState = fsm.MustGetState("House Key");
@@ -62,6 +67,7 @@ public class PavoLocation : AutoLocation
     private void HookPavoAct3(PlayMakerFSM fsm)
     {
         FsmState end = fsm.MustGetState("End Dialogue");
+        end.isSequence = true;
         end.InsertLambdaMethod(0, (finish) => {
             if (!Placement!.AllObtained() && CanReceiveBellhomeKey())
             {
@@ -73,6 +79,18 @@ public class PavoLocation : AutoLocation
                 finish();
             }
         });
+    }
+
+    /// <summary>
+    /// Borrows normal Pavo's quest completion check for Act 3 Pavo to use
+    /// </summary>
+    /// <param name="scene"></param>
+    private void FindPavoQuestGroup(Scene scene)
+    {
+        if (BellhomeKeyGroup) return;
+        GameObject pavo = scene.FindGameObject("Town States/Spinner Defeated/Bagpipers Not Here/Belltown Greeter NPC")!;
+        BellhomeKeyGroup = pavo.GetFsm("Dialogue")!.MustGetState("House Full Talked?")
+            .GetFirstActionOfType<CheckQuestCompleteTotalGroup>()!.TotalGroup.value as QuestCompleteTotalGroup;
     }
 
     private bool CanReceiveBellhomeKey()

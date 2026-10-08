@@ -1,7 +1,5 @@
 using Benchwarp.Data;
-using ItemChanger.Silksong.Modules;
 using ItemChanger.Silksong.RawData;
-using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.StartDefs;
 using PrepatcherPlugin;
 
@@ -19,8 +17,6 @@ internal class BellhomeKeyLocationTest : Test
 
     public override void Setup(TestArgs args)
     {
-        Modules.GetOrAdd<DivingBellAlwaysAvailableModule>();
-
         StartAt(new CoordinateStartDef()
         {
             SceneName = SceneNames.Belltown,
@@ -41,6 +37,7 @@ internal class BellhomeKeyLocationTest : Test
         
         PlayerDataAccess.spinnerDefeated = true;
         PlayerDataAccess.BelltownHouseState = GlobalEnums.BelltownHouseStates.Full;
+        // Receiving the Bellhome key requires that the player has completed at least 2 Bellhart wishwall quests
         QuestManager.GetQuest(Quests.Beastfly_Hunt).SetCompleted();
         // To test satisfying the quest check after loading the room
         QuestManager.GetQuest(Quests.Shiny_Bell_Goomba).SetReadyToComplete();
