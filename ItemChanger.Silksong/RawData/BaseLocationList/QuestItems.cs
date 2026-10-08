@@ -53,12 +53,6 @@ internal static partial class BaseLocationList
             Name = LocationNames.Maiden_s_Soul,
         },
     };
-  
-    public static Location Diving_Bell_Key => new BallowLocation()
-    {
-        SceneName = SceneNames.Dock_12,
-        Name = LocationNames.Diving_Bell_Key,
-    };
     
     public static Location Steel_Spines => new DualLocation()
     {
