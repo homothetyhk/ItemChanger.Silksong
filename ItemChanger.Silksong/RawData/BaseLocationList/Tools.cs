@@ -5,6 +5,7 @@ using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Costs;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Serialization;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -71,6 +72,32 @@ internal static partial class BaseLocationList
         {
             Name = LocationNames.Pollip_Pouch,
             SceneName = SceneNames.Room_Witch,
+        },
+    };
+  
+    public static Location Longclaw => new DualLocation
+    {
+        Name = LocationNames.Longclaw,
+        SceneName = SceneNames.Room_Huntress,
+        // If Huntress's quest was completed before Act 3, neither Huntress nor Runt will be present in Act 3
+        Test = new Conjunction
+        (
+            new PDBool(nameof(PlayerData.blackThreadWorld)),
+            new QuestCompletionBool(Quests.Huntress_Quest)
+        ),
+        FalseLocation = new HuntressQuestLocation() 
+        {
+            Name = LocationNames.Longclaw,
+            SceneName = SceneNames.Room_Huntress,
+        },
+        TrueLocation = new CoordinateLocation
+        {
+            Name = LocationNames.Longclaw,
+            SceneName = SceneNames.Room_Huntress,
+            X = 17.85f,
+            Y = 6.57f,
+            Managed = false,
+            ForceDefaultContainer = true,
         },
     };
 }
