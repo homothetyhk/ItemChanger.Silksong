@@ -8,6 +8,12 @@ namespace ItemChanger.Silksong.RawData;
 
 internal static partial class BaseLocationList
 {
+    public static Location Bellhome_Key => new BellhomeKeyLocation()
+    {
+        SceneName = SceneNames.Belltown,
+        Name = LocationNames.Bellhome_Key,
+    };
+
     public static Location Craw_Summons => new CrawSummonsLocation()
     {
         Name = LocationNames.Craw_Summons,
@@ -17,15 +23,9 @@ internal static partial class BaseLocationList
         Tags = [new OriginalContainerTag() { ContainerType = ContainerNames.CrawSummons }]
     };
   
-    public static Location Diving_Bell_Key => new BallowLocation()
+    public static Location Diving_Bell_Key => new DivingBellKeyLocation()
     {
         SceneName = SceneNames.Dock_12,
         Name = LocationNames.Diving_Bell_Key,
-    };
-
-    public static Location Bellhome_Key => new BellhomeKeyLocation()
-    {
-        SceneName = SceneNames.Belltown,
-        Name = LocationNames.Bellhome_Key,
     };
 }
