@@ -1,6 +1,7 @@
 ﻿using Benchwarp.Data;
 using ItemChanger.Enums;
 using ItemChanger.Locations;
+using ItemChanger.Serialization;
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
@@ -96,7 +97,12 @@ internal static partial class BaseLocationList
         FleaContainerType.GenericWall,
         replaceable: false
     ).WithTag(new DestroyOnContainerReplaceTag() { ObjectPath = "Bell Wall Flea/Bell Wall Tall (5)" })
-     .WithTag(new DeactivateIfPlacementCheckedTag() { ObjectName = "Bell Wall Flea/Bell Wall Tall (5)", SceneName = SceneNames.Belltown_04 });
+     .WithTag(new DeactivateObjectTag()
+     {
+         SceneName = SceneNames.Belltown_04,
+         ObjectName = "Bell Wall Flea/Bell Wall Tall (5)",
+         Test = new PlacementAllObtainedBool { PlacementName = LocationNames.Flea__Bellhart_Upper }
+     });
 
     public static Location Flea__dock_16 => new DualLocation()
     {
@@ -161,8 +167,14 @@ internal static partial class BaseLocationList
         FleaContainerType.SlabCage,
         elevation: 7.01f
     ).WithTag(new RemoveComponentTag<DeactivateIfPlayerdataTrue>() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" })
-     .WithTag(new DeactivateIfPlacementCheckedTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed" })
-     .WithTag(new DeactivateIfUnexpectedContainerTag() { SceneName = SceneNames.Slab_13, ObjectName = "Audio Player Flea Distressed", ExpectedContainerType = ContainerNames.Flea});
+     .WithTag(new DeactivateObjectTag
+     {
+         SceneName = SceneNames.Slab_13,
+         ObjectName = "Audio Player Flea Distressed",
+         Test = new Disjunction(
+             new PlacementAllObtainedBool { PlacementName = LocationNames.Flea__Slab_Cell },
+             new UnexpectedContainerBool { PlacementName = LocationNames.Flea__Slab_Cell, ExpectedContainerType = ContainerNames.Flea })
+     });
 
     public static Location Flea__dust_09 => CreateFleaLocation(
         LocationNames.Flea__Exhaust_Organ,
