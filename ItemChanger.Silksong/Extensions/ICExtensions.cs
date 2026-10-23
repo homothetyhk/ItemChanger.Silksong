@@ -8,8 +8,10 @@ using ItemChanger.Placements;
 using ItemChanger.Serialization;
 using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.Tags;
 using Newtonsoft.Json;
 using UnityEngine;
+using static ItemChanger.Silksong.Containers.ShinyContainer;
 
 namespace ItemChanger.Silksong.Extensions;
 
@@ -47,6 +49,16 @@ internal static class ICExtensions
 
 
         return $"{prefix}-{placement.Name}-{itemSuffix}";
+    }
+
+    public static T GetExtendedContainerInfo<T>(this ContainerInfo info) where T : new()
+    {
+        if (info is ExtendedContainerInfo<T> extInfo)
+            return extInfo.ExtendedInfo;
+        else if (info.GiveInfo.Placement.GetPlacementAndLocationTags().OfType<ExtendedContainerInfoTag<T>>().FirstOrDefault() is ExtendedContainerInfoTag<T> tag)
+            return tag.Info;
+        else
+            return new();
     }
 
     public static void AddToStart(this ItemChangerProfile profile, Item item)
