@@ -48,6 +48,7 @@ public partial class SilksongHost : ItemChangerHost
             new ChapelDoorObstacleModule(),
             new ReusableAbyssEscapeModule(),
             new RemoveCurrencyCapModule(),
+            new RetainToolsModule(),
             new RedundantItemReplacementModule(), // for testing Item.Redundant implementations. TODO: Consider removing before release.
         ];
     }
