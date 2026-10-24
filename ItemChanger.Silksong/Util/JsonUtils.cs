@@ -23,11 +23,12 @@ public static class JsonUtils
     /// <returns>True if a non-null object was successfully deserialized.</returns>
     public static bool TryDeserializeEmbeddedResource<T>(Assembly asm, string resourceName, [NotNullWhen(true)] out T? result)
     {
-        using Stream? stream = typeof(JsonUtils).Assembly.GetManifestResourceStream(resourceName);
+        // TODO: This should use `asm` according to the documentation?
+        using Stream? stream = asm.GetManifestResourceStream(resourceName);
         if (stream == null)
         {
             // Log warning at debug level, and let the caller handle the error
-            ItemChangerPlugin.Instance.Logger.LogDebug($"Failed to find resource with name {resourceName}");
+            ItemChangerPlugin.Instance.Logger.LogDebug($"Failed to find resource {resourceName} in {asm.FullName}");
             result = default;
             return false;
         }

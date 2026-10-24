@@ -1,12 +1,17 @@
-﻿using ItemChanger.Containers;
+﻿using HutongGames.PlayMaker;
+using ItemChanger.Containers;
 using ItemChanger.Costs;
+using ItemChanger.Enums;
 using ItemChanger.Items;
 using ItemChanger.Locations;
 using ItemChanger.Placements;
 using ItemChanger.Serialization;
+using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.RawData;
+using ItemChanger.Silksong.Tags;
 using Newtonsoft.Json;
 using UnityEngine;
+using static ItemChanger.Silksong.Containers.ShinyContainer;
 
 namespace ItemChanger.Silksong.Extensions;
 
@@ -46,6 +51,16 @@ internal static class ICExtensions
         return $"{prefix}-{placement.Name}-{itemSuffix}";
     }
 
+    public static T GetExtendedContainerInfo<T>(this ContainerInfo info) where T : new()
+    {
+        if (info is ExtendedContainerInfo<T> extInfo)
+            return extInfo.ExtendedInfo;
+        else if (info.GiveInfo.Placement.GetPlacementAndLocationTags().OfType<ExtendedContainerInfoTag<T>>().FirstOrDefault() is ExtendedContainerInfoTag<T> tag)
+            return tag.Info;
+        else
+            return new();
+    }
+
     public static void AddToStart(this ItemChangerProfile profile, Item item)
     {
         profile.AddPlacement(
@@ -73,6 +88,30 @@ internal static class ICExtensions
         GiveInfo info = loc.GetGiveInfo();
         info.Transform = fsm.transform;
         return () => loc.Placement!.GiveAll(info, () => fsm.SendEvent(sendEventOnFinish));
+    }
+
+    public static void OpenAndFlingItems(this ContainerInfo info, Transform transform, string containerName)
+    {
+        GiveInfo gi = new()
+        {
+            Container = containerName,
+            FlingType = info.GiveInfo.FlingType,
+            Transform = transform,
+            MessageType = MessageType.SmallPopup,
+        };
+
+        info.GiveInfo.Placement.AddVisitFlag(VisitState.Opened);
+        foreach (Item item in info.GiveInfo.Items)
+        {
+            if (!item.IsObtained())
+            {
+                if (item.GiveEarly(containerName))
+                {
+                    item.Give(info.GiveInfo.Placement, gi);
+                }
+                else ShinyContainer.Spawn(info, item, transform, fling: info.GiveInfo.FlingType == FlingType.Everywhere);
+            }
+        }
     }
 
     public static string GetUIName(this Placement pmt, IEnumerable<Item> items, int maxLength = 120)

@@ -1,5 +1,6 @@
 {
   // file for english-specific deviations from default.json
   // all language strings must have a default.json definition
-  "FMT_FAST_TRAVEL_PATTERN": "{STATION_NAME} {TRAVEL_TYPE}"
+  "FMT_FAST_TRAVEL_PATTERN": "{STATION_NAME} {TRAVEL_TYPE}",
+  "FMT_CREST_SLOT_UNLOCK_ITEM": "{CREST_NAME} {SLOT_TYPE} Slot"
 }

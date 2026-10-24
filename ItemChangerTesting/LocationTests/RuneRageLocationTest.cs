@@ -1,9 +1,6 @@
 ﻿using Benchwarp.Data;
 using ItemChanger;
-using ItemChanger.Extensions;
-using ItemChanger.Silksong;
 using ItemChanger.Silksong.RawData;
-using UnityEngine.SceneManagement;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -22,12 +19,4 @@ internal class RuneRageLocationTest : Test
         StartNear(SceneNames.Slab_10b, "left1");
         Profile.AddPlacement(Finder.GetLocation(LocationNames.Rune_Rage)!.Wrap().Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
     }
-
-    protected override void DoLoad()
-    {
-        base.DoLoad();
-        Using(new SceneEditGroup() { { SceneNames.Slab_10b, WeakenBoss } });
-    }
-
-    private void WeakenBoss(Scene scene) => scene.FindGameObjectByName("First Weaver")?.GetComponent<HealthManager>()?.hp = 1;
 }

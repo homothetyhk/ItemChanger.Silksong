@@ -49,6 +49,7 @@ public partial class SilksongHost : ItemChangerHost
             new ReusableAbyssEscapeModule(),
             new RemoveCurrencyCapModule(),
             new RetainToolsModule(),
+            new RedundantItemReplacementModule(), // for testing Item.Redundant implementations. TODO: Consider removing before release.
         ];
     }
 
@@ -86,6 +87,8 @@ public partial class SilksongHost : ItemChangerHost
         UnityEngine.SceneManagement.SceneManager.activeSceneChanged -= OnActiveSceneChanged;
         MessageUtil.Clear();
     }
+
+    internal new static void DetachSingleton() => ItemChangerHost.DetachSingleton();
 }
 
 file class PluginLogger : ILogger
