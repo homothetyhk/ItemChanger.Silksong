@@ -1,6 +1,6 @@
-using HarmonyLib;
-using System.Diagnostics;
-using System.Reflection;
+using ItemChanger.Silksong.RawData;
+using MonoDetour.DetourTypes;
+using QuestPlaymakerActions;
 
 namespace ItemChanger.Silksong.Modules;
 
@@ -9,26 +9,30 @@ namespace ItemChanger.Silksong.Modules;
 /// </summary>
 public class RetainToolsModule : ItemChanger.Modules.Module
 {
-    protected override void DoLoad() => Using(new HarmonyPatchGroup() { typeof(Patches) });
+    protected override void DoLoad()
+    {
+        Using(Md.ToolItem.Consume.ControlFlowPrefix(ToolItemConsumePrefix));
+        Using(Md.QuestPlaymakerActions.QuestConsumeTargetTake.DoAction.ControlFlowPrefix(QuestConsumeTargetTakeAction));
+    }
 
     protected override void DoUnload() { }
 
-    [HarmonyPatch]
-    private static class Patches
-    {
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(ToolItem), nameof(ToolItem.Consume))]
-        private static bool ToolItemConsumePrefix()
-        {
-            return false;
-        }
+    private static ReturnFlow ToolItemConsumePrefix(ToolItem self, ref int amount, ref bool showCounter) => ReturnFlow.SkipOriginal;
 
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(CollectableUIMsg), nameof(CollectableUIMsg.ShowTakeMsg))]
-        private static bool ShowTakeMsgPrefix(ICollectableUIMsgItem item, TakeItemTypes takeItemType)
+    private static ReturnFlow QuestConsumeTargetTakeAction(QuestConsumeTargetTake self, ref FullQuestBase quest)
+    {
+        if (quest.name == Quests.Extractor_Blue || quest.name == Quests.Extractor_Blue_Worms)
         {
-            MethodBase trace = new StackTrace().GetFrame(2).GetMethod();
-            return item is not ToolItem || trace.DeclaringType != typeof(QuestPlaymakerActions.QuestConsumeTargetTake);
+            foreach ((FullQuestBase.QuestTarget questTarget, int amount) in quest.TargetsAndCountersNotHidden)
+            {
+                if (questTarget.Counter && questTarget.Counter is not ToolItem) // skip consuming needle phial
+                {
+                    questTarget.Counter.Consume(amount, showCounter: false);
+                    CollectableUIMsg.ShowTakeMsg(questTarget.Counter, (TakeItemTypes)self.TakeDisplay.Value);
+                }
+            }
+            return ReturnFlow.SkipOriginal;
         }
+        return ReturnFlow.None;
     }
 }

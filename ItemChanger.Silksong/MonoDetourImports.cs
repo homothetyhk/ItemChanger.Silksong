@@ -1,5 +1,6 @@
 ﻿using HutongGames.PlayMaker.Actions;
 using MonoDetour.HookGen;
+using QuestPlaymakerActions;
 using TeamCherry.Localization;
 
 [assembly: MonoDetourTargets(typeof(GameManager), GenerateControlFlowVariants = true)]
@@ -15,3 +16,5 @@ using TeamCherry.Localization;
 [assembly: MonoDetourTargets(typeof(ToolCrestUIMsg))]
 [assembly: MonoDetourTargets(typeof(NPCControlBase), GenerateControlFlowVariants = true)]
 [assembly: MonoDetourTargets(typeof(SceneAdditiveLoadConditional), GenerateControlFlowVariants = true)]
+[assembly: MonoDetourTargets(typeof(ToolItem), GenerateControlFlowVariants = true)]
+[assembly: MonoDetourTargets(typeof(QuestConsumeTargetTake), GenerateControlFlowVariants = true)]
