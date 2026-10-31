@@ -5,6 +5,9 @@ using ItemChanger.Silksong.Containers;
 using ItemChanger.Silksong.Costs;
 using ItemChanger.Silksong.Locations;
 using ItemChanger.Silksong.Serialization;
+using ItemChanger.Serialization;
+using PrepatcherPlugin;
+using ItemChanger.Silksong.Tags;
 
 namespace ItemChanger.Silksong.RawData;
 
@@ -71,6 +74,58 @@ internal static partial class BaseLocationList
         {
             Name = LocationNames.Pollip_Pouch,
             SceneName = SceneNames.Room_Witch,
+        },
+    };
+
+    public static Location Needle_Phial => new DualLocation
+    {
+        SceneName = SceneNames.Crawl_08,
+        Name = LocationNames.Needle_Phial,
+        Test = new Conjunction
+        (
+            new PDBool(nameof(PlayerData.blackThreadWorld)),
+            new PDBool(nameof(PlayerData.BlueScientistDead))
+        ),
+        TrueLocation = new CoalescingCoordinateLocation
+        {
+            SceneName = SceneNames.Crawl_08,
+            Name = LocationNames.Needle_Phial,
+            X = 60.15f,
+            Y = 8.8f,
+            Managed = false,
+            ForceDefaultContainer = false,
+            ContainerType = "Chest",
+        },
+        FalseLocation = new ZylotolNeedlePhialLocation
+        {
+            SceneName = SceneNames.Crawl_08,
+            Name = LocationNames.Needle_Phial,
+        },
+    };
+
+    public static Location Plasmium_Phial => new DualLocation
+    {
+        SceneName = SceneNames.Crawl_08,
+        Name = LocationNames.Plasmium_Phial,
+        Test = new Conjunction
+        (
+            new PDBool(nameof(PlayerData.blackThreadWorld)),
+            new PDBool(nameof(PlayerData.BlueScientistDead))
+        ),
+        TrueLocation = new CoalescingCoordinateLocation
+        {
+            SceneName = SceneNames.Crawl_08,
+            Name = LocationNames.Plasmium_Phial,
+            X = 60.15f,
+            Y = 8.8f,
+            Managed = false,
+            ForceDefaultContainer = false,
+            ContainerType = "Chest",
+        },
+        FalseLocation = new ZylotolPlasmiumPhialLocation
+        {
+            SceneName = SceneNames.Crawl_08,
+            Name = LocationNames.Plasmium_Phial,
         },
     };
 }

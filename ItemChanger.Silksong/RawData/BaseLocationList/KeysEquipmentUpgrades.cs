@@ -60,4 +60,30 @@ internal static partial class BaseLocationList
         },
     };
 
+    public static Location Plasmium_Gland => new DualLocation
+    {
+        SceneName = SceneNames.Crawl_08,
+        Name = LocationNames.Plasmium_Gland,
+        Test = new Conjunction
+        (
+            new PDBool(nameof(PlayerData.blackThreadWorld)),
+            new PDBool(nameof(PlayerData.BlueScientistDead))
+        ),
+        TrueLocation = new CoalescingCoordinateLocation
+        {
+            SceneName = SceneNames.Crawl_08,
+            Name = LocationNames.Plasmium_Gland,
+            X = 60.15f,
+            Y = 8.8f,
+            Managed = false,
+            ForceDefaultContainer = false,
+            ContainerType = "Chest",
+        },
+        FalseLocation = new ZylotolPlasmiumGlandLocation
+        {
+            SceneName = SceneNames.Crawl_08,
+            Name = LocationNames.Plasmium_Gland,
+        },
+    };
+
 }

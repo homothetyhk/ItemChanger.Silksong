@@ -96,11 +96,8 @@ public static class LocationNames
     public const string Flintslate = "Flintslate";
     public const string Longpin = "Longpin";
 
-    // The first time you get it from Zylotol to harvest Plasmium Buds in Wormways
-    public const string Needle_Phial__Alchemist_Assistant = "Needle_Phial-Alchemist_Assistant";
-
-    // The second time you get it (Act 3) for the Advanced Alchemy/Lifeblood quest
-    public const string Needle_Phial__Advanced_Alchemy = "Needle_Phial-Advanced_Alchemy";
+    // We use a module to prevent Zylotol from taking the Needle Phial back, so this only gets one location
+    public const string Needle_Phial = "Needle_Phial";
     public const string Pimpillo = "Pimpillo";
     public const string Plasmium_Phial = "Plasmium_Phial";
     public const string Rosary_Cannon = "Rosary_Cannon";
@@ -711,6 +708,9 @@ public static class LocationNames
     public const string Cogheart_Piece__Choral_Chambers = "Cogheart_Piece-Choral_Chambers"; // To the west, connected to the tall room that leads to The Slab.
     public const string Cogheart_Piece__Memorium = "Cogheart_Piece-Memorium"; // To the east, in the room above the map room.
     public const string Cogheart_Piece__Whispering_Vaults = "Cogheart_Piece-Whispering_Vaults"; // In a room below the entrance to The Stage.
+
+    // Miscellaneous
+    public const string Plasmium_Gland = "Plasmium_Gland";
     // TODOs
 
     
