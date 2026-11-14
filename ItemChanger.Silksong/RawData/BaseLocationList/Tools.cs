@@ -27,6 +27,32 @@ internal static partial class BaseLocationList
         PreviewIndex = 4,
     }.WithTag(new DefaultCostTag { Cost = new MossberryCost { Value = 7 } });
 
+    public static Location Longclaw => new DualLocation
+    {
+        Name = LocationNames.Longclaw,
+        SceneName = SceneNames.Room_Huntress,
+        // If Huntress's quest was completed before Act 3, neither Huntress nor Runt will be present in Act 3
+        Test = new Conjunction
+        (
+            new PDBool(nameof(PlayerData.blackThreadWorld)),
+            new QuestCompletionBool(Quests.Huntress_Quest)
+        ),
+        FalseLocation = new HuntressQuestLocation()
+        {
+            Name = LocationNames.Longclaw,
+            SceneName = SceneNames.Room_Huntress,
+        },
+        TrueLocation = new CoordinateLocation
+        {
+            Name = LocationNames.Longclaw,
+            SceneName = SceneNames.Room_Huntress,
+            X = 17.85f,
+            Y = 6.57f,
+            Managed = false,
+            ForceDefaultContainer = true,
+        },
+    };
+  
     public static Location Tacks => new DualLocation
     {
         Name = LocationNames.Tacks,
@@ -74,30 +100,25 @@ internal static partial class BaseLocationList
             SceneName = SceneNames.Room_Witch,
         },
     };
-  
-    public static Location Longclaw => new DualLocation
+
+    public static Location Reserve_Bind => new DualLocation
     {
-        Name = LocationNames.Longclaw,
-        SceneName = SceneNames.Room_Huntress,
-        // If Huntress's quest was completed before Act 3, neither Huntress nor Runt will be present in Act 3
-        Test = new Conjunction
-        (
-            new PDBool(nameof(PlayerData.blackThreadWorld)),
-            new QuestCompletionBool(Quests.Huntress_Quest)
-        ),
-        FalseLocation = new HuntressQuestLocation() 
-        {
-            Name = LocationNames.Longclaw,
-            SceneName = SceneNames.Room_Huntress,
-        },
+        SceneName = SceneNames.Hang_17b,
+        Name = LocationNames.Reserve_Bind,
+        Test = new PDBool(nameof(PlayerData.defeatedSongChevalierBoss)),
         TrueLocation = new CoordinateLocation
         {
-            Name = LocationNames.Longclaw,
-            SceneName = SceneNames.Room_Huntress,
-            X = 17.85f,
-            Y = 6.57f,
+            SceneName = SceneNames.Hang_17b,
+            Name = LocationNames.Reserve_Bind,
+            X = 44.4f,
+            Y = 4.57f,
             Managed = false,
             ForceDefaultContainer = true,
+        },
+        FalseLocation = new SecondSentinelLocation
+        {
+            Name = LocationNames.Reserve_Bind,
+            SceneName = SceneNames.Hang_17b,
         },
     };
 }

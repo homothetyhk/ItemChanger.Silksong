@@ -1,10 +1,7 @@
 using Benchwarp.Data;
 using ItemChanger;
-using ItemChanger.Extensions;
-using ItemChanger.Silksong;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
-using UnityEngine.SceneManagement;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -26,31 +23,6 @@ internal class PhantomLocationTest : Test
             .Add(Finder.GetItem(ItemNames.Cling_Grip)!)
             .Add(Finder.GetItem(ItemNames.Surgeon_s_Key)!));
     }
-
-    private void WeakenBoss(Scene scene)
-    {
-        GameObject? go = scene.FindGameObjectByName("Phantom");
-        if (go == null)
-        {
-            GlobalRefs.LogWarn("Failed to find Phantom");
-            return;
-        }
-        GlobalRefs.LogInfo(go.GetComponent<HealthManager>().hp);
-        go.GetComponent<HealthManager>().hp = 1;
-    }
-
-    protected override void DoLoad()
-    {
-        base.DoLoad();
-        ItemChangerHost.Singleton.GameEvents.AddSceneEdit(SceneNames.Organ_01, WeakenBoss);
-    }
-
-    protected override void DoUnload()
-    {
-        base.DoUnload();
-        ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneNames.Organ_01, WeakenBoss);
-    }
-
 
     protected override void OnEnterGame()
     {

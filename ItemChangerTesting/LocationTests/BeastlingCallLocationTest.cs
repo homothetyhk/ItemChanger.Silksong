@@ -32,20 +32,6 @@ internal class BeastlingCallLocationTest : Test
                 { Persistence = Persistence.Persistent })));
     }
 
-    protected override void DoLoad()
-    {
-        base.DoLoad();
-        
-        ItemChangerHost.Singleton.GameEvents.AddSceneEdit(SceneNames.Bellway_Centipede_Arena, WeakenBoss);
-    }
-    
-    protected override void DoUnload()
-    {
-        base.DoUnload();
-        
-        ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneNames.Bellway_Centipede_Arena, WeakenBoss);
-    }
-
     protected override void OnEnterGame()
     {
         base.OnEnterGame();
@@ -57,13 +43,5 @@ internal class BeastlingCallLocationTest : Test
         
         // Location preconditions
         PlayerDataAccess.hasNeedolin = true;
-    }
-    
-    private void WeakenBoss(Scene scene)
-    {
-        GameObject bossHead = scene.FindGameObjectByName("Giant Centipede Head")!;
-        bossHead.GetComponent<HealthManager>().hp = 1;
-        GameObject bossButt = scene.FindGameObjectByName("Giant Centipede Butt")!;
-        bossButt.GetComponent<HealthManager>().hp = 1;
     }
 }

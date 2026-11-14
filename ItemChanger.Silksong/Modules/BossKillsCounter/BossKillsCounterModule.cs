@@ -70,7 +70,7 @@ public class BossKillsCounterModule : Module
         [JournalEntries.Coral_Warrior_Grey] = new JournalBossCounter(JournalEntries.Coral_Warrior_Grey), // Watcher at the Edge
 
         [JournalEntries.Lace] = new SpecialBossCounter(JournalEntries.Lace,
-            new Disjunction(new PDBool(nameof(PlayerData.defeatedLace1)), new PDBool(nameof(PlayerData.laceLeftDocks)), 
+            new Disjunction(new PDBool(nameof(PlayerData.defeatedLace1)), new PDBool(nameof(PlayerData.laceLeftDocks)),
                 new PDBool(nameof(PlayerData.visitedCitadel))), // Lace-Docks, encounteredLace1Grotto also deactivates the Docks fight, but this seems to be unused
             new PDBool(nameof(PlayerData.defeatedLaceTower))), // Lace-Cradle
         [JournalEntries.Mossbone_Mother] = new SpecialBossCounter(JournalEntries.Mossbone_Mother,
@@ -82,12 +82,12 @@ public class BossKillsCounterModule : Module
             {
                 ToCompare = new JournalKillDataKills(JournalEntries.Cloverstag_White),
                 Amount = 0,
-                Operator = Enums.ComparisonOperator.Gt, // Palestag 
-            }, new PDBool(nameof(PlayerData.defeatedCloverDancers)))), // locks out Palestag without granting entry 
+                Operator = Enums.ComparisonOperator.Gt, // Palestag
+            }, new PDBool(nameof(PlayerData.defeatedCloverDancers)))), // locks out Palestag without granting entry
         // TODO: if Verdania is made reaccessible, Palestag should be replaced by a JournalBossCounter
     });
 
-    internal static BossKillsCounterModule CreateDefault() => new() { BossCounters = [with(DefaultBossCounters)] };
+    internal static BossKillsCounterModule CreateDefault() => new() { BossCounters = new(DefaultBossCounters) };
 
     protected override void DoLoad()
     {
