@@ -6,7 +6,7 @@ using Silksong.FsmUtil;
 
 namespace ItemChanger.Silksong.Locations;
 
-public class BallowLocation : AutoLocation
+public class DivingBellKeyLocation : AutoLocation
 {
     protected override void DoLoad()
     {

@@ -80,32 +80,13 @@ public class ShinyContainer : Container
     
     public record ShinyControlInfo
     {
-        public static ShinyControlInfo Default { get; } = new();
         public ShinyType ShinyType { get; init; } = ShinyType.Normal;
         public ShinyControlFlags ShinyControlFlags { get; init; } = ShinyControlFlags.Default;
         public ShinyFling ShinyFling { get; init; } = ShinyFling.KeepExisting;
     }
 
-    /// <summary>
-    /// A ContainerInfo which contains additional shiny-specific configuration info. Takes precedence over configuration provided through <see cref="ShinyControlTag"/>.
-    /// </summary>
-    public class ShinyContainerInfo : ContainerInfo
-    {
-        public required ShinyControlInfo ShinyInfo { get; init; }
-
-        public ShinyContainerInfo() { }
-
-        [SetsRequiredMembers]
-        public ShinyContainerInfo(ContainerInfo containerInfo, ShinyControlInfo shinyInfo)
-        {
-            base.CostInfo = containerInfo.CostInfo;
-            base.ContainingScene = containerInfo.ContainingScene;
-            base.ContainerType = containerInfo.ContainerType;
-            base.GiveInfo = containerInfo.GiveInfo;
-            base.RequestedCapabilities = containerInfo.RequestedCapabilities;
-            this.ShinyInfo = shinyInfo;
-        }
-    }
+    [method: SetsRequiredMembers]
+    public class ShinyContainerInfo(ContainerInfo containerInfo, ShinyControlInfo shinyInfo) : ExtendedContainerInfo<ShinyControlInfo>(containerInfo, shinyInfo) { }
 
     public static ShinyContainer Instance { get; } = new();
 
@@ -119,7 +100,7 @@ public class ShinyContainer : Container
 
     public override GameObject GetNewContainer(ContainerInfo info)
     {
-        ShinyControlInfo shinyInfo = GetShinyControlInfo(info);
+        ShinyControlInfo shinyInfo = info.GetExtendedContainerInfo<ShinyControlInfo>();
  
         bool isInstant = shinyInfo?.ShinyType == ShinyType.Instant;
         CollectableItemPickup prefabComponent = isInstant ? Gameplay.CollectableItemPickupInstantPrefab : Gameplay.CollectableItemPickupPrefab;
@@ -151,7 +132,7 @@ public class ShinyContainer : Container
         }
         shiny.SetItem(item);
 
-        ShinyControlInfo shinyInfo = GetShinyControlInfo(info);
+        ShinyControlInfo shinyInfo = info.GetExtendedContainerInfo<ShinyControlInfo>();
         ShinyControlFlags controlFlags = shinyInfo.ShinyControlFlags;
 
         if (controlFlags.HasFlag(ShinyControlFlags.AddFeatherEffect))
@@ -242,6 +223,24 @@ public class ShinyContainer : Container
         }
     }
 
+    public static void Spawn(ContainerInfo info, Item item, Transform itemParent, bool fling)
+    {
+        ShinyContainerInfo shinyInfo = new(
+            containerInfo: ContainerInfo.FromPlacementAndItems(
+                info.GiveInfo.Placement,
+                [item],
+                info.ContainingScene,
+                ContainerNames.Shiny,
+                info.GiveInfo.FlingType
+            ),
+            shinyInfo: new() { ShinyFling = fling ? ShinyFling.Random : ShinyFling.Drop });
+
+        GameObject shiny = Instance.GetNewContainer(shinyInfo);
+        shiny.transform.SetParent(itemParent);
+        shiny.transform.position = itemParent.position;
+        shiny.SetActive(true);
+    }
+
     /// <summary>
     /// Add the default feather effect as applied to the Crawbug feather shinies.
     /// </summary>
@@ -286,13 +285,6 @@ public class ShinyContainer : Container
     public static void AllowHazardFloat(GameObject go)
     {
         UObject.Destroy(go.GetComponent<BreakOnHazard>());
-    }
-
-    private static ShinyControlInfo GetShinyControlInfo(ContainerInfo info)
-    {
-        return (info as ShinyContainerInfo)?.ShinyInfo
-            ?? info.GiveInfo.Placement.GetPlacementAndLocationTags().OfType<ShinyControlTag>().FirstOrDefault()?.Info
-            ?? ShinyControlInfo.Default;
     }
 
     protected override void DoLoad()

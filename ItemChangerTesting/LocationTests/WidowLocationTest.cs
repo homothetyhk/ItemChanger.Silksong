@@ -1,11 +1,9 @@
 using Benchwarp.Data;
 using GlobalEnums;
 using ItemChanger;
-using ItemChanger.Extensions;
 using ItemChanger.Silksong.Extensions;
 using ItemChanger.Silksong.RawData;
 using ItemChanger.Silksong.StartDefs;
-using UnityEngine.SceneManagement;
 
 namespace ItemChangerTesting.LocationTests;
 
@@ -33,20 +31,6 @@ internal class WidowLocationTest : Test
             .Add(Finder.GetItem(ItemNames.Flea)!));
     }
 
-    protected override void DoLoad()
-    {
-        base.DoLoad();
-        
-        ItemChangerHost.Singleton.GameEvents.AddSceneEdit(SceneNames.Belltown_Shrine, WeakenBoss);
-    }
-
-    protected override void DoUnload()
-    {
-        base.DoUnload();
-        
-        ItemChangerHost.Singleton.GameEvents.RemoveSceneEdit(SceneNames.Belltown_Shrine, WeakenBoss);
-    }
-
     protected override void OnEnterGame()
     {
         base.OnEnterGame();
@@ -59,14 +43,5 @@ internal class WidowLocationTest : Test
         {
             ItemChangerTestingPlugin.Instance.Logger.LogWarning($"Unable to locate quest {Quests.The_Threadspun_Town}.");
         }
-    }
-
-    private void WeakenBoss(Scene scene)
-    {
-        GameObject? boss = scene.FindGameObjectByName("Spinner Boss");
-        if (boss is null)
-            return;
-
-        boss.GetComponent<HealthManager>().hp = 1;
     }
 }
