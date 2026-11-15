@@ -1,5 +1,8 @@
+using Benchwarp.Data;
 using ItemChanger.Locations;
 using ItemChanger.Silksong.Containers;
+using ItemChanger.Silksong.Locations;
+using ItemChanger.Silksong.Serialization;
 using ItemChanger.Silksong.Tags;
 
 namespace ItemChanger.Silksong.RawData;
@@ -103,6 +106,27 @@ internal static partial class BaseLocationList
         SceneName = "Ward_01",
         ObjectName = "Silk Spool",
         Correction = default, // can fall
+    };
+    public static Location Spool_Fragment__Sherma => new DualLocation
+    {
+        SceneName = SceneNames.Ward_09,
+        Name = LocationNames.Spool_Fragment__Sherma,
+        Test = new QuestCompletionBool(Quests.Save_Sherma),
+        TrueLocation = new CoordinateLocation
+        {
+            SceneName = SceneNames.Ward_09,
+            Name = LocationNames.Spool_Fragment__Sherma,
+            X = 60.78f,
+            Y = 4.27f,
+            Managed = false,
+            ForceDefaultContainer = true,
+            Tags = [InteractFloat], // Sits on the counter Sherma hides behind
+        },
+        FalseLocation = new ShermaSpoolFragmentLocation
+        {
+            SceneName = SceneNames.Ward_09,
+            Name = LocationNames.Spool_Fragment__Sherma,
+        },
     };
 
     public static Location Spool_Fragment__Deep_Docks_West => new ObjectLocation
