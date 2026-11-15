@@ -92,6 +92,7 @@ internal static partial class BaseLocationList
         {
             SceneName = SceneNames.Shadow_24,
             Name = LocationNames.Throwing_Ring,
+            Hasten = true,
         },
     };
 }
